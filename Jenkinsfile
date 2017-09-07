@@ -44,7 +44,7 @@ pipeline {
     }
     stage('Integration Tests') {
       steps {
-      withCredentials([string(credentialsId: 'role', variable: 'ROLE_ID'),string(credentialsId: 'VAULTTOKEN', variable: 'VAULT_TOKEN')]) {
+        withCredentials([string(credentialsId: 'role', variable: 'ROLE_ID'),string(credentialsId: 'VAULTTOKEN', variable: 'VAULT_TOKEN')]) {
         sh '''
           set -x
           curl https://raw.githubusercontent.com/ncorrare/vault-java-example/master/ca.crt > ca.crt
