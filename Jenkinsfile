@@ -7,7 +7,7 @@ pipeline {
   stages { 
     stage('Cleanup') {
       steps {
-        withMaven(maven: 'maven-3.2.5') {
+        withMaven(maven: 'maven-3.5.0') {
           sh 'mvn clean'
         }
         
@@ -15,7 +15,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        withMaven(maven: 'maven-3.2.5') {
+        withMaven(maven: 'maven-3.5.0') {
           sh 'mvn test'
         }
         
@@ -23,7 +23,7 @@ pipeline {
     }
     stage('Compile') {
       steps {
-        withMaven(maven: 'maven-3.2.5') {
+        withMaven(maven: 'maven-3.5.0') {
           sh 'mvn compile'
         }
         
@@ -31,7 +31,7 @@ pipeline {
     }
     stage('Package') {
       steps {
-        withMaven(maven: 'maven-3.2.5') {
+        withMaven(maven: 'maven-3.5.0') {
           sh 'mvn package'
         }
         
