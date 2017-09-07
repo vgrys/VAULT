@@ -61,6 +61,6 @@ pipeline {
     }
   }
   environment {
-    mvnHome = 'maven-3.2.5'
+    mvnHome = 'maven-3.5.0'
   }
 }
