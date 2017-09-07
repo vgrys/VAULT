@@ -7,7 +7,7 @@ pipeline {
   stages { 
     stage('Cleanup') {
       steps {
-        (withMaven)(maven: 'maven-3.5.0') {
+        withMaven(maven: 'maven-3.5.0') {
           sh 'mvn clean'
         }
         
