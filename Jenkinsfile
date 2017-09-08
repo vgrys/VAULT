@@ -12,19 +12,28 @@ node {
   
     withCredentials([string(credentialsId: 'VAULT_KEY1', variable: 'VAULT_KEY1')]) {
       sh '''
-      echo "My KEY1 is: $VAULT_KEY1"
+      curl \
+          -X PUT \
+          -d '{"key": "$VAULT_KEY1"}' \
+          http://192.168.56.21:8200/v1/sys/unseal
       '''
      }
   
     withCredentials([string(credentialsId: 'VAULT_KEY2', variable: 'VAULT_KEY2')]) {
       sh '''
-      echo "My KEY2 is: $VAULT_KEY2" 
+      curl \
+          -X PUT \
+          -d '{"key": "$VAULT_KEY2"}' \
+          http://192.168.56.21:8200/v1/sys/unseal
       '''
       }
     
     withCredentials([string(credentialsId: 'VAULT_KEY3', variable: 'VAULT_KEY3')]) {
       sh '''
-      echo "My KEY3 is: $VAULT_KEY3"
+      curl \
+          -X PUT \
+          -d '{"key": "$VAULT_KEY3"}' \
+          http://192.168.56.21:8200/v1/sys/unseal
       '''
     }
   }
