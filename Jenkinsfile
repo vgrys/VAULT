@@ -21,7 +21,7 @@ node {
       sh '''
       curl \
           -X PUT \
-          -d '{"key": "($VAULT_KEY2)"}' \
+          -d "{"key": "$VAULT_KEY2"}" \
           http://192.168.56.21:8200/v1/sys/unseal
       '''
       }
