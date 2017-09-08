@@ -9,4 +9,25 @@ node {
     echo "My secret is token: $VAULT_TOKEN"
     '''
   }
+
+  withCredentials([string(credentialsId: 'VAULT-KEY1', variable: 'VAULT-KEY1')]) {
+    sh '''
+    set +x
+    echo "My secret is token: $VAULT-KEY1"
+    '''
+  }
+
+  withCredentials([string(credentialsId: 'VAULT-KEY2', variable: 'VAULT-KEY2')]) {
+    sh '''
+    set +x
+    echo "My secret is token: $VAULT-KEY2"
+    '''
+  }
+
+  withCredentials([string(credentialsId: 'VAULT-KEY3', variable: 'VAULT-KEY3')]) {
+    sh '''
+    set +x
+    echo "My secret is token: $VAULT-KEY3"
+    '''
+  }
 }
