@@ -7,5 +7,6 @@ node {
     sh '''
     set +x
     echo "My secret is token: $VAULT_TOKEN"
+    '''
   }
 }
