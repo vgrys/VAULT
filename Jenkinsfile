@@ -8,3 +8,4 @@ node {
   echo "My secret is key2: $VAULT-KEY2"
   echo "My secret is key3: $VAULT-KEY3"
   echo "My server: $vault_server"
+}
