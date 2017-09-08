@@ -2,7 +2,6 @@
 node {
   //
   def vault_server = 'http://192.168.56.21:8200'
-  def VAULT_KEY1 = 'Ifs54LGgYJpu2yeYtvrSwU1eoZQ5339r4PqJVE8JG5TI'
   // repository on Artifactory server
   stage ('reading credentials for Vault') {
     withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'VAULT_TOKEN')]) {
@@ -10,7 +9,7 @@ node {
      }
   
     withCredentials([string(credentialsId: 'VAULT_KEY1', variable: 'VAULT_KEY1')]) {
-      sh "curl -X PUT -d '{"key": "$VAULT_KEY1"}' http://192.168.56.21:8200/v1/sys/unseal"
+    sh "curl -X PUT -d '{"key": "$VAULT_KEY1"}' http://192.168.56.21:8200/v1/sys/unseal"
       echo "My KEY1: $VAULT_KEY1"
      }
   
