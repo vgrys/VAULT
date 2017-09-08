@@ -1,65 +1,22 @@
-def projectProperties = [
-    [$class: 'BuildDiscarderProperty',strategy: [$class: 'LogRotator', numToKeepStr: '3']],
-]
-properties(projectProperties)
-pipeline {
-  agent any
-  stages { 
-    stage('Cleanup') {
-      steps {
-        withMaven(maven: 'maven-3.5.0') {
-          sh 'mvn clean'
-        }
-        
-      }
+node {
+    // define the secrets and the env variables
+    def secrets = [
+        [$class: 'VaultSecret', path: 'secret/testing', secretValues: [
+            [$class: 'VaultSecretValue', envVar: 'testing', vaultKey: 'value_one'],
+            [$class: 'VaultSecretValue', envVar: 'testing_again', vaultKey: 'value_two']]],
+        [$class: 'VaultSecret', path: 'secret/another_test', secretValues: [
+            [$class: 'VaultSecretValue', envVar: 'another_test', vaultKey: 'value']]]
+    ]
+
+    // optional configuration, if you do not provide this the next higher configuration
+    // (e.g. folder or global) will be used
+    def configuration = [$class: 'VaultConfiguration',
+                         vaultUrl: 'http://my-very-other-vault-url.com',
+                         vaultCredentialId: 'my-vault-cred-id']
+    // inside this block your credentials will be available as env variables
+    wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
+        sh 'echo $testing'
+        sh 'echo $testing_again'
+        sh 'echo $another_test'
     }
-    stage('Test') {
-      steps {
-        withMaven(maven: 'maven-3.5.0') {
-          sh 'mvn test'
-        }
-        
-      }
-    }
-    stage('Compile') {
-      steps {
-        withMaven(maven: 'maven-3.5.0') {
-          sh 'mvn compile'
-        }
-        
-      }
-    }
-    stage('Package') {
-      steps {
-        withMaven(maven: 'maven-3.5.0') {
-          sh 'mvn package'
-        }
-        
-      }
-    }
-    stage('Notify') {
-      steps {
-        echo 'Build Successful!'
-      }
-    }
-    stage('Integration Tests') {
-      steps {
-        withCredentials([string(credentialsId: 'role', variable: 'ROLE_ID'),string(credentialsId: 'VAULTTOKEN', variable: 'VAULT_TOKEN')]) {
-        sh '''
-          set -x
-          curl https://raw.githubusercontent.com/ncorrare/vault-java-example/master/ca.crt > ca.crt
-          export VAULT_CACERT=$(pwd)/ca.crt
-          export VAULT_ADDR=https://vault.service.lhr.consul:8200
-          export SECRET_ID=$(./vault write -field=secret_id -f auth/approle/role/java-example/secret-id)
-          export VAULT_TOKEN=$(./vault write -field=token auth/approle/login role_id=${ROLE_ID} secret_id=${SECRET_ID})
-          keytool -import -trustcacerts -file ca.crt -alias CorrarelloCA -keystore cacerts -noprompt -keypass changeit -storepass changeit
-          java -D"javax.net.ssl.trustStore=./cacerts" -jar target/java-client-example-1.0-SNAPSHOT-jar-with-dependencies.jar 
-        '''
-        }
-      }
-    }
-  }
-  environment {
-    mvnHome = 'maven-3.5.0'
-  }
 }
