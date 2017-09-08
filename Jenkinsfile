@@ -6,7 +6,8 @@ node {
   withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'VAULT_TOKEN')]) 
   withCredentials([string(credentialsId: 'VAULT-KEY1', variable: 'VAULT-KEY1')])
   withCredentials([string(credentialsId: 'VAULT-KEY2', variable: 'VAULT-KEY2')])
-  withCredentials([string(credentialsId: 'VAULT-KEY2', variable: 'VAULT-KEY3')]) {
+  withCredentials([string(credentialsId: 'VAULT-KEY2', variable: 'VAULT-KEY3')]) 
+  {
     sh '''
     set +x
     echo "My secret is token: $VAULT_TOKEN"
@@ -15,3 +16,4 @@ node {
     echo "My secret is token: $VAULT-KEY3"
     '''
   }
+}
