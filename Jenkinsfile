@@ -12,19 +12,19 @@ node {
   
   withCredentials([string(credentialsId: 'VAULT-KEY1', variable: 'VAULT-KEY1')]) {
     sh '''
-    echo "My secret is token: $VAULT-KEY1"
+    echo "My KEY1 is: $VAULT-KEY1"
     '''
   }
   
   withCredentials([string(credentialsId: 'VAULT-KEY2', variable: 'VAULT-KEY2')]) {
     sh '''
-    echo "My secret is token: $VAULT-KEY2" 
+    echo "My KEY2 is: $VAULT-KEY2" 
     '''
     }
     
   withCredentials([string(credentialsId: 'VAULT-KEY2', variable: 'VAULT-KEY3')]) {
     sh '''
-    echo "My secret is token: $VAULT-KEY3"
+    echo "My KEY3 is: $VAULT-KEY3"
     '''
   }
 }
