@@ -13,7 +13,7 @@ node {
   
     withCredentials([string(credentialsId: 'VAULT_KEY1', variable: 'VAULT_KEY1')]) {
       sh '''
-      curl -X PUT -d '{"key": "Ifs54LGgYJpu2yeYtvrSwU1eoZQ5339r4PqJVE8JG5TI"}' http://192.168.56.21:8200/v1/sys/unseal
+      curl -X PUT -d ''{"key": "$VAULT_KEY1"}'' http://192.168.56.21:8200/v1/sys/unseal
       '''
     }
   
