@@ -4,12 +4,7 @@ node {
   def vault_server = 'http://192.168.56.21:8200'
   // repository on Artifactory server
   
-  withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'VAULT_TOKEN')]) {
-    sh '''
-    echo "My secret is token: $VAULT_TOKEN"
-    '''
-    }
-  
+
   withCredentials([string(credentialsId: 'VAULT-KEY1', variable: 'VAULT-KEY1')]) {
     sh '''
     echo "My KEY1 is: $VAULT-KEY1"
