@@ -16,6 +16,7 @@ node {
           -X PUT \
           -d '{"key": "${VAULT_KEY1}"}' \
           http://192.168.56.21:8200/v1/sys/unseal
+          echo "My KEY1: $VAULT_KEY1"
       '''
      }
   
