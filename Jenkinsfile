@@ -1,12 +1,17 @@
-#!/usr/bin/groovy
 @Grapes(
-    @Grab(group='com.bettercloud', module='vault-java-driver', version='3.0.0')
+    @Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.7.1')
 )
-final VaultConfig config = new VaultConfig
-                                  .address("http://192.168.56.21:8200")
-                                  .token("3c9fd6be-7bc2-9d1f-6fb3-cd746c0fc4e8")
-                                  .build();
 
-// You may choose not to provide a root token initially, if you plan to use
-// the Vault driver to retrieve one programmatically from an auth backend.
-final VaultConfig config = new VaultConfig().address("http://192.168.56.21:8200").build();
+import groovyx.net.http.HTTPBuilder
+import static groovyx.net.http.ContentType.*
+import static groovyx.net.http.Method.*
+
+def http = new HTTPBuilder("http://api.geonames.org/citiesJSON?north=44.1&south=-9.9&east=-22.4&west=55.2&lang=de&username=demo")
+
+http.request(POST, JSON ) { req ->
+    body = []
+    response.success = { resp, reader ->
+        println "$resp.statusLine   Respond rec"
+
+    }
+}
