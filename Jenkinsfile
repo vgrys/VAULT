@@ -10,7 +10,7 @@ pipeline  {
             }
         }
      }
-    stage {
+    stage ('checkin USER') {
         steps {
             printName {
         }
