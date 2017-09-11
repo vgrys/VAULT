@@ -5,16 +5,16 @@ pipeline  {
   agent any
   stages {
     stage('Build Release') {
-      steps{
-        vault {
+        steps{
+            vault {
+            }
         }
-      }
      }
     stage {
-     steps {
-        printName {
+        steps {
+            printName {
+        }
       }
     }
-  }
   }
  }
