@@ -3,7 +3,7 @@
 
 node {
 
-  stage('Build Release'){
-    mavenCanaryRelease 
- }
+stage('Build Release'){
+    mavenCanaryRelease
+  }
 }
