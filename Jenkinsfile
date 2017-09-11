@@ -1,8 +1,12 @@
 #!/usr/bin/groovy
 @Library('github.com/vgrys/VAULT@master')
-node {
-  stage('Build Release'){
-      mavenCanaryRelease {
-  }
+pipeline  {
+  stages {
+    stage('Build Release') {
+      steps{
+        mavenCanaryRelease {
+     }
+    }
+   }
  }
-}
+ }
