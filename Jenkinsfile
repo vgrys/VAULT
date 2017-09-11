@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-@Library('github.com/vgrys/VAULT@master')
+ @Library("vault") _
 
 vault {
     projectName = "Project1"
