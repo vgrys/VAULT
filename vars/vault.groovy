@@ -4,8 +4,8 @@
 // )
 
 
-@Grab(group='org.springframework', module='spring-orm', version='3.2.5.RELEASE')
-import org.springframework.jdbc.core.JdbcTemplate
+@GrabResolver(name='restlet', root='http://maven.restlet.org/')
+@Grab(group='org.restlet', module='org.restlet', version='1.1.6')
 
 def call(body) {
 
