@@ -1,6 +1,12 @@
 #!/usr/bin/groovy
-package com.epam
 
-import com.cloudbees.groovy.cps.NonCPS
-import jenkins.model.Jenkins
-import java.util.regex.Pattern
+
+@Grab('org.apache.commons:commons-math3:3.4.1') import org.apache.commons.math3.primes.Primes
+
+def print_command(int n) {
+
+    def config = [:]
+    // body()
+    println("\n$USER")
+    println(Primes.isPrime(n))
+}

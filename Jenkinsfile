@@ -10,11 +10,11 @@ pipeline  {
             }
         }
      }
-    stage ('checkin USER') {
-        steps {
-            printName {
-        }
-      }
-    }
+    // stage ('checkin USER') {
+    //     steps {
+    //         printName {
+    //     }
+    //   }
+    // }
   }
 }

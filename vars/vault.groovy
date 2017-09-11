@@ -4,15 +4,9 @@
 // )
 
 
-@Grab('org.apache.commons:commons-math3:3.4.1') import org.apache.commons.math3.primes.Primes
-class Lib {
-  static boolean isPrime(int n) {Primes.isPrime(n)}
-}
-
 def call(body) {
 
     def config = [:]
     body()
-    println("\nHello World")
-    println("\nTesting Library")
+    print_command(11)
 }
