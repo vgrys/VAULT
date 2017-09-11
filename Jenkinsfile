@@ -7,14 +7,12 @@ pipeline  {
     stage('Build Release') {
       steps{
         vault {
+        }
       }
      }
-    }
-  stage {
-    steps {
-      step {
+    stage {
+     steps {
         printName {
-        }
       }
     }
   }
