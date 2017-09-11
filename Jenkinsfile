@@ -6,7 +6,7 @@ pipeline  {
   stages {
     stage('Build Release') {
       steps{
-        mavenCanaryRelease {
+        vault {
       }
      }
     }
