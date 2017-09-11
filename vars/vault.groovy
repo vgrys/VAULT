@@ -7,7 +7,6 @@ import com.epam.vaultCommands
 
 def call(body) {
 
-    def config = [:]
     body()
     vaultCommands.print_command(11)
 }
