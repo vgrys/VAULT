@@ -4,8 +4,10 @@
 // )
 
 
-@GrabResolver(name='restlet', root='http://maven.restlet.org/')
-@Grab(group='org.restlet', module='org.restlet', version='1.1.6')
+@Grab('org.apache.commons:commons-math3:3.4.1') import org.apache.commons.math3.primes.Primes
+class Lib {
+  static boolean isPrime(int n) {Primes.isPrime(n)}
+}
 
 def call(body) {
 
