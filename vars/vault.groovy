@@ -9,5 +9,5 @@ def call(body) {
 
     def config = [:]
     body()
-    vaultCoomands.print_command(11)
+    vaultCommands.print_command(11)
 }
