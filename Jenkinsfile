@@ -10,5 +10,13 @@ pipeline  {
       }
      }
     }
+  stage {
+    steps {
+      step {
+        printName {
+        }
+      }
+    }
+  }
   }
  }
