@@ -2,12 +2,13 @@
 
 
 pipeline  {
+  agent any
   stages {
     stage('Build Release') {
       steps{
         mavenCanaryRelease {
+      }
      }
     }
-   }
- }
+  }
  }
