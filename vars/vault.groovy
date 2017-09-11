@@ -4,7 +4,8 @@
 // )
 
 
-@Grab('org.apache.httpcomponents:httpclient:4.2.1')
+@Grab(group='org.springframework', module='spring-orm', version='3.2.5.RELEASE')
+import org.springframework.jdbc.core.JdbcTemplate
 
 def call(body) {
 
