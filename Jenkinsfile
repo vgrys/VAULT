@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-@Library('github.com/vgrys/VAULT@master')
+@Library('github.com/vgrys/VAULT@master') _
 
 pipeline  {
   agent any
