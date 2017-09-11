@@ -1,9 +1,7 @@
 #!/usr/bin/groovy
 @Library('github.com/vgrys/VAULT@master')
 
-node {
-
-stage('Build Release'){
-    mavenCanaryRelease
-  }
+vault {
+    projectName = "Project1"
+    serverDomain = "Project1 Server Domain"
 }
