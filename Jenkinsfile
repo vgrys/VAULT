@@ -16,10 +16,11 @@ node {
 //        env.each{
 //            println it
 //        }
+        sh 'echo $MY_VAULT_TOKEN'
         println "------------------------------------------------"
         println "$MY_VAULT_TOKEN"
         println "------------------------------------------------"
-        sh 'echo $MY_VAULT_TOKEN'
+
 //        def creds = vc.get_credentials("$MY_VAULT_TOKEN")
         println (creds)
     }
