@@ -5,6 +5,7 @@
 def vc = new vaultCommands()
 
 node {
+    echo "start"
     vc.print_command(11)
 }
 
