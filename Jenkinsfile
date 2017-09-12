@@ -12,10 +12,10 @@ node {
 //    def token = "${env.VAULT_TOKEN}"
  //   print(token)
     withCredentials([string(credentialsId: 'VAULT_TOKEN', Variable: 'MY_VAULT_TOKEN')]) {
-        def env = System.getenv()
-        env.each{
-            println it
-        }
+//        def env = System.getenv()
+//        env.each{
+//            println it
+//        }
         println "------------------------------------------------"
         println "$MY_VAULT_TOKEN"
         println "------------------------------------------------"
