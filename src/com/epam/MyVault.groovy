@@ -10,16 +10,15 @@ import com.bettercloud.vault.response.LogicalResponse
 
 static def get_credentials(IP, token) {
 
-    def config = new VaultConfig()
+    final VaultConfig config = new VaultConfig()
             .address(IP)
             .token(token)
             .build()
 
     final Vault vault = new Vault(config)
-        final LogicalResponse response = vault.logical()
-                .read("secret/consul");
-        final username = response.getData().get("username");
-        final password = response.getData().get("password");
+        final  LogicalResponse response = vault.logical().read("secret/consul");
+        final String username = response.getData().get("username");
+        final String password = response.getData().get("password");
         return username
         return password
 
