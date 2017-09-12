@@ -8,9 +8,9 @@ package com.epam
 class vaultCommands implements Serializable {
  static  def print_command(int n) {
 
-      def config = [:]
-      // body()
-      //println("\n$USER")
+//      def config = [:]
+//       body()
+//      println("\n$USER")
       println(Primes.isPrime(n))
   }
 }
