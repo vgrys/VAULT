@@ -5,9 +5,10 @@
 
 import com.epam.vaultCommands
 
-def call() {
+def call(body) {
 
-  //  body()
+    body()
     def vc = new vaultCommands()
     vc.print_command(11)
+    echo "done"
 }
