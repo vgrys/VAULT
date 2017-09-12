@@ -7,7 +7,7 @@ import com.bettercloud.vault.VaultConfig
 def get_credentials(token) {
 
     def config = new VaultConfig()
-            .address("http://192.168.56.21:8200")
+            .address(token)
             .token(token)
             .build();
 
