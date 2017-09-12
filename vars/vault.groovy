@@ -5,8 +5,6 @@
 // )
 
 import com.epam.vaultCommands
-@Grab('org.apache.commons:commons-math3:3.4.1')
-import org.apache.commons.math3.primes.Primes
 
 //def call(body) {
 //
@@ -22,7 +20,8 @@ def call(body) {
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
     body()
-    new vaultCommands().print_command(11)
+        def vc = new vaultCommands()
+    vc.print_command(11)
     echo "done"
 
 //    def flow = new TerradatumCommands()
@@ -34,14 +33,4 @@ def call(body) {
 //    echo "Tagged version: ${newVersion}"
 //
 //    return newVersion
-}
-
-class vaultCommands implements Serializable {
-    def print_command(int n) {
-
-//      def config = [:]
-//       body()
-        println("Hello World")
-        println(Primes.isPrime(n))
-    }
 }
