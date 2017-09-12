@@ -25,7 +25,7 @@ static def get_credentials(IP, token, Backend) {
 
     def value = vault.logical().read(Backend).getData().get("username")
     def value2 = vault.logical().read(Backend).getData().get("password")
-    return value
+
     return value2
 
 
