@@ -17,5 +17,5 @@ def get_credentials() {
             .read("secret/hello")
             .getData().get("value");
 
-    return value;
+    return value1;
 }
