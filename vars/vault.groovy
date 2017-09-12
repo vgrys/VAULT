@@ -20,8 +20,7 @@ def call(body) {
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
     body()
-        def vc = new vaultCommands()
-    vc.print_command(11)
+    new vaultCommands().print_command(11)
     echo "done"
 
 //    def flow = new TerradatumCommands()
