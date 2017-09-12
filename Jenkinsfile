@@ -12,9 +12,9 @@ node {
 //    def token = "${env.VAULT_TOKEN}"
  //   print(token)
 
-    withCredentials([string(credentialsId: '$VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
+    withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
         sh '''
-        echo "My KEY1 is: $VAULT_KEY1"
+        echo "My KEY1 is: $MY_VAULT_TOKEN"
         '''
     }
 
