@@ -8,12 +8,11 @@ import org.apache.commons.math3.primes.Primes
 
 
 
-class vaultCommands implements Serializable {
+//class vaultCommands implements Serializable {
     def print_command(int n) {
 
 //        ServiceLoader<Primes> loader = ServiceLoader.load(Primes.class);
         println "Hello World"
-        script.sh "echo 1"
-//        error Primes.isPrime(n)
+        println Primes.isPrime(n)
     }
-}
+//}

@@ -2,10 +2,11 @@
 //@Library('github.com/vgrys/VAULT@master') _
 @Library('vaultCommands@master') import com.epam.vaultCommands
 //import com.epam.pipeline.vaultCommands.vaultCommands
-def vc = new vaultCommands()
 
 node {
     echo "start"
+    def vc = new vaultCommands()
+
     vc.print_command(11)
 }
 
