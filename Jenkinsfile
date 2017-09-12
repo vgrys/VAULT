@@ -1,16 +1,10 @@
 #!/usr/bin/groovy
-//@Library('github.com/vgrys/VAULT@master') _
+
 @Library('vaultCommands@master') import com.epam.MyVault
-//import com.epam.pipeline.vaultCommands.vaultCommands
 
 node {
     echo "start"
     def vc = new MyVault()
-
-//    withCredentials([string(credentialsId: '$VAULT_TOKEN', variable: 'TOKEN')])
-
-//    def token = "${env.VAULT_TOKEN}"
- //   print(token)
 
     withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
 
@@ -18,6 +12,7 @@ node {
         println (creds)
     }
 }
+
 
 //pipeline  {
 //  agent any

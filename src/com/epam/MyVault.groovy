@@ -9,13 +9,13 @@ def get_credentials(IP, token) {
     def config = new VaultConfig()
             .address(IP)
             .token(token)
-            .build();
+            .build()
 
-    def vault = new Vault(config);
+    def vault = new Vault(config)
 
     def value = vault.logical()
             .read("secret/hello")
-            .getData().get("value1");
+            .getData().get("value1")
 
     return value;
 }
