@@ -1,8 +1,10 @@
 package com.epam
 
 import com.bettercloud.vault.Vault
-@Grab('com.bettercloud:vault-java-driver:3.0.0')
 import com.bettercloud.vault.VaultConfig
+
+@Grab('com.bettercloud:vault-java-driver:3.0.0')
+
 
 def get_credentials(IP, token) {
 
@@ -15,7 +17,7 @@ def get_credentials(IP, token) {
 
     def value = vault.logical()
             .read("secret/CREDS")
-            //.getData().get("username", "password")
+            .getData().get("username", "password")
 
     return value;
 }
