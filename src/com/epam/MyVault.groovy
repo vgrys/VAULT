@@ -27,12 +27,9 @@ static def get_credentials(IP, token) {
     def value = vault.logical()
             .read("secret/consul")
             .getData().get("username")
+            .getData().get("password")
     return value
 
-    def value2 = vault.logical()
-            .read("secret/consul")
-            .getData().get("password")
-    return value2
 
 
 }
