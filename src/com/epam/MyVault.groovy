@@ -15,7 +15,7 @@ def get_credentials() {
 
     def value = vault.logical()
             .read("secret/hello")
-            .getData().get("value");
+            .getData().get("value1");
 
     return value;
 }
