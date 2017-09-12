@@ -8,13 +8,13 @@ def get_credentials() {
 
     def config = new VaultConfig()
             .address("http://192.168.56.21:8200")
-            .token("32dc6946-75cb-dbd7-e718-77b12be3a74b")
+            .token("$VAULT_TOKEN")
             .build();
 
     def vault = new Vault(config);
 
     def value = vault.logical()
-            .read("secret/File")
+            .read("secret/hello")
             .getData().get("value");
 
     return value;
