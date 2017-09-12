@@ -10,7 +10,7 @@ class vaultCommands implements Serializable {
 
 //      def config = [:]
 //       body()
-      println("\n$USER")
+        println("Hello World")
         println(Primes.isPrime(n))
   }
 }
