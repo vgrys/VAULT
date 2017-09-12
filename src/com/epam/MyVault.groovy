@@ -15,16 +15,10 @@ def get_credentials(IP, token) {
             .build()
 
     def vault = new Vault(config)
-
     def username = vault.logical()
-            .read("secret/CREDS")
+            .read("secret/consul")
             .getData().get("username")
 
     return username;
 
-    def password = vault.logical()
-            .read("secret/CREDS")
-            .getData().get("password")
-
-    return password;
 }
