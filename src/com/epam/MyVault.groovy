@@ -8,7 +8,7 @@ def get_credentials() {
 
     def config = new VaultConfig()
             .address("http://192.168.56.21:8200")
-            .token("$VAULT_TOKEN")
+            .token("${VAULT_TOKEN}")
             .build();
 
     def vault = new Vault(config);
