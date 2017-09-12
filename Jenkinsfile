@@ -3,21 +3,26 @@
 @Library('vaultCommands@master') import com.epam.vaultCommands
 //import com.epam.pipeline.vaultCommands.vaultCommands
 def vc = new vaultCommands()
-pipeline  {
-  agent any
-  stages {
-    stage('Build Release') {
-        steps{
-            vc.print_command(11)
-//            vault {
-//            }
-        }
-     }
-    // stage ('check USER') {
-    //     steps {
-    //         printName {
-    //     }
-    //   }
-    // }
-  }
+
+node {
+    vc.print_command(11)
 }
+
+//pipeline  {
+//  agent any
+//  stages {
+//    stage('Build Release') {
+//        steps{
+//            vc.print_command(11)
+////            vault {
+////            }
+//        }
+//     }
+//    // stage ('check USER') {
+//    //     steps {
+//    //         printName {
+//    //     }
+//    //   }
+//    // }
+//  }
+//}
