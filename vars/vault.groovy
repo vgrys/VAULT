@@ -5,8 +5,8 @@
 
 import com.epam.vaultCommands
 
-def call(body) {
+def call() {
 
-    body()
+  //  body()
     vaultCommands.print_command(11)
 }
