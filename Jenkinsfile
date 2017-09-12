@@ -12,8 +12,16 @@ node {
 //    def token = "${env.VAULT_TOKEN}"
  //   print(token)
     withCredentials([string(credentialsId: 'VAULT_TOKEN', Variable: 'MY_VAULT_TOKEN')]) {
-      //  def creds = vc.get_credentials("$MY_VAULT_TOKEN")
-        println ($MY_VAULT_TOKEN)
+        def env = System.getenv()
+        env.each{
+            println it
+        }
+        println "------------------------------------------------"
+        println "$MY_VAULT_TOKEN"
+        println "------------------------------------------------"
+        sh 'echo $MY_VAULT_TOKEN'
+//        def creds = vc.get_credentials("$MY_VAULT_TOKEN")
+        println (creds)
     }
 
 }
