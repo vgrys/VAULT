@@ -7,7 +7,7 @@ import com.bettercloud.vault.Vault
 def get_credentiALS() {
 
     def config = new VaultConfig
-            .address("192.168.56.21:8200")
+            .address("http://192.168.56.21:8200")
             .token("32dc6946-75cb-dbd7-e718-77b12be3a74b")
             .build();
 
