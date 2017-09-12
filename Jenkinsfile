@@ -8,7 +8,7 @@ node {
 
     withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
 
-        def creds = vc.get_credentials( "http://192.168.56.21:8200", "$MY_VAULT_TOKEN")
+        def creds = vc.get_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN")
         println (creds)
     }
 }
