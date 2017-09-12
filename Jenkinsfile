@@ -9,9 +9,7 @@ node {
 
 //    withCredentials([string(credentialsId: '$VAULT_TOKEN', variable: 'TOKEN')])
 
-    token = echo $VAULT_TOKEN
-
-    def creds = vc.get_credentials(token)
+    def creds = vc.get_credentials()
     println (creds)
 
 }
