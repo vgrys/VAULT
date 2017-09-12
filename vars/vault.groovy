@@ -8,5 +8,6 @@ import com.epam.vaultCommands
 def call() {
 
   //  body()
-    vaultCommands.print_command(11)
+    def vc = new vaultCommands()
+    vc.print_command(11)
 }
