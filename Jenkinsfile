@@ -6,7 +6,11 @@
 node {
     echo "start"
     def vc = new MyVault()
-    def token = $VAULT_TOKEN
+
+    def token = withCredentials([string(credentialsId: '$VAULT_TOKEN', variable: 'TOKEN')])
+
+
+
     def creds = vc.get_credentials(token)
     println (creds)
 
