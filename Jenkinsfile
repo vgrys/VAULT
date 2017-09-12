@@ -17,7 +17,6 @@ node {
         def creds = vc.get_credentials( "http://192.168.56.21:8200", "$MY_VAULT_TOKEN")
         println (creds)
     }
-
 }
 
 //pipeline  {
