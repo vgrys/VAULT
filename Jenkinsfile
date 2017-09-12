@@ -9,7 +9,7 @@ node {
 
 //    withCredentials([string(credentialsId: '$VAULT_TOKEN', variable: 'TOKEN')])
 
-    def token = ${env.VAULT_TOKEN}
+    def token = "${env.VAULT_TOKEN}"
     print(token)
     def creds = vc.get_credentials()
     println (creds)
