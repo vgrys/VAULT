@@ -8,7 +8,7 @@ import com.bettercloud.vault.response.LogicalResponse
     @Grab('com.bettercloud:vault-java-driver:3.0.0')
 )
 
-static def get_credentials(IP, token) {
+static def get_credentials(IP, token, BE) {
 
     final VaultConfig config = new VaultConfig()
             .address(IP)
@@ -23,11 +23,8 @@ static def get_credentials(IP, token) {
 //        return username
 //        return password
 
+    def value = vault.logical().read(BE).getData().get("username")
 
-    def value = vault.logical()
-            .read("secret/consul")
-            .getData().get("username")
-            .getData().get("password")
     return value
 
 
