@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 //@Library('github.com/vgrys/VAULT@master') _
-@Library('vaultCommands@master') _
+@Library('vaultCommands') _
 //import com.epam.pipeline.vaultCommands.vaultCommands
 
 pipeline  {
