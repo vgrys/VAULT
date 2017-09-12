@@ -1,13 +1,14 @@
 #!/usr/bin/groovy
 //@Library('github.com/vgrys/VAULT@master') _
-@Library('vaultCommands@master') import com.epam.vaultCommands
+@Library('vaultCommands@master') import com.epam.Vault
 //import com.epam.pipeline.vaultCommands.vaultCommands
 
 node {
     echo "start"
-    def vc = new vaultCommands()
+    def vc = new Vault()
 
-    vc.print_command(11)
+    def creds = vc.get_credentiALS()
+    println (creds)
 }
 
 //pipeline  {
