@@ -14,8 +14,9 @@ def get_credentials(IP, token) {
     def vault = new Vault(config)
 
     def value = vault.logical()
-            .read("secret/hello")
-            .getData().get("value1")
+            .read("secret/CREDS")
+            .getData().get("username")
+            .getData().get("password")
 
     return value;
 }
