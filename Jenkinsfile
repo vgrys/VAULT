@@ -7,7 +7,7 @@ node {
     echo "start"
     def vc = new Vault()
 
-    def creds = vc.get_credentiALS()
+    def creds = vc.get_credentials()
     println (creds)
 }
 
