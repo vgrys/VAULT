@@ -17,16 +17,15 @@ static def get_credentials(IP, token, Backend) {
 
     final Vault vault = new Vault(config)
 
-//        final  LogicalResponse response = vault.logical().read("secret/consul");
-//        final String username = response.getData().get("username");
-//        final String password = response.getData().get("password");
-//        return username
-//        return password
+        final  LogicalResponse response = vault.logical().read("secret/consul");
+        final String username = response.getData().get("username");
+        final String password = response.getData().get("password");
+        return "user=$username pass=$password"
 
-    def value = vault.logical().read(Backend).getData().get("username")
-    def value2 = vault.logical().read(Backend).getData().get("password")
-    return "user=$value pass=$value2"
-//    return value2
+//    def value = vault.logical().read(Backend).getData().get("username")
+//    def value2 = vault.logical().read(Backend).getData().get("password")
+//    return "user=$value pass=$value2"
+
 
 
 
