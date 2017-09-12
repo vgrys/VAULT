@@ -2,6 +2,7 @@ package com.epam
 
 @Grab('com.bettercloud:vault-java-driver:3.0.0')
 import com.bettercloud.vault.VaultConfig
+import com.bettercloud.vault.Vault
 
 def get_credentials() {
 
