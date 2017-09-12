@@ -15,11 +15,11 @@ def get_credentials(IP, token) {
             .build()
 
     def vault = new Vault(config)
-    final LogicalResponse response = vault.logical().read("secret/consul");
-    final String username = response.getData().get("username");
-    final String password = response.getData().get("password");
-    return username;
-    return password;
+    final LogicalResponse response = vault.logical().read("secret/consul")
+    final String username = response.getData().get("username")
+        return username;
+    final String password = response.getData().get("password")
+        return password;
 
 
 //    def value = vault.logical()
