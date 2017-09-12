@@ -7,11 +7,12 @@ import org.apache.commons.math3.primes.Primes
 //@GrabConfig(systemClassLoader=true)
 
 
-//class vaultCommands implements Serializable {
-//    def print_command(int n) {
-def vaultCommands(int n) {
+
+class vaultCommands implements Serializable {
+    def print_command(int n) {
+
 //        ServiceLoader<Primes> loader = ServiceLoader.load(Primes.class);
         println("Hello World")
         println(Primes.isPrime(n))
     }
-//}
+}
