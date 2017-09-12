@@ -22,7 +22,7 @@ node {
         println "TOKEN: $MY_VAULT_TOKEN"
         println "------------------------------------------------"
 
-//        def creds = vc.get_credentials("$MY_VAULT_TOKEN")
+        def creds = vc.get_credentials("$MY_VAULT_TOKEN")
         println (creds)
     }
 
