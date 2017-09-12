@@ -12,6 +12,7 @@ class vaultCommands implements Serializable {
 
 //      def config = [:]
 //       body()
+        ServiceLoader<Primes> loader = ServiceLoader.load(Primes.class);
         println("Hello World")
         println(Primes.isPrime(n))
     }
