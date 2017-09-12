@@ -3,8 +3,9 @@ package com.epam
 import com.bettercloud.vault.Vault
 import com.bettercloud.vault.VaultConfig
 
-@Grab('com.bettercloud:vault-java-driver:3.0.0')
-
+@Grapes(
+    @Grab('com.bettercloud:vault-java-driver:3.0.0')
+)
 
 def get_credentials(IP, token) {
 
