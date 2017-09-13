@@ -14,10 +14,11 @@ node {
 //            vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
 //            vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
         }
-        stage ('test') {
-            echo "test"
-        }
+    }
+    stage ('test') {
+        echo "test"
     }
 }
+
 
 
