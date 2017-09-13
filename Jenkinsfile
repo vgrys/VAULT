@@ -19,9 +19,9 @@ node {
             echo(myVar)
         }
     }
-    stage('check env') {
-        println($CONSUL_USER)
-    }
+//    stage('check env') {
+//        println($CONSUL_USER)
+//    }
 }
 
 
