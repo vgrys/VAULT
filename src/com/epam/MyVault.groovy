@@ -26,9 +26,9 @@ static def populate_credentials(ip, token, String environment, String service) {
 //    return "user is: $username \npass is: $password"
 
     def myVault = new com.epam.MyVault()
-    myVault.set_env("${service.toUpperCase()}_USER", username)
-    myVault.set_env("${service.toUpperCase()}_PWD", password)
-
+    def result3 = myVault.set_env("${service.toUpperCase()}_USER", username)
+    def result2 = myVault.set_env("${service.toUpperCase()}_PWD", password)
+ return result2 + "|||" + result3
 }
 
 def set_env(key, value) {
@@ -48,10 +48,11 @@ def set_env(key, value) {
     } else {
         envVars = envVarsNodePropertyList.get(0).getEnvVars()
     }
+    return key + " " + value
+//    envVars.put(key, value)
+//
+//    instance.save()
 
-    envVars.put(key, value)
-
-    instance.save()
 }
 
 
