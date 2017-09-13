@@ -20,7 +20,8 @@ static def populate_credentials(ip, token) {
         final LogicalResponse response = vault.logical().read("secret/production/consul")
         final String username = response.getData().get("username")
         final String password = response.getData().get("password")
-        return "User is: $username \nPass is: $password"
+        return username
+//    return "User is: $username \nPass is: $password"
 //    set_env("${service.toUpperCase()}_USER", username)
 //    set_env("${service.toUpperCase()}_PWD", password)
 //    return "user is: (\"${service.toUpperCase()}_USER\", username) \npass is: (\"${service.toUpperCase()}_PWD\", password)"
