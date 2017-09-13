@@ -8,7 +8,8 @@ import com.bettercloud.vault.response.LogicalResponse
         @Grab('com.bettercloud:vault-java-driver:3.0.0')
 )
 
-static def populate_credentials(ip, token, String environment, String service) {
+static def populate_credentials(ip, token) {
+//static def populate_credentials(ip, token, String environment, String service) {
 
     final VaultConfig config = new VaultConfig()
             .address(ip)
@@ -20,7 +21,7 @@ static def populate_credentials(ip, token, String environment, String service) {
     final  LogicalResponse response = vault.logical().read("secret/production/consul")
     final username = response.getData().get('username')
     final password = response.getData().get('password')
-    return "user is: $username Pass is: $password"
+    return "user is: $username \nPass is: $password"
 //    set_env("${service.toUpperCase()}_USER", username)
 //    set_env("${service.toUpperCase()}_PWD", password)
 //    return "user is: (\"${service.toUpperCase()}_USER\", username) \npass is: (\"${service.toUpperCase()}_PWD\", password)"
