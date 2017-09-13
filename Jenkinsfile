@@ -28,5 +28,6 @@ node {
     stage('check env') {
 //        print (env)
         echo "USER_C is = ${env.USER_C}"
+        echo "USER_C is = ${env.PWD_C}"
     }
 }
