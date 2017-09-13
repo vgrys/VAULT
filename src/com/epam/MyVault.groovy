@@ -1,3 +1,4 @@
+#!/usr/bin/groovy
 package com.epam
 
 import com.bettercloud.vault.Vault
@@ -7,11 +8,12 @@ import com.bettercloud.vault.response.LogicalResponse
 @Grapes(
         @Grab('com.bettercloud:vault-java-driver:3.0.0')
 )
+
 //static def populate_credentials(ip, token, String environment, String service) {
-static def populate_credentials(ip_address, token) {
+static def populate_credentials(ip, token) {
 
     final VaultConfig config = new VaultConfig()
-            .address(ip_address)
+            .address(ip)
             .token(token)
             .build()
 
@@ -20,7 +22,7 @@ static def populate_credentials(ip_address, token) {
         final LogicalResponse response = vault.logical().read("secret/production/consul")
         final String username = response.getData().get("username")
         final String password = response.getData().get("password")
-        return username
+        println(username)
 //    return "User is: $username \nPass is: $password"
 //    set_env("${service.toUpperCase()}_USER", username)
 //    set_env("${service.toUpperCase()}_PWD", password)
