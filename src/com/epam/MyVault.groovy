@@ -19,10 +19,11 @@ static def populate_credentials(ip, token, Backend) {
 
     final Vault vault = new Vault(config)
 
-        final LogicalResponse response = vault.logical().read(Backend)
-        final String username = response.getData().get("username")
-        final String password = response.getData().get("password")
-        return username
+    final LogicalResponse response = vault.logical().read(Backend)
+    final String username = response.getData().get("username")
+    final String password = response.getData().get("password")
+    return "user is: $username \npass is: $password"
+
 //    return "User is: $username \nPass is: $password"
 //    set_env("${service.toUpperCase()}_USER", username)
 //    set_env("${service.toUpperCase()}_PWD", password)
