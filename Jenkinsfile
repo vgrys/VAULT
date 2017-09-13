@@ -6,7 +6,7 @@ import com.epam.MyVault
 
 node {
     stage('check env') {
-        print ($BUILD_NUMBER)
+        print (HOME)
     }
     stage('Obtain credentials from Vault') {
 
@@ -23,5 +23,4 @@ node {
 //            echo(myVar)
         }
     }
-
 }
