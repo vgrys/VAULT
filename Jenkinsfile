@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 
 @Library('vaultCommands@master')
-import com.epam.MyVault
+import com.epam.VaultTools
 
 
 node {
@@ -15,11 +15,9 @@ node {
 
         withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
 
-           new MyVault().populate_credentials(env ,"http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
-
-//            new MyVault()vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
-//            new MyVault()vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
-//        }
+            VaultTools().populate_credentials(env ,"http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
+            VaultTools().populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
+            VaultTools().populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
     }
     stage('check env')
         echo "USER is = ${env.CONSUL_USER}"
