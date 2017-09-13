@@ -6,6 +6,7 @@ import com.epam.VaultTools
 
 node {
     stage('Obtain credentials from Vault') {
+        echo "Start to populate secrets from Vault"
 
         def ENVIRONMENT = "production"
 
@@ -15,8 +16,8 @@ node {
             vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
             vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
             vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
-            echo "Secreats are saved into variables"
         }
+        echo "Secrets are saved into environment variables"
     }
     stage('check env') {
         echo "USER_USER is = ${env.CONSUL_USER}"
