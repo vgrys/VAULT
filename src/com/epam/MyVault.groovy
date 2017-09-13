@@ -48,11 +48,11 @@ def set_env(key, value) {
     } else {
         envVars = envVarsNodePropertyList.get(0).getEnvVars()
     }
-    return key + " " + value
-//    envVars.put(key, value)
-//
-//    instance.save()
 
+    envVars.put(key, value)
+
+    instance.save()
+    return key + " " + value
 }
 
 
