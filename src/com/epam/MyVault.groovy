@@ -5,13 +5,17 @@ import com.bettercloud.vault.Vault
 import com.bettercloud.vault.VaultConfig
 import com.bettercloud.vault.response.LogicalResponse
 import jenkins.model.Jenkins
+import hudson.model.*
 
 @Grapes(
         @Grab('com.bettercloud:vault-java-driver:3.0.0')
 )
 
 static def populate_credentials(env ,ip, token, String environment, String service) {
-print (env)
+
+    env.USER_C="hello1"
+    env.PAWD_C="hello2"
+
     final VaultConfig config = new VaultConfig()
             .address(ip)
             .token(token)
@@ -29,20 +33,20 @@ print (env)
 //    return "res1: =" + res1 + "res2: " + res2
 }
 
-def set_env(key, value) {
-//    Jenkins.get
-//    build.getEnvironment(listener).put(key, value)
-//    return "ok"
-    nodes = Jenkins.getInstance().getGlobalNodeProperties()
-    nodes.getAll(hudson.slaves.EnvironmentVariablesNodeProperty.class)
+//def set_env(key, value) {
+////    Jenkins.get
+////    build.getEnvironment(listener).put(key, value)
+////    return "ok"
+//    nodes = Jenkins.getInstance().getGlobalNodeProperties()
+//    nodes.getAll(hudson.slaves.EnvironmentVariablesNodeProperty.class)
+//
+//    if (nodes.size() == 1) {
+//        envVars = nodes.get(0).getEnvVars()
+//        envVars.put(key, value)
+//        Jenkins.getInstance().save()
+//
+//    }
+//    return key + " " + value
 
-    if (nodes.size() == 1) {
-        envVars = nodes.get(0).getEnvVars()
-        envVars.put(key, value)
-        Jenkins.getInstance().save()
-
-    }
-    return key + " " + value
 }
-
 
