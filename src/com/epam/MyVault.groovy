@@ -10,8 +10,8 @@ import jenkins.model.Jenkins
         @Grab('com.bettercloud:vault-java-driver:3.0.0')
 )
 
-static def populate_credentials(ip, token, String environment, String service) {
-
+static def populate_credentials(env ,ip, token, String environment, String service) {
+print (env)
     final VaultConfig config = new VaultConfig()
             .address(ip)
             .token(token)
