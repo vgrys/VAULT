@@ -4,7 +4,6 @@ package com.epam
 import com.bettercloud.vault.Vault
 import com.bettercloud.vault.VaultConfig
 import com.bettercloud.vault.response.LogicalResponse
-import hudson.slaves.EnvironmentVariablesNodeProperty
 import jenkins.model.Jenkins
 
 @Grapes(
@@ -28,32 +27,20 @@ static def populate_credentials(ip, token, String environment, String service) {
     def myVault = new com.epam.MyVault()
     def result3 = myVault.set_env("${service.toUpperCase()}_USER", username)
     def result2 = myVault.set_env("${service.toUpperCase()}_PWD", password)
- return result2 + "|||" + result3
+    return result2 + "|||" + result3
 }
 
 def set_env(key, value) {
+    nodes = Jenkins.getInstance().getGlobalNodeProperties()
+    nodes.getAll(hudson.slaves.EnvironmentVariablesNodeProperty.class)
 
+    if (nodes.size() == 1) {
+        envVars = nodes.get(0).getEnvVars()
+        envVars.put(key, value)
+        Jenkins.getInstance().save()
 
-    instance = Jenkins.getInstance()
-    globalNodeProperties = instance.getGlobalNodeProperties()
-    envVarsNodePropertyList = globalNodeProperties.getAll(EnvironmentVariablesNodeProperty.class)
-
-    newEnvVarsNodeProperty = null
-    envVars = null
-
-    if (envVarsNodePropertyList == null || envVarsNodePropertyList.size() == 0) {
-        newEnvVarsNodeProperty = new EnvironmentVariablesNodeProperty();
-        globalNodeProperties.add(newEnvVarsNodeProperty)
-        envVars = newEnvVarsNodeProperty.getEnvVars()
-    } else {
-        envVars = envVarsNodePropertyList.get(0).getEnvVars()
     }
-
-    envVars.put(key, value)
-
-    instance.save()
     return key + " " + value
 }
-
 
 
