@@ -26,6 +26,8 @@ node {
         echo "PWD is = ${env.CONSUL_PWD}"
         echo "USER is = ${env.ATRIFACTORY_USER}"
         echo "PWD is = ${env.ATRIFACTORY_PWD}"
+        echo "USER is = ${env.SONARQUBE_USER}"
+        echo "PWD is = ${env.SONARQUBE_PWD}"
     }
 
 }
