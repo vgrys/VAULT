@@ -15,8 +15,6 @@ node {
 
         withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
 
-//            def creds = vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN")
-//            new MyVault().populate_credentials(env ,"http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
            new MyVault().populate_credentials(env ,"http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
 
 //            new MyVault()vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")

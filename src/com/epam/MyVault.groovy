@@ -30,7 +30,6 @@ static def populate_credentials(env ,ip, token, String environment, String servi
 }
 
 def set_env(env, key, value) {
-    env.USER_C="hello1"
-    env.PWD_C="hello2"
+    env.USER_C=key
+    env.PWD_C=value
 }
-
