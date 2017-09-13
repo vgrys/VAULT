@@ -12,22 +12,18 @@ node {
         withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
 
             def vaultTools = new VaultTools()
-            def res = vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
-            def res2 = vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
-            def res3 = vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
-
-            println(res)
-            println(res2)
-            println(res3)
+            vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
+            vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
+            vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
         }
     }
     stage('check env') {
-        echo "USER is = ${env.CONSUL_USER}"
-        echo "PWD is = ${env.CONSUL_PWD}"
-        echo "USER is = ${env.ATRIFACTORY_USER}"
-        echo "PWD is = ${env.ATRIFACTORY_PWD}"
-        echo "USER is = ${env.SONARQUBE_USER}"
-        echo "PWD is = ${env.SONARQUBE_PWD}"
+        echo "USER_USER is = ${env.CONSUL_USER}"
+        echo "USER_PWD is = ${env.CONSUL_PWD}"
+        echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
+        echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
+        echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
+        echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
     }
 
 }
