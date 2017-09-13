@@ -15,10 +15,11 @@ node {
         withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
 
 //            def creds = vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN")
-            def result = new MyVault().populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
+            new MyVault().populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
 //            vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
 //            vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
-            println(result)
+//            println("${CONSUL_USER}")
+            println(Jenkins.getInstance().getGlobalNodeProperties().get(0).getEnvVars().get("CONSUL_USER"))
 //            def myVar = build.getEnvironment(listener).get("BUILD_ID")
 //            echo(myVar)
         }
