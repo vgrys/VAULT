@@ -8,10 +8,10 @@ import com.bettercloud.vault.response.LogicalResponse
         @Grab('com.bettercloud:vault-java-driver:3.0.0')
 )
 //static def populate_credentials(ip, token, String environment, String service) {
-static def populate_credentials(ip, token) {
+static def populate_credentials(ip_address, token) {
 
     final VaultConfig config = new VaultConfig()
-            .address(ip)
+            .address(ip_address)
             .token(token)
             .build()
 
