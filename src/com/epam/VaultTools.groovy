@@ -1,10 +1,7 @@
 #!/usr/bin/groovy
 package com.epam
 
-import com.bettercloud.vault.Vault
-import com.bettercloud.vault.VaultConfig
-import com.bettercloud.vault.response.LogicalResponse
-import hudson.model.*
+import com.bettercloud.vault.*
 
 @Grapes(
         @Grab('com.bettercloud:vault-java-driver:3.0.0')
