@@ -22,7 +22,7 @@ static def populate_credentials(ip, token, Backend) {
         final LogicalResponse response = vault.logical().read(Backend)
         final String username = response.getData().get("username")
         final String password = response.getData().get("password")
-        printf(username)
+        return username
 //    return "User is: $username \nPass is: $password"
 //    set_env("${service.toUpperCase()}_USER", username)
 //    set_env("${service.toUpperCase()}_PWD", password)
