@@ -10,7 +10,7 @@ import com.bettercloud.vault.response.LogicalResponse
 )
 
 //static def populate_credentials(ip, token, String environment, String service) {
-static def populate_credentials(ip, token) {
+static def populate_credentials(ip, token, Backend) {
 
     final VaultConfig config = new VaultConfig()
             .address(ip)
@@ -19,7 +19,7 @@ static def populate_credentials(ip, token) {
 
     final Vault vault = new Vault(config)
 
-        final LogicalResponse response = vault.logical().read("secret/production/consul")
+        final LogicalResponse response = vault.logical().read(Backend)
         final String username = response.getData().get("username")
         final String password = response.getData().get("password")
         printf(username)
