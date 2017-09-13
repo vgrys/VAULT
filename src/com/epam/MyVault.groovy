@@ -10,7 +10,7 @@ import jenkins.model.Jenkins
         @Grab('com.bettercloud:vault-java-driver:3.0.0')
 )
 
-def populate_credentials(ip, token, String environment, String service) {
+static def populate_credentials(ip, token, String environment, String service) {
 
     final VaultConfig config = new VaultConfig()
             .address(ip)
@@ -25,11 +25,8 @@ def populate_credentials(ip, token, String environment, String service) {
 //    return "user is: $username \npass is: $password"
 
     def myVault = new com.epam.MyVault()
-    myVault.set_env("${service.toUpperCase()}_USER", username)
-    myVault.set_env("${service.toUpperCase()}_PWD", password)
-
-    def myVar = build.getEnvironment(listener).get("CONSUL_USER")
-    return myVar
+     myVault.set_env("${service.toUpperCase()}_USER", username)
+     myVault.set_env("${service.toUpperCase()}_PWD", password)
 }
 
 def set_env(key, value) {
@@ -42,6 +39,7 @@ def set_env(key, value) {
         Jenkins.getInstance().save()
 
     }
+    return key + " " + value
 }
 
 
