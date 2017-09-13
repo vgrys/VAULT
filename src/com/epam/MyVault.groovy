@@ -17,7 +17,7 @@ static def populate_credentials(ip, token, String environment, String service) {
 
     final Vault vault = new Vault(config)
 
-    final  LogicalResponse response = vault.logical().read("secret/$environment/$service")
+    final LogicalResponse response = vault.logical().read("secret/production/consul")
     final username = response.getData().get('username')
     final password = response.getData().get('password')
     return "user is: $username \nPass is: $password"
