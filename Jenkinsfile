@@ -7,7 +7,7 @@ import com.epam.MyVault
 node {
     stage('check env') {
 //        print (env)
-        echo "USER_C is = ${env.USER_C}"
+//        echo "USER_C is = ${env.USER_C}"
 }
     stage('Obtain credentials from Vault') {
 
@@ -24,5 +24,9 @@ node {
 //            def myVar = build.getEnvironment(listener).get("BUILD_ID")
 //            echo(myVar)
         }
+    }
+    stage('check env') {
+//        print (env)
+        echo "USER_C is = ${env.USER_C}"
     }
 }
