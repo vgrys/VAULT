@@ -25,12 +25,13 @@ static def populate_credentials(ip, token, String environment, String service) {
     final String password = response.getData().get("password")
 //    return "user is: $username \npass is: $password"
 
-    set_env("${service.toUpperCase()}_USER", username)
-    set_env("${service.toUpperCase()}_PWD", password)
+    def myVault = new com.epam.MyVault()
+    myVault.set_env("${service.toUpperCase()}_USER", username)
+    myVault.set_env("${service.toUpperCase()}_PWD", password)
 
 }
 
-static def set_env(key, value) {
+def set_env(key, value) {
 
 
     instance = Jenkins.getInstance()
@@ -40,7 +41,7 @@ static def set_env(key, value) {
     newEnvVarsNodeProperty = null
     envVars = null
 
-    if ( envVarsNodePropertyList == null || envVarsNodePropertyList.size() == 0 ) {
+    if (envVarsNodePropertyList == null || envVarsNodePropertyList.size() == 0) {
         newEnvVarsNodeProperty = new EnvironmentVariablesNodeProperty();
         globalNodeProperties.add(newEnvVarsNodeProperty)
         envVars = newEnvVarsNodeProperty.getEnvVars()
