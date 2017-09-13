@@ -5,7 +5,7 @@ import com.bettercloud.vault.VaultConfig
 import com.bettercloud.vault.response.LogicalResponse
 
 @Grapes(
-    @Grab('com.bettercloud:vault-java-driver:3.0.0')
+        @Grab('com.bettercloud:vault-java-driver:3.0.0')
 )
 
 static def populate_credentials(ip, token, String environment, String service) {
