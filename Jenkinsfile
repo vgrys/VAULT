@@ -4,6 +4,7 @@
 
 
 node {
+    stage('Obtain credentials from Vault') {
         def vc = new MyVault()
         def ENVIRONMENT = "production"
 
@@ -14,6 +15,7 @@ node {
 //            vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
 //            vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
         }
+    }
 }
 
 
