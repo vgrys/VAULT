@@ -14,11 +14,11 @@ node {
             def creds = vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
 //            vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
 //            vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
-            println (creds)
+            echo (creds)
         }
     }
         stage ('check env') {
-        println($CONSUL_USER)
+        echo($CONSUL_USER)
     }
 }
 
