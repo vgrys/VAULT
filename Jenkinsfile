@@ -17,8 +17,8 @@ node {
             println (creds)
         }
     }
-        stage ('test') {
-        echo "test"
+        stage ('check env') {
+        println($CONSUL_USER)
     }
 }
 
