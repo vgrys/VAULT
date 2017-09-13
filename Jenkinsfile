@@ -6,7 +6,7 @@ import com.epam.MyVault
 
 node {
     stage('check env') {
-//        print (env)
+        print (env)
 //        echo "USER_C is = ${env.USER_C}"
 }
     stage('Obtain credentials from Vault') {
