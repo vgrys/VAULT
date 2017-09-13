@@ -22,7 +22,7 @@ node {
 //        }
     }
     stage('check env')
-        echo "USER_C is = ${env.USER_C}"
-        echo "PWD_C is = ${env.PWD_C}"
+        echo "USER is = ${env.CONSUL_USER}"
+        echo "PWD is = ${env.CONSUL_PWD}"
     }
 }
