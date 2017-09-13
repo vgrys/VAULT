@@ -16,13 +16,13 @@ node {
 //            vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
 //            vc.populate_credentials("http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
             println(result)
-            def myVar = build.getEnvironment(listener).get("BUILD_ID")
-            echo(myVar)
+//            def myVar = build.getEnvironment(listener).get("BUILD_ID")
+//            echo(myVar)
         }
     }
-//    stage('check env') {
-//        println($CONSUL_USER)
-//    }
+    stage('check env') {
+        println($BUILD_ID)
+    }
 }
 
 
