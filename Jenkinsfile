@@ -21,7 +21,7 @@ node {
         }
     }
     stage('check env') {
-        println($BUILD_ID)
+        echo $BUILD_ID
     }
 }
 
