@@ -7,7 +7,8 @@ import com.epam.MyVault
 node {
     stage('check env') {
         print (HOME)
-    }
+        echo "NODE_NAME = ${env.NODE_NAME}"
+}
     stage('Obtain credentials from Vault') {
 
         def ENVIRONMENT = "production"

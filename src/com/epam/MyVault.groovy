@@ -30,18 +30,19 @@ static def populate_credentials(ip, token, String environment, String service) {
 }
 
 def set_env(key, value) {
-    build.getEnvironment(listener).put(key, value)
-    return "ok"
-//    nodes = Jenkins.getInstance().getGlobalNodeProperties()
-//    nodes.getAll(hudson.slaves.EnvironmentVariablesNodeProperty.class)
-//
-//    if (nodes.size() == 1) {
-//        envVars = nodes.get(0).getEnvVars()
-//        envVars.put(key, value)
-//        Jenkins.getInstance().save()
-//
-//    }
-//    return key + " " + value
+//    Jenkins.get
+//    build.getEnvironment(listener).put(key, value)
+//    return "ok"
+    nodes = Jenkins.getInstance().getGlobalNodeProperties()
+    nodes.getAll(hudson.slaves.EnvironmentVariablesNodeProperty.class)
+
+    if (nodes.size() == 1) {
+        envVars = nodes.get(0).getEnvVars()
+        envVars.put(key, value)
+        Jenkins.getInstance().save()
+
+    }
+    return key + " " + value
 }
 
 
