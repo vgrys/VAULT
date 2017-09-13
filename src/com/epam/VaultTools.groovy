@@ -10,10 +10,10 @@ import hudson.model.*
         @Grab('com.bettercloud:vault-java-driver:3.0.0')
 )
 
-static def populate_credentials(env, ip, token, String environment, String service) {
+static def populate_credentials(env, ip_vault, token, String environment, String service) {
 
     final VaultConfig config = new VaultConfig()
-            .address(ip)
+            .address(ip_vault)
             .token(token)
             .build()
 
@@ -26,4 +26,3 @@ static def populate_credentials(env, ip, token, String environment, String servi
     env.setProperty("${service.toUpperCase()}_USER", username)
     env.setProperty("${service.toUpperCase()}_PWD", password)
 }
-
