@@ -3,7 +3,7 @@
 @Library('vaultCommands@master') import com.epam.MyVault
 
 
-pipeline {
+node {
     agent any
     stages {
         stage('Obtain credentials from Vault') {
