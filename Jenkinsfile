@@ -5,6 +5,9 @@ import com.epam.MyVault
 
 
 node {
+    stage('check env') {
+        echo $BUILD_ID
+    }
     stage('Obtain credentials from Vault') {
 
         def ENVIRONMENT = "production"
@@ -20,9 +23,7 @@ node {
 //            echo(myVar)
         }
     }
-    stage('check env') {
-        echo $BUILD_ID
-    }
+
 }
 
 
