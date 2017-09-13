@@ -23,7 +23,7 @@ static def populate_credentials(ip, token, String environment, String service) {
     final String username = response.getData().get("username")
     final String password = response.getData().get("password")
 //    return "user is: $username \npass is: $password"
-
+    build.getEnvironment(listener).put("${service.toUpperCase()}_USER", username)
     def myVault = new com.epam.MyVault()
      def res1  = myVault.set_env("${service.toUpperCase()}_USER", username)
     def res2 =  myVault.set_env("${service.toUpperCase()}_PWD", password)
