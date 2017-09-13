@@ -5,10 +5,6 @@ import com.epam.VaultTools
 
 
 node {
-    stage('check env') {
-        print(env)
-//        echo "USER_C is = ${env.USER_C}"
-    }
     stage('Obtain credentials from Vault') {
 
         def ENVIRONMENT = "production"
@@ -24,6 +20,8 @@ node {
     stage('check env') {
         echo "USER is = ${env.CONSUL_USER}"
         echo "PWD is = ${env.CONSUL_PWD}"
+        echo "USER is = ${env.ATRIFACTORY_USER}"
+        echo "PWD is = ${env.ATRIFACTORY_PWD}"
     }
 
 }
