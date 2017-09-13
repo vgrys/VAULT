@@ -18,7 +18,7 @@ node {
         }
     }
         stage ('check env') {
-        echo($CONSUL_USER)
+        println($CONSUL_USER)
     }
 }
 
