@@ -33,5 +33,11 @@ node {
         echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
         echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
     }
+    stage('Cleanup') {
+        echo "********* Cleanup Files for Branch *********"
+        // Looks for makefile_cleanup.<branch_name> to run.  i.e. makefile_cleanup.release_project1 for release/project1 branch
+        cleanUpFiles()  //MAKE your makefile to cleanup your files
+    }
+
 
 }
