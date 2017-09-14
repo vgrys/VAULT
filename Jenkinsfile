@@ -10,15 +10,6 @@ node {
         deleteDir()
     }
 
-    stage('check env if exist') {
-        echo "CONSUL_USER is = ${env.CONSUL_USER}"
-        echo "CONSUL_PWD is = ${env.CONSUL_PWD}"
-        echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
-        echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
-        echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
-        echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
-    }
-
     stage('Obtain credentials from Vault') {
         echo "********** Start to populate secrets from Vault ***********"
         def ENVIRONMENT = "production"
@@ -39,12 +30,6 @@ node {
         echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
         echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
         echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
-    }
-
-    stage('Cleanup') {
-        echo "********* Cleanup Files for Branch *********"
-        // Looks for makefile_cleanup.<branch_name> to run.  i.e. makefile_cleanup.release_project1 for release/project1 branch
-        cleanUpFiles()  //MAKE your makefile to cleanup your files
     }
 
 
