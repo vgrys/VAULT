@@ -1,5 +1,7 @@
 #!/usr/bin/groovy
 package com.epam
+// src/ctc/ad/corp/cicd/VaultTools.groovy
+//package ctc.ad.corp.cicd
 
 import com.bettercloud.vault.Vault
 import com.bettercloud.vault.VaultConfig

@@ -1,0 +1,176 @@
+#!groovy
+
+/****************************************************************************/
+/* Jenkins Pipeline File                                                    */
+/* Author: J. Mongeon, Created: 2017-07-27                                  */
+/* Last Modified: 2017-07-27                                                */
+/* Description: Jenkins Pipeline Template                                   */
+/*                                                                          */
+/* For any changes, edit the schedule, deployment, cleanup, and rollback    */
+/* stages below.                                                            */
+/****************************************************************************/
+
+// Add DSS shared libraries - do not change
+@Library('dss-pipeline-library') import ctc.ad.corp.cicd.deploy
+
+
+// ---------------------------------------------------------------
+// DEVELOPER NOTE: EDIT JOB SCHEDULE AS REQUIRED
+// Example here runs Jenkins job every 6 hours (uncomment to use):
+// properties([pipelineTriggers([cron('0 H/6 * * *')])])
+// ---------------------------------------------------------------
+
+
+// Node is the dss node - do not change
+node ('q9lcwptdmap01.labcorp.ad.ctc') {
+
+    // Initialization - do not change
+    currentBuild.result = "SUCCESS"
+    def ERROR_TYPE = ""
+
+    echo "DEBUG CODE -----> Running ${env.JOB_NAME} on ${env.JENKINS_URL} for branch ${env.BRANCH_NAME}"
+
+    try {
+
+        // --------------------------------------
+        // DEVELOPER NOTE: DO NOT EDIT THIS STAGE
+        // CLEAN WORKSPACE STEPS
+        stage('Clean Workspace') {
+            echo "********** Clean Jenkins workspace ***********"
+            deleteDir()
+        }
+
+
+        // --------------------------------------
+        // DEVELOPER NOTE: DO NOT EDIT THIS STAGE
+        // CHECK OUT SCM STEPS
+        stage('Check out Source') {
+            echo "********** Checkout SCM and Set Bitbucket properties ***********"
+            checkout scm
+            // Set bitbucket user properties
+            bitbucketInfo()
+            // Set the git variables for the project
+            bitbucketGitInfo()
+            echo "DEBUG CODE -----> Git Origin: ${env.GIT_ORIGIN}, Git User: ${env.GIT_USER}, Git Project: ${env.GIT_PROJECT}, Git Branch: ${env.GIT_BRANCH}, Git Repo: ${env.GIT_REPO}, Git Feature Name (optional): ${env.GIT_FEATURE_NAME}"
+        }
+
+
+        // --------------------------------------
+        // DEVELOPER NOTE: DO NOT EDIT THIS STAGE
+        // RELEASE MANAGMENT STEPS
+        stage('Branch Management') {
+            echo "********** Check for Valid Branch Type ***********"
+            if (env.GIT_BRANCH_TYPE == "") {
+                //Error occurred, email notifiers
+                currentBuild.result = "FAILURE"
+                // Send error email
+                ERROR_TYPE = "BRANCH_NAME_ERROR"
+                sendErrorEmail(ERROR_TYPE)
+            }
+            echo "********* Create release branch, if not already there - look for 'feature/' prefix ************"
+            try {
+                // createNewReleaseBranch()
+            } catch (err) {
+                //Error occurred, email notifiers
+                currentBuild.result = "FAILURE"
+                // Send error email
+                ERROR_TYPE = "BRANCH_CREATE_ERROR"
+                sendErrorEmail(ERROR_TYPE)
+                throw err
+            }
+        }
+
+
+        // --------------------------------------
+        // DEVELOPER NOTE: DO NOT EDIT THIS STAGE
+        // TEST DATA MANAGMENT STEPS
+        stage('Test Data Management') {
+            try {
+                tdmInfo(env.BRANCH_NAME)
+                echo "********* Check for Data Manifest File ************"
+                getManifestFile()
+                echo "********* Run TDM Data Refresh (if manifest file found) **********"
+                runTDMRefresh()
+            } catch (err) {
+                // Error occurred, email notifiers
+                currentBuild.result = "FAILURE"
+                // Send error email
+                ERROR_TYPE = "TDM_ERROR"
+                sendErrorEmail(ERROR_TYPE)
+                throw err
+            } finally {
+                echo "********* Clear Temp TDM files *************"
+                clearTDMFiles()
+            }
+        }
+
+
+        // -----------------------------------------------------------
+        // DEVELOPER NOTE: EDIT THIS STAGE TO SPECIFY DEPLOYMENT STEPS
+        // DEPLOY STEPS
+        stage('Deploy') {
+
+            //Deploy for RELEASE or MASTER branch updates only
+            if (env.GIT_BRANCH_TYPE == "release" || env.GIT_BRANCH_TYPE == "master") {
+                try {
+
+                    /* Below is sample methods that can do different functions of deployment: */
+                    /* Update the methods to operate                                          */
+
+                    //echo "********* Add login/passwords from Jenkins in config file ************"
+                    //Example: updateConfigCredential(JenkinsCredentialID,"./config/property.sh","Replaced_Source_User","Replaced_Source_Password",)
+
+                    //echo "*********** Create the certificate files ***********"
+                    //setupCertFile(JenkinsCredentialID_CertificateFile,"./.ssh/id_rsa_file")
+
+                    echo "********* Run makefile with shell scripts for branch **********"
+                    // Look for makefile.<branch_name> to run.  i.e. makefile.release_project1 for release/project1 branch
+                    runMakefile()    //MAKE your makefile to deploy code for your branch!
+
+                    //echo "********* Run MySQL Scripts **********"
+                    //runMySQL(JenkinsCredentialID_MySQLDB,tdmInfo.DB_Hostname,"./mysql/ALTER tables.sql")
+
+                    //echo "********** Run Hive Scripts in Hadoop ***********"
+                    //def HadoopProjectServiceAccount = "svc.tdmadmin"
+                    //runHive(HadoopProjectServiceAccount,"./hive/test.ddl")
+
+                } catch (err) {
+                    currentBuild.result = "FAILURE"
+                    echo "********* Error - Rollback **********"
+
+                    // Looks for makefile_rollback.<branch_name> to run.  i.e. makefile_rollback.release_project1 for release/project1 branch
+                    rollbackFiles()  //MAKE your makefile to rollback your deployed code for branch!
+
+                }
+            } else {
+                echo "Skipping deploy as this branch isn't a release."
+            }
+
+        }
+
+
+        // ------------------------------------------------------------------
+        // DEVELOPER NOTE: EDIT THIS STAGE TO SPECIFY POST-RELEASE TEST STEPS
+        // TEST STEPS
+        stage('Post-Release Tests') {
+            // Test scripts here
+        }
+
+
+        // ---------------------------------------------------------
+        // DEVELOPER NOTE: EDIT THIS STAGE TO SPECIFY CLEANUP STEPS
+        // ROLLBACK STEPS
+        stage('Cleanup') {
+            echo "********* Cleanup Files for Branch *********"
+            // Looks for makefile_cleanup.<branch_name> to run.  i.e. makefile_cleanup.release_project1 for release/project1 branch
+            cleanUpFiles()  //MAKE your makefile to cleanup your files
+        }
+
+
+    } catch (err) {
+        currentBuild.result = "FAILURE"
+        // Send error email
+        sendErrorEmail()
+        throw err
+    }
+}
