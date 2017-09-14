@@ -6,8 +6,8 @@ import com.epam.VaultTools
 
 node {
     stage('check env if exist') {
-        echo "USER_USER is = ${env.CONSUL_USER}"
-        echo "USER_PWD is = ${env.CONSUL_PWD}"
+        echo "CONSUL_USER is = ${env.CONSUL_USER}"
+        echo "CONSUL_PWD is = ${env.CONSUL_PWD}"
         echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
         echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
         echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
@@ -26,8 +26,8 @@ node {
         echo "********** Secrets are saved into environment variables ***********"
     }
     stage('check env') {
-        echo "USER_USER is = ${env.CONSUL_USER}"
-        echo "USER_PWD is = ${env.CONSUL_PWD}"
+        echo "CONSUL_USER is = ${env.CONSUL_USER}"
+        echo "CONSUL_PWD is = ${env.CONSUL_PWD}"
         echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
         echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
         echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
