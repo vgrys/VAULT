@@ -28,7 +28,7 @@ node {
         withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
 
             def vaultTools = new VaultTools()
-            ['sql' 'consul', 'sonarqube', 'artifactory'].each { service ->
+            ['sql', 'consul', 'sonarqube', 'artifactory'].each { service ->
                 vaultTools.populate_credentials(env, vault_ip, "$MY_VAULT_TOKEN", environment, service)
             }
         }
