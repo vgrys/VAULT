@@ -10,7 +10,9 @@ node {
         deleteDir()
     }
 
-    stage('check env ix exist') {
+    stage('check env') {
+        echo "SQL_USER is = ${env.SQL_USER}"
+        echo "SQL_PWD is = ${env.SQL_PWD}"
         echo "CONSUL_USER is = ${env.CONSUL_USER}"
         echo "CONSUL_PWD is = ${env.CONSUL_PWD}"
         echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
@@ -26,7 +28,7 @@ node {
         withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
 
             def vaultTools = new VaultTools()
-            ['consul', 'sonarqube', 'artifactory'].each { service ->
+            ['sql' 'consul', 'sonarqube', 'artifactory'].each { service ->
                 vaultTools.populate_credentials(env, vault_ip, "$MY_VAULT_TOKEN", environment, service)
             }
         }
@@ -47,6 +49,8 @@ node {
 //    }
 
     stage('check env') {
+        echo "SQL_USER is = ${env.SQL_USER}"
+        echo "SQL_PWD is = ${env.SQL_PWD}"
         echo "CONSUL_USER is = ${env.CONSUL_USER}"
         echo "CONSUL_PWD is = ${env.CONSUL_PWD}"
         echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
