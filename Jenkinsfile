@@ -12,7 +12,7 @@ node {
 
     stage('Obtain credentials from Vault') {
         echo "********* Start to populate secrets from Vault **********"
-        def environment = 'production'
+        def environment = 'dev'
         def vault_ip = 'http://192.168.56.21:8200'
         withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
 
