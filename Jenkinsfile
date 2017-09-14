@@ -8,7 +8,7 @@ node {
     stage('Clean Workspace') {
         echo "********** Clean Jenkins workspace ***********"
         deleteDir()
-        echo "********** Clean Jenkins workspace is done ***********"
+        echo "********** End of clean Jenkins workspace ***********"
 
     }
 
@@ -36,6 +36,6 @@ node {
         echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
         echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
         echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
-        echo "********* This step is just for demo DONE **********"
+        echo "********* End of step is just for demo **********"
     }
 }
