@@ -17,7 +17,6 @@ def uploadSpec = """{
 }"""
 
 node {
-    def ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, 'vgrys', 'Password1')
 
     stage('Clean Workspace') {
         echo "********** Clean Jenkins workspace ***********"
@@ -45,6 +44,8 @@ node {
     stage ('Artifactory Configuration') {
         echo "********* Start to populate secrets from Vault **********"
 
+
+        withEnv([ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, 'vgrys', 'Password1')])
 
 
         echo "********* Start to populate secrets from Vault **********"
