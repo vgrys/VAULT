@@ -18,10 +18,11 @@ def uploadSpec = """{
 node {
     stage('Clean Workspace') {
         echo "********** Clean Jenkins workspace ***********"
+        echo artifactoryLocalLocation
         deleteDir()
         echo "********** End of clean Jenkins workspace ***********"
-        echo (JOB_NAME: JOB_NAME)
-        echo (BRANCH_NAME: BRANCH_NAME)
+        echo JOB_NAME
+        echo BRANCH_NAME
 
         echo ${BUILD_NUMBER} "BUILD_NUMBER"
         echo ${JOB_BASE_NAME} "JOB_BASE_NAME"
