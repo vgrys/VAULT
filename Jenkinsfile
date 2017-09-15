@@ -5,7 +5,7 @@ import com.epam.VaultTools
 
 //def ArtifactoryServerURL = 'http://192.168.56.21:8081/artifactory'
 //def ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, 'username', 'password')
-def ArtifactoryServer = Artifactory.newServer('http://192.168.56.21:8081/artifactory', 'vgrys', 'Password1')
+
 //ArtifactoryServer username = ${env.ARTIFACTORY_USER}
 //ArtifactoryServer password = ${env.ARTIFACTORY_PWD}
 //ArtifactoryServer bypassProxy = true
@@ -22,6 +22,8 @@ def uploadSpec = """{
 }"""
 
 node {
+    def ArtifactoryServer = Artifactory.newServer('http://192.168.56.21:8081/artifactory', 'vgrys', 'Password1')
+    
     stage('Clean Workspace') {
         echo "********** Clean Jenkins workspace ***********"
         echo artifactoryLocalLocation
@@ -43,6 +45,14 @@ node {
         echo "********* Secrets are saved into environment variables **********"
     }
 
+    stage ('Artifactory Configuration') {
+        echo "********* Start to populate secrets from Vault **********"
+
+
+
+        echo "********* Start to populate secrets from Vault **********"
+
+    }
     stage('check env') {
         echo "********* This step is just for demo **********"
         echo "SQL_USER is = ${env.SQL_USER}"
