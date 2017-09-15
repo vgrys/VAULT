@@ -21,6 +21,8 @@ node {
         echo artifactoryLocalLocation
         deleteDir()
         echo "********** End of clean Jenkins workspace ***********"
+        echo JENKINS_HOME
+        echo WORKSPACE
         echo JOB_NAME
         echo JOB_BASE_NAME
         echo BRANCH_NAME
