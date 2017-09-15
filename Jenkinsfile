@@ -4,7 +4,7 @@
 import com.epam.VaultTools
 
 def server = Artifactory.server 'flex1-arti'
-def artifactoryLocalLocation = '/var/lib/cjt/jobs/${JOB_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/'
+def artifactoryLocalLocation = '${JENKINS_HOME}/jobs/${JOB_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/'
 def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
 def uploadSpec = """{
   "files": [
@@ -21,14 +21,13 @@ node {
         echo artifactoryLocalLocation
         deleteDir()
         echo "********** End of clean Jenkins workspace ***********"
-        echo JENKINS_HOME
+
         echo WORKSPACE
         echo JOB_NAME
         echo JOB_BASE_NAME
         echo BRANCH_NAME
-        echo BUILD_NUMBER
-        echo BUILD_DISPLAY_NAME
         echo BUILD_ID
+
         echo "********** End of clean Jenkins workspace ***********"
     }
 
