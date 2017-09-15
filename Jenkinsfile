@@ -4,15 +4,9 @@
 import com.epam.VaultTools
 
 def server = Artifactory.server 'flex1-arti'
-def artifactoryLocalLocation = '${JENKINS_HOME}/jobs/${JOB_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/'
-def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
-//def jobBaseName = "${env.JOB_NAME}".split('/').last()
 def jobBaseName = "${env.JOB_NAME}".split('/')
-echo "Job Name: ${jobBaseName[0]}"
-
-//def (jobBaseName, BarachName) = "${env.JOB_NAME}".tokenize( '/' )
-//echo "Job Name: ${jobBaseName}"
-//echo "Job Name: ${BarachName}"
+def artifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/"
+def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
 def uploadSpec = """{
   "files": [
     {
