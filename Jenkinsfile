@@ -7,8 +7,8 @@ def server = Artifactory.server 'flex1-arti'
 def artifactoryLocalLocation = '${JENKINS_HOME}/jobs/${JOB_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/'
 def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
 //def jobBaseName = "${env.JOB_NAME}".split('/').last()
-def jobBaseName = "${env.JOB_NAME}".split('/')
-    result.jobBaseName = result[0]
+jobBaseName[] = "${env.JOB_NAME}".split('/')
+    String jobBaseName = result[0]
 echo "Job Name: ${jobBaseName}"
 def uploadSpec = """{
   "files": [
