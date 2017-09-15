@@ -66,8 +66,8 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        archiveArtifacts 'WORKSPACE'
-        fingerprint 'WORKSPACE'
+        archiveArtifacts "${WORKSPACE}"
+        fingerprint "${WORKSPACE}"
 //        archiveArtifacts 'assembly/target/*.tar.gz'
 //        fingerprint 'assembly/target/*.tar.gz'
 //        archiveArtifacts 'assembly/target/*.zip'
