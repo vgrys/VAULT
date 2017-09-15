@@ -8,6 +8,7 @@ def artifactoryLocalLocation = '${JENKINS_HOME}/jobs/${JOB_NAME}/branches/${BRAN
 def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
 //def jobBaseName = "${env.JOB_NAME}".split('/').last()
 def jobBaseName = "${env.JOB_NAME}".split('/')
+    result.jobBaseName = result[0]
 echo "Job Name: ${jobBaseName}"
 def uploadSpec = """{
   "files": [
