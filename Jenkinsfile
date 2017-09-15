@@ -3,6 +3,17 @@
 @Library('vaultCommands@master')
 import com.epam.VaultTools
 
+def server = Artifactory.server 'flex1-arti'
+def artifactoryLocalLocation = '/var/lib/jenkins/jobs/${JOB_BASE_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/'
+def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
+def uploadSpec = """{
+  "files": [
+    {
+      "pattern": "${artifactoryLocalLocation}",
+      "target": "${artifactoryUploadPath}"
+    }
+ ]
+}"""
 
 node {
     stage('Clean Workspace') {
@@ -38,6 +49,11 @@ node {
         echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
         echo "********* End of step is just for demo **********"
     }
+
+//    stage('Results') {
+//        junit '**/target/surefire-reports/TEST-*.xml'
+//        archive 'target/*.jar'
+//    }
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
