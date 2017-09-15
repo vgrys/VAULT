@@ -20,12 +20,12 @@ node {
         echo "********** Clean Jenkins workspace ***********"
         deleteDir()
         echo "********** End of clean Jenkins workspace ***********"
-        echo $JOB_NAME "JOB_NAME"
-        echo $BRANCH_NAME "BRANCH_NAME"
-        echo $BUILD_NUMBER "BUILD_NUMBER"
-        echo $JOB_BASE_NAME "JOB_BASE_NAME"
-        echo $BUILD_DISPLAY_NAME "BUILD_DISPLAY_NAME"
-        echo $BUILD_ID "BUILD_ID"
+        print $JOB_NAME "JOB_NAME"
+        print $BRANCH_NAME "BRANCH_NAME"
+        print $BUILD_NUMBER "BUILD_NUMBER"
+        print $JOB_BASE_NAME "JOB_BASE_NAME"
+        print $BUILD_DISPLAY_NAME "BUILD_DISPLAY_NAME"
+        print $BUILD_ID "BUILD_ID"
 
     }
 
