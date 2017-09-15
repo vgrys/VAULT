@@ -25,6 +25,7 @@ node {
         echo WORKSPACE
         echo JOB_NAME
         echo JOB_BASE_NAME
+        echo LEAF_JOB_NAME
         echo BRANCH_NAME
         echo BUILD_ID
 
@@ -65,10 +66,12 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        archiveArtifacts 'assembly/target/*.tar.gz'
-        fingerprint 'assembly/target/*.tar.gz'
-        archiveArtifacts 'assembly/target/*.zip'
-        fingerprint 'assembly/target/*.zip'
+        archiveArtifacts 'WORKSPACE'
+        fingerprint 'WORKSPACE'
+//        archiveArtifacts 'assembly/target/*.tar.gz'
+//        fingerprint 'assembly/target/*.tar.gz'
+//        archiveArtifacts 'assembly/target/*.zip'
+//        fingerprint 'assembly/target/*.zip'
         echo "********* End of archive artifacts **********"
 
     }
