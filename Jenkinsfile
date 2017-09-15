@@ -2,9 +2,9 @@
 
 @Library('vaultCommands@master')
 import com.epam.VaultTools
-import com.epam.ArtifactoryTools
+//import com.epam.ArtifactoryTools
 
-def ArtifactoryServer = 'http://192.168.56.21:8081/artifactory'
+//def ArtifactoryServer = 'http://192.168.56.21:8081/artifactory'
 echo JOB_NAME
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def artifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/"
