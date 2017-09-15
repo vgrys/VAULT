@@ -2,8 +2,9 @@
 
 @Library('vaultCommands@master')
 import com.epam.VaultTools
+import com.epam.ArtifactoryTools
 
-def server = Artifactory.server 'flex1-arti'
+def ArtifactoryServer = 'http://192.168.56.21:8081/artifactory'
 echo JOB_NAME
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def artifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/"
@@ -52,10 +53,14 @@ node {
         echo "********* End of step is just for demo **********"
     }
 
-//    stage('Results') {
-//        junit '**/target/surefire-reports/TEST-*.xml'
-//        archive 'target/*.jar'
-//    }
+    stage('Initialize Artifactory') {
+        echo "********* Start to Initialize Artifactory **********"
+        def artifactoryTools = new ArtifactoryTools()
+       def arts = artifactoryTools.provide_credentials(ArtifactoryServer, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+        echo arts
+
+        echo "********* Start to Initialize Artifactory **********"
+    }
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
@@ -74,8 +79,8 @@ node {
         script {
             def buildInfo = Artifactory.newBuildInfo()
             buildInfo.env.capture = true
-            buildInfo=server.upload(uploadSpec)
-            server.publishBuildInfo(buildInfo)
+            buildInfo=ArtifactoryServer.upload(uploadSpec)
+            ArtifactoryServer.publishBuildInfo(buildInfo)
             echo "********* End of upload artifacts to Artifactory server **********"
         }
     }
