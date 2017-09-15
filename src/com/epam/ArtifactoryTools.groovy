@@ -1,7 +1,7 @@
 package com.epam
 
 @Grapes(
-        @Grab('org.jfrog.artifactory.client:artifactory-java-client-services:+')
+        @Grab('org.jfrog.artifactory.client:artifactory-java-client-services:2.5.2')
 )
 
 import org.artifactory.client.*
@@ -10,8 +10,8 @@ import org.artifactory.client.*
 
 static def provide_credentials(ArtifactoryUrl, username, password) {
 
-    Artifactory artifactory = ArtifactoryClient.create(ArtifactoryUrl, username, password);
-    return artifactory
+    Artifactory artifactory_ID = ArtifactoryClient.create(ArtifactoryUrl, username, password)
+    return artifactory_ID
 }
 //
 //ItemHandle fileItem = artifactory.repository("generic-local ").file("path/to/file.txt");
