@@ -5,7 +5,7 @@
 package com.epam
 
 @Grapes(
-        @Grab('com.bettercloud:vault-java-driver:2.5.2')
+        @Grab('com.bettercloud:vault-java-driver:3.0.0')
 )
 
 import com.bettercloud.vault.Vault
