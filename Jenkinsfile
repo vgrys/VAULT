@@ -2,10 +2,9 @@
 
 @Library('vaultCommands@master')
 import com.epam.VaultTools
-import com.epam.ArtifactoryTools
 
-def ArtifactoryServer = 'http://192.168.56.21:8081/artifactory'
-echo JOB_NAME
+def ArtifactoryServerURL = 'http://192.168.56.21:8081/artifactory'
+def ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD})
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def artifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/"
 def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
@@ -51,15 +50,6 @@ node {
         echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
         echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
         echo "********* End of step is just for demo **********"
-    }
-
-    stage('Initialize Artifactory') {
-        echo "********* Start to Initialize Artifactory **********"
-        def artifactoryTools = new ArtifactoryTools()
-       def arts = artifactoryTools.provide_credentials(ArtifactoryServer, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-        echo arts
-
-        echo "********* Start to Initialize Artifactory **********"
     }
 
     stage ('Archive Artifacts') {
