@@ -24,8 +24,6 @@ node {
         echo artifactoryLocalLocation
         deleteDir()
         echo "********** End of clean Jenkins workspace ***********"
-        echo "ArtifactoryServer is = ${ArtifactoryServer}"
-
     }
 
     stage('Obtain credentials from Vault') {
@@ -43,13 +41,11 @@ node {
     }
 
     stage ('Artifactory Configuration') {
-        echo "********* Start to populate secrets from Vault **********"
-
+        echo "********* Start Artifactory Configuration **********"
 
         ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, 'vgrys', 'Password1')
-
-
-        echo "********* Start to populate secrets from Vault **********"
+        echo "ArtifactoryServer is = ${ArtifactoryServer}"
+        echo "********* End of Artifactory Configuration **********"
 
     }
     stage('check env') {
