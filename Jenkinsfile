@@ -4,7 +4,7 @@
 import com.epam.VaultTools
 
 def server = Artifactory.server 'flex1-arti'
-def artifactoryLocalLocation = '/var/lib/jenkins/jobs/${JOB_BASE_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/'
+def artifactoryLocalLocation = '/var/lib/cjt/jobs/${JOB_BASE_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/'
 def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
 def uploadSpec = """{
   "files": [
