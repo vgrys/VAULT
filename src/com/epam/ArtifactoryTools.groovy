@@ -1,7 +1,7 @@
 package com.epam
 
 @Grapes(
-        @Grab('org.jfrog.artifactory.client:artifactory-java-client-services:2.5.2')
+        @Grab('org.jfrog.artifactory.client:artifactory-java-client-api:2.5.2')
 )
 
 import org.artifactory.client.*
