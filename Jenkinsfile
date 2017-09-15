@@ -23,13 +23,14 @@ def uploadSpec = """{
 
 node {
     def ArtifactoryServer = Artifactory.newServer('http://192.168.56.21:8081/artifactory', 'vgrys', 'Password1')
-    echo ArtifactoryServer
 
     stage('Clean Workspace') {
         echo "********** Clean Jenkins workspace ***********"
         echo artifactoryLocalLocation
         deleteDir()
         echo "********** End of clean Jenkins workspace ***********"
+        echo "ArtifactoryServer is = ${ArtifactoryServer}"
+
     }
 
     stage('Obtain credentials from Vault') {
