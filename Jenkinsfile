@@ -3,6 +3,21 @@
 @Library('vaultCommands@master')
 import com.epam.VaultTools
 
+def server = Artifactory.server 'flex1-arti'
+echo JOB_NAME
+def jobBaseName = "${env.JOB_NAME}".split('/')
+def artifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/"
+def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
+def uploadSpec = """{
+  "files": [
+    {
+      "pattern": "${artifactoryLocalLocation}",
+      "target": "${artifactoryUploadPath}"
+    }
+ ]
+}"""
+
+
 
 node {
     stage('Clean Workspace') {
