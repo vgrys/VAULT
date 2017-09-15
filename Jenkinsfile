@@ -3,6 +3,7 @@
 @Library('vaultCommands@master')
 import com.epam.VaultTools
 
+def ArtifactoryServer
 def ArtifactoryServerURL = 'http://192.168.56.21:8081/artifactory'
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def artifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/"
@@ -45,7 +46,7 @@ node {
         echo "********* Start to populate secrets from Vault **********"
 
 
-        withEnv([ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, 'vgrys', 'Password1')])
+        ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, 'vgrys', 'Password1')
 
 
         echo "********* Start to populate secrets from Vault **********"
@@ -82,7 +83,7 @@ node {
             def buildInfo = Artifactory.newBuildInfo()
             buildInfo.env.capture = true
             buildInfo=ArtifactoryServer.upload(uploadSpec)
-            ArtifactoryServer.publishBuildInfo(buildInfo)
+            ${ArtifactoryServer}.publishBuildInfo(buildInfo)
             echo "********* End of upload artifacts to Artifactory server **********"
         }
     }
