@@ -53,35 +53,5 @@ node {
         echo "********* End of step is just for demo **********"
     }
 
-    stage('Initialize Artifactory') {
-        echo "********* Start to Initialize Artifactory **********"
-        def artifactoryTools = new ArtifactoryTools()
-       def arts = artifactoryTools.provide_credentials(ArtifactoryServer, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-        echo arts
 
-        echo "********* Start to Initialize Artifactory **********"
-    }
-
-    stage ('Archive Artifacts') {
-        echo "********* Archive artifacts **********"
-        archiveArtifacts "${WORKSPACE}"
-        fingerprint "${WORKSPACE}"
-//        archiveArtifacts 'assembly/target/*.tar.gz'
-//        fingerprint 'assembly/target/*.tar.gz'
-//        archiveArtifacts 'assembly/target/*.zip'
-//        fingerprint 'assembly/target/*.zip'
-        echo "********* End of archive artifacts **********"
-
-    }
-
-    stage ('Upload to Artifactory') {
-        echo "********* Upload artifacts to Artifactory server **********"
-        script {
-            def buildInfo = Artifactory.newBuildInfo()
-            buildInfo.env.capture = true
-            buildInfo=ArtifactoryServer.upload(uploadSpec)
-            ArtifactoryServer.publishBuildInfo(buildInfo)
-            echo "********* End of upload artifacts to Artifactory server **********"
-        }
-    }
 }
