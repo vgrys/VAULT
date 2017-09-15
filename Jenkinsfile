@@ -17,7 +17,6 @@ def uploadSpec = """{
  ]
 }"""
 
-
 node {
     stage('Clean Workspace') {
         echo "********** Clean Jenkins workspace ***********"
