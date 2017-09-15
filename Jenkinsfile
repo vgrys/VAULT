@@ -3,12 +3,7 @@
 @Library('vaultCommands@master')
 import com.epam.VaultTools
 
-//def ArtifactoryServerURL = 'http://192.168.56.21:8081/artifactory'
-//def ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, 'username', 'password')
-
-//ArtifactoryServer username = ${env.ARTIFACTORY_USER}
-//ArtifactoryServer password = ${env.ARTIFACTORY_PWD}
-//ArtifactoryServer bypassProxy = true
+def ArtifactoryServerURL = 'http://192.168.56.21:8081/artifactory'
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def artifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/"
 def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
@@ -22,7 +17,7 @@ def uploadSpec = """{
 }"""
 
 node {
-    def ArtifactoryServer = Artifactory.newServer('http://192.168.56.21:8081/artifactory', 'vgrys', 'Password1')
+    def ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, 'vgrys', 'Password1')
 
     stage('Clean Workspace') {
         echo "********** Clean Jenkins workspace ***********"
