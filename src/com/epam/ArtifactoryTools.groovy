@@ -4,7 +4,8 @@ package com.epam
         @Grab('org.jfrog.artifactory.client:artifactory-java-client-api:2.5.2')
 )
 
-import org.artifactory.client.*
+import org.artifactory.client.Artifactory
+import org.artifactory.client.ArtifactoryClient
 
 
 
