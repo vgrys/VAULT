@@ -17,23 +17,12 @@ def uploadSpec = """{
  ]
 }"""
 
-
-
 node {
     stage('Clean Workspace') {
         echo "********** Clean Jenkins workspace ***********"
+        echo artifactoryLocalLocation
         deleteDir()
-    }
-
-    stage('check env') {
-        echo "SQL_USER is = ${env.SQL_USER}"
-        echo "SQL_PWD is = ${env.SQL_PWD}"
-        echo "CONSUL_USER is = ${env.CONSUL_USER}"
-        echo "CONSUL_PWD is = ${env.CONSUL_PWD}"
-        echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
-        echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
-        echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
-        echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
+        echo "********** End of clean Jenkins workspace ***********"
     }
 
     stage('Obtain credentials from Vault') {
@@ -50,20 +39,8 @@ node {
         echo "********* Secrets are saved into environment variables **********"
     }
 
-//    stage('Obtain credentials from Vault') {
-//        echo "********** Start to populate secrets from Vault ***********"
-//        def ENVIRONMENT = "production"
-//        withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
-//
-//            def vaultTools = new VaultTools()
-//            vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "consul")
-//            vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "sonarqube")
-//            vaultTools.populate_credentials(env, "http://192.168.56.21:8200", "$MY_VAULT_TOKEN", ENVIRONMENT, "artifactory")
-//        }
-//        echo "********** Secrets are saved into environment variables ***********"
-//    }
-
     stage('check env') {
+        echo "********* This step is just for demo **********"
         echo "SQL_USER is = ${env.SQL_USER}"
         echo "SQL_PWD is = ${env.SQL_PWD}"
         echo "CONSUL_USER is = ${env.CONSUL_USER}"
@@ -72,5 +49,34 @@ node {
         echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
         echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
         echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
+        echo "********* End of step is just for demo **********"
+    }
+
+//    stage('Results') {
+//        junit '**/target/surefire-reports/TEST-*.xml'
+//        archive 'target/*.jar'
+//    }
+
+    stage ('Archive Artifacts') {
+        echo "********* Archive artifacts **********"
+        archiveArtifacts "${WORKSPACE}"
+        fingerprint "${WORKSPACE}"
+//        archiveArtifacts 'assembly/target/*.tar.gz'
+//        fingerprint 'assembly/target/*.tar.gz'
+//        archiveArtifacts 'assembly/target/*.zip'
+//        fingerprint 'assembly/target/*.zip'
+        echo "********* End of archive artifacts **********"
+
+    }
+
+    stage ('Upload to Artifactory') {
+        echo "********* Upload artifacts to Artifactory server **********"
+        script {
+            def buildInfo = Artifactory.newBuildInfo()
+            buildInfo.env.capture = true
+            buildInfo=server.upload(uploadSpec)
+            server.publishBuildInfo(buildInfo)
+            echo "********* End of upload artifacts to Artifactory server **********"
+        }
     }
 }
