@@ -4,7 +4,7 @@
 import com.epam.VaultTools
 
 def ArtifactoryServerURL = 'http://192.168.56.21:8081/artifactory'
-def ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD})
+def ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def artifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/"
 def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
