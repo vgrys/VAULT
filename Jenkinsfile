@@ -79,7 +79,7 @@ node {
             def buildInfo = Artifactory.newBuildInfo()
             buildInfo.env.capture = true
             buildInfo=ArtifactoryServer.upload(uploadSpec)
-            ${ArtifactoryServer}.publishBuildInfo(buildInfo)
+            ArtifactoryServer.publishBuildInfo(buildInfo)
             echo "********* End of upload artifacts to Artifactory server **********"
         }
     }
