@@ -38,4 +38,25 @@ node {
         echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
         echo "********* End of step is just for demo **********"
     }
+
+    stage ('Archive Artifacts') {
+        echo "********* Archive artifacts **********"
+        archiveArtifacts 'assembly/target/*.tar.gz'
+        fingerprint 'assembly/target/*.tar.gz'
+        archiveArtifacts 'assembly/target/*.zip'
+        fingerprint 'assembly/target/*.zip'
+        echo "********* End of archive artifacts **********"
+
+    }
+
+    stage ('Upload to Artifactory') {
+        echo "********* Upload artifacts to Artifactory server **********"
+        script {
+            def buildInfo = Artifactory.newBuildInfo()
+            buildInfo.env.capture = true
+            buildInfo=server.upload(uploadSpec)
+            server.publishBuildInfo(buildInfo)
+            echo "********* End of upload artifacts to Artifactory server **********"
+        }
+    }
 }
