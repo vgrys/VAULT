@@ -8,7 +8,7 @@ def artifactoryLocalLocation = '/var/lib/cjt/jobs/${JOB_NAME}/branches/${BRANCH_
 def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
 echo(message: env.JOB_NAME)
 def full_name = env.JOB_NAME.split('/')
-def job_name=full_name[1]def uploadSpec = """{
+def uploadSpec = """{
   "files": [
     {
       "pattern": "${artifactoryLocalLocation}",
@@ -26,7 +26,7 @@ node {
         echo JOB_NAME
         echo BRANCH_NAME
         echo BUILD_NUMBER
-        echo JOB_BASE_NAME 
+        echo JOB_BASE_NAME
         echo full_name 'full_name'
         echo BUILD_DISPLAY_NAME
         echo BUILD_ID
