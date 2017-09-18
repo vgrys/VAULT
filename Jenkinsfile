@@ -68,11 +68,32 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        archiveArtifacts '**/bin/*.zip'
-        fingerprint '**/bin/*.zip'
+//        archiveArtifacts '**/bin/*.py'
+//        fingerprint '**/bin/*.py'
+
+        zip archive: true, dir: '', glob: '**/bin/*.py', zipFile: 'Project$_{env.JOB_NAME}.zip'
+        archive '**/bin/*.py'
+        stash includes: '**, .py/', name: 'source', useDefaultExcludes: false
+        slackSend channel: 'jenkins', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+        sh "env"
+
         echo "********* End of archive artifacts **********"
 
     }
+
+//    node('docker') {
+//        stage "Checkout"
+//        deleteDir()
+//        checkout scm
+//        sh '''bash scripts/generate-docker-base.sh
+//          bash scripts/build-docker-base.sh ubuntu-yakkety
+//          bash scripts/check-patch.sh'''
+//        zip archive: true, dir: '', glob: 'scripts/**', zipFile: 'scripts.zip'
+//        archive 'scripts/**'
+//        stash includes: '**, .git/', name: 'source', useDefaultExcludes: false
+//        slackSend channel: 'jenkins', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+//        sh "env"
+//    }
 
     stage ('Upload to Artifactory') {
         echo "********* Upload artifacts to Artifactory server **********"
