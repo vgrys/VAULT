@@ -48,23 +48,26 @@ node {
         echo "********* End of Artifactory Configuration **********"
 
     }
-    stage('check env') {
-        echo "********* This step is just for demo **********"
-        echo "SQL_USER is = ${env.SQL_USER}"
-        echo "SQL_PWD is = ${env.SQL_PWD}"
-        echo "CONSUL_USER is = ${env.CONSUL_USER}"
-        echo "CONSUL_PWD is = ${env.CONSUL_PWD}"
-        echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
-        echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
-        echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
-        echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
-        echo "********* End of step is just for demo **********"
-    }
+//    stage('check env') {
+//        echo "********* This step is just for demo **********"
+//        echo "SQL_USER is = ${env.SQL_USER}"
+//        echo "SQL_PWD is = ${env.SQL_PWD}"
+//        echo "CONSUL_USER is = ${env.CONSUL_USER}"
+//        echo "CONSUL_PWD is = ${env.CONSUL_PWD}"
+//        echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
+//        echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
+//        echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
+//        echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
+//        echo "********* End of step is just for demo **********"
+//    }
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        echo '**/*.py'
-        zip destfile: "Project_TEST_ARCH.zip", archive: true, basedir: '**/bin/'
+
+        zip archive: true, dir: '', glob: '**/bin/**', zipFile: 'Project_TEST_ARCH.zip'
+        archive '**/bin/**'
+
+//        zip destfile: "Project_TEST_ARCH.zip", archive: true, basedir: "**/bin/"
 
         archiveArtifacts artifacts: 'Project_TEST_ARCH.zip', fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
 
