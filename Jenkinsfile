@@ -63,10 +63,14 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        archiveArtifacts '**/bin/*'
-        fingerprint '**/bin/*'
-        fingerprint: true
-        zip zipFile: "Project_${env.JOB_NAME}.zip", archive: true, dir: '**/bin/**', glob: '**/*.py'
+//        archiveArtifacts '**/bin/*', fingerprint '**/bin/*'
+//        fingerprint: true
+        zip zipFile: "Project_TEST_ARCH.zip", archive: true, dir: '**/bin/**'
+
+//        zip zipFile: "x64\\Release\\${APPLY_TAG}.zip", dir: "x64\\Release\\${APPLY_TAG}"
+        archiveArtifacts artifacts: "Project_TEST_ARCH.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
+
+
 
 //        zip archive: true, dir: '', glob: '**/bin/**', zipFile: "Project_${env.JOB_NAME}.zip"
 //        archive '**/bin/**'
@@ -75,20 +79,6 @@ node {
         echo "********* End of archive artifacts **********"
 
     }
-
-//    node('docker') {
-//        stage "Checkout"
-//        deleteDir()
-//        checkout scm
-//        sh '''bash scripts/generate-docker-base.sh
-//          bash scripts/build-docker-base.sh ubuntu-yakkety
-//          bash scripts/check-patch.sh'''
-//        zip archive: true, dir: '', glob: 'scripts/**', zipFile: 'scripts.zip'
-//        archive 'scripts/**'
-//        stash includes: '**, .git/', name: 'source', useDefaultExcludes: false
-//        slackSend channel: 'jenkins', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
-//        sh "env"
-//    }
 
     stage ('Upload to Artifactory') {
         echo "********* Upload artifacts to Artifactory server **********"
