@@ -66,18 +66,11 @@ node {
         archiveArtifacts '**/bin/*'
         fingerprint '**/bin/*'
         fingerprint: true
-       def AntBuilder = new AntBuilder().with {
-            new File('**/bin/*').eachDir {dir->
-                zip destfile: "${env.JOB_NAME}_${dir.name}.zip", {
-                    fileset dir: dir
-//                    fileset file: 'src/file.txt'
-                }
-            }
-        }
+        zip zipFile: "Project_${env.JOB_NAME}.zip" archive: true dir: '**/bin/**' glob: '**/*.py'
 
-        zip archive: true, dir: '', glob: '**/bin/**', zipFile: "Project_${env.JOB_NAME}.zip"
-        archive '**/bin/**'
-        stash includes: '**, .git/', name: 'source', useDefaultExcludes: false
+//        zip archive: true, dir: '', glob: '**/bin/**', zipFile: "Project_${env.JOB_NAME}.zip"
+//        archive '**/bin/**'
+//        stash includes: '**, .git/', name: 'source', useDefaultExcludes: false
 
         echo "********* End of archive artifacts **********"
 
