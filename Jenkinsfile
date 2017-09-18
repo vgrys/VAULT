@@ -65,7 +65,7 @@ node {
         echo "********* Archive artifacts **********"
 
         zip archive: true, dir: '', glob: '**/bin/**', zipFile: 'Project_TEST_ARCH.zip'
-//        archive '**/bin/**'
+        archive '**/bin/**'
 
 //        zip destfile: "Project_TEST_ARCH.zip", archive: true, basedir: "**/bin/"
 
