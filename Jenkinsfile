@@ -66,8 +66,16 @@ node {
         archiveArtifacts '**/bin/*'
         fingerprint '**/bin/*'
         fingerprint: true
+        new AntBuilder().with {
+            new File('**/bin/*').eachDir {dir->
+                zip destfile: "${env.JOB_NAME}_${dir.name}.zip", {
+                    fileset dir: dir
+//                    fileset file: 'src/file.txt'
+                }
+            }
+        }
 
-        zip archive: true, dir: '', glob: '**/bin/**', zipFile: 'Project$_{env.JOB_NAME}.zip'
+        zip archive: true, dir: '', glob: '**/bin/**', zipFile: "Project_${env.JOB_NAME}.zip"
         archive '**/bin/**'
         stash includes: '**, .git/', name: 'source', useDefaultExcludes: false
 
