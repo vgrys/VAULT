@@ -61,10 +61,10 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        archiveArtifacts 'assembly/target/*.tar.gz'
-        fingerprint 'assembly/target/*.tar.gz'
-        archiveArtifacts 'assembly/target/*.zip'
-        fingerprint 'assembly/target/*.zip'
+        archiveArtifacts '*/bin/*.py'
+        fingerprint '*/bin/*.py'
+//        archiveArtifacts 'assembly/target/*.zip'
+//        fingerprint 'assembly/target/*.zip'
         echo "********* End of archive artifacts **********"
 
     }
