@@ -8,7 +8,7 @@ def jobBaseName = "${env.JOB_NAME}".split('/')
 def ArtifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/*"
 def ArtifactoryUploadPath = '${JOB_NAME}/${BUILD_NUMBER}/'
 def ArtifactoryServer
-def ArtifactoryRepository = test_project
+def ArtifactoryRepository = 'test_project'
 def ArtifactoryServerURL = 'http://192.168.56.21:8081/artifactory/'ArtifactoryRepository''
 def uploadSpec = """{
   "files": [
