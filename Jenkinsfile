@@ -68,7 +68,7 @@ node {
         zip zipFile: "Project_TEST_ARCH.zip", archive: true, dir: '**/bin/**'
 
 //        zip zipFile: "x64\\Release\\${APPLY_TAG}.zip", dir: "x64\\Release\\${APPLY_TAG}"
-        archiveArtifacts artifacts: "Project_TEST_ARCH.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
+        archiveArtifacts artifacts: '**/bin/*', fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
 
 
 
