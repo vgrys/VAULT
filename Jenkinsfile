@@ -66,8 +66,8 @@ node {
         archiveArtifacts '**/bin/*'
         fingerprint '**/bin/*'
         fingerprint: true
-        AntBuilder().with {
-            File('**/bin/*').eachDir {dir->
+       def AntBuilder = new AntBuilder().with {
+            new File('**/bin/*').eachDir {dir->
                 zip destfile: "${env.JOB_NAME}_${dir.name}.zip", {
                     fileset dir: dir
 //                    fileset file: 'src/file.txt'
