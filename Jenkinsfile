@@ -21,16 +21,11 @@ def uploadSpec = """{
 
 node {
 
-    stage('Clean Workspace') {
-        echo "********** Clean Jenkins workspace ***********"
+    stage('Clean Workspace and Check out Source') {
+        echo "********** Clean Jenkins workspace and Check out Source ***********"
         deleteDir()
-        echo "********** End of clean Jenkins workspace ***********"
-    }
-
-    stage('Check out Source') {
-        echo "********** Checkout SCM  ***********"
         checkout scm
-        echo "********** End of checkout SCM  ***********"
+        echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
     stage('Obtain credentials from Vault') {
@@ -68,15 +63,14 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-//        archiveArtifacts '**/bin/*.py'
-//        fingerprint '**/bin/*.py'
+        archiveArtifacts '**/bin/*'
+        fingerprint '**/bin/*'
+        fingerprint: true
 
-        zip archive: true, dir: '', glob: '**/bin/*.py', zipFile: 'Project$_{env.JOB_NAME}.zip'
-        def ARCH = archive '**/bin/*.py'
-        def stash1 = stash includes: '**, .py/', name: 'source', useDefaultExcludes: false
+        zip archive: true, dir: '', glob: '**/bin/**', zipFile: 'Project$_{env.JOB_NAME}.zip'
+        archive '**/bin/**'
+        stash includes: '**, .py/', name: 'source', useDefaultExcludes: false
 
-        echo ARCH
-        echo stash1
         echo "********* End of archive artifacts **********"
 
     }
