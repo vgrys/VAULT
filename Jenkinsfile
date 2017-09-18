@@ -69,7 +69,7 @@ node {
 
         zip archive: true, dir: '', glob: '**/bin/**', zipFile: 'Project$_{env.JOB_NAME}.zip'
         archive '**/bin/**'
-        stash includes: '**, .py/', name: 'source', useDefaultExcludes: false
+        stash includes: '**, .git/', name: 'source', useDefaultExcludes: false
 
         echo "********* End of archive artifacts **********"
 
