@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import boto3
 
 # Let's use Amazon S3
