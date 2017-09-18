@@ -65,7 +65,8 @@ node {
         echo "********* Archive artifacts **********"
 //        archiveArtifacts '**/bin/*', fingerprint '**/bin/*'
 //        fingerprint: true
-        zip zipFile: "/var/lib/cjt/jobs/TEST/branches/dev/builds/1111/Project_TEST_ARCH.zip", dir: '/var/lib/cjt/jobs/TEST/branches/dev/builds/69/archive/bin/*.py', glob: ''
+        def ZIPP = zip zipFile: "Project_TEST_ARCH.zip", dir: '/bin/*.py', archive: true
+        echo ZIPP
 
         archiveArtifacts artifacts: 'Project_TEST_ARCH.zip', fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
 
