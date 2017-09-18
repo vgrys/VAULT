@@ -22,7 +22,6 @@ node {
 
     stage('Clean Workspace') {
         echo "********** Clean Jenkins workspace ***********"
-        echo artifactoryLocalLocation
         deleteDir()
         echo "********** End of clean Jenkins workspace ***********"
     }
