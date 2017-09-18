@@ -68,10 +68,8 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        archiveArtifacts '**/bin/*.py'
-        fingerprint '**/bin/*.py'
-//        archiveArtifacts 'assembly/target/*.zip'
-//        fingerprint 'assembly/target/*.zip'
+        archiveArtifacts zipFile '**/bin/*.zip'
+        fingerprint zipFile '**/bin/*.zip'
         echo "********* End of archive artifacts **********"
 
     }
@@ -81,8 +79,7 @@ node {
         script {
             def buildInfo = Artifactory.newBuildInfo()
             buildInfo.env.capture = true
-            buildInfo=ArtifactoryServer.upload(uploadSpec)
-//            ArtifactoryServer.publishBuildInfo(buildInfo)
+            ArtifactoryServer.upload(uploadSpec)
             echo "********* End of upload artifacts to Artifactory server **********"
         }
     }
