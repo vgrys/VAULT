@@ -64,7 +64,7 @@ node {
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
 
-        zip archive: true, dir: '', glob: '**/bin/**', zipFile: 'Project_TEST_ARCH.zip'
+        zip archive: true, dir: '', zipFile: 'Project_TEST_ARCH.zip'
         archive '**/bin/**'
 
 //        zip destfile: "Project_TEST_ARCH.zip", archive: true, basedir: "**/bin/"
