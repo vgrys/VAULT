@@ -6,9 +6,10 @@ import com.epam.VaultTools
 
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def ArtifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/*"
-def ArtifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
+def ArtifactoryUploadPath = '${JOB_NAME}/${BUILD_NUMBER}/'
 def ArtifactoryServer
-def ArtifactoryServerURL = 'http://192.168.56.21:8081/artifactory/test_project'
+def ArtifactoryRepository = test_project
+def ArtifactoryServerURL = 'http://192.168.56.21:8081/artifactory/'ArtifactoryRepository''
 def uploadSpec = """{
   "files": [
     {
@@ -67,8 +68,7 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        def ARCH = archiveArtifacts '**/bin/*.py'
-        echo ARCH
+        archiveArtifacts '**/bin/*.py'
         fingerprint '**/bin/*.py'
 //        archiveArtifacts 'assembly/target/*.zip'
 //        fingerprint 'assembly/target/*.zip'
