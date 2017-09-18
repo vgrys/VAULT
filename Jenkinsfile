@@ -74,7 +74,6 @@ node {
         zip archive: true, dir: '', glob: '**/bin/*.py', zipFile: 'Project$_{env.JOB_NAME}.zip'
         archive '**/bin/*.py'
         stash includes: '**, .py/', name: 'source', useDefaultExcludes: false
-        slackSend channel: 'jenkins', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
         sh "env"
 
         echo "********* End of archive artifacts **********"
