@@ -64,10 +64,10 @@ node {
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
 
-        zip archive: true, dir: '', zipFile: 'Project_TEST_ARCH.zip'
+        zip archive: true, dir: '', zipFile: ""${WORKSPACE}/Project_TEST_ARCH.zip"
         archive '**/bin/**'
 
-//        zip destfile: "Project_TEST_ARCH.zip", archive: true, basedir: "**/bin/"
+//        zip zipFile: "Project_TEST_ARCH.zip", archive: true, basedir: "**/bin/"
 
         archiveArtifacts artifacts: 'Project_TEST_ARCH.zip', fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
 
