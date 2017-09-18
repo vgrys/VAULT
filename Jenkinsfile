@@ -3,16 +3,17 @@
 @Library('vaultCommands@master')
 import com.epam.VaultTools
 
+
+def jobBaseName = "${env.JOB_NAME}".split('/')
+def ArtifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/"
+def ArtifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
 def ArtifactoryServer
 def ArtifactoryServerURL = 'http://192.168.56.21:8081/artifactory'
-def jobBaseName = "${env.JOB_NAME}".split('/')
-def artifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/assembly/target/"
-def artifactoryUploadPath = 'builds/${BUILD_NUMBER}/'
 def uploadSpec = """{
   "files": [
     {
-      "pattern": "${artifactoryLocalLocation}",
-      "target": "${artifactoryUploadPath}"
+      "pattern": "${ArtifactoryLocalLocation}",
+      "target": "${ArtifactoryUploadPath}"
     }
  ]
 }"""
@@ -42,9 +43,7 @@ node {
 
     stage ('Artifactory Configuration') {
         echo "********* Start Artifactory Configuration **********"
-
         ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-        echo "ArtifactoryServer is = ${ArtifactoryServer}"
         echo "********* End of Artifactory Configuration **********"
 
     }
@@ -63,12 +62,10 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        archiveArtifacts "${WORKSPACE}"
-        fingerprint "${WORKSPACE}"
-//        archiveArtifacts 'assembly/target/*.tar.gz'
-//        fingerprint 'assembly/target/*.tar.gz'
-//        archiveArtifacts 'assembly/target/*.zip'
-//        fingerprint 'assembly/target/*.zip'
+        archiveArtifacts 'assembly/target/*.tar.gz'
+        fingerprint 'assembly/target/*.tar.gz'
+        archiveArtifacts 'assembly/target/*.zip'
+        fingerprint 'assembly/target/*.zip'
         echo "********* End of archive artifacts **********"
 
     }
