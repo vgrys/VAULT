@@ -64,7 +64,7 @@ node {
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
         echo '**/*.py'
-        zip zipFile: "Project_TEST_ARCH.zip", dir: '**/*.py', archive: true
+        zip zipFile: "Project_TEST_ARCH.zip", dir: '/home/vagrant/', archive: true
 
         archiveArtifacts artifacts: 'Project_TEST_ARCH.zip', fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
 
