@@ -65,7 +65,7 @@ node {
         echo "********* Archive artifacts **********"
 //        archiveArtifacts '**/bin/*', fingerprint '**/bin/*'
 //        fingerprint: true
-        zip zipFile: "${ArtifactoryLocalLocation}/1111/Project_TEST_ARCH.zip", dir: '', glob: ''
+        zip zipFile: "/var/lib/cjt/jobs/TEST/branches/dev/builds/1111/Project_TEST_ARCH.zip", dir: '', glob: ''
 
         archiveArtifacts artifacts: 'Project_TEST_ARCH.zip', fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
 
