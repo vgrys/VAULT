@@ -66,7 +66,7 @@ node {
         archiveArtifacts '**/bin/*'
         fingerprint '**/bin/*'
         fingerprint: true
-        zip zipFile: "Project_${env.JOB_NAME}.zip" archive: true dir: '**/bin/**' glob: '**/*.py'
+        zip zipFile: "Project_${env.JOB_NAME}.zip", archive: true, dir: '**/bin/**', glob: '**/*.py'
 
 //        zip archive: true, dir: '', glob: '**/bin/**', zipFile: "Project_${env.JOB_NAME}.zip"
 //        archive '**/bin/**'
