@@ -26,6 +26,11 @@ node {
         echo "********** End of clean Jenkins workspace ***********"
     }
 
+    stage('Check out Source') {
+        echo "********** Checkout SCM and Set Bitbucket properties ***********"
+        checkout scm
+    }
+
     stage('Obtain credentials from Vault') {
         echo "********* Start to populate secrets from Vault **********"
         def environment = 'dev'
