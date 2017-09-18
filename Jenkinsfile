@@ -68,8 +68,8 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        archiveArtifacts zipFile '**/bin/*.zip'
-        fingerprint zipFile '**/bin/*.zip'
+        archiveArtifacts '**/bin/*.zip'
+        fingerprint '**/bin/*.zip'
         echo "********* End of archive artifacts **********"
 
     }
