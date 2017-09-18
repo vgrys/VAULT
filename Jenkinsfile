@@ -65,10 +65,9 @@ node {
         echo "********* Archive artifacts **********"
 //        archiveArtifacts '**/bin/*', fingerprint '**/bin/*'
 //        fingerprint: true
-        zip zipFile: "Project_TEST_ARCH.zip", archive: true, dir: '**/bin/**'
+        zip zipFile: "Project_TEST_ARCH.zip", dir: '**/bin/**', glob: ''
 
-//        zip zipFile: "x64\\Release\\${APPLY_TAG}.zip", dir: "x64\\Release\\${APPLY_TAG}"
-        archiveArtifacts artifacts: '**/bin/*', fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
+        archiveArtifacts artifacts: 'Project_TEST_ARCH.zip', fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
 
 
 
