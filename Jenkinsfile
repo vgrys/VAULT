@@ -72,10 +72,11 @@ node {
 //        fingerprint '**/bin/*.py'
 
         zip archive: true, dir: '', glob: '**/bin/*.py', zipFile: 'Project$_{env.JOB_NAME}.zip'
-        archive '**/bin/*.py'
-        stash includes: '**, .py/', name: 'source', useDefaultExcludes: false
-        sh "env"
+        def ARCH = archive '**/bin/*.py'
+        def stash1 = stash includes: '**, .py/', name: 'source', useDefaultExcludes: false
 
+        echo ARCH
+        echo stash1
         echo "********* End of archive artifacts **********"
 
     }
