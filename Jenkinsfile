@@ -28,11 +28,11 @@ def uploadSpec = """{
 }"""
 
 node {
-//    stage ('tet') {
-//        ArtifactoryTools.name = 'Alice'
-//        echo ArtifactoryTools.name /* prints: 'Alice' */
-//        ArtifactoryTools.caution 'The queen is angry!' /* prints: 'Hello, Alice. CAUTION: The queen is angry!' */
-//    }
+    stage ('tet') {
+        ArtifactoryTools.name = 'Alice'
+        echo ArtifactoryTools.name /* prints: 'Alice' */
+        ArtifactoryTools.caution 'The queen is angry!' /* prints: 'Hello, Alice. CAUTION: The queen is angry!' */
+    }
 
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
