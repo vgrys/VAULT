@@ -4,7 +4,7 @@
 import com.epam.VaultTools
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
-def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
+def TIMESTAMP = new java.text.SimpleDateFormat('yyyy.MM.dd.HH:mm:ss').format(new Date())
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def ArtifactoryLocalPath = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/*"
 def ArtifactoryUploadPath = '${JOB_NAME}/${BUILD_NUMBER}/'
@@ -51,9 +51,8 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        echo TIMESTAMP
-        zip archive: true, zipFile: "${jobBaseName[0]}-ts.zip", dir: ''
-        archiveArtifacts artifacts: "${jobBaseName[0]}-ts.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
+        zip archive: true, zipFile: "${jobBaseName[0]}-${TIMESTAMP}.zip", dir: ''
+        archiveArtifacts artifacts: "${jobBaseName[0]}-${TIMESTAMP}.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
         echo "********* End of archive artifacts **********"
     }
 
