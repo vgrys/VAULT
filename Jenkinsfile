@@ -2,9 +2,7 @@
 
 @Library('vaultCommands@master')
 import com.epam.VaultTools
-import com.epam.ArtifactoryTools
-
-import java.sql.Timestamp
+//import com.epam.ArtifactoryTools
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
@@ -29,9 +27,9 @@ def uploadSpec = """{
 }"""
 
 node {
-    stage ('tet') {
-        ArtifactoryTools
-    }
+//    stage ('tet') {
+//        ArtifactoryTools
+//    }
 
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
