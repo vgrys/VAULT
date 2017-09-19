@@ -30,8 +30,7 @@ import com.epam.ArtifactoryTools
 
 node {
     stage('tet') {
-        def z = new org.foo.Zot()
-        z.checkOutFrom(repo)
+        printName
     }
 }
 

@@ -1,8 +1,10 @@
+#!/usr/bin/groovy
 package com.epam
 
 
-def checkOutFrom(repo) {
-    println('hello world')
+def call(body) {
+    body()
+    println("\n$USER")
 }
 
 
