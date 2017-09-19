@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 
-@Library('vaultCommands@master')
-import com.epam.ArtifactoryTools
+//@Library('vaultCommands@master')
+//import com.epam.ArtifactoryTools
 //import com.epam.ArtifactoryTools
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
@@ -30,7 +30,7 @@ import com.epam.ArtifactoryTools
 
 node {
     stage('tet') {
-        printName
+        echo 'test'
     }
 }
 
