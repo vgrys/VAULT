@@ -50,6 +50,7 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
+        echo BUILD_ID
         zip archive: true, zipFile: "${jobBaseName[0]}-ts.zip", dir: ''
         archiveArtifacts artifacts: "${jobBaseName[0]}-ts.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
         echo "********* End of archive artifacts **********"
