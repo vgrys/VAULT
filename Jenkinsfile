@@ -27,11 +27,13 @@ import com.epam.ArtifactoryTools
 // ]
 //}"""
 
+def z = new org.foo.Zot()
+z.checkOutFrom(repo)
+
 node {
     stage('tet') {
-        ArtifactoryTools.name = 'Alice'
-        echo ArtifactoryTools.name /* prints: 'Alice' */
-        ArtifactoryTools.caution 'The queen is angry!' /* prints: 'Hello, Alice. CAUTION: The queen is angry!' */
+        def z = new org.foo.Zot()
+        z.checkOutFrom(repo)
     }
 }
 
