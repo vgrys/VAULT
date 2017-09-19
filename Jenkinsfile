@@ -21,7 +21,7 @@ def ArtifactoryAddress = "http://192.168.56.21:8081/artifactory/${ArtifactoryRep
 def uploadSpec = """{
   "files": [
     {
-      "pattern": "${WORKSPACE}/*.zip",
+      "pattern": "*.zip",
       "target": "${ArtifactoryUploadPath}"
     }
  ]
