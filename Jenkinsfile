@@ -1,5 +1,6 @@
 #!/usr/bin/groovy
 
+@Library('vaultCommands@master')
 import com.epam.*
 //import com.epam.ArtifactoryTools
 
