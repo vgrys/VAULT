@@ -27,8 +27,6 @@ import com.epam.ArtifactoryTools
 // ]
 //}"""
 
-def z = new org.foo.Zot()
-z.checkOutFrom(repo)
 
 node {
     stage('tet') {
