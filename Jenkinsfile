@@ -66,8 +66,6 @@ node {
     stage ('Archive Artifacts 1') {
         deleteDir()
         zip dir: '', glob: '', zipFile: 'thing.zip'
-        v = unzip dir: '', glob: '', read: true, zipFile: 'thing.zip'
-        println v
     }
 
     stage ('Archive Artifacts') {
