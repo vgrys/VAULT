@@ -7,7 +7,7 @@ import com.epam.ArtifactoryTools
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
 def ArtifactoryLocalPath = "${JENKINS_HOME}/jobs/${ArtifactoryTools.jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/*"
-def ArtifactoryUploadPath = '${JOB_NAME}/${BUILD_NUMBER}/'
+def ArtifactoryUploadPath = "${JOB_NAME}/${BUILD_NUMBER}/"
 def ArtifactoryServer
 def ArtifactoryRepository = 'test_project'
 def ArtifactoryAddress = "http://192.168.56.21:8081/artifactory/${ArtifactoryRepository}"
