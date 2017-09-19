@@ -2,7 +2,7 @@
 
 @Library('vaultCommands@master')
 import com.epam.VaultTools
-//import com.epam.ArtifactoryDef
+import com.epam.ArtifactoryDef
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
@@ -30,7 +30,7 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-
+        ArtifactoryDef.call()
     }
 
     stage('Clean Workspace and Check out Source') {
