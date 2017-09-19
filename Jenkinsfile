@@ -65,12 +65,7 @@ node {
 
     stage ('Archive Artifacts 1') {
         deleteDir()
-        touch file: 'afile.txt', timestamp: 0
-        touch file: 'bfile.txt', timestamp: 0
         zip dir: '', glob: '', zipFile: 'thing.zip'
-        dir ('directory') {
-            touch file: 'cfile.txt', timestamp: 0
-        }
         v = unzip dir: '', glob: '', read: true, zipFile: 'thing.zip'
         println v
     }
