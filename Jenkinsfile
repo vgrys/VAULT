@@ -13,7 +13,6 @@ import com.epam.VaultTools
 
 def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
 def jobBaseName = "${env.JOB_NAME}".split('/')
-def ArtifactoryLocalPath = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/*"
 def ArtifactoryUploadPath = "${JOB_NAME}/${BUILD_NUMBER}/"
 def ArtifactoryServer
 def ArtifactoryRepository = 'test_project'
@@ -21,7 +20,7 @@ def ArtifactoryAddress = "http://192.168.56.21:8081/artifactory/${ArtifactoryRep
 def uploadSpec = """{
   "files": [
     {
-      "pattern": "${ArtifactoryLocalPath}",
+      "pattern": "${WORKSPACE}*.zip",
       "target": "${ArtifactoryUploadPath}"
     }
  ]
@@ -30,7 +29,7 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-        echo 'test'
+
     }
 
     stage('Clean Workspace and Check out Source') {
@@ -58,8 +57,6 @@ node {
         echo "********* Archive artifacts **********"
         ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         zip archive: true, zipFile: "${jobBaseName[0]}-${TIMESTAMP}.zip", dir: ''
-        def tett = archiveArtifacts artifacts: "${jobBaseName[0]}-${TIMESTAMP}.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
-        echo tett
         def buildInfo = Artifactory.newBuildInfo()
         buildInfo.env.capture = true
         ArtifactoryServer.upload(uploadSpec)
