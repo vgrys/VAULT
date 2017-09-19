@@ -4,7 +4,7 @@
 import com.epam.VaultTools
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
-def TIMESTAMP = new Date().getTime() //  new java.text.SimpleDateFormat().format(new Date())
+def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def ArtifactoryLocalPath = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/*"
 def ArtifactoryUploadPath = '${JOB_NAME}/${BUILD_NUMBER}/'
