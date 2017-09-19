@@ -17,10 +17,13 @@ def ArtifactoryUploadPath = "${JOB_NAME}/${BUILD_NUMBER}/"
 def ArtifactoryServer
 def ArtifactoryRepository = 'test_project'
 def ArtifactoryAddress = "http://192.168.56.21:8081/artifactory/${ArtifactoryRepository}"
+
+echo WORKSPACE
+
 def uploadSpec = """{
   "files": [
     {
-      "pattern": "${WORKSPACE}*.zip",
+      "pattern": "${WORKSPACE}/*.zip",
       "target": "${ArtifactoryUploadPath}"
     }
  ]
