@@ -2,7 +2,7 @@
 
 @Library('vaultCommands@master')
 import com.epam.VaultTools
-import com.epam.ArtifactoryDef
+//import com.epam.ArtifactoryDef
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
@@ -32,7 +32,6 @@ node {
     stage('tet') {
         echo 'test'
     }
-}
 
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
