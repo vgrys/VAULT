@@ -66,6 +66,7 @@ node {
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
         print("$WORKSPACE")
+        touch "${jobBaseName[0]}_${BRANCH_NAME}_${BUILD_NUMBER}.zip"
         zip dir: '', zipFile: "${jobBaseName[0]}_${BRANCH_NAME}_${BUILD_NUMBER}.zip"
         archiveArtifacts artifacts: "${jobBaseName[0]}_${BRANCH_NAME}_${BUILD_NUMBER}.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
         echo "********* End of archive artifacts **********"
