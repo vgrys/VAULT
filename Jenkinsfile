@@ -30,9 +30,8 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-    ArtifactoryDef.name = 'Alice'
-        echo ArtifactoryDef.name /* prints: 'Alice' */
-    ArtifactoryDef.caution 'The queen is angry!'
+    ArtifactoryDef = 'Alice'
+    ArtifactoryDef ()
     }
 
     stage('Clean Workspace and Check out Source') {

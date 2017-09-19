@@ -2,18 +2,10 @@
 package com.epam
 
 
-// vars/acme.groovy
-class ArtifactoryDef implements Serializable {
-    private String name
-    def setName(value) {
-        name = value
-    }
-    def getName() {
-        name
-    }
-    def caution(message) {
-        echo "Hello, ${name}! CAUTION: ${message}"
-    }
+def call(String name = 'human') {
+    // Any valid steps can be called from this code, just like in other
+    // Scripted Pipeline
+    echo "Hello, ${name}."
 }
 
 //def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
