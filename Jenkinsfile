@@ -63,22 +63,9 @@ node {
 
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-
-        zip dir: '*', zipFile: "${WORKSPACE}/Project_TEST_ARCH.zip"
-        archive '**/bin/**'
-
-//        zip zipFile: "Project_TEST_ARCH.zip", archive: true, basedir: "**/bin/"
-
-        archiveArtifacts artifacts: 'Project_TEST_ARCH.zip', fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
-
-
-
-//        zip archive: true, dir: '', glob: '**/bin/**', zipFile: "Project_${env.JOB_NAME}.zip"
-//        archive '**/bin/**'
-//        stash includes: '**, .git/', name: 'source', useDefaultExcludes: false
-
+        zip dir: '*', zipFile: "${jobBaseName[0]}_${BRANCH_NAME}_${BUILD_NUMBER}.zip"
+        archiveArtifacts artifacts: "${jobBaseName[0]}_${BRANCH_NAME}_${BUILD_NUMBER}.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
         echo "********* End of archive artifacts **********"
-
     }
 
     stage ('Upload to Artifactory') {
