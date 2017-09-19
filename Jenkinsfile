@@ -9,6 +9,8 @@ import com.epam.ArtifactoryTools
 //def ts = new com.epam.ArtifactoryTools()
 //    ts.TIMESTAMP
 
+def printname = new ArtifactoryTools(this)
+
 def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
 def jobBaseName = "${env.JOB_NAME}".split('/')
 
@@ -28,7 +30,7 @@ def uploadSpec = """{
 
 node {
     stage ('tet') {
-        ArtifactoryTools.printName
+        printname.printName
     }
 
     stage('Clean Workspace and Check out Source') {

@@ -1,8 +1,10 @@
 package com.epam
 
 
-class printName {
-    def call() {
+class ArtifactoryTools implements Serializable {
+    def steps
+    ArtifactoryTools(steps) {this.steps = steps}
+    def printName() {
         // evaluate the body block, and collect configuration into the object
         println "Hello world!"
     }
