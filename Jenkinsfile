@@ -2,7 +2,7 @@
 
 @Library('vaultCommands@master')
 import com.epam.VaultTools
-import static com.epam.ArtifactoryTools
+import com.epam.ArtifactoryTools
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
