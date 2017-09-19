@@ -37,7 +37,7 @@ node {
 
             def vaultTools = new VaultTools()
             ['sql', 'consul', 'sonarqube', 'artifactory', 'server_dev'].each { service ->
-                vaultTools.populate_credentials(environment_variables, vault_ip, "$MY_VAULT_TOKEN", environment, service)
+                vaultTools.populate_credentials(env, vault_ip, "$MY_VAULT_TOKEN", environment, service)
             }
         }
         echo "********* Secrets are saved into environment variables **********"
@@ -45,7 +45,7 @@ node {
 
     stage ('Artifactory Configuration') {
         echo "********* Start Artifactory Configuration **********"
-        ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${environment_variables.ARTIFACTORY_USER}", "${environment_variables.ARTIFACTORY_PWD}")
+        ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         echo "********* End of Artifactory Configuration **********"
     }
 
@@ -64,18 +64,18 @@ node {
         echo "********* End of upload artifacts to Artifactory server repository **********"
     }
 
-        stage('check env') {
-        echo "********* This step is just for demo **********"
-        echo "SQL_USER is = ${environment_variables.SQL_USER}"
-        echo "SQL_PWD is = ${environment_variables.SQL_PWD}"
-        echo "CONSUL_USER is = ${environment_variables.CONSUL_USER}"
-        echo "CONSUL_PWD is = ${environment_variables.CONSUL_PWD}"
-        echo "ATRIFACTORY_USER is = ${environment_variables.ARTIFACTORY_USER}"
-        echo "ATRIFACTORY_PWD is = ${environment_variables.ARTIFACTORY_PWD}"
-        echo "SONARQUBE_USER is = ${environment_variables.SONARQUBE_USER}"
-        echo "SONARQUBE_PWD is = ${environment_variables.SONARQUBE_PWD}"
-        echo "SERVER_DEV_USER is = ${environment_variables.SERVER_DEV_USER}"
-        echo "SERVER_DEV_PWD is = ${environment_variables.SERVER_DEV_PWD}"
-        echo "********* End of step is just for demo **********"
-    }
+    //    stage('check env') {
+//        echo "********* This step is just for demo **********"
+//        echo "SQL_USER is = ${env.SQL_USER}"
+//        echo "SQL_PWD is = ${env.SQL_PWD}"
+//        echo "CONSUL_USER is = ${env.CONSUL_USER}"
+//        echo "CONSUL_PWD is = ${env.CONSUL_PWD}"
+//        echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
+//        echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
+//        echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
+//        echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
+//        echo "SERVER_DEV_USER is = ${env.SERVER_DEV_USER}"
+//        echo "SERVER_DEV_PWD is = ${env.SERVER_DEV_PWD}"
+//        echo "********* End of step is just for demo **********"
+//    }
 }
