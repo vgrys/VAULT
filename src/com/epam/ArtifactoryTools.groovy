@@ -1,11 +1,15 @@
 package com.epam
 
 
-class ArtifactoryTools implements Serializable {
-         def printName() {
-        // evaluate the body block, and collect configuration into the object
-        println "Hello world!"
-    }
+// vars/acme.groovy
+def setName(value) {
+    name = value
+}
+def getName() {
+    name
+}
+def caution(message) {
+    echo "Hello, ${name}! CAUTION: ${message}"
 }
 
 //def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
