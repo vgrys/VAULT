@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 
-@Library('vaultCommands')
+@Library('shared-library')
 //import com.epam.VaultTools
 import com.epam.ArtifactoryDef
 
