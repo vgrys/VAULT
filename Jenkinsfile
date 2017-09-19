@@ -63,15 +63,9 @@ node {
         echo "********* End of step is just for demo **********"
     }
 
-    stage ('Archive Artifacts 1') {
-        deleteDir()
-        zip dir: '', glob: '', zipFile: 'thing.zip'
-    }
-
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
-        print("$WORKSPACE")
-        zip zipFile: "1.zip" ,archive: true
+        zip zipFile: "${jobBaseName[0]}_${BRANCH_NAME}_${BUILD_NUMBER}.zip", dir: "/bin/*" ,archive: true
         archiveArtifacts artifacts: "${jobBaseName[0]}_${BRANCH_NAME}_${BUILD_NUMBER}.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
         echo "********* End of archive artifacts **********"
     }
