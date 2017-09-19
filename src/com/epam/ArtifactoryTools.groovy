@@ -1,7 +1,7 @@
 package com.epam
 
 
-class acme implements Serializable {
+class ArtifactoryTools implements Serializable {
     private String name
     def setName(value) {
         name = value
