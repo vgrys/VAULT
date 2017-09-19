@@ -58,7 +58,8 @@ node {
         echo "********* Archive artifacts **********"
         ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         zip archive: true, zipFile: "${jobBaseName[0]}-${TIMESTAMP}.zip", dir: ''
-        archiveArtifacts artifacts: "${jobBaseName[0]}-${TIMESTAMP}.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
+        def tett = archiveArtifacts artifacts: "${jobBaseName[0]}-${TIMESTAMP}.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
+        echo tett
         def buildInfo = Artifactory.newBuildInfo()
         buildInfo.env.capture = true
         ArtifactoryServer.upload(uploadSpec)
