@@ -2,7 +2,7 @@
 
 @Library('vaultCommands@master')
 import com.epam.VaultTools
-import com.epam.ArtifactoryTools
+//import com.epam.ArtifactoryTools
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
@@ -13,7 +13,6 @@ import com.epam.ArtifactoryTools
 
 def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
 def jobBaseName = "${env.JOB_NAME}".split('/')
-
 def ArtifactoryLocalPath = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/*"
 def ArtifactoryUploadPath = "${JOB_NAME}/${BUILD_NUMBER}/"
 def ArtifactoryServer
@@ -29,11 +28,11 @@ def uploadSpec = """{
 }"""
 
 node {
-    stage ('tet') {
-        ArtifactoryTools.name = 'Alice'
-        echo ArtifactoryTools.name /* prints: 'Alice' */
-        ArtifactoryTools.caution 'The queen is angry!' /* prints: 'Hello, Alice. CAUTION: The queen is angry!' */
-    }
+//    stage ('tet') {
+//        ArtifactoryTools.name = 'Alice'
+//        echo ArtifactoryTools.name /* prints: 'Alice' */
+//        ArtifactoryTools.caution 'The queen is angry!' /* prints: 'Hello, Alice. CAUTION: The queen is angry!' */
+//    }
 
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
@@ -56,25 +55,15 @@ node {
         echo "********* Secrets are saved into environment variables **********"
     }
 
-    stage ('Artifactory Configuration') {
-        echo "********* Start Artifactory Configuration **********"
-        ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-        echo "********* End of Artifactory Configuration **********"
-    }
-
     stage ('Archive Artifacts') {
         echo "********* Archive artifacts **********"
+        ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         zip archive: true, zipFile: "${jobBaseName[0]}-${TIMESTAMP}.zip", dir: ''
         archiveArtifacts artifacts: "${jobBaseName[0]}-${TIMESTAMP}.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
-        echo "********* End of archive artifacts **********"
-    }
-
-    stage ('Upload to Artifactory repository') {
-        echo "********* Upload artifacts to Artifactory server repository **********"
         def buildInfo = Artifactory.newBuildInfo()
         buildInfo.env.capture = true
         ArtifactoryServer.upload(uploadSpec)
-        echo "********* End of upload artifacts to Artifactory server repository **********"
+        echo "********* End of archive artifacts **********"
     }
 
     //    stage('check env') {
