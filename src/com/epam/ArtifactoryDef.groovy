@@ -3,7 +3,7 @@ package com.epam
 
 
 // vars/acme.groovy
-class acme implements Serializable {
+class ArtifactoryDef implements Serializable {
     private String name
     def setName(value) {
         name = value
