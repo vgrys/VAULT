@@ -1,8 +1,7 @@
 #!/usr/bin/groovy
 
-@Library('vaultCommands@master')
-import com.epam.VaultTools
-import com.epam.ArtifactoryTools
+import com.epam.*
+//import com.epam.ArtifactoryTools
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
