@@ -3,17 +3,17 @@
 @Library('vaultCommands@master')
 import com.epam.VaultTools
 
-
+//Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 def jobBaseName = "${env.JOB_NAME}".split('/')
-def ArtifactoryLocalLocation = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/*"
+def ArtifactoryLocalPath = "${JENKINS_HOME}/jobs/${jobBaseName[0]}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/archive/*"
 def ArtifactoryUploadPath = '${JOB_NAME}/${BUILD_NUMBER}/'
 def ArtifactoryServer
 def ArtifactoryRepository = 'test_project'
-def ArtifactoryServerURL = "http://192.168.56.21:8081/artifactory/${ArtifactoryRepository}"
+def ArtifactoryAddress = "http://192.168.56.21:8081/artifactory/${ArtifactoryRepository}"
 def uploadSpec = """{
   "files": [
     {
-      "pattern": "${ArtifactoryLocalLocation}",
+      "pattern": "${ArtifactoryLocalPath}",
       "target": "${ArtifactoryUploadPath}"
     }
  ]
@@ -44,11 +44,28 @@ node {
 
     stage ('Artifactory Configuration') {
         echo "********* Start Artifactory Configuration **********"
-        ArtifactoryServer = Artifactory.newServer(ArtifactoryServerURL, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+        ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         echo "********* End of Artifactory Configuration **********"
-
     }
-//    stage('check env') {
+
+    stage ('Archive Artifacts') {
+        echo "********* Archive artifacts **********"
+        zip archive: true, zipFile: "${jobBaseName[0]}-ts.zip", dir: ''
+        archiveArtifacts artifacts: "${jobBaseName[0]}-ts.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
+        echo "********* End of archive artifacts **********"
+    }
+
+    stage ('Upload to Artifactory repository') {
+        echo "********* Upload artifacts to Artifactory server repository **********"
+        script {
+            def buildInfo = Artifactory.newBuildInfo()
+            buildInfo.env.capture = true
+            ArtifactoryServer.upload(uploadSpec)
+            echo "********* End of upload artifacts to Artifactory server repository **********"
+        }
+    }
+
+    //    stage('check env') {
 //        echo "********* This step is just for demo **********"
 //        echo "SQL_USER is = ${env.SQL_USER}"
 //        echo "SQL_PWD is = ${env.SQL_PWD}"
@@ -62,21 +79,4 @@ node {
 //        echo "SERVER_DEV_PWD is = ${env.SERVER_DEV_PWD}"
 //        echo "********* End of step is just for demo **********"
 //    }
-
-    stage ('Archive Artifacts') {
-        echo "********* Archive artifacts **********"
-        zip archive: true, zipFile: "${jobBaseName[0]}_${BRANCH_NAME}_${BUILD_NUMBER}.zip", dir: "'bin/', 'src/'"
-        archiveArtifacts artifacts: "${jobBaseName[0]}_${BRANCH_NAME}_${BUILD_NUMBER}.zip", fingerprint: true, allowEmptyArchive: false, onlyIfSuccessful: true
-        echo "********* End of archive artifacts **********"
-    }
-
-    stage ('Upload to Artifactory') {
-        echo "********* Upload artifacts to Artifactory server **********"
-        script {
-            def buildInfo = Artifactory.newBuildInfo()
-            buildInfo.env.capture = true
-            ArtifactoryServer.upload(uploadSpec)
-            echo "********* End of upload artifacts to Artifactory server **********"
-        }
-    }
 }
