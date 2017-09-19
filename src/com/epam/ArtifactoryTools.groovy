@@ -1,19 +1,10 @@
 package com.epam
 
-@Grapes(
-        @Grab('org.jfrog.artifactory.client:artifactory-java-client-services:jar:0.16')
-)
 
-import org.artifactory.client.Artifactory
-import org.artifactory.client.ArtifactoryClient
+def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
+def jobBaseName = "${env.JOB_NAME}".split('/')
 
 
-
-static def provide_credentials(ArtifactoryUrl, username, password) {
-
-    Artifactory artifactory_ID = ArtifactoryClient.create(ArtifactoryUrl, username, password)
-    return artifactory_ID
-}
 
 
 //from pipeline:
