@@ -30,7 +30,8 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-        ArtifactoryDef.call()
+        def ss = new ArtifactoryDef()
+        ss.ArtifactoryDef.call
     }
 
     stage('Clean Workspace and Check out Source') {
