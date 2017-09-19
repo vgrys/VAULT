@@ -58,12 +58,12 @@ node {
 
     stage ('Upload to Artifactory repository') {
         echo "********* Upload artifacts to Artifactory server repository **********"
-        script {
+//        script {
             def buildInfo = Artifactory.newBuildInfo()
             buildInfo.env.capture = true
             ArtifactoryServer.upload(uploadSpec)
             echo "********* End of upload artifacts to Artifactory server repository **********"
-        }
+//        }
     }
 
     //    stage('check env') {
