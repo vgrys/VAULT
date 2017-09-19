@@ -45,7 +45,7 @@ node {
 
     stage ('Artifactory Configuration') {
         echo "********* Start Artifactory Configuration **********"
-        ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+        ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${environment_variables.ARTIFACTORY_USER}", "${environment_variables.ARTIFACTORY_PWD}")
         echo "********* End of Artifactory Configuration **********"
     }
 
