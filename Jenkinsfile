@@ -59,7 +59,7 @@ node {
         echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
         echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
         echo "SERVER_DEV_USER is = ${env.SERVER_DEV_USER}"
-        echo "SERVER_DEV_PWD is = ${env.SERVER_DEV_USER}"
+        echo "SERVER_DEV_PWD is = ${env.SERVER_DEV_PWD}"
         echo "********* End of step is just for demo **********"
     }
 
