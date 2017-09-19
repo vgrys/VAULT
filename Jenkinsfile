@@ -2,14 +2,14 @@
 
 @Library('vaultCommands@master')
 //import com.epam.VaultTools
-import com.epam.ArtifactoryTools
+import com.epam.ArtifactoryDef
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
-//def ts = new com.epam.ArtifactoryTools()
+//def ts = new com.epam.ArtifactoryDef()
 //    ts.TIMESTAMP
 
-//def printname = new ArtifactoryTools()
+//def printname = new ArtifactoryDef()
 
 //def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
 //def jobBaseName = "${env.JOB_NAME}".split('/')
