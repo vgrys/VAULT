@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 
 @Library('shared-library@dev')
-//import com.epam.VaultTools
+import com.epam.VaultTools
 import com.epam.ArtifactoryDef
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
@@ -47,7 +47,7 @@ node {
         def vault_ip = 'http://192.168.56.21:8200'
         withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
 
-            def vaultTools = new ArtifactoryDef()
+            def vaultTools = new VaultTools()
             ['sql', 'consul', 'sonarqube', 'artifactory', 'server_dev'].each { service ->
                 vaultTools.populate_credentials(env, vault_ip, "$MY_VAULT_TOKEN", environment_used, service)
             }
