@@ -33,7 +33,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                         }"""
 
 
-    ZipStep step = new ZipStep('${projectName}-${TIMESTAMP}.zip')
+    ZipStep step = new ZipStep("1234.zip")
     step.setDir("")
     step.setArchive(true)
 
@@ -41,7 +41,6 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     env.setProperty("${"PROJECT_NAME"}", projectName)
     env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
     env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
-
 }
 
 //    ArtifactoryImpl artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
