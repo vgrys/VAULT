@@ -33,7 +33,7 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-        def timeS = new Timestamp()
+        def timeS = new timeStamp()
         echo timeS
     }
 
