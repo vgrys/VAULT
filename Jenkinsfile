@@ -33,17 +33,18 @@ node {
         def atifactory_ip = 'http://192.168.56.21:8081'
         def artifactoryDef = new ArtifactoryDef()
             artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
+        echo "********* End of Artifactory CFG **********"
+    }
 
+    stage('Archive arts') {
+        echo "********* Start to Archive arts **********"
         zip archive: true, zipFile: "${env.JOBBASENAME}-${env.TIMESTAMP}.zip", dir: ''
         def ArtifactoryServer = Artifactory.newServer(${env.ArtifactoryAddress}, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         def buildInfo = Artifactory.newBuildInfo()
         buildInfo.env.capture = true
         ArtifactoryServer.upload("${env.UPLOADSPEC}")
-
-        echo "********* End of Artifactory CFG **********"
+        echo "********* End of Archive arts **********"
     }
-
-
 
 //    stage ('Archive Artifacts') {
 //        echo "********* Archive artifacts **********"
