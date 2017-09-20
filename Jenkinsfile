@@ -2,7 +2,7 @@
 
 @Library('shared-library@dev')
 import com.epam.VaultTools
-import ArtifactoryDef
+//import ArtifactoryDef
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
@@ -11,7 +11,6 @@ import ArtifactoryDef
 
 //def printname = new ArtifactoryDef()
 
-def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def ArtifactoryUploadPath = "${JOB_NAME}/${BUILD_NUMBER}/"
 def ArtifactoryServer
@@ -30,9 +29,7 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-        ArtifactoryDef.name = 'Alice'
-        echo ArtifactoryDef.name /* prints: 'Alice' */
-        ArtifactoryDef.caution 'The queen is angry!' /* prints: 'Hello, Alice. CAUTION: The queen is angry!' */
+        ArtifactoryDef.TIMESTAMP
     }
 
     stage('Clean Workspace and Check out Source') {
