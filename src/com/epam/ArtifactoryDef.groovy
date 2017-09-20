@@ -11,7 +11,7 @@ package com.epam
 )
 
 import org.jfrog.artifactory.client.Artifactory
-import org.artifactory.client.ArtifactoryClient
+//import org.artifactory.client.ArtifactoryClient
 
 
 static def configure_artifactory(env, atifactory_ip, repository) {
@@ -30,7 +30,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
 
     Artifactory artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
     java.io.File file = new java.io.File("*.zip")
-    File result = artifactory.repository("RepoName").upload("${ArtifactoryUploadPath}", file).doUpload()
+    File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", file).doUpload()
 
 //    def buildInfo = Artifactory.newBuildInfo()
 //    buildInfo.env.capture = true
