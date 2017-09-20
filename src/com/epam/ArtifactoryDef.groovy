@@ -11,6 +11,7 @@ package com.epam
 )
 
 import org.jfrog.artifactory.client.Artifactory
+import org.jfrog.artifactory.client.ArtifactoryClient
 
 
 static def configure_artifactory(env, atifactory_ip, repository) {
@@ -20,23 +21,26 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/"
     def ArtifactoryAddress = "${atifactory_ip}/artifactory/${repository}"
 
-    def uploadSpec = """{
-                            "files": [{
-                                "pattern": "*.zip",
-                                "target": "${ArtifactoryUploadPath}"
-                             }]
-                        }"""
+//    def uploadSpec = """{
+//                            "files": [{
+//                                "pattern": "*.zip",
+//                                "target": "${ArtifactoryUploadPath}"
+//                             }]
+//                        }"""
 
-    def ArtifactoryServer = Artifactory.newServer("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-    def buildInfo = Artifactory.newBuildInfo()
-    buildInfo.env.capture = true
-    def done = ArtifactoryServer.upload("${env.UPLOAD_SPEC}")
+    Artifactory artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+    java.io.File file = new java.io.File("*.zip")
+    File result = artifactory.repository("RepoName").upload("${ArtifactoryUploadPath}", file).doUpload()
 
-    env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
-    env.setProperty("${"PROJECT_NAME"}", projectName)
-    env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
-    env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
-    return done
+//    def buildInfo = Artifactory.newBuildInfo()
+//    buildInfo.env.capture = true
+//    def done = artifactory.upload("${env.UPLOAD_SPEC}")
+
+//    env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
+//    env.setProperty("${"PROJECT_NAME"}", projectName)
+//    env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
+//    env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
+    return result
 }
 
 //def ArtifactoryServer = Artifactory.newServer("${env.ARTIFACTORY_ADDRESS}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
