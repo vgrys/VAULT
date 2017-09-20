@@ -5,6 +5,11 @@ package com.epam
 @Grapes(
         @Grab('org.jenkins-ci.plugins:pipeline-utility-steps:1.4.1')
 )
+
+@Grapes(
+        @Grab('org.codehaus.plexus:plexus-utils:3.1.0')
+)
+
 import org.jenkinsci.plugins.pipeline.utility.steps.zip.ZipStep
 
 
@@ -22,7 +27,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                              }]
                         }"""
 
-    ZipStep: zipFile: "${projectName}-${TIMESTAMP}.zip", dir: '', archive: true
+//    ZipStep: zip zipFile: "${projectName}-${TIMESTAMP}.zip", dir: '', archive: true
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
