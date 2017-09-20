@@ -33,10 +33,9 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                         }"""
 
 
-    ZipStep step = new ZipStep("${projectName}-${TIMESTAMP}.zip");
-    step.setDir("");
-//        step.setGlob("**/*.zip");
-    step.setArchive(true);
+    ZipStep step = new ZipStep('${projectName}-${TIMESTAMP}.zip')
+    step.setDir("")
+    step.setArchive(true)
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
