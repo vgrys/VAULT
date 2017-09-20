@@ -1,8 +1,6 @@
 #!/usr/bin/groovy
 //package com.epam
 
-import org.artifactory.client.Artifactory
-
 static def configure_artifactory(env, atifactory_ip, repository) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
@@ -17,13 +15,11 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     }
  ]
 }"""
-    def ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-    def buildInfo = Artifactory.newBuildInfo()
-    buildInfo.env.capture = true
-    ArtifactoryServer.upload(uploadSpec)
 
     env.setProperty(TIMESTAMP)
     env.setProperty(jobBaseName)
+    env.setProperty(ArtifactoryAddress)
+    env.setProperty(uploadSpec)
 
 
 //    zip archive: true, zipFile: "${jobBaseName[0]}-${TIMESTAMP}.zip", dir: ''
