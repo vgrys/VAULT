@@ -6,8 +6,8 @@ package com.epam
 //)
 
 @Grapes([
-        @Grab('org.jfrog.artifactory.client:artifactory-java-client-services:2.3.5'),
-        @Grab('org.jenkins-ci.plugins:pipeline-utility-steps:1.4.1')
+        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', varsion='2.3.5'),
+        @Grab(group='org.jenkins-ci.plugins', module='pipeline-utility-steps', version='1.4.1')
 ])
 
 import org.jenkinsci.plugins.pipeline.utility.steps.zip.ZipStep
