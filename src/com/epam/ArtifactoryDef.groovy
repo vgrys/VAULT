@@ -29,9 +29,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                              }]
                         }"""
 
-    ZipStep step = new ZipStep("1234.zip")
-    step.setDir("")
-//    step.setArchive(true)
+    ZipStep("1234.zip").setDir("").setArchive(true)
 
 
 
