@@ -2,40 +2,10 @@
 
 @Library('shared-library@dev')
 import com.epam.VaultTools
-//import ArtifactoryDef
-import sendNotifications
-
-import java.sql.Timestamp
-
-//Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
-
-//def ts = new ArtifactoryDef()
-//    ts.TIMESTAMP
-
-//def printname = new ArtifactoryDef()
-
-//def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
-def jobBaseName = "${env.JOB_NAME}".split('/')
-def ArtifactoryUploadPath = "${JOB_NAME}/${BUILD_NUMBER}/"
-def ArtifactoryServer
-def ArtifactoryRepository = 'test_project'
-def ArtifactoryAddress = "http://192.168.56.21:8081/artifactory/${ArtifactoryRepository}"
-
-def uploadSpec = """{
-  "files": [
-    {
-      "pattern": "*.zip",
-      "target": "${ArtifactoryUploadPath}"
-    }
- ]
-}"""
-
+import ArtifactoryDef
+//import sendNotifications
 
 node {
-    stage('tet') {
-        def timeS = new timeStamp()
-        echo timeS
-    }
 
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
@@ -58,15 +28,27 @@ node {
         echo "********* Secrets are saved into environment variables **********"
     }
 
-    stage ('Archive Artifacts') {
-        echo "********* Archive artifacts **********"
-        ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-        zip archive: true, zipFile: "${jobBaseName[0]}-${TIMESTAMP}.zip", dir: ''
-        def buildInfo = Artifactory.newBuildInfo()
-        buildInfo.env.capture = true
-        ArtifactoryServer.upload(uploadSpec)
-        echo "********* End of archive artifacts **********"
+    stage('Artifactory CFG') {
+        echo "********* Start to Artifactory CFG **********"
+        def repository = 'test_project'
+        def atifactory_ip = 'http://192.168.56.21:8081'
+        def artifactoryDef = new ArtifactoryDef()
+        artifactoryDef.configure_artifactory(env, atifactory_ip, repository, service)
+        zip archive: true, zipFile: "${env.jobBaseName}-${env.TIMESTAMP}.zip", dir: ''
+        echo "********* End of Artifactory CFG **********"
     }
+
+
+
+//    stage ('Archive Artifacts') {
+//        echo "********* Archive artifacts **********"
+//        ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+//        zip archive: true, zipFile: "${jobBaseName[0]}-${TIMESTAMP}.zip", dir: ''
+//        def buildInfo = Artifactory.newBuildInfo()
+//        buildInfo.env.capture = true
+//        ArtifactoryServer.upload(uploadSpec)
+//        echo "********* End of archive artifacts **********"
+//    }
 
     //    stage('check env') {
 //        echo "********* This step is just for demo **********"
