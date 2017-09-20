@@ -2,11 +2,7 @@
 package com.epam
 
 
-def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
-return TIMESTAMP
-//def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
-//
-//
-//def jobBaseName = "${env.JOB_NAME}".split('/')
-
-
+def call() {
+    def quotes = ['Make it so', 'Tea. Earl Grey. Hot.', 'Engage']
+    println quotes.get(new Random().nextInt(quotes.size()))
+}

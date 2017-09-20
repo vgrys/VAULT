@@ -11,6 +11,7 @@ import com.epam.VaultTools
 
 //def printname = new ArtifactoryDef()
 
+def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
 def jobBaseName = "${env.JOB_NAME}".split('/')
 def ArtifactoryUploadPath = "${JOB_NAME}/${BUILD_NUMBER}/"
 def ArtifactoryServer
@@ -29,7 +30,7 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-        ArtifactoryDef.TIMESTAMP
+        ArtifactoryDef()
     }
 
     stage('Clean Workspace and Check out Source') {
