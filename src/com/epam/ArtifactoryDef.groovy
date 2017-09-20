@@ -16,7 +16,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     }
  ]
 }"""
-    return ArtifactoryUploadPath
+    return ArtifactoryAddress
 //
 ////    env.setProperty(TIMESTAMP)
 //    env.setProperty("${TIMESTAMP.toUpperCase()}", TIMESTAMP)
