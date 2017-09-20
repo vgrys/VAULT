@@ -6,15 +6,14 @@ package com.epam
 //        @Grab('org.jenkins-ci.plugins:pipeline-utility-steps:1.4.1')
 //)
 
-@Grapes([
-        @Grab('org.jfrog.artifactory.client:artifactory-java-client-api:2.5.2'),
-        @Grab('org.jfrog.artifactory.client:artifactory-java-client-services:2.5.2')
-])
+@Grapes(
+        @Grab('org.jfrog.artifactory.client:artifactory-java-client-services:2.3.5')
+)
 
 
-import org.jfrog.artifactory.client.Artifactory
-//import org.artifactory.client.ArtifactoryClient
 import org.jfrog.artifactory.client.ArtifactoryClient
+import org.jfrog.artifactory.client.impl.ArtifactoryImpl
+
 
 static def configure_artifactory(env, atifactory_ip, repository) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
@@ -30,7 +29,10 @@ static def configure_artifactory(env, atifactory_ip, repository) {
 //                             }]
 //                        }"""
 
-    Artifactory artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+
+
+
+    ArtifactoryImpl artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
     java.io.File file = new java.io.File("*.zip")
     File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", file).doUpload()
 
