@@ -9,13 +9,11 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     def ArtifactoryAddress = "${atifactory_ip}/artifactory/${repository}"
 
     def uploadSpec = """{
-                            "files": [
-                                        {
-                            "pattern": "*.zip",
-                            "target": "${ArtifactoryUploadPath}"
-                                        }
-                        ]
-                    }"""
+                            "files": [{
+                                "pattern": "*.zip",
+                                "target": "${ArtifactoryUploadPath}"
+                             }]
+                        }"""
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
