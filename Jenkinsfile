@@ -30,8 +30,8 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-    ArtifactoryDef 'Alice'
-    ArtifactoryDef ()
+        ArtifactoryDef 'Alice'
+        ArtifactoryDef ()
     }
 
     stage('Clean Workspace and Check out Source') {
