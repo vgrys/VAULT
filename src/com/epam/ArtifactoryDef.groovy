@@ -16,7 +16,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     }
  ]
 }"""
-    return ArtifactoryAddress
+    return uploadSpec
 //
 ////    env.setProperty(TIMESTAMP)
 //    env.setProperty("${TIMESTAMP.toUpperCase()}", TIMESTAMP)
@@ -31,20 +31,3 @@ static def configure_artifactory(env, atifactory_ip, repository) {
 
 //    zip archive: true, zipFile: "${jobBaseName[0]}-${TIMESTAMP}.zip", dir: ''
 }
-
-//static def populate_credentials(env, vault_ip, token, String environment, String service) {
-//
-//    final VaultConfig config = new VaultConfig()
-//            .address(vault_ip)
-//            .token(token)
-//            .build()
-//
-//    final Vault vault = new Vault(config)
-//
-//    final LogicalResponse response = vault.logical().read("secret/$environment/$service")
-//    final String username = response.getData().get("username")
-//    final String password = response.getData().get("password")
-//
-//    env.setProperty("${service.toUpperCase()}_USER", username)
-//    env.setProperty("${service.toUpperCase()}_PWD", password)
-//}
