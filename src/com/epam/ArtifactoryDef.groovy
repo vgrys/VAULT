@@ -3,7 +3,8 @@ package com.epam
 
 
 @Grapes([
-        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.3.5'),
+        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.2'),
+        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
         @Grab(group='org.jenkins-ci.plugins', module='pipeline-utility-steps', version='1.4.1'),
         @Grab(group='org.codehaus.plexus', module='plexus-utils', version='3.1.0'),
         @Grab(group='commons-io', module='commons-io', version='2.5')
@@ -33,11 +34,9 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                         }"""
 
     ZipStep step = new ZipStep("TEMP123.zip")
-//            step.zipFile("${projectName}-${TIMESTAMP}.zip")
             step.setDir('/home/vagrant/TEST/')
             step.setArchive(true)
-
-
+    
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
