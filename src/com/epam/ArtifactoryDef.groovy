@@ -11,6 +11,25 @@ package com.epam
 
 import org.jenkinsci.plugins.pipeline.utility.steps.zip.ZipStep
 
+
+import hudson.model.Label;
+import hudson.model.Result;
+import hudson.model.Run;
+import jenkins.util.VirtualFile;
+import org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition;
+import org.jenkinsci.plugins.workflow.job.WorkflowJob;
+import org.jenkinsci.plugins.workflow.job.WorkflowRun;
+import org.jenkinsci.plugins.workflow.steps.StepConfigTester;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.jvnet.hudson.test.JenkinsRule;
+
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
 import org.jfrog.artifactory.client.ArtifactoryClient
 import org.jfrog.artifactory.client.impl.ArtifactoryImpl
 import org.jfrog.artifactory.client.impl.UploadableArtifactImpl
@@ -29,7 +48,13 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                              }]
                         }"""
 
-    ZipStep("1234.zip").setDir("").setArchive(true)
+    node {
+        zip archive: true, zipFile: "${projectName}-${TIMESTAMP}.zip", dir: ''
+    }
+//    ZipStep step = new ZipStep("sdfsdfsdf.zip")
+//            step.zipFile("1234.zip")
+//            step.setDir("")
+//            step.setArchive(true)
 
 
 
