@@ -33,7 +33,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                         }"""
 
     ZipStep step = new ZipStep("${projectName}-${TIMESTAMP}.zip")
-            step.zipFile("1234.zip")
+//            step.zipFile("${projectName}-${TIMESTAMP}.zip")
             step.setDir("")
             step.setArchive(true)
 
