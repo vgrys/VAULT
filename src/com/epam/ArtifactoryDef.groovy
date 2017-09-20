@@ -15,15 +15,16 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     }
  ]
 }"""
-
-//    env.setProperty(TIMESTAMP)
-    env.setProperty("${TIMESTAMP.toUpperCase()}", TIMESTAMP)
-//    env.setProperty(jobBaseName)
-    env.setProperty("${jobBaseName.toUpperCase()}", jobBaseName)
-//    env.setProperty(ArtifactoryAddress)
-    env.setProperty("${ArtifactoryAddress.toUpperCase()}", ArtifactoryAddress)
-//    env.setProperty(uploadSpec)
-    env.setProperty("${uploadSpec.toUpperCase()}", uploadSpec)
+    return TIMESTAMP
+//
+////    env.setProperty(TIMESTAMP)
+//    env.setProperty("${TIMESTAMP.toUpperCase()}", TIMESTAMP)
+////    env.setProperty(jobBaseName)
+//    env.setProperty("${jobBaseName.toUpperCase()}", jobBaseName)
+////    env.setProperty(ArtifactoryAddress)
+//    env.setProperty("${ArtifactoryAddress.toUpperCase()}", ArtifactoryAddress)
+////    env.setProperty(uploadSpec)
+//    env.setProperty("${uploadSpec.toUpperCase()}", uploadSpec)
 
 
 
