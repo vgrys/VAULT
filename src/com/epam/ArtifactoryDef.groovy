@@ -11,7 +11,7 @@ package com.epam
 )
 
 import org.jfrog.artifactory.client.Artifactory
-import org.jfrog.artifactory.client.ArtifactoryClient
+import org.artifactory.client.ArtifactoryClient
 
 
 static def configure_artifactory(env, atifactory_ip, repository) {
