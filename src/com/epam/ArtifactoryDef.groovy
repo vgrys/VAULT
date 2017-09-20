@@ -52,7 +52,6 @@ static def configure_artifactory(env, atifactory_ip, repository) {
 //    env.setProperty("${"PROJECT_NAME"}", projectName)
 //    env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
 //    env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
-}
 
 //def ArtifactoryServer = Artifactory.newServer("${env.ARTIFACTORY_ADDRESS}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
 //def buildInfo = Artifactory.newBuildInfo()
