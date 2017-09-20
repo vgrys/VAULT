@@ -38,6 +38,11 @@ static def configure_artifactory(env, atifactory_ip, repository) {
 //        step.setGlob("**/*.zip");
     step.setArchive(true);
 
+    env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
+    env.setProperty("${"PROJECT_NAME"}", projectName)
+    env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
+    env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
+
 }
 
 //    ArtifactoryImpl artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
@@ -48,10 +53,6 @@ static def configure_artifactory(env, atifactory_ip, repository) {
 //    buildInfo.env.capture = true
 //    def done = artifactory.upload("${env.UPLOAD_SPEC}")
 
-//    env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
-//    env.setProperty("${"PROJECT_NAME"}", projectName)
-//    env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
-//    env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
 
 //def ArtifactoryServer = Artifactory.newServer("${env.ARTIFACTORY_ADDRESS}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
 //def buildInfo = Artifactory.newBuildInfo()

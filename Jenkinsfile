@@ -32,8 +32,7 @@ node {
         def repository = 'bigdata-dss-automation'
         def atifactory_ip = 'http://192.168.56.21:8081'
         def artifactoryDef = new ArtifactoryDef()
-        def done  = artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
-        echo done
+        artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
         echo "********* End of configure Artifactory **********"
     }
 
