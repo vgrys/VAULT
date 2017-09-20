@@ -32,7 +32,7 @@ node {
         def repository = 'test_project'
         def atifactory_ip = 'http://192.168.56.21:8081'
         def artifactoryDef = new ArtifactoryDef()
-        artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
+        def TIMESTAMP = artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
         echo TIMESTAMP
         echo "********* End of Artifactory CFG **********"
     }
