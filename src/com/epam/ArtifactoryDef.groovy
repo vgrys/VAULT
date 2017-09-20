@@ -4,8 +4,8 @@ package com.epam
 
 //@Grapes(
 //        @Grab('org.jenkins-ci.plugins:pipeline-utility-steps:1.4.1')
-)
-//
+//)
+
 @Grapes(
         @Grab('org.jfrog.artifactory.client:artifactory-java-client-api:2.5.2')
 )
