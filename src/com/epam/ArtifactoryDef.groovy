@@ -1,9 +1,6 @@
 #!/usr/bin/groovy
 package com.epam
 
-//@Grapes(
-//        @Grab('org.jenkins-ci.plugins:pipeline-utility-steps:1.4.1')
-//)
 
 @Grapes([
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.3.5'),
@@ -32,15 +29,20 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                              }]
                         }"""
 
-
     ZipStep step = new ZipStep("1234.zip")
     step.setDir("")
     step.setArchive(true)
+    step.isArchive()
+    step.zipFile
+    step.archive
+
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
     env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
     env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
+
+    return ZipStep
 }
 
 //    ArtifactoryImpl artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
