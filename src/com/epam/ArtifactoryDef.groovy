@@ -5,7 +5,7 @@ package com.epam
 @Grapes(
         @Grab('org.jenkins-ci.plugins:pipeline-utility-steps:1.4.1')
 )
-//import
+import org.jenkinsci.plugins.pipeline.utility.steps.*
 
 static def configure_artifactory(env, atifactory_ip, repository) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
@@ -21,7 +21,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                              }]
                         }"""
 
-//    zip archive: true, zipFile: "${env.PROJECT_NAME}-${env.TIMESTAMP}.zip", dir: ''
+    zip archive: true, zipFile: "${projectName}-${TIMESTAMP}.zip", dir: ''
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
