@@ -29,7 +29,7 @@ node {
 
     stage('Artifactory CFG') {
         echo "********* Start to Artifactory CFG **********"
-        def repository = 'test_project'
+        def repository = 'bigdata-dss-automation'
         def atifactory_ip = 'http://192.168.56.21:8081'
         def artifactoryDef = new ArtifactoryDef()
         artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
