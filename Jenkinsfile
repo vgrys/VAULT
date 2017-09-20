@@ -5,6 +5,8 @@ import com.epam.VaultTools
 //import ArtifactoryDef
 import sendNotifications
 
+import java.sql.Timestamp
+
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
 //def ts = new ArtifactoryDef()
@@ -31,7 +33,7 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-        sendNotifications 'STARTED'
+        echo timeStamp
     }
 
     stage('Clean Workspace and Check out Source') {
