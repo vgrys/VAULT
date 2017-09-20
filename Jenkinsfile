@@ -2,11 +2,11 @@
 
 @Library('shared-library@dev')
 import com.epam.VaultTools
-import com.epam.ArtifactoryDef
+//import ArtifactoryDef
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
-//def ts = new com.epam.ArtifactoryDef()
+//def ts = new ArtifactoryDef()
 //    ts.TIMESTAMP
 
 //def printname = new ArtifactoryDef()
