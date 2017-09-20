@@ -3,7 +3,7 @@ package com.epam
 
 
 @Grapes(
-        @Grab('org.jenkins-ci.plugins:pipeline-utility-steps:jar:1.4.1')
+        @Grab('org.jenkins-ci.plugins:pipeline-utility-steps:1.4.1')
 )
 import org.jenkinsci.plugins.pipeline.utility.steps.*
 
