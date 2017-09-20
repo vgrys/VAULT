@@ -15,7 +15,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     }
  ]
 }"""
-    return TIMESTAMP
+    return jobBaseName
 //
 ////    env.setProperty(TIMESTAMP)
 //    env.setProperty("${TIMESTAMP.toUpperCase()}", TIMESTAMP)
