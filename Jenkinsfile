@@ -33,7 +33,7 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-        echo timeStamp
+        timeStamp 'TIMESTAMP'
     }
 
     stage('Clean Workspace and Check out Source') {
