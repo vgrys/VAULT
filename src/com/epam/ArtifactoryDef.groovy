@@ -36,7 +36,8 @@ static def configure_artifactory(env, atifactory_ip, repository) {
             step.setArchive(true)
 
     def ArtifactoryServer = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-    ArtifactoryServer.upload(uploadSpec)
+    java.io.File file = new java.io.File("*.zip")
+    ArtifactoryServer.repository("${repository}").upload("${ArtifactoryUploadPath}", file).doUpload()
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
