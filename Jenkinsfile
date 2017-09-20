@@ -38,7 +38,7 @@ node {
 
     stage('Archive arts') {
         echo "********* Start to Archive arts **********"
-        zip archive: true, zipFile: "${env.PROJECTNAME}-$TIMESTAMP.zip", dir: ''
+        zip archive: true, zipFile: "${env.PROJECTNAME}-${env.TIMESTAMP}.zip", dir: ''
         def ArtifactoryServer = Artifactory.newServer(${env.ArtifactoryAddress}, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         def buildInfo = Artifactory.newBuildInfo()
         buildInfo.env.capture = true
