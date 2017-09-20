@@ -38,7 +38,7 @@ node {
         def ArtifactoryServer = Artifactory.newServer(${env.ArtifactoryAddress}, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         def buildInfo = Artifactory.newBuildInfo()
         buildInfo.env.capture = true
-        ArtifactoryServer.upload(${uploadSpec})
+        ArtifactoryServer.upload("${uploadSpec}")
 
         echo "********* End of Artifactory CFG **********"
     }
