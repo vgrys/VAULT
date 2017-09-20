@@ -34,11 +34,11 @@ node {
         def artifactoryDef = new ArtifactoryDef()
             artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
 
-        zip archive: true, zipFile: "${env.jobBaseName}-${env.TIMESTAMP}.zip", dir: ''
+        zip archive: true, zipFile: "${env.JOBBASENAME}-${env.TIMESTAMP}.zip", dir: ''
         def ArtifactoryServer = Artifactory.newServer(${env.ArtifactoryAddress}, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         def buildInfo = Artifactory.newBuildInfo()
         buildInfo.env.capture = true
-        ArtifactoryServer.upload("${uploadSpec}")
+        ArtifactoryServer.upload("${env.UPLOADSPEC}")
 
         echo "********* End of Artifactory CFG **********"
     }
