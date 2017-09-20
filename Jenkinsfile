@@ -2,7 +2,7 @@
 
 @Library('shared-library@dev')
 import com.epam.VaultTools
-//import ArtifactoryDef
+import ArtifactoryDef
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
