@@ -27,13 +27,13 @@ node {
         echo "********* Secrets are saved into environment variables **********"
     }
 
-    stage('Artifactory CFG') {
-        echo "********* Start to Artifactory CFG **********"
+    stage('Artifactory configuration') {
+        echo "********* Start to configure Artifactory **********"
         def repository = 'bigdata-dss-automation'
         def atifactory_ip = 'http://192.168.56.21:8081'
         def artifactoryDef = new ArtifactoryDef()
         artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
-        echo "********* End of Artifactory CFG **********"
+        echo "********* End of configure Artifactory **********"
     }
 
     stage('Upload Artifacts to Artifactory server') {

@@ -1,6 +1,12 @@
 #!/usr/bin/groovy
 package com.epam
 
+
+@Grapes(
+        @Grab('org.jenkins-ci.plugins:pipeline-utility-steps:1.4.1')
+)
+//import
+
 static def configure_artifactory(env, atifactory_ip, repository) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
@@ -14,6 +20,8 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                                 "target": "${ArtifactoryUploadPath}"
                              }]
                         }"""
+
+//    zip archive: true, zipFile: "${env.PROJECT_NAME}-${env.TIMESTAMP}.zip", dir: ''
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
