@@ -3,6 +3,7 @@
 @Library('shared-library@dev')
 import com.epam.VaultTools
 //import ArtifactoryDef
+import sendNotifications
 
 //Import ctc.ad.corp.cicd.VaultTools   // to be added to Jenkinsfile oin CTC side
 
@@ -30,8 +31,7 @@ def uploadSpec = """{
 
 node {
     stage('tet') {
-        ArtifactoryDef(quotes)
-        ArtifactoryDef(TIME)
+        sendNotifications 'STARTED'
     }
 
     stage('Clean Workspace and Check out Source') {

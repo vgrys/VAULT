@@ -1,7 +1,3 @@
-#!/usr/bin/groovy
-//package com.epam
-
-
 #!/usr/bin/env groovy
 
 /**
