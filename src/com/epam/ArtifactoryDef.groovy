@@ -7,10 +7,9 @@ package com.epam
 )
 
 @Grapes(
-        @Grab('org.codehaus.plexus:plexus-utils:3.1.0')
+        @Grab('org.jfrog.artifactory.client:artifactory-java-client-services:2.3.5')
 )
 
-import org.jenkinsci.plugins.pipeline.utility.steps.zip
 
 
 static def configure_artifactory(env, atifactory_ip, repository) {
@@ -27,10 +26,19 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                              }]
                         }"""
 
-    zip zipFile: "${projectName}-${TIMESTAMP}.zip", dir: '', archive: true
+    def ArtifactoryServer = Artifactory.newServer("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+    def buildInfo = Artifactory.newBuildInfo()
+    buildInfo.env.capture = true
+    def done = ArtifactoryServer.upload("${env.UPLOAD_SPEC}")
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
     env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
     env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
+    return done
 }
+
+//def ArtifactoryServer = Artifactory.newServer("${env.ARTIFACTORY_ADDRESS}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+//def buildInfo = Artifactory.newBuildInfo()
+//buildInfo.env.capture = true
+//ArtifactoryServer.upload("${env.UPLOAD_SPEC}")

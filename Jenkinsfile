@@ -32,17 +32,15 @@ node {
         def repository = 'bigdata-dss-automation'
         def atifactory_ip = 'http://192.168.56.21:8081'
         def artifactoryDef = new ArtifactoryDef()
-        artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
+        def done  = artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
+        echo done
         echo "********* End of configure Artifactory **********"
     }
 
     stage('Upload Artifacts to Artifactory server') {
         echo "********* Start to upload Artifacts to Artifactory server **********"
 //        zip archive: true, zipFile: "${env.PROJECT_NAME}-${env.TIMESTAMP}.zip", dir: ''
-        def ArtifactoryServer = Artifactory.newServer("${env.ARTIFACTORY_ADDRESS}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-        def buildInfo = Artifactory.newBuildInfo()
-        buildInfo.env.capture = true
-        ArtifactoryServer.upload("${env.UPLOAD_SPEC}")
+
         echo "********* End of upload Artifacts to Artifactory server **********"
     }
 
