@@ -42,7 +42,8 @@ node {
         def ArtifactoryServer = Artifactory.newServer(${env.ARTIFACTORY_ADDRESS}, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         def buildInfo = Artifactory.newBuildInfo()
         buildInfo.env.capture = true
-        ArtifactoryServer.upload("${env.UPLOAD_SPEC}")
+        def spec = env.UPLOAD_SPEC
+        ArtifactoryServer.upload(spec)
         echo "********* End of Archive arts **********"
     }
 
