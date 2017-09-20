@@ -2,8 +2,7 @@
 
 @Library('shared-library@dev')
 import com.epam.VaultTools
-import ArtifactoryDef
-//import sendNotifications
+import com.epam.ArtifactoryDef
 
 node {
 
@@ -33,10 +32,9 @@ node {
         def repository = 'test_project'
         def atifactory_ip = 'http://192.168.56.21:8081'
         def artifactoryDef = new ArtifactoryDef()
-        artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
+            artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
 
         zip archive: true, zipFile: "${env.jobBaseName}-${env.TIMESTAMP}.zip", dir: ''
-
         def ArtifactoryServer = Artifactory.newServer(${env.ArtifactoryAddress}, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
         def buildInfo = Artifactory.newBuildInfo()
         buildInfo.env.capture = true

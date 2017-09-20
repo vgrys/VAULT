@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-//package com.epam
+package com.epam
 
 static def configure_artifactory(env, atifactory_ip, repository) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
