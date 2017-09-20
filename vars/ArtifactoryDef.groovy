@@ -2,12 +2,16 @@
 package com.epam
 
 
-def call(String name = 'human') {
-    // Any valid steps can be called from this code, just like in other
-    // Scripted Pipeline
-    echo "Hello, ${name}."
+// vars/acme.groovy
+def setName(value) {
+    name = value
 }
-
+def getName() {
+    name
+}
+def caution(message) {
+    echo "Hello, ${name}! CAUTION: ${message}"
+}
 //def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
 //
 //
