@@ -12,10 +12,7 @@ package com.epam
 ])
 
 import org.jenkinsci.plugins.pipeline.utility.steps.zip.ZipStep
-
-
-
-
+import org.jfrog.artifactory.client.Artifactory
 import org.jfrog.artifactory.client.ArtifactoryClient
 import org.jfrog.artifactory.client.impl.ArtifactoryImpl
 import org.jfrog.artifactory.client.impl.UploadableArtifactImpl
@@ -38,6 +35,8 @@ static def configure_artifactory(env, atifactory_ip, repository) {
             step.setDir('/home/vagrant/TEST/')
             step.setArchive(true)
 
+    def ArtifactoryServer = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+    ArtifactoryServer.upload(uploadSpec)
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
