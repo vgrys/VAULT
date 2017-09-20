@@ -13,7 +13,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                                         {
                             "pattern": "*.zip",
                             "target": "${ArtifactoryUploadPath}"
-                                           }
+                                        }
                         ]
                     }"""
 
