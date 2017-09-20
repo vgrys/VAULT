@@ -10,9 +10,14 @@ package com.epam
         @Grab('org.jfrog.artifactory.client:artifactory-java-client-api:2.5.2')
 )
 
+@Grapes(
+        @Grab('org.jfrog.artifactory.client:artifactory-java-client-services:2.5.2')
+)
+
+
 import org.jfrog.artifactory.client.Artifactory
 //import org.artifactory.client.ArtifactoryClient
-
+import org.jfrog.artifactory.client.ArtifactoryClient
 
 static def configure_artifactory(env, atifactory_ip, repository) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
