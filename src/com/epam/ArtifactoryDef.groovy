@@ -32,7 +32,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
                              }]
                         }"""
 
-    ZipStep step = new ZipStep("${projectName}-${TIMESTAMP}.zip")
+    ZipStep step = new ZipStep("/home/vagrant/${projectName}-${TIMESTAMP}.zip")
 //            step.zipFile("${projectName}-${TIMESTAMP}.zip")
             step.setDir("")
             step.setArchive(true)
