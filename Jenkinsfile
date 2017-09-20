@@ -33,7 +33,7 @@ node {
         def repository = 'test_project'
         def atifactory_ip = 'http://192.168.56.21:8081'
         def artifactoryDef = new ArtifactoryDef()
-        artifactoryDef.configure_artifactory(env, atifactory_ip, repository, service)
+        artifactoryDef.configure_artifactory(env, atifactory_ip, repository)
 
         zip archive: true, zipFile: "${env.jobBaseName}-${env.TIMESTAMP}.zip", dir: ''
 
