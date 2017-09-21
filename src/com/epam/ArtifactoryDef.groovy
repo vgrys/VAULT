@@ -15,11 +15,11 @@ package com.epam
         @Grab(group='commons-io', module='commons-io', version='2.5')
 ])
 
-@Grapes([
-        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.1'),
-        @GrabExclude(group='commons-io', module='commons-io'),
-        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
-])
+//@Grapes([
+//        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.1'),
+//        @GrabExclude(group='commons-io', module='commons-io'),
+//        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
+//])
 
 @Grapes([
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.1'),
