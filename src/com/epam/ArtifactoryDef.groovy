@@ -22,14 +22,14 @@ static def upload_atrifact(env, atifactory_ip, repository, java.io.File artifact
 //    def projectName = "${jobBaseName[0]}"
 
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
-    def ArtifactoryAddress = "${atifactory_ip}/artifactory/"
+//    def ArtifactoryAddress = "${atifactory_ip}/artifactory/"
 
 
 //    ZipStep step = new ZipStep("TEMP123.zip")
 //            step.setDir('/home/vagrant/TEST/')
 //            step.setArchive(true)
 
-    Artifactory artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+    Artifactory artifactory = ArtifactoryClient.create("${atifactory_ip}/artifactory/", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
     File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
 
 //    env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
