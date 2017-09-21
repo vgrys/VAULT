@@ -2,13 +2,25 @@
 package com.epam
 
 
+//@Grapes([
+////        @GrabExclude(group='commons-io', module='commons-io', version='2.4'),
+//        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml', version='2.3.1'),
+//        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.1'),
+//        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.1'),
+////        @Grab(group='org.codehaus.groovy', module='groovy-xml', version='2.3.2'),
+//        @Grab(group='commons-io', module='commons-io', version='2.5')
+//])
+
 @Grapes([
-//        @GrabExclude(group='commons-io', module='commons-io', version='2.4'),
-        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml', version='2.3.1'),
+        @GrabExclude(group='commons-io', module='commons-io'),
+        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.1'),
+])
+
+@Grapes([
+        @GrabExclude(group='commons-io', module='commons-io'),
+        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.1'),
-//        @Grab(group='org.codehaus.groovy', module='groovy-xml', version='2.3.2'),
-        @Grab(group='commons-io', module='commons-io', version='2.5')
 ])
 
 import org.jfrog.artifactory.client.Artifactory
