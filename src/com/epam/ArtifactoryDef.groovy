@@ -23,12 +23,6 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/"
     def ArtifactoryAddress = "${atifactory_ip}/artifactory/"
 
-//    def uploadSpec = """{
-//                            "files": [{
-//                                "pattern": "*.zip",
-//                                "target": "${ArtifactoryUploadPath}"
-//                             }]
-//                        }"""
 
     ZipStep step = new ZipStep("TEMP123.zip")
             step.setDir('/home/vagrant/TEST/')
@@ -41,6 +35,16 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
     env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
-//    env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
-    return result.getDownloadUri()
+    return result //.getDownloadUri()
 }
+
+
+
+
+//    def uploadSpec = """{
+//                            "files": [{
+//                                "pattern": "*.zip",
+//                                "target": "${ArtifactoryUploadPath}"
+//                             }]
+//                        }"""
+//    env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
