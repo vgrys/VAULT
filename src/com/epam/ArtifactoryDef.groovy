@@ -14,8 +14,6 @@ package com.epam
 import org.jenkinsci.plugins.pipeline.utility.steps.zip.ZipStep
 import org.jfrog.artifactory.client.Artifactory
 import org.jfrog.artifactory.client.ArtifactoryClient
-import org.jfrog.artifactory.client.impl.ArtifactoryImpl
-import org.jfrog.artifactory.client.impl.UploadableArtifactImpl
 
 static def configure_artifactory(env, atifactory_ip, repository) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
@@ -35,8 +33,8 @@ static def configure_artifactory(env, atifactory_ip, repository) {
             step.setDir('/home/vagrant/TEST/')
             step.setArchive(true)
 
-    def ArtifactoryServer = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-    java.io.File file = new java.io.File("TEST.zip")
+    Artifactory ArtifactoryServer = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+    java.io.File file = new java.io.File("TEST.zip");
     File result = ArtifactoryServer.repository("${repository}").upload("${ArtifactoryUploadPath}", file).doUpload()
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
