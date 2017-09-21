@@ -35,7 +35,7 @@ static def upload_atrifact(env, atifactory_ip, repository, artifact) {
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${bundle.getName()}"
 
 
-    ArtifactoryClientBuilder.baseUrl("${atifactory_ip}/artifactory/")
+//    ArtifactoryClientBuilder.baseUrl("${atifactory_ip}/artifactory/")
     Artifactory artifactory = ArtifactoryClientBuilder.create()
             .setUrl("${atifactory_ip}/artifactory/")
             .setUsername("${env.ARTIFACTORY_USER}")
