@@ -7,8 +7,7 @@ static def create_archive(env) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
     def projectName = "${jobBaseName[0]}"
-
-    String zipFileName = "${projectName}_${TIMESTAMP}.zip"
+    String zipFileName = "${env.WORKSPACE}/${projectName}_${TIMESTAMP}.zip"
     String inputDir = "${env.WORKSPACE}"
 
     ZipOutputStream zipFile = new ZipOutputStream(new FileOutputStream(zipFileName))
@@ -25,6 +24,3 @@ static def create_archive(env) {
     }
     zipFile.close()
 }
-
-
-
