@@ -12,6 +12,10 @@ package com.epam
 //])
 
 @Grapes([
+        @Grab(group='commons-io', module='commons-io', version='2.5')
+])
+
+@Grapes([
         @GrabExclude(group='commons-io', module='commons-io'),
         @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.1'),
