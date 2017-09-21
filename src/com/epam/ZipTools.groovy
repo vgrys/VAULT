@@ -3,14 +3,14 @@ package com.epam
 import java.util.zip.*
 
 
-static def create_archive(env) {
+static def bundle(env) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
     def projectName = "${jobBaseName[0]}"
-    String zipFileName = "${env.WORKSPACE}/${projectName}_${TIMESTAMP}.zip"
+    String zipFilePath = "${env.WORKSPACE}/${projectName}_${TIMESTAMP}.zip"
     String inputDir = "${env.WORKSPACE}"
 
-    ZipOutputStream zipFile = new ZipOutputStream(new FileOutputStream(zipFileName))
+    ZipOutputStream zipFile = new ZipOutputStream(new FileOutputStream(zipFilePath))
     new File(inputDir).eachFile() { file ->
         //check if file
         if (file.isFile()){
@@ -23,4 +23,5 @@ static def create_archive(env) {
         }
     }
     zipFile.close()
+    return zipFilePath
 }

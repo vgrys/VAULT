@@ -5,7 +5,11 @@ import com.epam.VaultTools
 import com.epam.ArtifactoryDef
 import com.epam.ZipTools
 
+def bundlePath
+
 node {
+
+
 
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
@@ -31,7 +35,7 @@ node {
     stage('Create project archive') {
         echo "********* Start to create project archive **********"
         def archiveProject = new ZipTools()
-        archiveProject.create_archive(env)
+        bundlePath = archiveProject.bundle(env)
         echo "********* End of create project archive **********"
     }
 
@@ -42,7 +46,7 @@ node {
         def atifactory_ip = 'http://192.168.56.21:8081'
         def artifactoryDef = new ArtifactoryDef()
 //        java.io.File bundle = new java.io.File("${env.WORKSPACE}/TEST.zip")
-        def url = artifactoryDef.upload_atrifact(env, atifactory_ip, repository, "${env.WORKSPACE}/TEST.zip")
+        def url = artifactoryDef.upload_atrifact(env, atifactory_ip, repository, "${env.WORKSPACE}/${bundlePath}")
         echo "uploaded an artifact to $url"
         echo "********* End of configure Artifactory **********"
     }
