@@ -5,7 +5,7 @@ package com.epam
 @Grapes([
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.2'),
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
-//        @Grab(group='org.codehaus.groovy', module='groovy-xml', version='2.3.2'),
+        @Grab(group='org.codehaus.groovy', module='groovy-xml', version='2.3.2'),
 //        @Grab(group='org.jenkins-ci.plugins', module='pipeline-utility-steps', version='1.4.1'),
 //        @Grab(group='org.codehaus.plexus', module='plexus-utils', version='3.1.0'),
         @Grab(group='commons-io', module='commons-io', version='2.5')
