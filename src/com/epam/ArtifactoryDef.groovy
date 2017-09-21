@@ -14,7 +14,7 @@ package com.epam
 @Grapes([
         @Grab(group='commons-io', module='commons-io', version='2.5'),
         @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
-        @GrabExclude(group='xerces', module='xerces')
+        @GrabExclude(group='xerces', module='xercesImpl')
 ])
 
 @Grapes([
@@ -23,14 +23,14 @@ package com.epam
 //        @Grab(group='commons-io', module='commons-io', version='2.5'),
 //        @GrabExclude(group='commons-io', module='commons-io'),
         @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
-        @GrabExclude(group='xerces', module='xerces')
+        @GrabExclude(group='xerces', module='xercesImpl')
 ])
 
 @Grapes([
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
 //        @GrabExclude(group='commons-io', module='commons-io'),
         @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
-        @GrabExclude(group='xerces', module='xerces')
+        @GrabExclude(group='xerces', module='xercesImpl')
 ])
 
 import org.jfrog.artifactory.client.Artifactory
@@ -42,15 +42,12 @@ static def upload_atrifact(env, atifactory_ip, repository, artifact) {
     java.io.File bundle = new java.io.File(artifact)
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${bundle.getName()}"
 
-
-//    ArtifactoryClientBuilder.baseUrl("${atifactory_ip}/artifactory/")
     Artifactory artifactory = ArtifactoryClientBuilder.create()
             .setUrl("${atifactory_ip}/artifactory/")
             .setUsername("${env.ARTIFACTORY_USER}")
             .setPassword("${env.ARTIFACTORY_PWD}")
             .build();
-//            ArtifactoryClientBuilder.create("${atifactory_ip}/artifactory/", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
     File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", bundle).doUpload()
 
-    return result.getSize() //.getDownloadUri()
+    return result.getDownloadUri()
 }
