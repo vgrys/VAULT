@@ -3,9 +3,10 @@
 
 package com.epam
 
-@Grapes(
-        @Grab('com.bettercloud:vault-java-driver:3.0.0')
-)
+@Grapes([
+        @Grab('com.bettercloud:vault-java-driver:3.0.0'),
+        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml')
+])
 
 import com.bettercloud.vault.Vault
 import com.bettercloud.vault.VaultConfig
