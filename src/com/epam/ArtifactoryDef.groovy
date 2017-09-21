@@ -20,7 +20,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
     def projectName = "${jobBaseName[0]}"
-    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/1.txt"
+    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${projectName}-${TIMESTAMP}.zip"
     def ArtifactoryAddress = "${atifactory_ip}/artifactory/"
 
 
