@@ -3,6 +3,7 @@
 @Library('shared-library@dev')
 import com.epam.VaultTools
 import com.epam.ArtifactoryDef
+import com.epam.ZipTools
 
 node {
 
@@ -27,6 +28,14 @@ node {
         echo "********* Secrets are saved into environment variables **********"
     }
 
+    stage('Create project archive') {
+        echo "********* Start to create project archive **********"
+        def archiveProject = new ZipTools()
+        archiveProject.create_archive(env)
+        echo "********* End of create project archive **********"
+    }
+
+
     stage('Artifactory configuration') {
         echo "********* Start to configure Artifactory **********"
         def repository = 'bigdata-dss-automation'
@@ -38,15 +47,6 @@ node {
         echo "********* End of configure Artifactory **********"
     }
 
-    stage('Upload Artifacts to Artifactory server') {
-        echo "********* Start to upload Artifacts to Artifactory server **********"
-//        zip archive: true, zipFile: "${env.PROJECT_NAME}-${env.TIMESTAMP}.zip", dir: ''
-//        def ArtifactoryServer = Artifactory.newServer("${env.ARTIFACTORY_ADDRESS}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-//        def buildInfo = Artifactory.newBuildInfo()
-//        buildInfo.env.capture = true
-//        ArtifactoryServer.upload("${env.UPLOAD_SPEC}")
-        echo "********* End of upload Artifacts to Artifactory server **********"
-    }
 
 //    stage ('Archive Artifacts') {
 //        echo "********* Archive artifacts **********"
