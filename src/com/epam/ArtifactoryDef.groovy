@@ -5,8 +5,9 @@ package com.epam
 @Grapes([
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.2'),
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
-        @Grab(group='org.codehaus.groovy', module='groovy-xml', version='2.3.11'),
+//        @Grab(group='org.codehaus.groovy', module='groovy-xml', version='2.3.11'),
         @Grab(group='commons-io', module='commons-io', version='2.5'),
+        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
 //        @Grab(group='xerces', module='xerces', version='2.9.1'),
 ])
 
