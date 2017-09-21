@@ -35,7 +35,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
     env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
-    return result.getPath() //.getDownloadUri()
+    return result.getRepo() //.getDownloadUri()
 }
 
 
