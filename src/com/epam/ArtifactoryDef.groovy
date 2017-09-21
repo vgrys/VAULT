@@ -14,6 +14,7 @@ package com.epam
 @Grapes([
         @Grab(group='commons-io', module='commons-io', version='2.5'),
         @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
+        @GrabExclude(group='xerces', module='xerces')
 ])
 
 @Grapes([
@@ -22,12 +23,14 @@ package com.epam
 //        @Grab(group='commons-io', module='commons-io', version='2.5'),
 //        @GrabExclude(group='commons-io', module='commons-io'),
         @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
+        @GrabExclude(group='xerces', module='xerces')
 ])
 
 @Grapes([
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
 //        @GrabExclude(group='commons-io', module='commons-io'),
         @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
+        @GrabExclude(group='xerces', module='xerces')
 ])
 
 import org.jfrog.artifactory.client.Artifactory
