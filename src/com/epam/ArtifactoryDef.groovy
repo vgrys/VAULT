@@ -16,36 +16,24 @@ import org.jfrog.artifactory.client.Artifactory
 import org.jfrog.artifactory.client.ArtifactoryClient
 import org.jfrog.artifactory.client.model.File
 
-static def configure_artifactory(env, atifactory_ip, repository) {
-    def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
-    def jobBaseName = "${env.JOB_NAME}".split('/')
-    def projectName = "${jobBaseName[0]}"
-    java.io.File file = new java.io.File("${env.WORKSPACE}/TEST.zip")
-    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${file.getName()}"
+static def upload_atrifact(env, atifactory_ip, repository, java.io.File artifact) {
+//    def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
+//    def jobBaseName = "${env.JOB_NAME}".split('/')
+//    def projectName = "${jobBaseName[0]}"
+
+    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
     def ArtifactoryAddress = "${atifactory_ip}/artifactory/"
 
 
-    ZipStep step = new ZipStep("TEMP123.zip")
-            step.setDir('/home/vagrant/TEST/')
-            step.setArchive(true)
+//    ZipStep step = new ZipStep("TEMP123.zip")
+//            step.setDir('/home/vagrant/TEST/')
+//            step.setArchive(true)
 
     Artifactory artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-    java.io.File file = new java.io.File("${env.WORKSPACE}/TEST.zip")
-    File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", file).doUpload()
+    File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
 
-    env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
-    env.setProperty("${"PROJECT_NAME"}", projectName)
-    env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
+//    env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
+//    env.setProperty("${"PROJECT_NAME"}", projectName)
+//    env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
     return result.getSize() //.getDownloadUri()
 }
-
-
-
-
-//    def uploadSpec = """{
-//                            "files": [{
-//                                "pattern": "*.zip",
-//                                "target": "${ArtifactoryUploadPath}"
-//                             }]
-//                        }"""
-//    env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
