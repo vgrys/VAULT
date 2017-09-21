@@ -33,9 +33,9 @@ static def configure_artifactory(env, atifactory_ip, repository) {
             step.setDir('/home/vagrant/TEST/')
             step.setArchive(true)
 
-    Artifactory ArtifactoryServer = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
+    Artifactory artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
     java.io.File file = new java.io.File("TEST.zip");
-    File result = ArtifactoryServer.repository("${repository}").upload("${ArtifactoryUploadPath}", file).doUpload()
+    File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", file).doUpload()
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
     env.setProperty("${"PROJECT_NAME"}", projectName)
