@@ -14,6 +14,7 @@ package com.epam
 import org.jenkinsci.plugins.pipeline.utility.steps.zip.ZipStep
 import org.jfrog.artifactory.client.Artifactory
 import org.jfrog.artifactory.client.ArtifactoryClient
+import org.jfrog.artifactory.client.model.File
 
 static def configure_artifactory(env, atifactory_ip, repository) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
@@ -41,7 +42,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     env.setProperty("${"PROJECT_NAME"}", projectName)
     env.setProperty("${"ARTIFACTORY_ADDRESS"}", ArtifactoryAddress)
     env.setProperty("${"UPLOAD_SPEC"}", uploadSpec)
-return result
+    return result.getDownloadUri()
 }
 
 //    ArtifactoryImpl artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
