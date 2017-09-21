@@ -48,15 +48,6 @@ node {
     }
 
 
-//    stage ('Archive Artifacts') {
-//        echo "********* Archive artifacts **********"
-//        ArtifactoryServer = Artifactory.newServer(ArtifactoryAddress, "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-//        zip archive: true, zipFile: "${jobBaseName[0]}-${TIMESTAMP}.zip", dir: ''
-//        def buildInfo = Artifactory.newBuildInfo()
-//        buildInfo.env.capture = true
-//        ArtifactoryServer.upload(uploadSpec)
-//        echo "********* End of archive artifacts **********"
-//    }
 
     //    stage('check env') {
 //        echo "********* This step is just for demo **********"

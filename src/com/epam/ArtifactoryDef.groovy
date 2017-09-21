@@ -8,7 +8,7 @@ package com.epam
 //        @Grab(group='org.codehaus.groovy', module='groovy-xml', version='2.3.2'),
 //        @Grab(group='org.jenkins-ci.plugins', module='pipeline-utility-steps', version='1.4.1'),
 //        @Grab(group='org.codehaus.plexus', module='plexus-utils', version='3.1.0'),
-//        @Grab(group='commons-io', module='commons-io', version='2.5')
+        @Grab(group='commons-io', module='commons-io', version='2.5')
 ])
 
 import org.jfrog.artifactory.client.Artifactory
