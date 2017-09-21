@@ -12,7 +12,8 @@ package com.epam
 //])
 
 @Grapes([
-        @Grab(group='commons-io', module='commons-io', version='2.5')
+        @Grab(group='commons-io', module='commons-io', version='2.5'),
+        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
 ])
 
 @Grapes([
