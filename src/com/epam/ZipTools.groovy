@@ -8,20 +8,21 @@ static def bundle(env) {
     def jobBaseName = "${env.JOB_NAME}".split('/')
     def projectName = "${jobBaseName[0]}"
     String zipFilePath = "${env.WORKSPACE}/${projectName}_${TIMESTAMP}.zip"
-    String inputDir = "${env.WORKSPACE}"
+    String sourceFolder = "${env.WORKSPACE}"
 
-    ZipOutputStream zipFile = new ZipOutputStream(new FileOutputStream(zipFilePath))
-    new File(inputDir).eachFile() { file ->
-        //check if file
-        if (file.isFile()){
-            zipFile.putNextEntry(new ZipEntry(file.name))
-            def buffer = new byte[file.size()]
-            file.withInputStream {
-                zipFile.write(buffer, 0, it.read(buffer))
-            }
-            zipFile.closeEntry()
-        }
-    }
-    zipFile.close()
+    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
+
+//    ZipOutputStream zipFile = new ZipOutputStream(new FileOutputStream(zipFilePath))
+//    new File(inputDir).eachFile() { file ->
+//        if (file.isFile()){
+//            zipFile.putNextEntry(new ZipEntry(file.name))
+//            def buffer = new byte[file.size()]
+//            file.withInputStream {
+//                zipFile.write(buffer, 0, it.read(buffer))
+//            }
+//            zipFile.closeEntry()
+//        }
+//    }
+//    zipFile.close()
     return zipFilePath
 }
