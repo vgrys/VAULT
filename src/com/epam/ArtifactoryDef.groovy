@@ -20,7 +20,8 @@ static def configure_artifactory(env, atifactory_ip, repository) {
     def TIMESTAMP = new java.text.SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
     def projectName = "${jobBaseName[0]}"
-    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${projectName}-${TIMESTAMP}.zip"
+    def ZIPNAME = "${env.BUILD_NUMBER}/${projectName}-${TIMESTAMP}.zip"
+    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${ZIPNAME}"
     def ArtifactoryAddress = "${atifactory_ip}/artifactory/"
 
 
@@ -29,7 +30,7 @@ static def configure_artifactory(env, atifactory_ip, repository) {
             step.setArchive(true)
 
     Artifactory artifactory = ArtifactoryClient.create("${ArtifactoryAddress}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
-    java.io.File file = new java.io.File("${env.WORKSPACE}/${env.BUILD_NUMBER}/${projectName}-${TIMESTAMP}.zip");
+    java.io.File file = new java.io.File("${env.WORKSPACE}/${env.BUILD_NUMBER}/${ZIPNAME}");
     File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", file).doUpload()
 
     env.setProperty("${"TIMESTAMP"}", TIMESTAMP)
