@@ -2,7 +2,7 @@
 
 @Library('shared-library@dev')
 import com.epam.VaultTools
-import com.epam.ArtifactoryDef
+import com.epam.ArtifactoryTools
 import com.epam.ZipTools
 
 def bundlePath
@@ -34,8 +34,9 @@ node {
 
     stage('Create project archive') {
         echo "********* Start to create project archive **********"
-        def archiveProject = new ZipTools()
-        bundlePath = archiveProject.bundle(env)
+        def zip = new ZipTools()
+        bundlePath = zip.bundle(env)
+        echo "created an archive $bundlePath"
         echo "********* End of create project archive **********"
     }
 
@@ -44,8 +45,8 @@ node {
         echo "********* Start to configure Artifactory **********"
         def repository = 'bigdata-dss-automation'
         def atifactory_ip = 'http://192.168.56.21:8081'
-        def artifactoryDef = new ArtifactoryDef()
-        def url = artifactoryDef.upload_atrifact(env, atifactory_ip, repository, "${bundlePath}")
+        def artifactory = new ArtifactoryTools()
+        def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}")
         echo "uploaded an artifact to $url"
         echo "********* End of configure Artifactory **********"
     }
