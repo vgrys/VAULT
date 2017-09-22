@@ -18,19 +18,19 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
-    stage('Obtain credentials from Vault') {
-        echo "********* Start to populate secrets from Vault **********"
-        def environment_used = 'dev'
-        def vault_ip = 'http://192.168.56.21:8200'
-        withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
-
-            def vaultTools = new VaultTools()
-            ['sql', 'consul', 'sonarqube', 'artifactory', 'server_dev'].each { service ->
-                vaultTools.populate_credentials(env, vault_ip, "$MY_VAULT_TOKEN", environment_used, service)
-            }
-        }
-        echo "********* Secrets are saved into environment variables **********"
-    }
+//    stage('Obtain credentials from Vault') {
+//        echo "********* Start to populate secrets from Vault **********"
+//        def environment_used = 'dev'
+//        def vault_ip = 'http://192.168.56.21:8200'
+//        withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
+//
+//            def vaultTools = new VaultTools()
+//            ['sql', 'consul', 'sonarqube', 'artifactory', 'server_dev'].each { service ->
+//                vaultTools.populate_credentials(env, vault_ip, "$MY_VAULT_TOKEN", environment_used, service)
+//            }
+//        }
+//        echo "********* Secrets are saved into environment variables **********"
+//    }
 
     stage('Create project archive') {
         echo "********* Start to create project archive **********"
@@ -41,14 +41,16 @@ node {
     }
 
 
-    stage('Artifactory configuration') {
-        echo "********* Start to configure Artifactory **********"
-        def repository = 'bigdata-dss-automation'
-        def atifactory_ip = 'http://192.168.56.21:8081'
-        def artifactory = new ArtifactoryTools()
-        def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}")
-        echo "uploaded an artifact to $url"
-        echo "********* End of configure Artifactory **********"
+    stage('Upload artifacts to Artifactory server') {
+        echo "********* Start to upload artifacts to Artifactory server **********"
+        withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'env.ARTIFACTORY_USER', passwordVariable: 'env.ARTIFACTORY_PWD')]) {
+            def repository = 'bigdata-dss-automation'
+            def atifactory_ip = 'http://192.168.56.21:8081'
+            def artifactory = new ArtifactoryTools()
+            def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}")
+            echo "uploaded an artifact to $url"
+        }
+        echo "********* End of upload artifacts to Artifactory server **********"
     }
 
 
