@@ -47,7 +47,7 @@ node {
             def repository = 'bigdata-dss-automation'
             def atifactory_ip = 'http://192.168.56.21:8081'
             def artifactory = new ArtifactoryTools()
-            def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}")
+            def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}", "${env.ARTIFACTORY_USER}", "${env.ARTIFACTORY_PWD}")
             echo "uploaded an artifact to $url"
         }
         echo "********* End of upload artifacts to Artifactory server **********"
