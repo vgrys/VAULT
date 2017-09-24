@@ -9,8 +9,6 @@ def bundlePath
 
 node {
 
-
-
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
         deleteDir()
@@ -52,7 +50,7 @@ node {
         }
         echo "********* End of upload artifacts to Artifactory server **********"
     }
-
+    step([$class: 'WsCleanup'])
 
 
     //    stage('check env') {
