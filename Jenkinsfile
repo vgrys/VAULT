@@ -49,8 +49,8 @@ node {
             def atifactory_ip = 'http://192.168.56.21:8081'
             def artifactory = new ArtifactoryTools()
             def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")
-            url.each( echo("$it") )
-//            echo "uploaded an artifact to $url"
+//            url.each( echo("$it") )
+            echo "uploaded an artifact to $url"
         }
         echo "********* End of upload artifacts to Artifactory server **********"
     }
