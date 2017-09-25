@@ -1,11 +1,13 @@
 #!/usr/bin/groovy
 
 @Library('shared-library@dev')
-import com.epam.VaultTools
+//import com.epam.VaultTools
 import com.epam.ArtifactoryTools
 import com.epam.ZipTools
 
 def bundlePath
+def isMaster = env.BRANCH_NAME == 'master'
+def isDevelop = env.BRANCH_NAME == 'develop'
 
 node {
 
@@ -56,6 +58,21 @@ node {
         }
         echo "********* End of upload artifacts to Artifactory server **********"
     }
+
+    stage ('deploy')
+    if (isDevelop || isMaster) {
+        deployCmd = isMaster ? 'fab deploy_prod' : 'fab deploy_staging'
+        sshagent([sshCredentialsId]) {
+            stage(name: 'Deploy') {
+                sh "source ${workspace}/env/bin/activate && ${deployCmd}"
+            }
+        }
+    }
+
+
+
+
+
     step([$class: 'WsCleanup'])
 
 
