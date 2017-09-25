@@ -73,6 +73,7 @@ node {
             stage(name: 'Deploy') {
 //                sh "source ${workspace}/env/bin/activate && ${deployCmd}"
                 sh "echo $USER"
+                sh "pwd"
 //            }
         }
     }
