@@ -14,16 +14,23 @@ package com.epam
 import org.jfrog.artifactory.client.Artifactory
 import org.jfrog.artifactory.client.ArtifactoryClientBuilder
 import org.jfrog.artifactory.client.model.File
+import com.fasterxml.jackson.databind.ObjectMapper
 
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
     def a = []
-    def b = new ArtifactoryTools()
-    b.class.getClassLoader().getURLs().each { url ->
-        a.add "- ${url.toString()}"
-    }
-    return a
+//    def b = new ArtifactoryTools()
+//    b.class.getClassLoader().getURLs().each { url ->
+//        a.add "- ${url.toString()}"
+//    }
+//    return a
 
+    ObjectMapper.class.declaredMethods.findAll{ !it.synthetic }.each {
+        a.add("$it.name $it.parameters.name")
+    }
+
+    return a
+//
 //    java.io.File artifact = new java.io.File(artifactPath)
 //    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
 //
