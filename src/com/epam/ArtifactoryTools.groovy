@@ -1,40 +1,48 @@
+#!/usr/bin/groovy
 package com.epam
 
-@Grapes(
-        @Grab('org.jfrog.artifactory.client:artifactory-java-client-services:+')
-)
+@Grapes([
+        @Grab(group='commons-io', module='commons-io', version='2.5'),
+        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.2'),
+        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
+        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
+        @GrabExclude(group='xerces', module='xercesImpl')
+])
 
-import org.artifactory.client.*
+import org.jfrog.artifactory.client.Artifactory
+import org.jfrog.artifactory.client.ArtifactoryClient
+import org.jfrog.artifactory.client.ArtifactoryClientBuilder
+import org.jfrog.artifactory.client.model.File
 
+static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
+//    def a = []
+//    def b = new ArtifactoryTools()
+//    b.class.getClassLoader().getURLs().each { url ->
+//        a.add "- ${url.toString()}"
+//    }
+//    return a
+//    a.add(ObjectMapper.getClass().protectionDomain.codeSource.location.path)
+//    ObjectMapper.getClass().declaredMethods.findAll().each {
+//        a.add("$it.name $it.parameters.name")
+//    }
+//
+//    return a
+//
+    java.io.File artifact = new java.io.File(artifactPath)
+    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
 
-static def provide_credentials(ArtifactoryUrl, username, password) {
+// For version 2.3.5
+//    Artifactory artifactory = ArtifactoryClient.create("${atifactory_ip}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")
 
-    Artifactory artifactory = ArtifactoryClient.create(ArtifactoryUrl, username, password);
-    return artifactory
+// For version 2.5.2
+    Artifactory artifactory = ArtifactoryClientBuilder.create()
+        .setUrl("${atifactory_ip}/artifactory/")
+        .setUsername("${ARTIFACTORY_USER}")
+        .setPassword("${ARTIFACTORY_PWD}")
+        .build()
+
+File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
+
+return result.getDownloadUri()
 }
-//
-//ItemHandle fileItem = artifactory.repository("generic-local ").file("path/to/file.txt");
-//ItemHandle folderItem = artifactory.repository("generic-local ").folder("path/to/folder");
-//
-//
-//import com.bettercloud.vault.Vault
-//import com.bettercloud.vault.VaultConfig
-//import com.bettercloud.vault.response.LogicalResponse
-//
-//static def populate_credentials(env, ip_vault, token, String environment, String service) {
-//
-//    final VaultConfig config = new VaultConfig()
-//            .address(ip_vault)
-//            .token(token)
-//            .build()
-//
-//    final Vault vault = new Vault(config)
-//
-//    final LogicalResponse response = vault.logical().read("secret/$environment/$service")
-//    final String username = response.getData().get("username")
-//    final String password = response.getData().get("password")
-//
-//    env.setProperty("${service.toUpperCase()}_USER", username)
-//    env.setProperty("${service.toUpperCase()}_PWD", password)
-//}
