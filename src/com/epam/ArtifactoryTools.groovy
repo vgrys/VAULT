@@ -5,8 +5,8 @@ package com.epam
         @Grab(group='commons-io', module='commons-io', version='2.5'),
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.2'),
         @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
-        @Grab(group='com.fasterxml.jackson.core', module='jackson-core', version='2.4.6'),
-        @GrabExclude(group='com.fasterxml.jackson.core', module='jackson-core', version='2.9.1'),
+//        @Grab(group='com.fasterxml.jackson.core', module='jackson-core', version='2.4.6'),
+//        @GrabExclude(group='com.fasterxml.jackson.core', module='jackson-core', version='2.9.1'),
         @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
         @GrabExclude(group='xerces', module='xercesImpl')
 ])
@@ -17,16 +17,22 @@ import org.jfrog.artifactory.client.model.File
 
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
-    java.io.File artifact = new java.io.File(artifactPath)
-    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
+    def a = []
+    this.class.classLoader.getURLs().each { url ->
+        a.add "- ${url.toString()}"
+    }
+    return a
 
-    Artifactory artifactory = ArtifactoryClientBuilder.create()
-        .setUrl("${atifactory_ip}/artifactory/")
-        .setUsername("${ARTIFACTORY_USER}")
-        .setPassword("${ARTIFACTORY_PWD}")
-        .build()
-
-File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
-
-return result.getDownloadUri()
+//    java.io.File artifact = new java.io.File(artifactPath)
+//    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
+//
+//    Artifactory artifactory = ArtifactoryClientBuilder.create()
+//        .setUrl("${atifactory_ip}/artifactory/")
+//        .setUsername("${ARTIFACTORY_USER}")
+//        .setPassword("${ARTIFACTORY_PWD}")
+//        .build()
+//
+//File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
+//
+//return result.getDownloadUri()
 }
