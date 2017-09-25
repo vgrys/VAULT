@@ -19,19 +19,12 @@ static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTO
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
 
     Artifactory artifactory = ArtifactoryClientBuilder.create()
-                .setUrl("${atifactory_ip}/artifactory/")
-                .setUsername("${ARTIFACTORY_USER}")
-                .setPassword("${ARTIFACTORY_PWD}")
-                .build()
-
-        File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
-
-        return result.getDownloadUri()
-}
-
-
-//ory artifactory = ArtifactoryClientBuilder.create()
-//        .setUrl("${atifactory_ip}/artifactory/")
-//        .setUsername("${ARTIFACTORY_USER}")
-//        .setPassword("${ARTIFACTORY_PWD}")
+        .setUrl("${atifactory_ip}/artifactory/")
+        .setUsername("${ARTIFACTORY_USER}")
+        .setPassword("${ARTIFACTORY_PWD}")
 //        .build()
+
+File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
+
+return result.getDownloadUri()
+}
