@@ -61,7 +61,7 @@ node {
 
 
     stage ('tests') {
-        sh "py.test --junitxml results.xml atf/tests/tempTest.py"
+        sh "py.test --junitxml results.xml "${WORKSPACE}"atf/tests/tempTest.py"
     }
 
     if (isDevelop || isMaster) {
