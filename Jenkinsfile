@@ -61,7 +61,7 @@ node {
 
 
     stage ('tests') {
-       def tttt = sh "py.test --junitxml results.xml '${WORKSPACE}'/atf/tests/tempTest.py"
+       def tttt = sh "py.test --junitxml results.xml '${WORKSPACE}'/tempTest.py"
         echo tttt
     }
 
@@ -75,8 +75,9 @@ node {
         }
     }
 
-
-    step([$class: 'WsCleanup'])
+    stage ('Clean up WORKSPACE') {
+        //    step([$class: 'WsCleanup'])
+    }
 
 
     //    stage('check env') {
