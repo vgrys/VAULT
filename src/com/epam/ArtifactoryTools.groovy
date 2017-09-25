@@ -24,8 +24,8 @@ static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTO
 //        a.add "- ${url.toString()}"
 //    }
 //    return a
-
-    ObjectMapper.class.declaredMethods.findAll().each {
+    a.add(ObjectMapper.getClass().protectionDomain.codeSource.location.path)
+    ObjectMapper.getClass().declaredMethods.findAll().each {
         a.add("$it.name $it.parameters.name")
     }
 
