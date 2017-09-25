@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 
-@Library('shared-library@dev')
+@Library('shared-library@master')
 import com.epam.VaultTools
 import com.epam.ArtifactoryTools
 import com.epam.ZipTools
