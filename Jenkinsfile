@@ -59,7 +59,6 @@ node {
         echo "********* End of upload artifacts to Artifactory server **********"
     }
 
-    stage ('deploy')
     if (isDevelop || isMaster) {
         deployCmd = isMaster ? 'fab deploy_prod' : 'fab deploy_staging'
         sshagent([sshCredentialsId]) {
