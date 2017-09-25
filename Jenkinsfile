@@ -7,7 +7,7 @@ import com.epam.ZipTools
 
 def bundlePath
 def isMaster = env.BRANCH_NAME == 'master'
-def isDevelop = env.BRANCH_NAME == 'develop'
+def isDevelop = env.BRANCH_NAME == 'dev'
 
 node {
 
