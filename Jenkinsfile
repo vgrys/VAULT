@@ -42,9 +42,9 @@ node {
     stage('Upload artifacts to Artifactory server') {
         echo "********* Start to upload artifacts to Artifactory server **********"
         withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PWD')]) {
-            this.class.classLoader.getURLs().each { url ->
-                echo "- ${url.toString()}"
-            }
+//            this.class.classLoader.getURLs().each { url ->
+//                echo "- ${url.toString()}"
+//            }
             def repository = 'bigdata-dss-automation'
             def atifactory_ip = 'http://192.168.56.21:8081'
             def artifactory = new ArtifactoryTools()

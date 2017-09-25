@@ -3,8 +3,8 @@ package com.epam
 
 @Grapes([
         @Grab(group='commons-io', module='commons-io', version='2.5'),
-        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.2'),
-        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
+        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.3.5'),
+        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.3.5'),
         @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
         @GrabExclude(group='xerces', module='xercesImpl')
 ])
@@ -12,7 +12,6 @@ package com.epam
 import org.jfrog.artifactory.client.Artifactory
 import org.jfrog.artifactory.client.ArtifactoryClientBuilder
 import org.jfrog.artifactory.client.model.File
-import com.fasterxml.jackson.databind.ObjectMapper
 
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
