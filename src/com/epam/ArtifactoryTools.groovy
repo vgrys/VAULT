@@ -19,7 +19,7 @@ static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTO
     java.io.File artifact = new java.io.File(artifactPath)
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
 
-    ArtifactoryClient artifactory = ArtifactoryClientBuilder.create()
+    def artifactory = ArtifactoryClientBuilder.create()
             .setUrl("${atifactory_ip}/artifactory/")
             .setUsername("${ARTIFACTORY_USER}")
             .setPassword("${ARTIFACTORY_PWD}")
