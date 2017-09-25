@@ -61,7 +61,7 @@ node {
 
 
     stage ('tests') {
-       def tttt = sh "py.test --junitxml results.xml "${WORKSPACE}"atf/tests/tempTest.py"
+       def tttt = sh "py.test --junitxml results.xml '${WORKSPACE}'atf/tests/tempTest.py"
         echo tttt
     }
 
