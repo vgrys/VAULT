@@ -61,7 +61,7 @@ node {
 
 
     stage ('tests') {
-       sh "tests.sh"
+       sh "py.test --junitxml results.xml atf/tests/tempTest.py"
     }
 
     if (isDevelop || isMaster) {
