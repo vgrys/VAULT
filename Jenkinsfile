@@ -63,6 +63,11 @@ node {
     stage ('tests') {
         echo "********* Start to perform unittest2 **********"
         sh "py.test --junitxml results.xml atf/tests/tempTest.py"
+        post {
+            always {
+                junit "results.xml"
+            }
+        }
         echo "********* End of unittest2 **********"
     }
 
