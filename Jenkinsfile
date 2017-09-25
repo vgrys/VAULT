@@ -62,8 +62,8 @@ node {
 
     stage ('tests') {
         echo "********* Start to perform unittest2 **********"
-        sh "py.test --junitxml results.xml atf/tests/tempTest.py"
-        junit "results.xml"
+        sh "py.test --junitxml reports/results.xml atf/tests/tempTest.py"
+        junit 'reports/**'
         echo "********* End of unittest2 **********"
     }
 
@@ -78,7 +78,7 @@ node {
     }
 
     stage ('Clean up WORKSPACE') {
-        //    step([$class: 'WsCleanup'])
+//            step([$class: 'WsCleanup'])
     }
 
 
