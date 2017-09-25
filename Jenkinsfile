@@ -14,12 +14,6 @@ node {
         deleteDir()
         checkout scm
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
-
-        String jobInfoShort = "${env.JOB_NAME} ${env.BUILD_DISPLAY_NAME}"
-        String jobInfo = "${env.JOB_NAME} ${env.BUILD_DISPLAY_NAME} \n${env.BUILD_URL}"
-        echo jobInfoShort
-        echo jobInfo
-
     }
 
 
