@@ -41,15 +41,15 @@ node {
 
     stage('Upload artifacts to Artifactory server') {
         echo "********* Start to upload artifacts to Artifactory server **********"
-        withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PWD')]) {
+//        withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PWD')]) {
             echo ARTIFACTORY_USER
             echo ARTIFACTORY_PWD
             def repository = 'bigdata-dss-automation'
             def atifactory_ip = 'http://192.168.56.21:8081'
             def artifactory = new ArtifactoryTools()
-            def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")
+            def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}", "vgrys", "Password1")
             echo "uploaded an artifact to $url"
-        }
+//        }
         echo "********* End of upload artifacts to Artifactory server **********"
     }
     step([$class: 'WsCleanup'])
