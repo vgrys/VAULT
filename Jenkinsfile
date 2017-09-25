@@ -63,7 +63,8 @@ node {
         deployCmd = isMaster ? 'fab deploy_prod' : 'fab deploy_staging'
 //        sshagent([sshCredentialsId]) {
             stage(name: 'Deploy') {
-                sh "source ${workspace}/env/bin/activate && ${deployCmd}"
+//                sh "source ${workspace}/env/bin/activate && ${deployCmd}"
+                sh "$USER"
 //            }
         }
     }
