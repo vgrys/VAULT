@@ -18,7 +18,7 @@ import org.jfrog.artifactory.client.model.File
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
     def a = []
-    ArtifactoryTools.getClass().classLoader.getURLs().each { url ->
+    ArtifactoryTools.getClass().getClassLoader().getURLs().each { url ->
         a.add "- ${url.toString()}"
     }
     return a
