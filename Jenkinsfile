@@ -61,10 +61,10 @@ node {
 
     if (isDevelop || isMaster) {
         deployCmd = isMaster ? 'fab deploy_prod' : 'fab deploy_staging'
-        sshagent([sshCredentialsId]) {
+//        sshagent([sshCredentialsId]) {
             stage(name: 'Deploy') {
                 sh "source ${workspace}/env/bin/activate && ${deployCmd}"
-            }
+//            }
         }
     }
 
