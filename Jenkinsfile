@@ -61,8 +61,7 @@ node {
 
 
     stage ('tests') {
-       def tttt = sh "py.test --junitxml 'tests/test_result/results.xml' '${WORKSPACE}'/atf/tests/tempTest.py"
-        echo tttt
+       sh "tests.sh"
     }
 
     if (isDevelop || isMaster) {
