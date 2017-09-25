@@ -22,7 +22,7 @@ static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTO
         .setUrl("${atifactory_ip}/artifactory/")
         .setUsername("${ARTIFACTORY_USER}")
         .setPassword("${ARTIFACTORY_PWD}")
-//        .build()
+        .build()
 
 File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
 
