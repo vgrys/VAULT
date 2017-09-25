@@ -10,7 +10,6 @@ package com.epam
 ])
 
 import org.jfrog.artifactory.client.Artifactory
-import org.jfrog.artifactory.client.ArtifactoryClient
 import org.jfrog.artifactory.client.ArtifactoryClientBuilder
 import org.jfrog.artifactory.client.model.File
 
@@ -19,14 +18,17 @@ static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTO
     java.io.File artifact = new java.io.File(artifactPath)
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
 
-    def artifactory = ArtifactoryClientBuilder.create()
-            .setUrl("${atifactory_ip}/artifactory/")
-            .setUsername("${ARTIFACTORY_USER}")
-            .setPassword("${ARTIFACTORY_PWD}")
-            .build()
-    File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
+//    Artifactory artifactory = ArtifactoryClientBuilder.create()
 
-    return result.getDownloadUri()
+    Artifactory artifactory = ArtifactoryClientBuilder.create()
+                .setUrl("${atifactory_ip}/artifactory/")
+                .setUsername("${ARTIFACTORY_USER}")
+                .setPassword("${ARTIFACTORY_PWD}")
+                .build()
+
+        File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
+
+        return result.getDownloadUri()
 }
 
 
