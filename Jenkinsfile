@@ -61,7 +61,9 @@ node {
 
 
     stage ('tests') {
-       sh "py.test --junitxml results.xml atf/tests/tempTest.py"
+        echo "********* Start to perform unittest2 **********"
+        sh "py.test --junitxml results.xml atf/tests/tempTest.py"
+        echo "********* End of unittest2 **********"
     }
 
     if (isDevelop || isMaster) {
