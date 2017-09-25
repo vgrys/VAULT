@@ -3,13 +3,14 @@ package com.epam
 
 @Grapes([
         @Grab(group='commons-io', module='commons-io', version='2.5'),
-        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.3.5'),
-        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.3.5'),
+        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.2'),
+        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
         @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
         @GrabExclude(group='xerces', module='xercesImpl')
 ])
 
 import org.jfrog.artifactory.client.Artifactory
+import org.jfrog.artifactory.client.ArtifactoryClient
 import org.jfrog.artifactory.client.ArtifactoryClientBuilder
 import org.jfrog.artifactory.client.model.File
 
@@ -31,6 +32,10 @@ static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTO
     java.io.File artifact = new java.io.File(artifactPath)
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
 
+// For version 2.3.5
+//    Artifactory artifactory = ArtifactoryClient.create("${atifactory_ip}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")
+
+// For version 2.5.2
     Artifactory artifactory = ArtifactoryClientBuilder.create()
         .setUrl("${atifactory_ip}/artifactory/")
         .setUsername("${ARTIFACTORY_USER}")
