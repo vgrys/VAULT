@@ -64,7 +64,7 @@ node {
 //        sshagent([sshCredentialsId]) {
             stage(name: 'Deploy') {
 //                sh "source ${workspace}/env/bin/activate && ${deployCmd}"
-                sh "$USER"
+                sh "echo $USER"
 //            }
         }
     }
