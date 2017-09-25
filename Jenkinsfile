@@ -59,6 +59,11 @@ node {
         echo "********* End of upload artifacts to Artifactory server **********"
     }
 
+
+    stage ('tests') {
+        sh "py.test --junitxml results.xml atf/tests/tests.py"
+    }
+
     if (isDevelop || isMaster) {
         deployCmd = isMaster ? 'fab deploy_prod' : 'fab deploy_staging'
 //        sshagent([sshCredentialsId]) {
@@ -68,9 +73,6 @@ node {
 //            }
         }
     }
-
-
-
 
 
     step([$class: 'WsCleanup'])
