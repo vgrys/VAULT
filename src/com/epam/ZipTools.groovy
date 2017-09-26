@@ -4,7 +4,7 @@ package com.epam
 import java.text.SimpleDateFormat
 
 static def bundle(env, incl, excl) {
-    def filesToInclude = [incl]
+    def filesToInclude = incl
     def filesToExclude = ['**/*.groovy', '**/tests/*', '**/*__init__*']
     def TIMESTAMP = new SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
