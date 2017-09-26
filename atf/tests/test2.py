@@ -11,7 +11,7 @@ class SimpleTest(unittest.TestCase):
         self.fail("shouldn't happen")
 
     def test_skipped_now(self):
-        self.fail("shouldn't happen")
+        self.fail_now("shouldn't happen")
 
     def test_pass(self):
         self.assertEqual(10, 7 + 3)
