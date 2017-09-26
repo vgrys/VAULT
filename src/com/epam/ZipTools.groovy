@@ -4,7 +4,8 @@ package com.epam
 import java.text.SimpleDateFormat
 
 static def bundle(env, incl, excl) {
-    def filesToZip = ['**/*.py', '**/*.sh']
+    def filesToInclude = ['**/*.py', '**/*.sh']
+    def filesToExclude = ['**/*.groovy', '**/tests/*', '**/*__init__*']
     def TIMESTAMP = new SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
     def projectName = "${jobBaseName[0]}"
@@ -14,8 +15,8 @@ static def bundle(env, incl, excl) {
 //    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
     new AntBuilder().zip(destfile: zipFilePath,
             basedir: sourceFolder,
-            includes: filesToZip.join(' '),
-            excludes: "${excl}")
+            includes: filesToInclude.join(' '),
+            excludes: filesToExclude.join(' '))
 
     return zipFilePath
 }
