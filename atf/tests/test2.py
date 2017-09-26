@@ -1,9 +1,10 @@
 import random
 
 try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
+    import unittest2
+    # as unittest
+# except ImportError:
+#     import unittest
 
 class SimpleTest(unittest.TestCase):
     @unittest.skip("demonstrating skipping")
