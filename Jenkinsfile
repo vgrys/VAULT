@@ -39,7 +39,7 @@ node {
         def zip = new ZipTools()
         ['**/*.groovy', '**/*.py', '**/*.sh'].each { includes ->
 //            ['**/*__init__*', 'server_dev'].each { excludes ->
-                bundlePath = zip.bundle(env, includes, excludes)
+                bundlePath = zip.bundle(env, includes)
             }
 //        }
         echo "created an archive $bundlePath"
