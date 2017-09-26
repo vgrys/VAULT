@@ -10,7 +10,20 @@ static def bundle(env) {
     String zipFilePath = "${env.WORKSPACE}/${projectName}_${TIMESTAMP}.zip"
     String sourceFolder = "${env.WORKSPACE}"
 
-    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
+//    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
+    (new AntBuilder()).zip(destfile: zipFilePath) {
+        basedir:sourceFolder
+            include(name:"**/*.groovy")
+            exclude(name:"**/*.py")
+}
+
 
     return zipFilePath
 }
+
+//new AntBuilder().copy(todir: "dstFolder") {
+//    fileset(dir : "srcFolder") {
+//        include(name:"**/*.java")
+//        exclude(name:"**/*Test.java")
+//    }
+//}
