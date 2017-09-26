@@ -3,7 +3,7 @@ package com.epam
 
 import java.text.SimpleDateFormat
 
-static def bundle(env, includes) {
+static def bundle(env, includes, excludes) {
     def TIMESTAMP = new SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
     def projectName = "${jobBaseName[0]}"
@@ -13,8 +13,9 @@ static def bundle(env, includes) {
 //    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
     new AntBuilder().zip(destfile: zipFilePath,
         basedir: sourceFolder,
-            includes: "${includes}")
-//            excludes: "${excludes}")
+            includes: "${includes}",
+            excludes: "${excludes}")
 
-    return zipFilePath
+//    return zipFilePath
+    return includes
 }

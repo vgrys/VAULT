@@ -38,10 +38,10 @@ node {
         echo "********* Start to create project archive **********"
         def zip = new ZipTools()
         ['**/*.groovy', '**/*.py', '**/*.sh'].each { includes ->
-//            ['**/*__init__*', 'server_dev'].each { excludes ->
-                bundlePath = zip.bundle(env, includes)
+            ['**/*__init__*', 'server_dev'].each { excludes ->
+                bundlePath = zip.bundle(env, includes, excludes)
             }
-//        }
+        }
         echo "created an archive $bundlePath"
         echo "********* End of create project archive **********"
     }
