@@ -12,7 +12,7 @@ static def bundle(env) {
 
 //    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
     (new AntBuilder()).zip(destfile: zipFilePath) {
-        basedir:sourceFolder
+        fileset (basedir: sourceFolder)
             include(name:"**/*.groovy")
             exclude(name:"**/*.py")
 }
