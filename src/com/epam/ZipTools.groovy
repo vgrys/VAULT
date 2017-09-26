@@ -13,7 +13,7 @@ static def bundle(env) {
 //    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
     new AntBuilder().zip(destfile: zipFilePath) {
         fileset (dir: sourceFolder)
-            include(name:zipFilePath.name)
+            include(name:zipFilePath)
             exclude(name:"**/*.py")
 }
 
