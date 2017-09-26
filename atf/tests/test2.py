@@ -18,7 +18,3 @@ class SimpleTest(unittest.TestCase):
 
     def test_pass_and_again(self):
         self.assertEqual(20, 10 + 10)
-
-
-    # def test_fail(self):
-    #     self.assertEqual(11, 7 + 3)
