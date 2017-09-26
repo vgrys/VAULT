@@ -39,7 +39,7 @@ node {
 //        sh "py.test --junitxml reports/results.xml atf/tests/*.py"
 //        sh "python -m unittest2 atf/tests/*.py"
         sh "nose2 --verbose"
-        junit 'reports/**'
+//        junit 'reports/**'
         echo "********* End of unittest2 **********"
     }
 
