@@ -12,9 +12,15 @@ static def bundle(env, includes, excludes) {
 
 //    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
     new AntBuilder().zip(destfile: zipFilePath,
-        basedir: sourceFolder,
-            includes: "${includes}", "**/*.py",
-            excludes: "${excludes}")
-
+        basedir: sourceFolder) {
+            includes: ("${includes}")
+            excludes: ("${excludes}")
+        }
     return zipFilePath
 }
+
+//new AntBuilder().copy(todir: "${outputFolder.absolutePath}/.babun/cygwin", quiet: true) {
+//    fileset(dir: "${cygwinFolder.absolutePath}", defaultexcludes:"no") {
+//        exclude(name: "Cygwin.bat")
+//        exclude(name: "Cygwin.ico")
+//        exclude(name: "Cygwin-Terminal.ico")
