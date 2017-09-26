@@ -11,8 +11,10 @@ static def bundle(env, incl, excl) {
     String sourceFolder = "${env.WORKSPACE}"
 
 //    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
-    new AntBuilder().zip(destfile: zipFilePath, basedir: sourceFolder,
-            includes: "|${incl}|",
+    new AntBuilder().zip(destfile: zipFilePath,
+            basedir: sourceFolder,
+            includes: "${incl}",
             excludes: "${excl}")
+
     return zipFilePath
 }
