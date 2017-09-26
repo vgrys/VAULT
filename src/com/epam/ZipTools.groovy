@@ -16,6 +16,5 @@ static def bundle(env, includes, excludes) {
             includes: "${includes}",
             excludes: "${excludes}")
 
-//    return zipFilePath
-    return includes
+    return zipFilePath
 }
