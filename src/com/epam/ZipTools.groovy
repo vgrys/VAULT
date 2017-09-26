@@ -4,7 +4,7 @@ package com.epam
 import java.text.SimpleDateFormat
 
 static def bundle(env, incl, excl) {
-    def filesToZip = ["${incl}"]
+    def filesToZip = "${incl}"
     def TIMESTAMP = new SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
     def projectName = "${jobBaseName[0]}"
