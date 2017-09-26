@@ -34,14 +34,22 @@ node {
 //        echo "********* Secrets are saved into environment variables **********"
 //    }
 
+    stage ('tests') {
+        echo "********* Start to perform unittest2 **********"
+//        sh "py.test --junitxml reports/results.xml atf/tests/*.py"
+//        sh "python -m unittest2 atf/tests/*.py"
+        python "atf/tests/*.py" nosetests --with-xunit
+        junit 'reports/**'
+        echo "********* End of unittest2 **********"
+    }
+
+
     stage('Create project archive') {
         echo "********* Start to create project archive **********"
         def zip = new ZipTools()
         ['**/*.py', '**/*.sh'].each { includes ->
             ['**/*.groovy', '**/tests/*', '**/*__init__*'].each { excludes ->
                 bundlePath = zip.bundle(env, includes, excludes)
-                echo includes
-                echo excludes
             }
         }
         echo "created an archive $bundlePath"
@@ -65,17 +73,6 @@ node {
         echo "********* End of upload artifacts to Artifactory server **********"
     }
 
-    stage ('Build stage') {
-
-    }
-
-    stage ('tests') {
-        echo "********* Start to perform unittest2 **********"
-        sh "py.test --junitxml reports/results.xml atf/tests/*.py"
-//        sh "python -m unittest2 atf/tests/*.py"
-        junit 'reports/**'
-        echo "********* End of unittest2 **********"
-    }
 
     if (isDevelop || isMaster) {
         deployCmd = isMaster ? 'fab deploy_prod' : 'fab deploy_staging'
