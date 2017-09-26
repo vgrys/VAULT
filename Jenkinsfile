@@ -38,8 +38,8 @@ node {
         echo "********* Start to perform unittest2 **********"
 //        sh "py.test --junitxml reports/results.xml atf/tests/*.py"
 //        sh "python -m unittest2 atf/tests/*.py"
-        sh "nosetests -w atf/tests/*.py"
-//        junit 'reports/**'
+        sh "nose2 --with-xunit --xunit-file=reports/nosetests.xml"
+        junit 'reports/**'
         echo "********* End of unittest2 **********"
     }
 
