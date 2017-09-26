@@ -59,12 +59,15 @@ node {
         echo "********* End of upload artifacts to Artifactory server **********"
     }
 
+    stage ('Build stage') {
+
+    }
 
     stage ('tests') {
         echo "********* Start to perform unittest2 **********"
-//        sh "py.test --junitxml reports/results.xml atf/tests/*.py"
-        sh "python -m unittest2 atf/tests/*.py"
-//        junit 'reports/**'
+        sh "py.test --junitxml reports/results.xml atf/tests/*.py"
+//        sh "python -m unittest2 atf/tests/*.py"
+        junit 'reports/**'
         echo "********* End of unittest2 **********"
     }
 
