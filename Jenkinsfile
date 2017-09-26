@@ -63,7 +63,7 @@ node {
     stage ('tests') {
         echo "********* Start to perform unittest2 **********"
 //        sh "py.test --junitxml reports/results.xml atf/tests/*.py"
-        sh "python -m unittest2 atf/tests/*.py"
+        sh "python -m unittest2 --junitxml reports/results.xml atf/tests/*.py"
         junit 'reports/**'
         echo "********* End of unittest2 **********"
     }
