@@ -37,7 +37,11 @@ node {
     stage('Create project archive') {
         echo "********* Start to create project archive **********"
         def zip = new ZipTools()
-        bundlePath = zip.bundle(env)
+        ['**/*.groovy', '**/*.py', '**/*.sh'].each { includes ->
+            ['**/*__init__*', 'server_dev'].each { excludes ->
+                bundlePath = zip.bundle(env, includes, excludes)
+            }
+        }
         echo "created an archive $bundlePath"
         echo "********* End of create project archive **********"
     }
