@@ -14,7 +14,7 @@ class SimpleTest(unittest.TestCase):
         self.assertEqual(10, 7 + 3)
 
     def test_pass_again(self):
-        self.assertEqual(15, 10 + 5)
+        self.assertEqual(15, 11 + 5)
 
     def test_pass_and_again(self):
         self.assertEqual(20, 10 + 10)
