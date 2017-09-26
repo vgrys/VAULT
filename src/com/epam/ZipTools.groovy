@@ -3,7 +3,7 @@ package com.epam
 
 import java.text.SimpleDateFormat
 
-static def bundle(env, includes, excludes) {
+static def bundle(env, incl, excl) {
     def TIMESTAMP = new SimpleDateFormat('yyyyMMddHHmmss').format(new Date())
     def jobBaseName = "${env.JOB_NAME}".split('/')
     def projectName = "${jobBaseName[0]}"
@@ -11,15 +11,8 @@ static def bundle(env, includes, excludes) {
     String sourceFolder = "${env.WORKSPACE}"
 
 //    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
-    new AntBuilder().zip(destfile: zipFilePath, basedir: sourceFolder) {
-            include("${includes}")
-            exclude("${excludes}")
-        }
+    new AntBuilder().zip(destfile: zipFilePath, basedir: sourceFolder,
+            include: "${incl}",
+            exclude: "${excl}")
     return zipFilePath
 }
-
-//new AntBuilder().copy(todir: "${outputFolder.absolutePath}/.babun/cygwin", quiet: true) {
-//    fileset(dir: "${cygwinFolder.absolutePath}", defaultexcludes:"no") {
-//        exclude(name: "Cygwin.bat")
-//        exclude(name: "Cygwin.ico")
-//        exclude(name: "Cygwin-Terminal.ico")
