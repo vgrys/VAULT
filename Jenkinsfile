@@ -21,10 +21,9 @@ node {
     stage ('Check branch') {
         echo "********* Start to check actual branch **********"
         if (isDevelop || isMaster) {
-            deployCmd = isMaster ? 'fab deploy_prod' : 'fab deploy_staging'
-//        sshagent([sshCredentialsId]) {
+            echo "Noting to merge. Actual branch is Master or Dev"
+        } else {
             stage(name: 'Deploy') {
-//                sh "source ${workspace}/env/bin/activate && ${deployCmd}"
                 sh "echo $USER"
                 sh "pwd"
 //            }
