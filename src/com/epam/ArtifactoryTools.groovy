@@ -17,7 +17,7 @@ import static groovy.io.FileType.FILES
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
 
-        new java.io.File("${env.WORKSPACE}/dist/").eachFileMatch(/.*.rag.gz/) { file ->
+        new java.io.File("${env.WORKSPACE}/dist/").eachFileMatch(/.*.tar.gz/) { file ->
             return file.getName()
 //            println file.getName()
         }
