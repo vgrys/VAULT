@@ -29,7 +29,3 @@ File result = artifactory.repository("${repository}").upload("${ArtifactoryUploa
 
 return result.getDownloadUri()
 }
-
-//new java.io.File("${env.WORKSPACE}/dist/").eachFileMatch(/.*.tar.gz/) { file ->
-//    return file.getName()
-//}
