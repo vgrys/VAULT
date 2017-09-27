@@ -19,7 +19,8 @@ node {
     stage ('Check branch') {
         echo "********* Start to check actual branch **********"
         if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'develop') {
-            echo "Merging  dev branch to  ${env.BRANCH_NAME}"
+            echo "Merging develep branch to ${env.BRANCH_NAME}"
+            sh "chmod +x ${WORKSPACE}"
             sh "${WORKSPACE} git status"
 //            sh "${WORKSPACE} git merge origin/develop"
             }
