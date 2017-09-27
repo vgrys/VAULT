@@ -18,13 +18,14 @@ node {
 
     stage ('Check branch') {
         echo "********* Start to check actual branch **********"
-        if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'dev') {
-            echo "Noting to merge. Actual branch is Master or Dev"
-        } else {
-            echo "Merging ${env.BRANCH_NAME} to Existing branch"
+        if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'dev') {
+            echo "Merging  dev branch to  ${env.BRANCH_NAME}"
             sh 'git status'
             sh 'git checkout dev'
-            sh "git commit -am 'Merged dev branch to "${env.BRANCH_NAME}"'"
+            sh 'git pull origin dev'
+            sh "git checkout ${env.BRANCH_NAME}"
+            sh 'git merge dev'
+//            sh "git commit -am 'Merged dev branch to "${env.BRANCH_NAME}"'"
 //            sh 'git merge '
 
             }
