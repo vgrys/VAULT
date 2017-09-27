@@ -42,6 +42,12 @@ node {
         echo "********* End of unittest2 **********"
     }
 
+    stage ('Build ATF project') {
+        echo "********* Start to build ATF project **********"
+        sh "build-atf.sh"
+        echo "********* End of build ATF project **********"
+    }
+
 
     stage('Create project archive') {
         echo "********* Start to create project archive **********"
