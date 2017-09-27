@@ -20,7 +20,8 @@ node {
         echo "********* Start to check actual branch **********"
         if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'develop') {
             echo "Merging  dev branch to  ${env.BRANCH_NAME}"
-                sh "git merge origin/develop"
+            sh "git status"
+//            sh "git merge origin/develop"
             }
         echo "********* End of check actual branch **********"
     }
