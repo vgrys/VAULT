@@ -69,8 +69,9 @@ node {
             def repository = 'bigdata-dss-automation'
             def atifactory_ip = 'http://192.168.56.21:8081'
             files = findFiles(glob: '**/.tar.gz')
+            def output = ${files[0]}.name
 //            def atfArtifact = "${WORKSPACE}/dist/*.tar.gz"
-//            echo "${files[0]}"
+            echo output
 
             def artifactory = new ArtifactoryTools()
 //            ["${bundlePath}", , 'sonarqube', 'artifactory', 'server_dev'].each { service ->
