@@ -20,11 +20,11 @@ node {
         echo "********* Start to check actual branch **********"
         if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'dev') {
             echo "Merging  dev branch to  ${env.BRANCH_NAME}"
-            sh 'git status'
-            sh 'git checkout dev'
-            sh 'git pull origin dev'
-            sh "git checkout ${env.BRANCH_NAME}"
-            sh 'git merge dev'
+                sh "git merge origin/develop"
+//            sh 'git checkout dev'
+//            sh 'git pull origin dev'
+//            sh "git checkout ${env.BRANCH_NAME}"
+//            sh 'git merge dev'
 //            sh "git commit -am 'Merged dev branch to "${env.BRANCH_NAME}"'"
 //            sh 'git merge '
 
