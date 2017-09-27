@@ -22,7 +22,7 @@ node {
             echo "Noting to merge. Actual branch is Master or Dev"
         } else {
                 echo "Merging ${env.BRANCH_NAME} to Existing branch"
-                sh "pwd"
+                sh 'git status'
             }
         echo "********* End of check actual branch **********"
     }
