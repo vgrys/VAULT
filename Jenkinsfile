@@ -68,7 +68,7 @@ node {
         withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PWD')]) {
             def repository = 'bigdata-dss-automation'
             def atifactory_ip = 'http://192.168.56.21:8081'
-            files = findFiles(glob: '**/*.tar.gz')
+            files = findFiles(glob: '**/.tar.gz')
 //            def atfArtifact = "${WORKSPACE}/dist/*.tar.gz"
             echo files
 
