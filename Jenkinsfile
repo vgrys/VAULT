@@ -44,7 +44,7 @@ node {
 
     stage ('Build ATF project') {
         echo "********* Start to build ATF project **********"
-        sh "build-atf.sh"
+        sh('build-atf.sh')
         echo "********* End of build ATF project **********"
     }
 
