@@ -21,7 +21,7 @@ node {
         if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'dev') {
             echo "Noting to merge. Actual branch is Master or Dev"
         } else {
-                echo "Merging "(env.BRANCH_NAME)" to Existing branch"
+                echo "Merging ${env.BRANCH_NAME} to Existing branch"
                 sh "pwd"
             }
         echo "********* End of check actual branch **********"
