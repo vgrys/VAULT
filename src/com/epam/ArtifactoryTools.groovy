@@ -12,12 +12,20 @@ package com.epam
 import org.jfrog.artifactory.client.Artifactory
 import org.jfrog.artifactory.client.ArtifactoryClientBuilder
 import org.jfrog.artifactory.client.model.File
+import static groovy.io.FileType.FILES
 
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
-    def atfArtifact = new FileNameFinder().getFileNames("${env.WORKSPACE}", '/**/*.tar.gz')
 
-    return atfArtifact
+    static void main(String[] args) {
+        new java.io.File("${env.WORKSPACE}").eachFileMatch(/.*.rag.gz/) { file ->
+            return file.getName()
+//            println file.getName()
+        }
+    }
+
+//    def atfArtifact = new FileNameFinder().getFileNames("${env.WORKSPACE}", '/**/*.tar.gz')
+
 
 //    java.io.File projectartifact = new java.io.File(artifactPath)
 //    java.io.File atfartifact = new java.io.File(atfArtifact)
