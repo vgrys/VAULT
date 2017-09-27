@@ -17,26 +17,20 @@ import static groovy.io.FileType.FILES
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
 
-        new java.io.File("${env.WORKSPACE}/dist/").eachFileMatch(/.*.tar.gz/) { file ->
-            return file.getName()
-//            println file.getName()
-        }
+    java.io.File artifact = new java.io.File(artifactPath)
+    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
 
+    Artifactory artifactory = ArtifactoryClientBuilder.create()
+        .setUrl("${atifactory_ip}/artifactory/")
+        .setUsername("${ARTIFACTORY_USER}")
+        .setPassword("${ARTIFACTORY_PWD}")
+        .build()
 
-//    def atfArtifact = new FileNameFinder().getFileNames("${env.WORKSPACE}", '/**/*.tar.gz')
+File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
 
-
-//    java.io.File projectartifact = new java.io.File(artifactPath)
-//    java.io.File atfartifact = new java.io.File(atfArtifact)
-//    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${projectartifact.getName()}"
-//
-//    Artifactory artifactory = ArtifactoryClientBuilder.create()
-//        .setUrl("${atifactory_ip}/artifactory/")
-//        .setUsername("${ARTIFACTORY_USER}")
-//        .setPassword("${ARTIFACTORY_PWD}")
-//        .build()
-//
-//File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", projectartifact).doUpload()
-//
-//return result.getDownloadUri()
+return result.getDownloadUri()
 }
+
+//new java.io.File("${env.WORKSPACE}/dist/").eachFileMatch(/.*.tar.gz/) { file ->
+//    return file.getName()
+//}
