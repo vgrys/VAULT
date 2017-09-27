@@ -45,7 +45,8 @@ node {
     stage ('Build ATF project') {
         echo "********* Start to build ATF project **********"
         sh "chmod +x ${WORKSPACE}/build-atf.sh"
-        sh "${WORKSPACE}/build-atf.sh"
+        def atfArtifact = sh "${WORKSPACE}/build-atf.sh"
+        echo atfArtifact
         echo "********* End of build ATF project **********"
     }
 

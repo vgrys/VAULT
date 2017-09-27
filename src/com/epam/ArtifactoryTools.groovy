@@ -15,8 +15,9 @@ import org.jfrog.artifactory.client.model.File
 
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
     def atfArtifact = "${env.WORKSPACE}/dist/*.tar.gz"
-    java.io.File artifact = new java.io.File(artifactPath, atfArtifact)
-    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
+    java.io.File projectartifact = new java.io.File(artifactPath)
+    java.io.File atfartifact = new java.io.File(atfArtifact)
+    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${projectartifact.getName()}"
 
     Artifactory artifactory = ArtifactoryClientBuilder.create()
         .setUrl("${atifactory_ip}/artifactory/")
@@ -24,7 +25,7 @@ static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTO
         .setPassword("${ARTIFACTORY_PWD}")
         .build()
 
-File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", artifact).doUpload()
+File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", projectartifact).doUpload()
 
 return result.getDownloadUri()
 }
