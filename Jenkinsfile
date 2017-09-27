@@ -45,8 +45,7 @@ node {
     stage ('Build ATF project') {
         echo "********* Start to build ATF project **********"
         sh "chmod +x ${WORKSPACE}/build-atf.sh"
-        def atfArtifact = sh "${WORKSPACE}/build-atf.sh"
-        echo atfArtifact
+        "${WORKSPACE}/build-atf.sh"
         echo "********* End of build ATF project **********"
     }
 
@@ -69,6 +68,8 @@ node {
         withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PWD')]) {
             def repository = 'bigdata-dss-automation'
             def atifactory_ip = 'http://192.168.56.21:8081'
+            def atfArtifact = "${WORKSPACE}/dist/*.tar.gz"
+                    echo atfArtifact
             def artifactory = new ArtifactoryTools()
 //            ["${bundlePath}", , 'sonarqube', 'artifactory', 'server_dev'].each { service ->
             def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")
