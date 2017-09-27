@@ -14,7 +14,7 @@ static def bundle(env, incl, excl) {
 
 //    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
     new AntBuilder().zip(destfile: zipFilePath,
-            basedir: sourceFolder,
+            basedir: sourceFolder)
 //            includes: filesToInclude.join(' '),
 //            excludes: filesToExclude.join(' '))
 
