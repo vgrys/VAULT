@@ -12,9 +12,9 @@ static def bundle(env, incl, excl) {
     String zipFilePath = "${env.WORKSPACE}/${projectName}_${TIMESTAMP}.zip"
     String sourceFolder = "${env.WORKSPACE}"
 
-//    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
-    new AntBuilder().zip(destfile: zipFilePath,
-            basedir: sourceFolder)
+    (new AntBuilder()).zip(destfile: zipFilePath, basedir: sourceFolder)
+//    new AntBuilder().zip(destfile: zipFilePath,
+//            basedir: sourceFolder,
 //            includes: filesToInclude.join(' '),
 //            excludes: filesToExclude.join(' '))
 
