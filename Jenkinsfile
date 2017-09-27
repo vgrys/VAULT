@@ -68,14 +68,9 @@ node {
         withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PWD')]) {
             def repository = 'bigdata-dss-automation'
             def atifactory_ip = 'http://192.168.56.21:8081'
-
-            def atfArtifact = "${WORKSPACE}/dist/*.tar.gz"
-            def uploadSpec = """{
-                                "files": [{
-                                      "pattern": "${atfArtifact}",
-                                         }]
-                                }"""
-                    echo uploadSpec
+            files = findFiles(glob: '/dist/*.tar.gz')
+//            def atfArtifact = "${WORKSPACE}/dist/*.tar.gz"
+            echo files
 
             def artifactory = new ArtifactoryTools()
 //            ["${bundlePath}", , 'sonarqube', 'artifactory', 'server_dev'].each { service ->
