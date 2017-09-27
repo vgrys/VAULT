@@ -6,8 +6,6 @@ import com.epam.ArtifactoryTools
 import com.epam.ZipTools
 
 def bundlePath
-def isMaster = env.BRANCH_NAME == 'master'
-def isDevelop = env.BRANCH_NAME == 'dev'
 
 node {
 
@@ -20,16 +18,13 @@ node {
 
     stage ('Check branch') {
         echo "********* Start to check actual branch **********"
-        if (isDevelop || isMaster) {
+        if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'dev') {
             echo "Noting to merge. Actual branch is Master or Dev"
         } else {
-            stage(name: 'Deploy') {
-                sh "echo $USER"
+                echo "Merging "${env.BRANCH_NAME}" to Existing branch"
                 sh "pwd"
-//            }
             }
-            echo "********* End of check actual branch **********"
-        }
+        echo "********* End of check actual branch **********"
     }
 
     stage ('tests') {
