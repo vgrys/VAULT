@@ -21,8 +21,12 @@ node {
         if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'dev') {
             echo "Noting to merge. Actual branch is Master or Dev"
         } else {
-                echo "Merging ${env.BRANCH_NAME} to Existing branch"
-                sh 'git status'
+            echo "Merging ${env.BRANCH_NAME} to Existing branch"
+            sh 'git status'
+            sh 'git checkout dev'
+            sh "git commit -am 'Merged dev branch to "${env.BRANCH_NAME}"'"
+//            sh 'git merge '
+
             }
         echo "********* End of check actual branch **********"
     }
