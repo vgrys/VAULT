@@ -70,7 +70,7 @@ node {
             def atifactory_ip = 'http://192.168.56.21:8081'
             files = findFiles(glob: '**/.tar.gz')
 //            def atfArtifact = "${WORKSPACE}/dist/*.tar.gz"
-            echo files[0].name
+//            echo "${files[0]}"
 
             def artifactory = new ArtifactoryTools()
 //            ["${bundlePath}", , 'sonarqube', 'artifactory', 'server_dev'].each { service ->
