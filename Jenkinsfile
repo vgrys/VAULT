@@ -44,7 +44,16 @@ node {
 
     stage ('Build ATF project') {
         echo "********* Start to build ATF project **********"
-        sh("sudo ${WORKSPACE}/build-atf.sh")
+
+        // Permission to execute
+//        sh "chmod +x -R ${env.WORKSPACE}/../${env.JOB_NAME}@script"
+
+        sh "chmod +x ${WORKSPACE}/build-atf.sh"
+
+        // Call SH
+//        sh "${env.WORKSPACE}/../${env.JOB_NAME}@script/script.sh"
+
+        sh "${WORKSPACE}/build-atf.sh"
         echo "********* End of build ATF project **********"
     }
 
