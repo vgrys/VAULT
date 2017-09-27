@@ -68,8 +68,6 @@ node {
         withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PWD')]) {
             def repository = 'bigdata-dss-automation'
             def atifactory_ip = 'http://192.168.56.21:8081'
-
-
             def artifactory = new ArtifactoryTools()
 //            ["${bundlePath}", , 'sonarqube', 'artifactory', 'server_dev'].each { service ->
             def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")

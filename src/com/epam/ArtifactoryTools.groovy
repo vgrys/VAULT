@@ -14,24 +14,22 @@ import org.jfrog.artifactory.client.ArtifactoryClientBuilder
 import org.jfrog.artifactory.client.model.File
 
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
-//    def atfArtifact = "${env.WORKSPACE}/dist/*.tar.gz"
 
     def atfArtifact = new FileNameFinder().getFileNames("${env.WORKSPACE}", '**/*.tar.gz')
-//    assert new java.io.File("${env.WORKSPACE}", 'README.txt').absolutePath in txtFiles
 
     return atfArtifact
 
-    java.io.File projectartifact = new java.io.File(artifactPath)
-    java.io.File atfartifact = new java.io.File(atfArtifact)
-    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${projectartifact.getName()}"
-
-    Artifactory artifactory = ArtifactoryClientBuilder.create()
-        .setUrl("${atifactory_ip}/artifactory/")
-        .setUsername("${ARTIFACTORY_USER}")
-        .setPassword("${ARTIFACTORY_PWD}")
-        .build()
-
-File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", projectartifact).doUpload()
-
-return result.getDownloadUri()
+//    java.io.File projectartifact = new java.io.File(artifactPath)
+//    java.io.File atfartifact = new java.io.File(atfArtifact)
+//    def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${projectartifact.getName()}"
+//
+//    Artifactory artifactory = ArtifactoryClientBuilder.create()
+//        .setUrl("${atifactory_ip}/artifactory/")
+//        .setUsername("${ARTIFACTORY_USER}")
+//        .setPassword("${ARTIFACTORY_PWD}")
+//        .build()
+//
+//File result = artifactory.repository("${repository}").upload("${ArtifactoryUploadPath}", projectartifact).doUpload()
+//
+//return result.getDownloadUri()
 }
