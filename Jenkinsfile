@@ -18,6 +18,8 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
+    stage ('Check branch')
+    echo "********* Start to check actual branch **********"
     if (isDevelop || isMaster) {
         deployCmd = isMaster ? 'fab deploy_prod' : 'fab deploy_staging'
 //        sshagent([sshCredentialsId]) {
@@ -27,6 +29,7 @@ node {
             sh "pwd"
 //            }
         }
+        echo "********* End of check actual branch **********"
     }
 
     stage ('tests') {
