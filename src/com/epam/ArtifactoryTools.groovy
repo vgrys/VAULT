@@ -15,7 +15,7 @@ import org.jfrog.artifactory.client.model.File
 
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
-    def atfArtifact = new FileNameFinder().getFileNames("${env.WORKSPACE}", '**/*.tar.gz')
+    def atfArtifact = new FileNameFinder().getFileNames("${env.WORKSPACE}", '/**/*.tar.gz')
 
     return atfArtifact
 
