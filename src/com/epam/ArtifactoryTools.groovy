@@ -17,12 +17,11 @@ import static groovy.io.FileType.FILES
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
 
-    static void main(String[] args) {
         new java.io.File("${env.WORKSPACE}").eachFileMatch(/.*.rag.gz/) { file ->
             return file.getName()
 //            println file.getName()
         }
-    }
+
 
 //    def atfArtifact = new FileNameFinder().getFileNames("${env.WORKSPACE}", '/**/*.tar.gz')
 
