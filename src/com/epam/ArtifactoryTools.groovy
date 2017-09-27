@@ -10,32 +10,14 @@ package com.epam
 ])
 
 import org.jfrog.artifactory.client.Artifactory
-import org.jfrog.artifactory.client.ArtifactoryClient
 import org.jfrog.artifactory.client.ArtifactoryClientBuilder
 import org.jfrog.artifactory.client.model.File
 
 static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
-
-//    def a = []
-//    def b = new ArtifactoryTools()
-//    b.class.getClassLoader().getURLs().each { url ->
-//        a.add "- ${url.toString()}"
-//    }
-//    return a
-//    a.add(ObjectMapper.getClass().protectionDomain.codeSource.location.path)
-//    ObjectMapper.getClass().declaredMethods.findAll().each {
-//        a.add("$it.name $it.parameters.name")
-//    }
-//
-//    return a
-//
-    java.io.File artifact = new java.io.File(artifactPath)
+    def atfArtifact = "${env.WORKSPACE}/dist/*.tar.gz"
+    java.io.File artifact = new java.io.File(artifactPath, atfArtifact)
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
 
-// For version 2.3.5
-//    Artifactory artifactory = ArtifactoryClient.create("${atifactory_ip}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")
-
-// For version 2.5.2
     Artifactory artifactory = ArtifactoryClientBuilder.create()
         .setUrl("${atifactory_ip}/artifactory/")
         .setUsername("${ARTIFACTORY_USER}")

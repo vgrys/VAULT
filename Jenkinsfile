@@ -44,15 +44,7 @@ node {
 
     stage ('Build ATF project') {
         echo "********* Start to build ATF project **********"
-
-        // Permission to execute
-//        sh "chmod +x -R ${env.WORKSPACE}/../${env.JOB_NAME}@script"
-
         sh "chmod +x ${WORKSPACE}/build-atf.sh"
-
-        // Call SH
-//        sh "${env.WORKSPACE}/../${env.JOB_NAME}@script/script.sh"
-
         sh "${WORKSPACE}/build-atf.sh"
         echo "********* End of build ATF project **********"
     }
@@ -74,14 +66,12 @@ node {
     stage('Upload artifacts to Artifactory server') {
         echo "********* Start to upload artifacts to Artifactory server **********"
         withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PWD')]) {
-//            this.class.classLoader.getURLs().each { url ->
-//                echo "- ${url.toString()}"
-//            }
             def repository = 'bigdata-dss-automation'
             def atifactory_ip = 'http://192.168.56.21:8081'
             def artifactory = new ArtifactoryTools()
+//            ["${bundlePath}", , 'sonarqube', 'artifactory', 'server_dev'].each { service ->
             def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")
-//            url.each( echo("$it") )
+//            def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")
             echo "uploaded an artifact to $url"
         }
         echo "********* End of upload artifacts to Artifactory server **********"
