@@ -6,6 +6,7 @@ import com.epam.ArtifactoryTools
 import com.epam.ZipTools
 
 def bundlePath
+def files
 
 node {
 
@@ -16,16 +17,16 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
-    stage ('Check branch') {
-        echo "********* Start to check actual branch **********"
-        if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'develop') {
-            echo "Merging develep branch to ${env.BRANCH_NAME}"
-            sh "chmod +x ${WORKSPACE}"
-            sh "${WORKSPACE} git status"
-//            sh "${WORKSPACE} git merge origin/develop"
-            }
-        echo "********* End of check actual branch **********"
-    }
+//    stage ('Check branch') {
+//        echo "********* Start to check actual branch **********"
+//        if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'develop') {
+//            echo "Merging develep branch to ${env.BRANCH_NAME}"
+//            sh "chmod +x ${WORKSPACE}"
+//            sh "${WORKSPACE} git status"
+////            sh "${WORKSPACE} git merge origin/develop"
+//            }
+//        echo "********* End of check actual branch **********"
+//    }
 
     stage ('tests') {
         echo "********* Start to perform unittest2 **********"
@@ -39,6 +40,11 @@ node {
         echo "********* Start to build ATF project **********"
         sh "chmod +x ${WORKSPACE}/build-atf.sh"
         sh "${WORKSPACE}/build-atf.sh"
+
+        sh "ls ${WORKSPACE}/dist/*.tar.gz > listArchive"
+        files = readFile( "${WORKSPACE}/dist/listArchive" ).split( "\\r?\\n" );
+//        sh "rm -f listJsonFiles"
+
         echo "********* End of build ATF project **********"
     }
 
