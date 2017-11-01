@@ -1,13 +1,12 @@
 #!/usr/bin/groovy
-@Library('shared-library@master')
-import com.epam.ArtifactoryToolsPlugin
+@Library('shared-library')
 
 //import com.epam.ZipTools
 String artifactoryRepo = 'bigdata-dss-automation'
 String artifactoryUrl = 'http://192.168.56.105:8081'
 String atfVersion = '0.0.1'
-String projectVersion = '0.1'
 String projectName = 'framework'
+String projectVersion = '0.1'
 
 //('flex1')
 node {
@@ -78,8 +77,8 @@ node {
     stage('Upload artifacts to Artifactory server') {
         echo "********* Start to upload artifacts to Artifactory server **********"
 
-        def atfArchivePath = "${WORKSPACE}/dist/*.tar.gz"
-        def projectArchivePath = "${WORKSPACE}/*.tgz"
+        GString atfArchivePath = "${WORKSPACE}/dist/*.tar.gz"
+        GString projectArchivePath = "${WORKSPACE}/*.tgz"
         def artifactoryServer = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
         def artifactory = new ArtifactoryToolsPlugin()
         artifactory.artifactoryConfig(env, artifactoryRepo, "${atfArchivePath}", "${projectArchivePath}", atfVersion, projectName, projectVersion)
