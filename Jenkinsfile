@@ -66,7 +66,7 @@ node {
 
     stage('Build ATF project') {
         echo "********* Start to build ATF project **********"
-        if (env.BRANCH_NAME == 'Artifactory-with-plugin+') {
+        if (env.BRANCH_NAME == 'master') {
             echo "Branch name is ${env.BRANCH_NAME}, build ATF project "
             sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
         } else {
