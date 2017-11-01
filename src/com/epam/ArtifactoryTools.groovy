@@ -1,41 +1,38 @@
 #!/usr/bin/groovy
 package com.epam
 
-@Grapes([
-        @Grab(group='commons-io', module='commons-io', version='2.5'),
-        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.2'),
-        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
-        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
-        @GrabExclude(group='xerces', module='xercesImpl')
-])
-
 import org.jfrog.artifactory.client.Artifactory
-import org.jfrog.artifactory.client.ArtifactoryClient
 import org.jfrog.artifactory.client.ArtifactoryClientBuilder
 import org.jfrog.artifactory.client.model.File
 
-static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
 
-//    def a = []
-//    def b = new ArtifactoryTools()
-//    b.class.getClassLoader().getURLs().each { url ->
-//        a.add "- ${url.toString()}"
-//    }
-//    return a
-//    a.add(ObjectMapper.getClass().protectionDomain.codeSource.location.path)
-//    ObjectMapper.getClass().declaredMethods.findAll().each {
-//        a.add("$it.name $it.parameters.name")
-//    }
-//
-//    return a
-//
+def loadGrapes(){
+    ClassLoader classLoader = new groovy.lang.GroovyClassLoader()
+    Map[] grapez = [
+            [group='commons-io', module='commons-io', version='2.5'],
+            [group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.2']
+            [group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2']
+    ]
+    Grape.grab(classLoader: classLoader, grapez)
+    println "Class: " + classLoader.loadClass('org.ccil.cowan.tagsoup.jaxp.SAXParserImpl')
+}
+
+
+//@Grapes([
+//        @Grab(group='commons-io', module='commons-io', version='2.5'),
+//        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-services', version='2.5.2'),
+//        @Grab(group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2'),
+//        @GrabExclude(group='org.codehaus.groovy', module='groovy-xml'),
+//        @GrabExclude(group='xerces', module='xercesImpl')
+//])
+
+
+static def upload(env, atifactory_ip, repository, String artifactPath, ARTIFACTORY_USER, ARTIFACTORY_PWD) {
+    loadGrapes()
+
     java.io.File artifact = new java.io.File(artifactPath)
     def ArtifactoryUploadPath = "${env.JOB_NAME}/${env.BUILD_NUMBER}/${artifact.getName()}"
 
-// For version 2.3.5
-//    Artifactory artifactory = ArtifactoryClient.create("${atifactory_ip}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")
-
-// For version 2.5.2
     Artifactory artifactory = ArtifactoryClientBuilder.create()
         .setUrl("${atifactory_ip}/artifactory/")
         .setUsername("${ARTIFACTORY_USER}")

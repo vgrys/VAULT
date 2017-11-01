@@ -1,0 +1,3 @@
+[prod]
+P9CPWPTDMCI01 ansible_host=192.168.56.21 ansible_user=vagrant
+

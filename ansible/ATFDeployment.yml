@@ -1,0 +1,68 @@
+---
+- hosts: "{{server}}"
+
+  vars_files:
+    - vars/configs.yml
+
+
+  vars:
+    - tempDir: "/tmp/atfdir"
+    - dest: "{{tempDir}}/atf-{{atfVersion}}.tar.gz"
+    - requirementsSrc: "{{workspace}}/requirements.txt"
+    - requirementsDest: "{{tempDir}}/requirements.txt"
+    - venvPath: "/tmp/ATFVENV/"
+    - zephSrc: "{{zephCred}}"
+    - zephDest: "$HOME/zephCred"
+
+  tasks:
+
+    - name: " Delete temporary directory '{{tempDir}}' if exists "
+      file:
+        path: "{{tempDir}}"
+        state: absent
+    - name: " Create temporary directory '{{tempDir}}' "
+      file:
+        path: "{{tempDir}}"
+        state: directory
+        mode: 0755
+
+    - name: " Download build 'atf-{{atfVersion}}.tar.gz' from Artifactory server into '{{tempDir}} directory "
+      uri:
+        validate_certs: no
+        url: "{{artifactoryAtfPath}}"
+        method: GET
+        user: "{{artifactory_user}}"
+        password: "{{artifactory_pwd}}"
+        return_content: yes
+        dest: "{{dest}}"
+
+    - name: " Copy requirements from '{{requirementsSrc}}' to '{{requirementsDest}}' "
+      copy:
+        src: "{{requirementsSrc}}"
+        dest: "{{requirementsDest}}"
+
+    - name: " copy zeph credential file to the server "
+      copy:
+        src: "{{zephSrc}}"
+        dest: "{{zephDest}}"
+        mode: 0400
+
+    - name: " Create virtualenv '{{venvPath}}' if doesn't exist "
+      command: "virtualenv {{venvPath}} -p python3.6 creates={{venvPath}}"
+
+    - name: " Install requirements from {{requirementsDest}}"
+      pip:
+        virtualenv_site_packages: yes
+        virtualenv: "{{venvPath}}"
+        requirements: "{{requirementsDest}}"
+
+    - name: " Deploy ATF project "
+      pip:
+        virtualenv_site_packages: yes
+        name: "file://{{dest}}"
+        virtualenv: "{{venvPath}}"
+
+    - name: " Delete temporary directory '{{tempDir}}' "
+      file:
+        path: "{{tempDir}}"
+        state: absent

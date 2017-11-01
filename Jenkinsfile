@@ -1,76 +1,131 @@
 #!/usr/bin/groovy
+@Library('shared-library@Artifactory-with-plugin')
+import com.epam.ArtifactoryToolsPlugin
 
-@Library('shared-library@master')
-import com.epam.VaultTools
-import com.epam.ArtifactoryTools
-import com.epam.ZipTools
+//import com.epam.ZipTools
+String artifactoryRepo = 'bigdata-dss-automation'
+String artifactoryUrl = 'http://192.168.56.105:8081'
+String atfVersion = '0.0.1'
+String projectVersion = '0.1'
+String projectName = 'framework'
 
-def bundlePath
-
+//('flex1')
 node {
+
+    echo "DEBUG CODE -----> Running ${env.JOB_NAME} on ${env.JENKINS_URL} for branch ${env.BRANCH_NAME}"
 
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
         deleteDir()
         checkout scm
+
+//        sh('. RepoTwo/build.sh')
+//        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'subdirectory2']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/vgrys/activemq.git']]])
+//        load 'subdirectory2/Jenkinsfile'
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
-
-
-//    stage('Obtain credentials from Vault') {
-//        echo "********* Start to populate secrets from Vault **********"
-//        def environment_used = 'dev'
-//        def vault_ip = 'http://192.168.56.21:8200'
-//        withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')]) {
-//
-//            def vaultTools = new VaultTools()
-//            ['sql', 'consul', 'sonarqube', 'artifactory', 'server_dev'].each { service ->
-//                vaultTools.populate_credentials(env, vault_ip, "$MY_VAULT_TOKEN", environment_used, service)
-//            }
-//        }
-//        echo "********* Secrets are saved into environment variables **********"
-//    }
-
-    stage('Create project archive') {
-        echo "********* Start to create project archive **********"
+    stage('Check out other repo') {
+        dir('RepoTwo') {
+            git url: 'https://github.com/vgrys/activemq.git'
+        }
+    }
+    stage('Create Ansible archive') {
+        echo "********* Start to create Ansible archive **********"
+        GString sourceFolder = "${WORKSPACE}/ansible/"
         def zip = new ZipTools()
-        bundlePath = zip.bundle(env)
+        def bundlePath = zip.bundle(env, sourceFolder, [".git"])
         echo "created an archive $bundlePath"
-        echo "********* End of create project archive **********"
+        echo "********* Ansible archive created **********"
     }
 
+//    stage('Create project archive') {
+//        echo "********* Start to create project archive **********"
+//        GString sourceFolder = "${WORKSPACE}"
+//        def zip = new ZipTools()
+//        def bundlePath = zip.bundle(env, sourceFolder, [".git", "test*.py", "File1", ".excludes.txt", '__init__*'])
+//        echo "created an archive $bundlePath"
+//        echo "********* End of create project archive **********"
+//    }
+
+    stage("Install requirements") {
+        echo "********* Start to install requirements **********"
+        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && ./bin/pip3.6 install -r ${WORKSPACE}/requirements.txt"
+        echo "********* End of install requirements **********"
+    }
+
+
+    stage('tests') {
+        echo "********* Start to perform unittest2 **********"
+        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && py.test --junitxml reports/results.xml atf/tests/*.py"
+//        sh "nose2 --verbose -c nose2.cfg"
+        junit 'reports/**'
+        echo "********* End of unittest2 **********"
+    }
+
+    stage('Build ATF project') {
+        echo "********* Start to build ATF project **********"
+        if (env.BRANCH_NAME == 'Artifactory-with-plugin+') {
+            echo "Branch name is ${env.BRANCH_NAME}, build ATF project "
+            sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
+        } else {
+            echo "Branch name is ${env.BRANCH_NAME}, skip build ATF project "
+            echo "********* End of build ATF project **********"
+        }
+    }
 
     stage('Upload artifacts to Artifactory server') {
         echo "********* Start to upload artifacts to Artifactory server **********"
-        withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PWD')]) {
-//            this.class.classLoader.getURLs().each { url ->
-//                echo "- ${url.toString()}"
-//            }
-            def repository = 'bigdata-dss-automation'
-            def atifactory_ip = 'http://192.168.56.21:8081'
-            def artifactory = new ArtifactoryTools()
-            def url = artifactory.upload(env, atifactory_ip, repository, "${bundlePath}", "${ARTIFACTORY_USER}", "${ARTIFACTORY_PWD}")
-//            url.each( echo("$it") )
-            echo "uploaded an artifact to $url"
-        }
+
+        def atfArchivePath = "${WORKSPACE}/dist/*.tar.gz"
+        def projectArchivePath = "${WORKSPACE}/*.tgz"
+        def artifactoryServer = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
+        def artifactory = new ArtifactoryToolsPlugin()
+        artifactory.artifactoryConfig(env, artifactoryRepo, "${atfArchivePath}", "${projectArchivePath}", atfVersion, projectName, projectVersion)
+        artifactoryServer.upload(env.uploadSpec)
         echo "********* End of upload artifacts to Artifactory server **********"
     }
-    step([$class: 'WsCleanup'])
 
-
-    //    stage('check env') {
-//        echo "********* This step is just for demo **********"
-//        echo "SQL_USER is = ${env.SQL_USER}"
-//        echo "SQL_PWD is = ${env.SQL_PWD}"
-//        echo "CONSUL_USER is = ${env.CONSUL_USER}"
-//        echo "CONSUL_PWD is = ${env.CONSUL_PWD}"
-//        echo "ATRIFACTORY_USER is = ${env.ARTIFACTORY_USER}"
-//        echo "ATRIFACTORY_PWD is = ${env.ARTIFACTORY_PWD}"
-//        echo "SONARQUBE_USER is = ${env.SONARQUBE_USER}"
-//        echo "SONARQUBE_PWD is = ${env.SONARQUBE_PWD}"
-//        echo "SERVER_DEV_USER is = ${env.SERVER_DEV_USER}"
-//        echo "SERVER_DEV_PWD is = ${env.SERVER_DEV_PWD}"
-//        echo "********* End of step is just for demo **********"
+//    stage('playbook test stage') {
+//        echo "********* playbook test stage starting **********"
+//        dir("${WORKSPACE}/ansible") {
+//            sh "ssh -o ServerAliveInterval=30 vagrant@192.168.56.21 uname -a"
+//            sh "ansible prod -m ping -u vagrant"
+//            sh "ansible-playbook --extra-vars 'server=prod artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} projectVersion=${projectVersion} projectName=${projectName} workspace=${WORKSPACE}' projectDeployment.yml"
+//        }
+//        echo "********* playbook test stage end **********"
 //    }
+
+    stage('ATF install') {
+        echo "********* Start to install AFT project **********"
+        withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
+            dir("${WORKSPACE}/ansible") {
+                sh "ansible-playbook --extra-vars 'server=prod artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} workspace=${WORKSPACE} zephCred=${zephCred}' ATFDeployment.yml"
+            }
+        }
+        echo "********* End of install AFT project **********"
+    }
+
+    stage('Project deployment') {
+        echo "********* Start project deployment **********"
+        dir("${WORKSPACE}/ansible") {
+            sh "ansible-playbook --extra-vars 'server=prod artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} projectVersion=${projectVersion} projectName=${projectName} workspace=${WORKSPACE}' projectDeployment.yml"
+        }
+        echo "********* End of project deployment **********"
+    }
+
+//    stage('Virtualenv') {
+//        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && ./bin/pip3.6 install -r ${WORKSPACE}/requirements.txt"
+////        sh "virtualenv -p python3.6 ${WORKSPACE}/atf-venv"
+////        sh "source ${WORKSPACE}/atf-venv/bin/activate"
+////        sh "pip3.6 install -t ${WORKSPACE}/requirements.txt"
+////        sh "pip3.6 install -t ${WORKSPACE}/requirements.txt"
+//
+//    }
+
+    stage('Clean up WORKSPACE') {
+        echo "********* Start to clean up WORKSPACE **********"
+//            step([$class: 'WsCleanup'])
+        echo "********* Start to clean up WORKSPACE **********"
+    }
 }

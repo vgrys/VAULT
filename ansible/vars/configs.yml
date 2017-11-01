@@ -1,0 +1,6 @@
+---
+artifactory_user: grys
+artifactory_pwd: AKCp5Z2Y3srMsSpGGpfEeGWu7FTQdexXPAfhxF5stW6mYh1TfrkwPmopZ5Yq4MgGH3BfgskkE
+artifactoryAtfPath: "{{artifactoryUrl}}/artifactory/bigdata-dss-automation/atf/{{atfVersion}}/atf-{{atfVersion}}.tar.gz"
+artifactoryProjectPath: "{{artifactoryUrl}}/artifactory/{{artifactoryRepo}}/{{projectName}}/{{projectVersion}}/{{projectName}}-{{projectVersion}}.tgz"
+tempProjectDir: "/tmp/{{projectName}}-tmp"
