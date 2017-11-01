@@ -114,15 +114,6 @@ node {
         echo "********* End of project deployment **********"
     }
 
-//    stage('Virtualenv') {
-//        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && ./bin/pip3.6 install -r ${WORKSPACE}/requirements.txt"
-////        sh "virtualenv -p python3.6 ${WORKSPACE}/atf-venv"
-////        sh "source ${WORKSPACE}/atf-venv/bin/activate"
-////        sh "pip3.6 install -t ${WORKSPACE}/requirements.txt"
-////        sh "pip3.6 install -t ${WORKSPACE}/requirements.txt"
-//
-//    }
-
     stage('Clean up WORKSPACE') {
         echo "********* Start to clean up WORKSPACE **********"
 //            step([$class: 'WsCleanup'])
