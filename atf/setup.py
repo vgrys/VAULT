@@ -4,9 +4,9 @@ setup(
     name='atf',
     version='0.0.1',
     packages=['atf'],
-    url='canadiantire.com',
+    url='test.com',
     license='',
-    author='IDEA+',
+    author='TEST+',
     author_email='',
-    description='IDEA+ Automated Testing Framework'
+    description='Testing Framework'
 )
