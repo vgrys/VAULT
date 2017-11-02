@@ -37,7 +37,7 @@ def static ansible(command, targetGroup) {
 
 def runDeployATF(String artifactoryRepo, String artifactoryUrl, String atfVersion, String projectName, String targetGroup) {
     withCredentials([usernamePassword(credentialsId: 'artifactoryIDVG', usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
-        sh "cp $WORKSPACE/ci-cd-framework/requirements.txt ${env.WORKSPACE}/requirements.txt"
+        sh "cp ${env.WORKSPACE}/requirements.txt ${env.WORKSPACE}/requirements.txt"
         withCredentials([file(credentialsId: 'atf-config', variable: 'atfConf')]) {
             dir("${env.WORKSPACE}/ansible") {
                 sh ansible("artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} projectName=${projectName} workspace=${WORKSPACE} atfConf=${atfConf}' ATFDeployment.yml", targetGroup)
