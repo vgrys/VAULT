@@ -31,7 +31,7 @@ def reportGitParams() {
     echo "Git Origin: ${env.GIT_ORIGIN}, Git User: ${env.GIT_USER}, Git Project: ${env.GIT_PROJECT}, Git Branch: ${env.GIT_BRANCH}, Git Repo: ${env.GIT_REPO}, Git Feature Name (optional): ${env.GIT_FEATURE_NAME}"
 }
 
-def ansible(command, targetGroup) {
+def static ansible(command, targetGroup) {
     return "ansible-playbook --extra-vars 'server=${targetGroup} user=artifactory_user password=artifactory_pwd ${command}"
 }
 
@@ -48,7 +48,7 @@ def runDeployATF(String artifactoryRepo, String artifactoryUrl, String atfVersio
 
 def runDeployProject(artifactoryUrl, artifactoryRepo, projectVersion, projectName) {
     def cmd = ansible("artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} projectVersion=${projectVersion} projectName=${projectName} workspace=${WORKSPACE}' projectDeployment.yml")
-    executeAnsible(cmd, targetGroup )
+    executeAnsible(cmd)
 }
 
 def runProjectCleanup(projectName, targetGroup ) {
