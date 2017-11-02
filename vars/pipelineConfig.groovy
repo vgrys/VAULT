@@ -20,7 +20,7 @@ def sshCli(host, commandToRun) {
     return "ssh -o StrictHostKeyChecking=no ${host} /bin/bash -c '\"${commandToRun}\"'"
 }
 
-def executeAnsible(ansibleCommand) {
+def executeAnsible(ansibleCommand, targetGroup) {
     withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
         dir("${WORKSPACE}/ansible") {
             sh ansibleCommand
@@ -32,7 +32,7 @@ def reportGitParams() {
     echo "Git Origin: ${env.GIT_ORIGIN}, Git User: ${env.GIT_USER}, Git Project: ${env.GIT_PROJECT}, Git Branch: ${env.GIT_BRANCH}, Git Repo: ${env.GIT_REPO}, Git Feature Name (optional): ${env.GIT_FEATURE_NAME}"
 }
 
-def ansible(command) {
+def ansible(command, targetGroup) {
     return "ansible-playbook --extra-vars 'server=${targetGroup} user=artifactory_user password=artifactory_pwd ${command}"
 }
 
@@ -49,13 +49,13 @@ def runDeployATF(String artifactoryRepo, String artifactoryUrl, String atfVersio
 
 def runDeployProject(artifactoryUrl, artifactoryRepo, projectVersion, projectName) {
     def cmd = ansible("artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} projectVersion=${projectVersion} projectName=${projectName} workspace=${WORKSPACE}' projectDeployment.yml")
-    executeAnsible(cmd)
+    executeAnsible(cmd, targetGroup )
 }
 
 
-def runProjectCleanup(projectName) {
+def runProjectCleanup(projectName, targetGroup ) {
     cmd = ansible("projectName=${projectName}' projectCleanup.yml")
-    executeAnsible(cmd)
+    executeAnsible(cmd, targetGroup)
 }
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
