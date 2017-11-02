@@ -10,7 +10,6 @@ def createProjectBundle(sourceFolder) {
     echo "created an archive $bundlePath"
 }
 
-
 def runATFCommand(targetHost, user, projectName, command) {
     String commandToRun = "cd /home/${user}/${projectName}; source ./ATFVENV/bin/activate; ${command}"
     sh sshCli(targetHost, commandToRun)
@@ -20,7 +19,7 @@ def sshCli(host, commandToRun) {
     return "ssh -o StrictHostKeyChecking=no ${host} /bin/bash -c '\"${commandToRun}\"'"
 }
 
-def executeAnsible(ansibleCommand, targetGroup) {
+def executeAnsible(ansibleCommand) {
     withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
         dir("${WORKSPACE}/ansible") {
             sh ansibleCommand
@@ -52,10 +51,7 @@ def runDeployProject(artifactoryUrl, artifactoryRepo, projectVersion, projectNam
     executeAnsible(cmd, targetGroup )
 }
 
-
 def runProjectCleanup(projectName, targetGroup ) {
-    cmd = ansible("projectName=${projectName}' projectCleanup.yml")
+    cmd = pipelineConfig.ansible("projectName=${projectName}' projectCleanup.yml")
     executeAnsible(cmd, targetGroup)
 }
-
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
