@@ -1,6 +1,7 @@
 #!/usr/bin/groovy
 @Library('shared-library@master')
-import com.epam.Ar
+import com.epam.ArtifactoryToolsPlugin
+
 //import com.epam.ZipTools
 String artifactoryRepo = 'bigdata-dss-automation'
 String artifactoryUrl = 'http://192.168.56.105:8081'
