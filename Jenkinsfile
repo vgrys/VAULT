@@ -49,7 +49,6 @@ node {
         echo "********* End of install requirements **********"
     }
 
-
     stage('tests') {
         echo "********* Start to perform unittest2 **********"
         sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && py.test --ignore=bin/ --ignore=lib/ --junitxml reports/results.xml"

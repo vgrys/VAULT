@@ -13,7 +13,7 @@ static def artifactoryConfig(env, repository, String atfArchivePath, String proj
     env.uploadSpec = """{
                         "files": [{
                             "pattern": "${atfArchivePath}",
-                            "target": "${artifactoryATFPath}/atf-${atf_version}.tar.gz"
+                            "target": "${artifactoryATFPath}/"
                         },
                         {
                             "pattern": "${projectArchivePath}",
