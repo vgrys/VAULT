@@ -7,23 +7,23 @@
 
   vars:
     - tempDir: "/tmp/{{projectName}}-tmp"
-    - dest: "{{tempProjectDir}}/{{projectName}}-{{projectVersion}}.tgz"
-    - tempDirArch: "{{tempProjectDir}}/{{projectName}}-{{projectVersion}}"
+    - dest: "{{tempProjectDirectory}}/{{projectName}}-{{projectVersion}}.tgz"
+    - tempDirArch: "{{tempProjectDirectory}}/{{projectName}}-{{projectVersion}}"
 
   tasks:
 
-    - name: " Delete temporary directory '{{tempProjectDir}}' if exists "
+    - name: " Delete temporary directory '{{tempProjectDirectory}}' if exists "
       file:
-        path: "{{tempProjectDir}}"
+        path: "{{tempProjectDirectory}}"
         state: absent
 
-    - name: " Create temporary directories '{{tempProjectDir}}' and '{{tempDirArch}}' "
+    - name: " Create temporary directories '{{tempProjectDirectory}}' and '{{tempDirArch}}' "
       file:
         path: "{{ item }}"
         state: directory
         mode: 0755
       with_items:
-        - "{{tempProjectDir}}"
+        - "{{tempProjectDirectory}}"
         - "{{tempDirArch}}"
 
     - name: " Download project archive '{{projectName}}-{{projectVersion}}.tgz' from Artifactory server "
