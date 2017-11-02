@@ -53,5 +53,5 @@ def runDeployProject(artifactoryUrl, artifactoryRepo, projectVersion, projectNam
 
 def runProjectCleanup(projectName, targetGroup ) {
     cmd = pipelineConfig.ansible("projectName=${projectName}' projectCleanup.yml", targetGroup)
-    executeAnsible(cmd, targetGroup)
+    executeAnsible(cmd)
 }
