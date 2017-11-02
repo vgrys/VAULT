@@ -35,12 +35,12 @@ def static ansible(command, targetGroup) {
     return "ansible-playbook --extra-vars 'server=${targetGroup} user=artifactory_user password=artifactory_pwd ${command}"
 }
 
-def runDeployATF(String artifactoryRepo, String artifactoryUrl, String atfVersion, String projectName, targetGroup) {
+def runDeployATF(String artifactoryRepo, String artifactoryUrl, String atfVersion, String projectName, String targetGroup) {
     withCredentials([usernamePassword(credentialsId: 'artifactoryIDVG', usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
-        sh "cp $WORKSPACE/ci-cd-framework/requirements.txt $WORKSPACE/requirements.txt"
+        sh "cp $WORKSPACE/ci-cd-framework/requirements.txt ${env.WORKSPACE}/requirements.txt"
         withCredentials([file(credentialsId: 'atf-config', variable: 'atfConf')]) {
-            dir("${WORKSPACE}/ci-cd-framework/ansible") {
-                sh pipelineConfig.ansible("artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} projectName=${projectName} workspace=${WORKSPACE} atfConf=${atfConf}' ATFDeployment.yml", targetGroup)
+            dir("${env.WORKSPACE}/ansible") {
+                sh ansible("artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} projectName=${projectName} workspace=${WORKSPACE} atfConf=${atfConf}' ATFDeployment.yml", targetGroup)
             }
         }
     }
@@ -52,6 +52,6 @@ def runDeployProject(artifactoryUrl, artifactoryRepo, projectVersion, projectNam
 }
 
 def runProjectCleanup(projectName, targetGroup ) {
-    cmd = pipelineConfig.ansible("projectName=${projectName}' projectCleanup.yml", targetGroup)
+    cmd = ansible("projectName=${projectName}' projectCleanup.yml", targetGroup)
     executeAnsible(cmd)
 }
