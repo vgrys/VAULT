@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-package com.epam
+package com.epam.ArtifactoryToolsPlugin
 
 
 static def artifactoryConfig(env, repository, String atfArchivePath, String projectArchivePath, atf_version, project_name, project_version) {
