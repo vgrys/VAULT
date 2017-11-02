@@ -40,7 +40,7 @@ def runDeployATF(String artifactoryRepo, String artifactoryUrl, String atfVersio
         sh "cp ${env.WORKSPACE}/requirements.txt ${env.WORKSPACE}/requirements-new.txt"
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
             dir("${env.WORKSPACE}/ansible") {
-                sh ansible("artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} projectName=${projectName} workspace=${WORKSPACE} atfConf=${atfConf}' ATFDeployment.yml", targetGroup)
+                sh ansible("artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} projectName=${projectName} workspace=${WORKSPACE} zephCred=${zephCred}' ATFDeployment.yml", targetGroup)
             }
         }
     }
