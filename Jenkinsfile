@@ -25,12 +25,6 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
-    stage('Check out other repo') {
-        dir('RepoTwo') {
-            git url: 'https://github.com/vgrys/test-project.git'
-        }
-    }
-
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
         GString sourceFolder = "${WORKSPACE}/ansible/"
