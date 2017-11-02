@@ -58,7 +58,7 @@ node {
 
     stage('tests') {
         echo "********* Start to perform unittest2 **********"
-        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && py.test --junitxml reports/results.xml --ignore='bin/*, lib/*'"
+        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && py.test --ignore=bin/ --ignore=lib/ --junitxml reports/results.xml'"
 //        sh "nose2 --verbose -c nose2.cfg"
         junit 'reports/**'
         echo "********* End of unittest2 **********"
