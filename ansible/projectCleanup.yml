@@ -1,0 +1,21 @@
+---
+- hosts: "{{server}}"
+
+  vars_files:
+    - vars/configs.yml
+
+  tasks:
+
+    - name: " Delete temporary directory '{{tempProjectDirectory}}' if exists "
+      file:
+        state: absent
+        path: "{{tempProjectDirectory}}/"
+
+    - name: " Unset environment variable 'ATF_CONF_FILE' "
+      lineinfile:
+        dest: $HOME/.bashrc
+        regexp: "export ATF_CONF_FILE=*"
+        state: absent
+
+    - name: " Source the .bashrc file to activate environment variable "
+      shell: source $HOME/.bashrc executable=/bin/bash
