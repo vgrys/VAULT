@@ -34,11 +34,10 @@ node {
 
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
-        def branchName = "${env.BRANCH_NAME}".split('/')
-        def releaseBranchName = "${branchName[0]}"
-        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || releaseBranchName == 'release') {
-            echo "Branch name is '${releaseBranchName}', create Ansible archive "
-            GString sourceFolder = "${WORKSPACE}/ansible/"
+        GString sourceFolder = "${WORKSPACE}/ansible/"
+//        def branchName = "${env.BRANCH_NAME}".split('/')
+//        def releaseBranchName = "${branchName[0]}"
+        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || env.BRANCH_NAME.contains('release/') == 'release/') {
             def zip = new ZipTools()
             def bundlePath = zip.bundle(env, sourceFolder, [".git"])
             echo "created an archive $bundlePath"
@@ -47,6 +46,7 @@ node {
         }
         echo "********* End of stage 'Create Ansible archive' **********"
     }
+    (env.BRANCH_NAME.contains('release/'))
 
     stage("Install requirements") {
         echo "********* Start to install requirements **********"
