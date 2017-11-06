@@ -6,15 +6,17 @@ def call(String git_directory = '.') {
     env.GIT_PROJECT_KEY = sh(returnStdout: true, script: script).trim()
 
     def tokens = "${env.JOB_NAME}".tokenize('/')
-//    env.GIT_PROJECT = tokens[tokens.size()-3]
-//    env.GIT_REPO = tokens[tokens.size()-2]
-//    env.GIT_BRANCH = tokens[tokens.size()-1].replaceAll('%2F', '/')
+    env.GIT_PROJECT = tokens[tokens.size()-3]
+    env.GIT_REPO = tokens[tokens.size()-2]
+    env.GIT_BRANCH = tokens[tokens.size()-1].replaceAll('%2F', '/')
 
     script = 'git show --name-only --pretty=format:"user:%ae" | grep user: || true'
     env.GIT_USER = sh(returnStdout: true, script: script).replaceAll("user:","").trim()
 
     script = 'git remote -v | grep push || true'
     env.GIT_ORIGIN = sh(returnStdout: true, script: script).replaceAll(" \\(push\\)","").replaceAll("origin	https://","").replaceAll("origin	ssh://git@","").replaceAll("/scm/",":22/")
+
+    env.JENKIS_SLVALE1 = 'flex1'
 
     if (env.BRANCH_NAME.contains('feature/')) {
         env.GIT_FEATURE_NAME = env.GIT_BRANCH.replaceAll('feature/', '')

@@ -25,6 +25,7 @@ node {
         echo env.GIT_PROJECT
         echo env.GIT_REPO
         echo env.GIT_BRANCH
+        echo env.JENKIS_SLVALE1
         echo "********** End of testing GIT env ***********"
 
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
