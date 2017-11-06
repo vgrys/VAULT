@@ -26,6 +26,7 @@ node {
         echo env.GIT_REPO
         echo env.GIT_BRANCH
         echo env.JENKIS_SLVALE1
+        echo env.GIT_FEATURE_NAME
         echo "********** End of testing GIT env ***********"
 
 
@@ -36,11 +37,11 @@ node {
         echo "********* Start to create Ansible archive **********"
         GString sourceFolder = "${WORKSPACE}/ansible/"
 
-        echo env.BRANCH_NAME.contains('release/')
-
-        def branchName = "${env.BRANCH_NAME}".split('/')
-        def releaseBranchName = "${branchName[0]}"
-        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || releaseBranchName == 'release') {
+//        echo env.BRANCH_NAME.contains('release/')
+//
+//        def branchName = "${env.BRANCH_NAME}".split('/')
+//        def releaseBranchName = "${branchName[0]}"
+        if (env.GIT_FEATURE_NAME == 'develop' || env.GIT_FEATURE_NAME == 'master' || GIT_FEATURE_NAME == 'release') {
             def zip = new ZipTools()
             def bundlePath = zip.bundle(env, sourceFolder, [".git"])
             echo "created an archive $bundlePath"
