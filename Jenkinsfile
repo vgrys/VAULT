@@ -18,10 +18,11 @@ node {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
         deleteDir()
         checkout scm
+        gitInfo()
+        echo "********** testing GIT env ***********"
+        echo GIT_ORIGIN
+        echo "********** End of testing GIT env ***********"
 
-//        sh('. RepoTwo/build.sh')
-//        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'subdirectory2']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/vgrys/activemq.git']]])
-//        load 'subdirectory2/Jenkinsfile'
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
