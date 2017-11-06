@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-@Library('shared-library@master')
+@Library('shared-library@release/version1')
 import com.epam.ArtifactoryToolsPlugin
 
 //import com.epam.ZipTools
