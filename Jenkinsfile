@@ -41,12 +41,12 @@ node {
 //
 //        def branchName = "${env.BRANCH_NAME}".split('/')
 //        def releaseBranchName = "${branchName[0]}"
-        if (env.GIT_FEATURE_NAME == 'develop' || env.GIT_FEATURE_NAME == 'master' || GIT_FEATURE_NAME == 'release') {
+        if (env.GIT_BRANCH_TYPE == 'develop' || env.GIT_BRANCH_TYPE == 'master' || GIT_BRANCH_TYPE == 'release') {
             def zip = new ZipTools()
             def bundlePath = zip.bundle(env, sourceFolder, [".git"])
             echo "created an archive $bundlePath"
         } else {
-            echo "Branch name is '${env.BRANCH_NAME}', skip to create Ansible archive "
+            echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
         }
         echo "********* End of stage 'Create Ansible archive' **********"
     }
