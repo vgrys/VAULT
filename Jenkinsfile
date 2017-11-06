@@ -35,6 +35,9 @@ node {
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
         GString sourceFolder = "${WORKSPACE}/ansible/"
+
+        echo env.BRANCH_NAME.contains('release/')
+
         def branchName = "${env.BRANCH_NAME}".split('/')
         def releaseBranchName = "${branchName[0]}"
         if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || releaseBranchName == 'release') {
