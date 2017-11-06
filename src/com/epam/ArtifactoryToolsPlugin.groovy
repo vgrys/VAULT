@@ -4,15 +4,13 @@ package com.epam.ArtifactoryToolsPlugin
 
 def static artifactoryConfig(env, repository, String atfArchivePath, String projectArchivePath, atf_version, project_name, project_version) {
 
-    def branchName = "${env.BRANCH_NAME}".split('/')
-    def releaseBranchName = "${branchName[0]}"
     def branchDirs = [
         'develop': 'develop',
         'master': 'stable',
         'release': 'release'
     ]
 
-    def dirName = branchDirs.get(env.BRANCH_NAME, '')
+    def dirName = branchDirs.get(env.GIT_BRANCH_TYPE, '')
     if (dirName != '') {
         GString artifactoryATFPath = "artifactory/${repository}/atf/${dirName}/"
         GString artifactoryProjectPath = "artifactory/${repository}/${project_name}/${project_version}/"
