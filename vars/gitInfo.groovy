@@ -11,7 +11,7 @@ def call(String git_directory = '.') {
     env.GIT_BRANCH = tokens[tokens.size()-1].replaceAll('%2F', '/')
 
     script = 'git show --name-only --pretty=format:"user:%ae" | grep user: || true'
-    env.GIT_USER = sh(returnStdout: true, script: script).replaceAll("user:","").trim()
+//    env.GIT_USER = sh(returnStdout: true, script: script).replaceAll("user:","").trim()
 
     script = 'git remote -v | grep push || true'
     env.GIT_ORIGIN = sh(returnStdout: true, script: script).replaceAll(" \\(push\\)","").replaceAll("origin	https://","").replaceAll("origin	ssh://git@","").replaceAll("/scm/",":22/")
