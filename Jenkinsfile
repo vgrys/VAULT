@@ -64,8 +64,9 @@ node {
 
     stage('Build ATF project') {
         echo "********* Start to build ATF project **********"
-        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'release*') {
-            echo "Branch name is ${env.BRANCH_NAME}, build ATF project "
+        def branchName = "${env.BRANCH_NAME}".split('/')
+        def releaseBranchName = "${branchName[0]}"
+        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || releaseBranchName == 'release') {
             sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
         } else {
             echo "Branch name is ${env.BRANCH_NAME}, skip build ATF project "
