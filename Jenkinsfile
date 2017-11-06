@@ -34,9 +34,10 @@ node {
 
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
-        def releaseBranch = "${env.BRANCH_NAME}".split('/')
-        def ReleaseBranch = "${releaseBranch[0]}"
-        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || ReleaseBranch == 'release') {
+        def branchName = "${env.BRANCH_NAME}".split('/')
+        def releaseBranchName = "${branchName[0]}"
+        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || releaseBranchName == 'release') {
+            echo "Branch name is '${releaseBranchName}', create Ansible archive "
             GString sourceFolder = "${WORKSPACE}/ansible/"
             def zip = new ZipTools()
             def bundlePath = zip.bundle(env, sourceFolder, [".git"])
