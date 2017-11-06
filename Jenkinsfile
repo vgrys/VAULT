@@ -42,6 +42,7 @@ node {
 //        def branchName = "${env.BRANCH_NAME}".split('/')
 //        def releaseBranchName = "${branchName[0]}"
         if (env.GIT_BRANCH_TYPE == 'develop' || env.GIT_BRANCH_TYPE == 'master' || GIT_BRANCH_TYPE == 'release') {
+            echo " Create Ansible archive because branch is '${env.GIT_BRANCH_TYPE}'"
             def zip = new ZipTools()
             def bundlePath = zip.bundle(env, sourceFolder, [".git"])
             echo "created an archive $bundlePath"
@@ -68,9 +69,8 @@ node {
 
     stage('Build ATF project') {
         echo "********* Start to build ATF project **********"
-        def branchName = "${env.BRANCH_NAME}".split('/')
-        def releaseBranchName = "${branchName[0]}"
-        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || releaseBranchName == 'release') {
+        if (env.GIT_BRANCH_TYPE == 'develop' || env.GIT_BRANCH_TYPE == 'master' || GIT_BRANCH_TYPE == 'release') {
+            echo " Build ATF project because branch is '${env.GIT_BRANCH_TYPE}'"
             sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
         } else {
             echo "Branch name is ${env.BRANCH_NAME}, skip build ATF project "
