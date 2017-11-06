@@ -8,14 +8,14 @@ def static artifactoryConfig(env, repository, String atfArchivePath, String proj
     def releaseBranchName = "${branchName[0]}"
 
     if (env.BRANCH_NAME == 'develop') {
-        DIR_NAME = 'develop'
+        env.DIR_NAME = 'develop'
     } else if (env.BRANCH_NAME == 'master') {
-        DIR_NAME = 'stable'
+        env.DIR_NAME = 'stable'
     } else if (releaseBranchName == 'release') {
-        DIR_NAME = 'release'
+        env.DIR_NAME = 'release'
     }
 
-    def artifactoryATFPath = "artifactory/${repository}/atf/${DIR_NAME}/"
+    def artifactoryATFPath = "artifactory/${repository}/atf/${env.DIR_NAME}/"
     def artifactoryProjectPath = "artifactory/${repository}/${project_name}/${project_version}/"
 
 
