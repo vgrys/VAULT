@@ -7,9 +7,9 @@ def static artifactoryConfig(env, repository, String atfArchivePath, String proj
     def branchName = "${env.BRANCH_NAME}".split('/')
     def releaseBranchName = "${branchName[0]}"
 
-    if (${env.BRANCH_NAME} == 'develop') {
+    if (env.BRANCH_NAME == 'develop') {
         env.DIR_NAME = 'develop'
-    } else if (${env.BRANCH_NAME} == 'master') {
+    } else if (env.BRANCH_NAME == 'master') {
         env.DIR_NAME = 'stable'
     } else if (releaseBranchName == 'release') {
         env.DIR_NAME = 'release'
