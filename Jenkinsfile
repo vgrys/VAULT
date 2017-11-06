@@ -33,21 +33,16 @@ node {
 
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
-        GString sourceFolder = "${WORKSPACE}/ansible/"
-        def zip = new ZipTools()
-        def bundlePath = zip.bundle(env, sourceFolder, [".git"])
-        echo "created an archive $bundlePath"
-        echo "********* Ansible archive created **********"
+        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'release*') {
+            GString sourceFolder = "${WORKSPACE}/ansible/"
+            def zip = new ZipTools()
+            def bundlePath = zip.bundle(env, sourceFolder, [".git"])
+            echo "created an archive $bundlePath"
+        } else {
+            echo "Branch name is '${env.BRANCH_NAME}', skip to create Ansible archive "
+        }
+        echo "********* End of stage 'Create Ansible archive' **********"
     }
-
-//    stage('Create project archive') {
-//        echo "********* Start to create project archive **********"
-//        GString sourceFolder = "${WORKSPACE}"
-//        def zip = new ZipTools()
-//        def bundlePath = zip.bundle(env, sourceFolder, [".git", "test*.py", "File1", ".excludes.txt", '__init__*'])
-//        echo "created an archive $bundlePath"
-//        echo "********* End of create project archive **********"
-//    }
 
     stage("Install requirements") {
         echo "********* Start to install requirements **********"
