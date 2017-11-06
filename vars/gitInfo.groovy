@@ -14,7 +14,7 @@ def call(String git_directory = '.') {
     env.GIT_USER = sh(returnStdout: true, script: script).replaceAll("user:","").trim()
 
     script = 'git remote -v | grep push || true'
-//    env.GIT_ORIGIN = sh(returnStdout: true, script: script).replaceAll(" \\(push\\)","").replaceAll("origin	https://","").replaceAll("origin	ssh://git@","").replaceAll("/scm/",":22/")
+    env.GIT_ORIGIN = sh(returnStdout: true, script: script).replaceAll(" \\(push\\)","").replaceAll("origin	https://","").replaceAll("origin	ssh://git@","").replaceAll("/scm/",":22/")
 
     if (env.BRANCH_NAME.contains('feature/')) {
         env.GIT_FEATURE_NAME = env.GIT_BRANCH.replaceAll('feature/', '')

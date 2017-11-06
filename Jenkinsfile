@@ -21,6 +21,7 @@ node {
         gitInfo()
         echo "********** testing GIT env ***********"
         echo GIT_ORIGIN
+        echo env.GIT_USER
         echo "********** End of testing GIT env ***********"
 
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
