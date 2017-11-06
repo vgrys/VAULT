@@ -34,7 +34,9 @@ node {
 
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
-        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'release*') {
+        def releaseBranch = "${env.BRANCH_NAME}".split('/')
+        def ReleaseBranch = "${releaseBranch[0]}"
+        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || ReleaseBranch == 'release') {
             GString sourceFolder = "${WORKSPACE}/ansible/"
             def zip = new ZipTools()
             def bundlePath = zip.bundle(env, sourceFolder, [".git"])
@@ -61,7 +63,7 @@ node {
 
     stage('Build ATF project') {
         echo "********* Start to build ATF project **********"
-        if (env.BRANCH_NAME == 'master') {
+        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'release*') {
             echo "Branch name is ${env.BRANCH_NAME}, build ATF project "
             sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
         } else {
