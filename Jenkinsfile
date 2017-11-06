@@ -22,6 +22,9 @@ node {
         echo "********** testing GIT env ***********"
         echo GIT_ORIGIN
         echo env.GIT_USER
+        echo env.GIT_PROJECT
+        echo env.GIT_REPO
+        echo env.GIT_BRANCH
         echo "********** End of testing GIT env ***********"
 
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
@@ -53,7 +56,7 @@ node {
 
     stage('tests') {
         echo "********* Start to perform unittest2 **********"
-        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && py.test --ignore=bin/ --ignore=lib/ --junitxml reports/results.xml atf/tests"
+        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && py.test --ignore=bin/ --ignore=lib/ --junitxml reports/results.xml "
 //        sh "nose2 --verbose -c nose2.cfg"
         junit 'reports/**'
         echo "********* End of unittest2 **********"
