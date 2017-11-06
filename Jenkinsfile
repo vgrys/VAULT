@@ -28,6 +28,7 @@ node {
         echo env.JENKIS_SLVALE1
         echo "********** End of testing GIT env ***********"
 
+
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
