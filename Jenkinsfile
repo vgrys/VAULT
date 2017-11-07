@@ -38,7 +38,7 @@ node {
         GString sourceFolder = "${WORKSPACE}/ansible/"
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
             echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
-            ZipTools.bundle(env, sourceFolder, [".git"], "ci-cd-playbooks-${playbooksVersion}")
+            ZipTools.bundle(sourceFolder, [".git"], "ci-cd-playbooks-${playbooksVersion}")
             echo "created an archive $bundlePath"
         } else {
             echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
@@ -87,15 +87,15 @@ node {
 //        echo "********* End of upload Ansible archive to Artifactory server **********"
 //    }
 
-    stage('Upload ATF archive to Artifactory server') {
-        echo "********* Start to upload ATF archive to Artifactory server **********"
-        GString atfArchivePath = "${WORKSPACE}/dist/*.tar.gz"
-        def artifactoryServer = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
-        def artifactory = new ArtifactoryToolsPlugin()
-        artifactory.artifactoryATFConfig(env, artifactoryRepo, "${atfArchivePath}")
-        artifactoryServer.upload(env.uploadSpec)
-        echo "********* End of upload ATF archive to Artifactory server **********"
-    }
+//    stage('Upload ATF archive to Artifactory server') {
+//        echo "********* Start to upload ATF archive to Artifactory server **********"
+//        GString atfArchivePath = "${WORKSPACE}/dist/*.tar.gz"
+//        def artifactoryServer = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
+//        def artifactory = new ArtifactoryToolsPlugin()
+//        artifactory.artifactoryATFConfig(env, artifactoryRepo, "${atfArchivePath}")
+//        artifactoryServer.upload(env.uploadSpec)
+//        echo "********* End of upload ATF archive to Artifactory server **********"
+//    }
 
 //    stage('playbook test stage') {
 //        echo "********* playbook test stage starting **********"

@@ -1,5 +1,5 @@
 
-def bundle(env, sourceFolder, excludes, bundleName = '') {
+def bundle(sourceFolder, excludes, bundleName = '') {
 
     String excludeParameters = ''
     for (exclude in excludes) {
