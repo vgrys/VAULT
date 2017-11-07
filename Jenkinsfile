@@ -41,8 +41,8 @@ node {
 //
 //        def branchName = "${env.BRANCH_NAME}".split('/')
 //        def releaseBranchName = "${branchName[0]}"
-        if (env.GIT_BRANCH_TYPE == 'develop' || env.GIT_BRANCH_TYPE == 'master' || GIT_BRANCH_TYPE == 'release') {
-            echo " Create Ansible archive because branch is '${env.GIT_BRANCH_TYPE}'"
+        if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
+            echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
             def zip = new ZipTools()
             def bundlePath = zip.bundle(env, sourceFolder, [".git"])
             echo "created an archive $bundlePath"
@@ -51,7 +51,6 @@ node {
         }
         echo "********* End of stage 'Create Ansible archive' **********"
     }
-    (env.BRANCH_NAME.contains('release/'))
 
     stage("Install requirements") {
         echo "********* Start to install requirements **********"
@@ -70,7 +69,6 @@ node {
     stage('Build ATF project') {
         echo "********* Start to build ATF project **********"
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
-//        if (env.GIT_BRANCH_TYPE == 'develop' || env.GIT_BRANCH_TYPE == 'master' || GIT_BRANCH_TYPE == 'release') {
             echo " Build ATF project because branch is '${env.GIT_BRANCH_TYPE}'"
             sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
         } else {
