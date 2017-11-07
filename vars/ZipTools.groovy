@@ -1,4 +1,3 @@
-//package ctc.ad.corp.cicd
 
 def bundle(env, sourceFolder, excludes, bundleName = '') {
 
