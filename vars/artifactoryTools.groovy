@@ -16,7 +16,7 @@ def static artifactoryATFConfig(repository, String archive) {
             'master' : 'stable',
             'release': 'release'
     ]
-    def dirName = branchDirs.get(env.GIT_BRANCH_TYPE, '')
+    def dirName = branchDirs.get("${env.GIT_BRANCH_TYPE}", '')
     if (dirName != '') {
         artifactoryConfig(repository, archive, "atf", dirName)
     }
@@ -27,11 +27,11 @@ def static artifactoryProjectConfig(repository, String archive, name, version) {
 }
 
 def ATFUpload (artifactoryUrl, artifactoryRepo) {
-    GString atfArchivePath = "${WORKSPACE}/dist/*.tar.gz"
+    GString atfArchivePath = "${env.WORKSPACE}/dist/*.tar.gz"
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
     def artifactory = new artifactoryTools()
     artifactory.artifactoryATFConfig(artifactoryRepo, atfArchivePath)
-    server.upload(env.uploadSpec)
+    server.upload("${env.uploadSpec}")
 }
 
 def projectUpload (artifactoryUrl, artifactoryRepo, projectName, projectVersion) {
@@ -39,5 +39,5 @@ def projectUpload (artifactoryUrl, artifactoryRepo, projectName, projectVersion)
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
     def artifactory = new artifactoryTools()
     artifactory.artifactoryProjectConfig(artifactoryRepo, projectArchivePath, projectName, projectVersion)
-    server.upload(env.uploadSpec)
+    server.upload("${env.uploadSpec}")
 }
