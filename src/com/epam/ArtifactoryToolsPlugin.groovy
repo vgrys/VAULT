@@ -28,7 +28,6 @@ package com.epam.ArtifactoryToolsPlugin
 //    }
 //}
 
-
 def static artifactoryConfig(env, repository, String archive, name, version) {
 
     env.uploadSpec = """{
@@ -47,7 +46,7 @@ def static artifactoryATFConfig(env, repository, String archive) {
     ]
     def dirName = branchDirs.get(env.GIT_BRANCH_TYPE, '')
     if (dirName != '') {
-        artifactoryConfig(env, repository, archive, "atf", branchDirs)
+        artifactoryConfig(env, repository, archive, "atf", dirName)
     }
 }
 
