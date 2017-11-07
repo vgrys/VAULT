@@ -8,7 +8,7 @@ def static artifactoryConfig(env, repository, String archive, name, version) {
                     }]}"""
 }
 
-def static artifactoryATFConfig(env, repository, String archive) {
+def static artifactoryATFConfig(env, repository, String archive, name ) {
     def branchDirs = [
             'develop': 'develop',
             'master' : 'stable',
@@ -16,7 +16,7 @@ def static artifactoryATFConfig(env, repository, String archive) {
     ]
     def dirName = branchDirs.get(env.GIT_BRANCH_TYPE, '')
     if (dirName != '') {
-        artifactoryConfig(repository, archive, "atf", dirName)
+        artifactoryConfig(repository, archive, name, dirName)
     }
 }
 
@@ -25,20 +25,27 @@ def static artifactoryProjectConfig(env, repository, String archive, name, versi
 }
 
 def ATFUpload (artifactoryUrl, artifactoryRepo) {
+    GString archive = "${env.WORKSPACE}/dist/*.tar.gz"
+    def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
+    artifactoryATFConfig(env, artifactoryRepo, archive, "atf")
+    server.upload(uploadSpec)
+}
+
+def projectUpload (artifactoryUrl, artifactoryRepo, name, version) {
+    GString archive = "${env.WORKSPACE}/*.tgz"
+    def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
+    artifactoryProjectConfig(env, artifactoryRepo, archive, name, version)
+    server.upload(uploadSpec)
+}
+
+def ansibleUpload (artifactoryUrl, artifactoryRepo, name) {
     GString atfArchivePath = "${env.WORKSPACE}/dist/*.tar.gz"
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
-    artifactoryATFConfig(env, artifactoryRepo, atfArchivePath)
+    artifactoryATFConfig(env, artifactoryRepo, atfArchivePath, name)
     server.upload(uploadSpec)
 }
 
-def projectUpload (artifactoryUrl, artifactoryRepo, projectName, projectVersion) {
-    GString projectArchivePath = "${env.WORKSPACE}/*.tgz"
-    def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
-    artifactoryProjectConfig(env, artifactoryRepo, projectArchivePath, projectName, projectVersion)
-    server.upload(uploadSpec)
-}
-
-def downloadAnsible (artifactoryUrl, artifactoryRepo, name, version) {
+def ansibleDownload (artifactoryUrl, artifactoryRepo, name, version) {
     GString frameworkArtifactoryPath = "${artifactoryRepo}/${name}/${version}/*.tgz"
     GString downloadSpec = """{"files": [{"pattern": "${frameworkArtifactoryPath}", "target": "${env.WORKSPACE}/ansible/"}]}"""
     def server = Artifactory.newServer url: "${artifactoryUrl}/artifactory/", credentialsId: 'arifactoryID'

@@ -77,15 +77,21 @@ node {
         }
     }
 
-    stage('Upload Ansible archive to Artifactory server') {
-        echo "********* Start to upload Ansible archive to Artifactory server **********"
-        GString projectArchivePath = "${WORKSPACE}/*.tgz"
-        def artifactoryServer = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
-        def artifactory = new ArtifactoryToolsPlugin()
-        artifactory.artifactoryProjectConfig(env, artifactoryRepo, "${projectArchivePath}", "${projectName}", "${projectVersion}")
-        artifactoryServer.upload(env.uploadSpec)
-        echo "********* End of upload Ansible archive to Artifactory server **********"
+    stage('Download artifacts from Artifactory server') {
+        echo "********* Start to download artifacts from Artifactory server **********"
+        artifactoryTools.ansibleUpload(artifactoryUrl, artifactoryRepo, projectName)
+        echo "********* End of download artifacts from Artifactory server **********"
     }
+
+//    stage('Upload Ansible archive to Artifactory server') {
+//        echo "********* Start to upload Ansible archive to Artifactory server **********"
+//        GString projectArchivePath = "${WORKSPACE}/*.tgz"
+//        def artifactoryServer = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
+//        def artifactory = new ArtifactoryToolsPlugin()
+//        artifactory.artifactoryProjectConfig(env, artifactoryRepo, "${projectArchivePath}", "${projectName}", "${projectVersion}")
+//        artifactoryServer.upload(env.uploadSpec)
+//        echo "********* End of upload Ansible archive to Artifactory server **********"
+//    }
 
     stage('Upload ATF archive to Artifactory server') {
         echo "********* Start to upload ATF archive to Artifactory server **********"
