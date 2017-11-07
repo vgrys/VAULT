@@ -13,10 +13,10 @@ def static artifactoryConfig(env, repository, String atfArchivePath, String proj
     def dirName = branchDirs.get(env.GIT_BRANCH_TYPE, '')
     if (dirName != '') {
         GString artifactoryATFPath = "artifactory/${repository}/atf/${dirName}/"
-        GString artifactoryProjectPath = "artifactory/${repository}/${project_name}/${project_version}/"
 
-
-        env.uploadSpec = """{
+    }
+    GString artifactoryProjectPath = "artifactory/${repository}/${project_name}/${project_version}/"
+    env.uploadSpec = """{
                     "files": [{
                         "pattern": "${atfArchivePath}",
                         "target": "${artifactoryATFPath}/"
@@ -26,7 +26,6 @@ def static artifactoryConfig(env, repository, String atfArchivePath, String proj
                         "target": "${artifactoryProjectPath}/${project_name}-${project_version}.tgz"
                     }]
                  }"""
-    }
 }
 
 //when built from master - deploy to atf/stable/atf-*tar.gz
