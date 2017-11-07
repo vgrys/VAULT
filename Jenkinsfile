@@ -74,7 +74,8 @@ node {
 
     stage('Upload Ansible to Artifactory server') {
         echo "********* Start to upload Ansible to Artifactory server **********"
-        artifactoryTools.ansibleUpload(artifactoryUrl, artifactoryRepo, projectName)
+        def path = artifactoryTools.ansibleUpload(artifactoryUrl, artifactoryRepo, projectName)
+        echo path
         echo "********* End of upload Ansible to Artifactory server **********"
     }
 
