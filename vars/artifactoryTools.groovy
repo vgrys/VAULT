@@ -43,6 +43,7 @@ def ansibleUpload (artifactoryUrl, artifactoryRepo, name) {
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
     artifactoryATFConfig(env, artifactoryRepo, archive, name)
     server.upload(uploadSpec)
+    return (uploadSpec)
 }
 
 def ansibleDownload (artifactoryUrl, artifactoryRepo, name, version) {
