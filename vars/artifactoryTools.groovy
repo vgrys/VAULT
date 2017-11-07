@@ -8,7 +8,7 @@ def static artifactoryConfig(env, repository, String archive, name, version) {
                     }]}"""
 }
 
-def static artifactoryATFConfig(env, repository, String archive, name ) {
+def static artifactoryATFConfig(env, repository, String archive, String name) {
     def branchDirs = [
             'develop': 'develop',
             'master' : 'stable',
@@ -40,7 +40,6 @@ def projectUpload (artifactoryUrl, artifactoryRepo, name, version) {
 
 def ansibleUpload (artifactoryUrl, artifactoryRepo, name) {
     GString archive = "${env.WORKSPACE}/*.tgz"
-    GString uploadSpec = """{"files": [{"pattern": "${archive}", "target": "artifactory/${artifactoryRepo}/${name}/${version}/${name}-${version}.tgz"}]}"""
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
     artifactoryATFConfig(env, artifactoryRepo, archive, name)
     server.upload(uploadSpec)
