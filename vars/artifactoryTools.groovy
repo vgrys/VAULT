@@ -22,7 +22,7 @@ def static artifactoryATFConfig(env, repository, String archive) {
     }
 }
 
-def static artifactoryProjectConfig(repository, String archive, name, version) {
+def static artifactoryProjectConfig(env, repository, String archive, name, version) {
     artifactoryConfig(env, repository, archive, name, version)
 }
 
