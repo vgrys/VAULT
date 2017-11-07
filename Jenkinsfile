@@ -52,19 +52,19 @@ node {
         echo "********* End of stage 'Create Ansible archive' **********"
     }
 
-    stage("Install requirements") {
-        echo "********* Start to install requirements **********"
-        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && ./bin/pip3.6 install -r ${WORKSPACE}/requirements.txt"
-        echo "********* End of install requirements **********"
-    }
-
-    stage('tests') {
-        echo "********* Start to perform unittest2 **********"
-        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && py.test --ignore=bin/ --ignore=lib/ --junitxml reports/results.xml "
-//        sh "nose2 --verbose -c nose2.cfg"
-        junit 'reports/**'
-        echo "********* End of unittest2 **********"
-    }
+//    stage("Install requirements") {
+//        echo "********* Start to install requirements **********"
+//        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && ./bin/pip3.6 install -r ${WORKSPACE}/requirements.txt"
+//        echo "********* End of install requirements **********"
+//    }
+//
+//    stage('tests') {
+//        echo "********* Start to perform unittest2 **********"
+//        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && py.test --ignore=bin/ --ignore=lib/ --junitxml reports/results.xml "
+////        sh "nose2 --verbose -c nose2.cfg"
+//        junit 'reports/**'
+//        echo "********* End of unittest2 **********"
+//    }
 
     stage('Build ATF project') {
         echo "********* Start to build ATF project **********"
