@@ -6,6 +6,7 @@ def static artifactoryConfig(env, repository, String archive, name, version) {
                         "pattern": "${archive}",
                         "target": "artifactory/${repository}/${name}/${version}/"
                     }]}"""
+    return target
 }
 
 def static artifactoryATFConfig(env, repository, String archive, String name) {

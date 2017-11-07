@@ -39,7 +39,7 @@ node {
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
             echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
             def zip = new ZipTools()
-            def def bundlePath = zip.bundle(sourceFolder, [".git"], "ci-cd-playbooks-${playbooksVersion}")
+            def bundlePath = zip.bundle(sourceFolder, [".git"], "ci-cd-playbooks-${playbooksVersion}")
             echo "created an archive $bundlePath"
         } else {
             echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
