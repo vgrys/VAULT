@@ -8,6 +8,7 @@ String artifactoryUrl = 'http://192.168.56.105:8081'
 String atfVersion = '0.0.1'
 String projectName = 'framework'
 String projectVersion = '0.1'
+String playbooksVersion = '0.1'
 
 //('flex1')
 node {
@@ -44,7 +45,7 @@ node {
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
             echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
             def zip = new ZipTools()
-            def bundlePath = zip.bundle(env, sourceFolder, [".git"])
+            def bundlePath = zip.bundle(env, sourceFolder, [".git"], "ci-cd-playbooks-${playbooksVersion}")
             echo "created an archive $bundlePath"
         } else {
             echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
