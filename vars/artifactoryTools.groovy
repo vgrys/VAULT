@@ -39,7 +39,7 @@ def projectUpload (artifactoryUrl, artifactoryRepo, name, version) {
 }
 
 def ansibleUpload (artifactoryUrl, artifactoryRepo, name) {
-    GString archive = "${env.WORKSPACE}/dist/*.tar.gz"
+    GString archive = "${env.WORKSPACE}/*.tgz"
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
     artifactoryATFConfig(env, artifactoryRepo, archive, name)
     server.upload(uploadSpec)
