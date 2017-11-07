@@ -38,7 +38,8 @@ node {
         GString sourceFolder = "${WORKSPACE}/ansible/"
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
             echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
-            ZipTools.bundle(sourceFolder, [".git"], "ci-cd-playbooks-${playbooksVersion}")
+            def zip = new ZipTools()
+            zip.bundle(sourceFolder, [".git"], "ci-cd-playbooks-${playbooksVersion}")
             echo "created an archive $bundlePath"
         } else {
             echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
