@@ -35,7 +35,7 @@ def static artifactoryConfig(env, repository, String archive, name, version) {
                     "files": [{
                         "pattern": "${archive}",
                         "target": "artifactory/${repository}/${name}/${version}/"
-                    ]}
+                    }]
                     }"""
 }
 
