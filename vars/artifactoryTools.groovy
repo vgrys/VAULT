@@ -2,7 +2,7 @@
 
 def static artifactoryConfig(repository, String archive, name, version) {
 
-    env.uploadSpec = """{
+    uploadSpec = """{
                     "files": [{
                         "pattern": "${archive}",
                         "target": "artifactory/${repository}/${name}/${version}/"
@@ -16,7 +16,7 @@ def static artifactoryATFConfig(repository, String archive) {
             'master' : 'stable',
             'release': 'release'
     ]
-    def dirName = branchDirs.get("${env.GIT_BRANCH_TYPE}", '')
+    def dirName = branchDirs.get(env.GIT_BRANCH_TYPE, '')
     if (dirName != '') {
         artifactoryConfig(repository, archive, "atf", dirName)
     }
@@ -31,7 +31,7 @@ def ATFUpload (artifactoryUrl, artifactoryRepo) {
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
     def artifactory = new artifactoryTools()
     artifactory.artifactoryATFConfig(artifactoryRepo, atfArchivePath)
-    server.upload("${env.uploadSpec}")
+    server.upload(uploadSpec)
 }
 
 def projectUpload (artifactoryUrl, artifactoryRepo, projectName, projectVersion) {
@@ -39,5 +39,5 @@ def projectUpload (artifactoryUrl, artifactoryRepo, projectName, projectVersion)
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
     def artifactory = new artifactoryTools()
     artifactory.artifactoryProjectConfig(artifactoryRepo, projectArchivePath, projectName, projectVersion)
-    server.upload("${env.uploadSpec}")
+    server.upload(uploadSpec)
 }
