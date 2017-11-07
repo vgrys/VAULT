@@ -77,10 +77,10 @@ node {
         }
     }
 
-    stage('Download artifacts from Artifactory server') {
-        echo "********* Start to download artifacts from Artifactory server **********"
+    stage('Upload artifacts to Artifactory server') {
+        echo "********* Start to upload artifacts to Artifactory server **********"
         artifactoryTools.ansibleUpload(artifactoryUrl, artifactoryRepo, projectName)
-        echo "********* End of download artifacts from Artifactory server **********"
+        echo "********* End of upload artifacts to Artifactory server **********"
     }
 
 //    stage('Upload Ansible archive to Artifactory server') {

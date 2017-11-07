@@ -16,7 +16,7 @@ def static artifactoryATFConfig(env, repository, String archive, name ) {
     ]
     def dirName = branchDirs.get(env.GIT_BRANCH_TYPE, '')
     if (dirName != '') {
-        artifactoryConfig(repository, archive, name, dirName)
+        artifactoryConfig(env, repository, archive, name, dirName)
     }
 }
 
@@ -39,9 +39,9 @@ def projectUpload (artifactoryUrl, artifactoryRepo, name, version) {
 }
 
 def ansibleUpload (artifactoryUrl, artifactoryRepo, name) {
-    GString atfArchivePath = "${env.WORKSPACE}/dist/*.tar.gz"
+    GString archive = "${env.WORKSPACE}/dist/*.tar.gz"
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
-    artifactoryATFConfig(env, artifactoryRepo, atfArchivePath, name)
+    artifactoryATFConfig(env, artifactoryRepo, archive, name)
     server.upload(uploadSpec)
 }
 
