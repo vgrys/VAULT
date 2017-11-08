@@ -86,15 +86,15 @@ node {
 //        echo "********* End of upload Ansible archive to Artifactory server **********"
 //    }
 
-//    stage('Upload ATF archive to Artifactory server') {
-//        echo "********* Start to upload ATF archive to Artifactory server **********"
-//        GString atfArchivePath = "${WORKSPACE}/dist/*.tar.gz"
-//        def artifactoryServer = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
-//        def artifactory = new ArtifactoryToolsPlugin()
-//        artifactory.artifactoryATFConfig(env, artifactoryRepo, "${atfArchivePath}")
-//        artifactoryServer.upload(env.uploadSpec)
-//        echo "********* End of upload ATF archive to Artifactory server **********"
-//    }
+    stage('Upload ATF archive to Artifactory server') {
+        echo "********* Start to upload ATF archive to Artifactory server **********"
+        GString atfArchivePath = "${WORKSPACE}/dist/*.tar.gz"
+        def artifactoryServer = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
+        def artifactory = new ArtifactoryToolsPlugin()
+        artifactory.artifactoryATFConfig(env, artifactoryRepo, "${atfArchivePath}")
+        artifactoryServer.upload(env.uploadSpec)
+        echo "********* End of upload ATF archive to Artifactory server **********"
+    }
 
 //    stage('playbook test stage') {
 //        echo "********* playbook test stage starting **********"
