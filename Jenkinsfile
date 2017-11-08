@@ -95,11 +95,9 @@ node {
     }
 
     stage('Project deployment') {
-        echo "********* Start project deployment **********"
-        dir("${WORKSPACE}/ansible") {
-            sh "ansible-playbook --extra-vars 'server=prod artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} projectVersion=${projectVersion} projectName=${projectName} workspace=${WORKSPACE}' projectDeployment.yml"
-        }
-        echo "********* End of project deployment **********"
+        echo pipelineConfig.pad("Start project deployment")
+        pipelineConfig.runDeployProject(artifactoryUrl, artifactoryRepo, env.GIT_REPO, projectArchiveName ,targetGroup)
+        echo pipelineConfig.pad("End of project deployment")
     }
 
     stage('Clean up WORKSPACE') {
