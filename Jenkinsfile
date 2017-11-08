@@ -96,7 +96,7 @@ node {
 
     stage('Project deployment') {
         echo pipelineConfig.pad("Start project deployment")
-        pipelineConfig.runDeployProject(artifactoryUrl, artifactoryRepo, env.GIT_REPO, projectArchiveName ,targetGroup)
+        pipelineConfig.runDeployProject(artifactoryUrl, artifactoryRepo, env.GIT_REPO, "test-project-20171108105623.tgz"  ,targetGroup)
         echo pipelineConfig.pad("End of project deployment")
     }
 
