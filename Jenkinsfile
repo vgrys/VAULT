@@ -8,7 +8,6 @@ String atfVersion = '0.0.1'
 String projectName = 'framework'
 String projectVersion = '0.1'
 String playbooksVersion = '0.1'
-def bundleName = ''
 
 //('flex1')
 node {
@@ -40,8 +39,8 @@ node {
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
             echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
             def zip = new ZipTools()
-            bundleName = zip.bundle(sourceFolder, [".git"], "ci-cd-playbooks-${playbooksVersion}")
-            echo "created an archive ${bundleName}"
+            def bundlePath = zip.bundle(sourceFolder, [".git"], "ci-cd-playbooks-${playbooksVersion}")
+            echo "created an archive $bundlePath"
         } else {
             echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
         }
@@ -122,7 +121,6 @@ node {
     stage('Project deployment') {
         echo "********* Start project deployment **********"
         dir("${WORKSPACE}/ansible") {
-            echo "created an archive $bundleName"
             sh "ansible-playbook --extra-vars 'server=prod artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} projectVersion=${projectVersion} projectName=${projectName} workspace=${WORKSPACE}' projectDeployment.yml"
         }
         echo "********* End of project deployment **********"
