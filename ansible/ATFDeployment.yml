@@ -6,9 +6,9 @@
 
 
   vars:
-    - tempDir: "/tmp/atfdir"
+    - tempDir: "$HOME/atfdir-tmp"
     - dest: "{{tempDir}}/atf-{{atfVersion}}.tar.gz"
-    - requirementsDest: "{{tempAtfDir}}/atf-{{atfVersion}}/requirements.txt"
+    - requirementsDest: "{{tempDir}}/atf-{{atfVersion}}/requirements.txt"
     - venvPath: "/tmp/ATFVENV/"
     - zephSrc: "{{zephCred}}"
     - zephDest: "$HOME/zephCred"
