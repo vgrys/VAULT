@@ -5,7 +5,6 @@
     - vars/configs.yml
 
   vars:
-    - tempDir: "/tmp/{{projectName}}-tmp"
     - dest: "{{tempProjectDirectory}}/{{projectArchiveName}}"
 
   tasks:
@@ -15,7 +14,7 @@
         path: "{{tempProjectDirectory}}"
         state: absent
 
-    - name: " Create temporary directories '{{tempProjectDirectory}}' and '{{tempDirArch}}' "
+    - name: " Create temporary directories '{{tempProjectDirectory}}' and '{{tempProjectDirectory}}' "
       file:
         path: "{{ item }}"
         state: directory
@@ -33,10 +32,10 @@
         return_content: yes
         dest: "{{dest}}"
 
-    - name: " Extract '{{projectArchiveName}}' into '{{tempDir}}' directory "
+    - name: " Extract '{{projectArchiveName}}' into '{{tempProjectDirectory}}' directory "
       unarchive:
         src: "{{dest}}"
-        dest: "{{tempDir}}"
+        dest: "{{tempProjectDirectory}}"
         remote_src: yes
 
     - name: " Unset environment variable 'ATF_CONF_FILE' "
@@ -49,7 +48,7 @@
       lineinfile:
         dest: $HOME/.bashrc
         regexp: "export ATF_CONF_FILE=*"
-        line: "export ATF_CONF_FILE={{tempDirArch}}/atf-config.yml"
+        line: "export ATF_CONF_FILE={{tempProjectDirectory}}/atf-config.yml"
         insertafter: 'EOF'
         state: present
 
@@ -60,7 +59,7 @@
       lineinfile:
         create: yes
         state: present
-        dest: "{{tempDirArch}}/environment.sh"
+        dest: "{{tempProjectDirectory}}/environment.sh"
         line: '{{item}}'
         mode: 0755
       with_items:
