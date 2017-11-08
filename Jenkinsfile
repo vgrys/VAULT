@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-@Library('shared-library@feature/testing')
+@Library('shared-library@release/version1')
 
 String artifactoryRepo = 'bigdata-dss-automation'
 String artifactoryUrl = 'http://192.168.56.105:8081'
