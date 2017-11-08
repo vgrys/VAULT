@@ -4,7 +4,6 @@
   vars_files:
     - vars/configs.yml
 
-
   vars:
     - tempDir: "/tmp/{{projectName}}-tmp"
     - dest: "{{tempProjectDirectory}}/{{projectArchiveName}}"
@@ -36,8 +35,7 @@
         return_content: yes
         dest: "{{dest}}"
 
-    - name: " Extract '{{projectArchiveName}}' into {{tempDirArch}} directory "
-    - name: " Extract '{{projectArchiveName}}' into {{tempDirArch}} directory "
+    - name: " Extract '{{projectArchiveName}}' into '{{tempDirArch}}' directory "
       unarchive:
         src: "{{dest}}"
         dest: "{{tempDirArch}}"
