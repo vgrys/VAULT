@@ -21,7 +21,7 @@ def static artifactoryATFConfig(env, repository, String archive, String name) {
 }
 
 def static artifactoryProjectConfig(env, repository, String archive, name) {
-    artifactoryConfig(env, repository, archive, name, '')
+    artifactoryConfig(env, repository, archive, "${env.GIT_REPO}", '')
 }
 
 def ATFUpload (artifactoryUrl, artifactoryRepo) {
