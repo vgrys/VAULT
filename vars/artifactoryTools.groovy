@@ -20,7 +20,7 @@ def artifactoryATFConfig(env, repository, String archive, String name) {
     }
 }
 
-def static artifactoryProjectConfig(env, repository, String archive, name) {
+def static artifactoryProjectConfig(env, repository, String archive) {
     artifactoryConfig(env, repository, archive, "${env.GIT_REPO}", '')
 }
 
@@ -31,10 +31,10 @@ def ATFUpload (artifactoryUrl, artifactoryRepo) {
     server.upload(uploadSpec)
 }
 
-def projectUpload (artifactoryUrl, artifactoryRepo, name) {
+def projectUpload (artifactoryUrl, artifactoryRepo) {
     GString archive = "${env.WORKSPACE}/*.tgz"
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
-    artifactoryProjectConfig(env, artifactoryRepo, archive, name)
+    artifactoryProjectConfig(env, artifactoryRepo, archive)
     server.upload(uploadSpec)
 }
 
