@@ -7,7 +7,7 @@ String atfVersion = '0.0.1'
 String projectName = 'framework'
 String projectVersion = '0.1'
 String playbooksVersion = '0.1'
-
+String bundleName = ''
 //('flex1')
 node {
 
@@ -37,8 +37,8 @@ node {
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
             echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
             def zip = new ZipTools()
-            def bundlePath = zip.bundle("${sourceFolder}", [".git"], "ci-cd-playbooks-${playbooksVersion}.tgz")
-            echo "created an archive $bundlePath"
+            bundleName = zip.bundle("${sourceFolder}", [".git"], "ci-cd-playbooks-${playbooksVersion}.tgz")
+            echo "created an archive $bundleName"
         } else {
             echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
         }
@@ -109,6 +109,7 @@ node {
     stage('ATF install') {
         echo "********* Start to install AFT project **********"
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
+            echo "created an archive $bundleName"
             dir("${WORKSPACE}/ansible") {
                 sh "ansible-playbook --extra-vars 'server=prod artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} workspace=${WORKSPACE} zephCred=${zephCred}' ATFDeployment.yml"
             }
