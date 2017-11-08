@@ -5,7 +5,7 @@
     - vars/configs.yml
 
   vars:
-    - dest: "{{tempProjectDirectory}}/{{projectArchiveName}}"
+    - destProjectArchive: "{{tempProjectDirectory}}/{{projectArchiveName}}"
 
   tasks:
 
@@ -30,11 +30,11 @@
         user: "{{artifactory_user}}"
         password: "{{artifactory_pwd}}"
         return_content: yes
-        dest: "{{dest}}"
+        dest: "{{destProjectArchive}}"
 
     - name: " Extract '{{projectArchiveName}}' into '{{tempProjectDirectory}}' directory "
       unarchive:
-        src: "{{dest}}"
+        src: "{{destProjectArchive}}"
         dest: "{{tempProjectDirectory}}"
         remote_src: yes
 
