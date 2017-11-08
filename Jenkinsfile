@@ -4,10 +4,11 @@
 String artifactoryRepo = 'bigdata-dss-automation'
 String artifactoryUrl = 'http://192.168.56.105:8081'
 String atfVersion = '0.0.1'
-String projectName = 'framework'
+//String projectName = 'framework'
 String projectVersion = '0.1'
 String playbooksVersion = '0.1'
-String bundleName = ''
+String bundleName
+
 //('flex1')
 node {
 
