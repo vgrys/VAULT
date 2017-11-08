@@ -38,7 +38,7 @@ node {
             echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
             def zip = new ZipTools()
             bundleName = zip.bundle("${sourceFolder}", [".git"], "ci-cd-playbooks-${playbooksVersion}.tgz")
-            echo "created an archive $bundleName"
+            echo "created an archive '$bundleName'"
         } else {
             echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
         }

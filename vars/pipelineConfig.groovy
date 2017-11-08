@@ -46,8 +46,8 @@ def runDeployATF(String artifactoryRepo, String artifactoryUrl, String atfVersio
     }
 }
 
-def runDeployProject(artifactoryUrl, artifactoryRepo, projectVersion, projectName) {
-    def cmd = ansible("artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} projectVersion=${projectVersion} projectName=${projectName} workspace=${WORKSPACE}' projectDeployment.yml")
+def runDeployProject(artifactoryUrl, artifactoryRepo, projectName) {
+    def cmd = ansible("artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} projectName=${projectName} workspace=${WORKSPACE}' projectDeployment.yml")
     executeAnsible(cmd)
 }
 
