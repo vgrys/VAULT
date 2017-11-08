@@ -4,8 +4,7 @@
 String artifactoryRepo = 'bigdata-dss-automation'
 String artifactoryUrl = 'http://192.168.56.105:8081'
 String atfVersion = '0.0.1'
-//String projectName = 'framework'
-String projectVersion = '0.1'
+String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 
@@ -38,7 +37,7 @@ node {
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
             echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
             def zip = new ZipTools()
-            bundleName = zip.bundle("${sourceFolder}", [".git"], "ci-cd-playbooks-${playbooksVersion}.tgz")
+            bundleName = zip.bundle("${sourceFolder}", [".git"], "${playbooksName}-${playbooksVersion}.tgz")
             echo "created an archive '$bundleName'"
         } else {
             echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
@@ -73,7 +72,7 @@ node {
 
     stage('Upload Ansible to Artifactory server') {
         echo "********* Start to upload Ansible to Artifactory server **********"
-        artifactoryTools.ansibleUpload(artifactoryUrl, artifactoryRepo, projectName)
+        artifactoryTools.ansibleUpload(artifactoryUrl, artifactoryRepo, playbooksName)
         echo "********* End of upload Ansible to Artifactory server **********"
     }
 
