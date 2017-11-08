@@ -21,6 +21,6 @@ def bundle(sourceFolder, excludes, bundleName = '') {
     return bundleName
 }
 
-def extractAnsible(frameworkName, frameworkVersion) {
-    sh "tar -xzf ${env.WORKSPACE}/ansible/${frameworkName}/${frameworkVersion}/${frameworkName}-${frameworkVersion}.tgz -C ${env.WORKSPACE}/ansible/"
+def extractAnsible(frameworkName, playbooksRelease, frameworkVersion) {
+    sh "tar -xzf ${env.WORKSPACE}/ansible/${frameworkName}/${playbooksRelease}/${frameworkName}-${frameworkVersion}.tgz -C ${env.WORKSPACE}/ansible/"
 }
