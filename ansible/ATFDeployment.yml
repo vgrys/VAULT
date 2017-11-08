@@ -8,7 +8,6 @@
   vars:
     - tempDir: "/tmp/atfdir"
     - dest: "{{tempDir}}/atf-{{atfVersion}}.tar.gz"
-    - requirementsSrc: "{{workspace}}/requirements.txt"
     - requirementsDest: "{{tempDir}}/requirements.txt"
     - venvPath: "/tmp/ATFVENV/"
     - zephSrc: "{{zephCred}}"
