@@ -17,7 +17,8 @@ def artifactoryATFConfig(env, repository, String archive, String name) {
     ]
     def dirName = branchDirs.get(env.GIT_BRANCH_TYPE, '')
     if (dirName != '') {
-        artifactoryConfig(env, repository, archive, name, dirName)
+        def artifactoryc = new artifactoryConfig()
+        artifactoryc(env, repository, archive, name, dirName)
     }
 }
 
