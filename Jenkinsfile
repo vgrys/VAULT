@@ -1,7 +1,6 @@
 #!/usr/bin/groovy
 @Library('shared-library@release/version1')
 
-//import com.epam.ZipTools
 String artifactoryRepo = 'bigdata-dss-automation'
 String artifactoryUrl = 'http://192.168.56.105:8081'
 String atfVersion = '0.0.1'
@@ -29,17 +28,16 @@ node {
         echo env.GIT_FEATURE_NAME
         echo "********** End of testing GIT env ***********"
 
-
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
-        GString sourceFolder = "${WORKSPACE}/ansible/"
+        GString sourceFolder = "${env.WORKSPACE}/ansible"
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
             echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
             def zip = new ZipTools()
-            def bundlePath = zip.bundle(sourceFolder, [".git"], "ci-cd-playbooks-${playbooksVersion}")
+            def bundlePath = zip.bundle("${sourceFolder}", [".git"], "ci-cd-playbooks-${playbooksVersion}.tgz")
             echo "created an archive $bundlePath"
         } else {
             echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "

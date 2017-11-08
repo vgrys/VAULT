@@ -11,9 +11,9 @@ def bundle(sourceFolder, excludes, bundleName = '') {
         String timestamp = now.format('yyyyMMddHHmmss')
         def jobBaseName = "${env.JOB_NAME}".split('/')
         GString projectName = "${jobBaseName[0]}"
-        bundleName = "${projectName}_${timestamp}"
+        bundleName = "${projectName}-${timestamp}.tgz"
     }
-    GString archhiveFilePath = "${env.WORKSPACE}/${bundleName}.tgz"
+    GString archhiveFilePath = "${env.WORKSPACE}/${bundleName}"
 
     sh "cd ${sourceFolder} && tar -zcf ${archhiveFilePath} ${excludeParameters} * "
 
