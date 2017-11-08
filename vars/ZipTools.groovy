@@ -12,11 +12,12 @@ def bundle(sourceFolder, excludes, bundleName = '') {
         String timestamp = now.format('yyyyMMddHHmmss')
         bundleName = "${env.GIT_REPO}-${timestamp}.tgz"
     }
+    env.PROJECT_ARCHIVE = bundleName
     GString archhiveFilePath = "${env.WORKSPACE}/${bundleName}"
 
     sh "cd ${sourceFolder} && tar -zcf ${archhiveFilePath} ${excludeParameters} * "
 
-    return bundleName
+    return archhiveFilePath
 }
 
 def extractAnsible(name, release, version) {
