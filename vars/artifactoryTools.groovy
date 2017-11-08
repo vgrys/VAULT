@@ -10,10 +10,10 @@ def static artifactoryConfig(env, repository, String archive, name, version) {
 
 def artifactoryATFConfig(env, repository, String archive, String name) {
     def branchDirs = [
-            'develop': 'develop',
-            'master' : 'stable',
-            'release': 'release',
-            'feature': 'feature'
+            develop: develop,
+            master : stable,
+            release: release,
+            feature: feature
     ]
     def dirName = branchDirs.get(env.GIT_BRANCH_TYPE, '')
     if (dirName != '') {
