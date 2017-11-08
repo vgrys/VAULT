@@ -63,7 +63,7 @@ node {
 
     stage('Build ATF project') {
         echo "********* Start to build ATF project **********"
-        if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
+        if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
             echo " Build ATF project because branch is '${env.GIT_BRANCH_TYPE}'"
             sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
         } else {
