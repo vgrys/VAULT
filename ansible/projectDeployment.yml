@@ -22,7 +22,6 @@
         mode: 0755
       with_items:
         - "{{tempProjectDirectory}}"
-        - "{{tempDirArch}}"
 
     - name: " Download project archive '{{projectArchiveName}}' from Artifactory server "
       uri:
