@@ -55,7 +55,3 @@ def runProjectCleanup(projectName, targetGroup ) {
     cmd = ansible("projectName=${projectName}' projectCleanup.yml", targetGroup)
     executeAnsible(cmd)
 }
-
-def extractAnsible(frameworkName, frameworkVersion) {
-    sh "tar -xzf ${env.WORKSPACE}/ansible//${frameworkName}/${frameworkVersion}/${frameworkName}-${frameworkVersion}.tgz -C ${env.WORKSPACE}/ansible/"
-}
