@@ -7,7 +7,6 @@
   vars:
     - tempDir: "/tmp/{{projectName}}-tmp"
     - dest: "{{tempProjectDirectory}}/{{projectArchiveName}}"
-    - tempDirArch: "{{tempProjectDirectory}}/{{projectName}}"
 
   tasks:
 
@@ -35,10 +34,10 @@
         return_content: yes
         dest: "{{dest}}"
 
-    - name: " Extract '{{projectArchiveName}}' into '{{tempDirArch}}' directory "
+    - name: " Extract '{{projectArchiveName}}' into '{{tempDir}}' directory "
       unarchive:
         src: "{{dest}}"
-        dest: "{{tempDirArch}}"
+        dest: "{{tempDir}}"
         remote_src: yes
 
     - name: " Unset environment variable 'ATF_CONF_FILE' "
