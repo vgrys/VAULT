@@ -4,6 +4,8 @@
 String artifactoryRepo = 'bigdata-dss-automation'
 String artifactoryUrl = 'http://192.168.56.105:8081'
 String atfVersion = '0.1.0'
+String atfRelease = 'release'
+
 String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
@@ -82,33 +84,11 @@ node {
         echo "********* End of upload ATF archive to Artifactory server **********"
     }
 
-
-//    stage('Upload ATF archive to Artifactory server') {
-//        echo "********* Start to upload ATF archive to Artifactory server **********"
-//        GString atfArchivePath = "${WORKSPACE}/dist/*.tar.gz"
-//        def artifactoryServer = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
-//        def artifactory = new ArtifactoryToolsPlugin()
-//        artifactory.artifactoryATFConfig(env, artifactoryRepo, "${atfArchivePath}")
-//        artifactoryServer.upload(env.uploadSpec)
-//        echo "********* End of upload ATF archive to Artifactory server **********"
-//    }
-
-//    stage('playbook test stage') {
-//        echo "********* playbook test stage starting **********"
-//        dir("${WORKSPACE}/ansible") {
-//            sh "ssh -o ServerAliveInterval=30 vagrant@192.168.56.21 uname -a"
-//            sh "ansible prod -m ping -u vagrant"
-//            sh "ansible-playbook --extra-vars 'server=prod artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} projectVersion=${projectVersion} projectName=${projectName} workspace=${WORKSPACE}' projectDeployment.yml"
-//        }
-//        echo "********* playbook test stage end **********"
-//    }
-
     stage('ATF install') {
         echo "********* Start to install AFT project **********"
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
-            echo "created an archive $bundleName"
             dir("${WORKSPACE}/ansible") {
-                sh "ansible-playbook --extra-vars 'server=prod artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} workspace=${WORKSPACE} zephCred=${zephCred}' ATFDeployment.yml"
+                sh "ansible-playbook --extra-vars 'server=prod artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
             }
         }
         echo "********* End of install AFT project **********"
