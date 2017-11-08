@@ -8,7 +8,7 @@
   vars:
     - tempDir: "/tmp/atfdir"
     - dest: "{{tempDir}}/atf-{{atfVersion}}.tar.gz"
-    - requirementsDest: "{{tempDir}}/requirements.txt"
+    - requirementsDest: "{{tempAtfDir}}/atf-{{atfVersion}}/requirements.txt"
     - venvPath: "/tmp/ATFVENV/"
     - zephSrc: "{{zephCred}}"
     - zephDest: "$HOME/zephCred"
@@ -35,10 +35,11 @@
         return_content: yes
         dest: "{{dest}}"
 
-    - name: " Copy requirements from '{{requirementsSrc}}' to '{{requirementsDest}}' "
-      copy:
-        src: "{{requirementsSrc}}"
-        dest: "{{requirementsDest}}"
+    - name: " Extract 'atf-{{atfVersion}}.tar.gz' into '{{tempAtfDir}}' directory "
+      unarchive:
+        src: "{{destAtf}}"
+        dest: "{{tempAtfDir}}"
+        remote_src: yes
 
     - name: " copy zeph credential file to the server "
       copy:
@@ -51,9 +52,9 @@
 
     - name: " Install requirements from {{requirementsDest}}"
       pip:
-        virtualenv_site_packages: yes
         virtualenv: "{{venvPath}}"
         requirements: "{{requirementsDest}}"
+        state: forcereinstall
 
     - name: " Deploy ATF project "
       pip:
