@@ -3,7 +3,7 @@
 
 String artifactoryRepo = 'bigdata-dss-automation'
 String artifactoryUrl = 'http://192.168.56.105:8081'
-String atfVersion = '0.0.1'
+String atfVersion = '0.1.0'
 String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
