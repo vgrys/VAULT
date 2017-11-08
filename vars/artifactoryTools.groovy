@@ -8,7 +8,7 @@ def static artifactoryConfig(env, repository, String archive, name, version) {
                     }]}"""
 }
 
-def static artifactoryATFConfig(env, repository, String archive, String name) {
+def artifactoryATFConfig(env, repository, String archive, String name) {
     def branchDirs = [
             'develop': 'develop',
             'master' : 'stable',
