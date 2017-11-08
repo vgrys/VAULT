@@ -7,8 +7,8 @@
 
   vars:
     - tempDir: "/tmp/{{projectName}}-tmp"
-    - dest: "{{tempProjectDirectory}}/{{projectName}}-{{projectVersion}}.tgz"
-    - tempDirArch: "{{tempProjectDirectory}}/{{projectName}}-{{projectVersion}}"
+    - dest: "{{tempProjectDirectory}}/{{projectArchiveName}}"
+    - tempDirArch: "{{tempProjectDirectory}}/{{projectName}}"
 
   tasks:
 
@@ -26,7 +26,7 @@
         - "{{tempProjectDirectory}}"
         - "{{tempDirArch}}"
 
-    - name: " Download project archive '{{projectName}}-{{projectVersion}}.tgz' from Artifactory server "
+    - name: " Download project archive '{{projectArchiveName}}' from Artifactory server "
       uri:
         validate_certs: no
         url: "{{artifactoryProjectPath}}"
@@ -36,7 +36,8 @@
         return_content: yes
         dest: "{{dest}}"
 
-    - name: " Extract '{{projectName}}-{{projectVersion}}.tgz' into {{tempDirArch}} directory "
+    - name: " Extract '{{projectArchiveName}}' into {{tempDirArch}} directory "
+    - name: " Extract '{{projectArchiveName}}' into {{tempDirArch}} directory "
       unarchive:
         src: "{{dest}}"
         dest: "{{tempDirArch}}"
