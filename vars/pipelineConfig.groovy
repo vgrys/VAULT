@@ -35,12 +35,12 @@ def static ansible(command, targetGroup) {
     return "ansible-playbook --extra-vars 'server=${targetGroup} user=artifactory_user password=artifactory_pwd ${command}"
 }
 
-def runDeployATF(String artifactoryRepo, String artifactoryUrl, String atfVersion, String projectName, String targetGroup) {
+def runDeployATF(String artifactoryRepo, String artifactoryUrl, String atfVersion, String release, String projectName, String targetGroup) {
     withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
         sh "cp ${env.WORKSPACE}/requirements.txt ${env.WORKSPACE}/requirements-new.txt"
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
             dir("${env.WORKSPACE}/ansible") {
-                sh ansible("artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} projectName=${projectName} workspace=${WORKSPACE} zephCred=${zephCred}' ATFDeployment.yml", targetGroup)
+                sh ansible("artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} release=${release} projectName=${projectName} workspace=${WORKSPACE} zephCred=${zephCred}' ATFDeployment.yml", targetGroup)
             }
         }
     }
