@@ -36,7 +36,7 @@ node {
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
         GString sourceFolder = "${env.WORKSPACE}/ansible"
-        if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release']) {
+        if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
             echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
             def zip = new ZipTools()
             bundleName = zip.bundle("${sourceFolder}", [".git"], "${playbooksName}-${playbooksVersion}.tgz")
