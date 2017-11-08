@@ -10,9 +10,7 @@ def bundle(sourceFolder, excludes, bundleName = '') {
     if (bundleName == '') {
         def now = new Date()
         String timestamp = now.format('yyyyMMddHHmmss')
-        def jobBaseName = "${env.JOB_NAME}".split('/')
-        GString projectName = "${jobBaseName[0]}"
-        bundleName = "${projectName}-${timestamp}.tgz"
+        bundleName = "${env.GIT_REPO}-${timestamp}.tgz"
     }
     GString archhiveFilePath = "${env.WORKSPACE}/${bundleName}"
 
