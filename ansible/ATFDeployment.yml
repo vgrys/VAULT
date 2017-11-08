@@ -37,8 +37,8 @@
 
     - name: " Extract 'atf-{{atfVersion}}.tar.gz' into '{{tempAtfDir}}' directory "
       unarchive:
-        src: "{{destAtf}}"
-        dest: "{{tempAtfDir}}"
+        src: "{{dest}}"
+        dest: "{{tempDir}}"
         remote_src: yes
 
     - name: " copy zeph credential file to the server "
