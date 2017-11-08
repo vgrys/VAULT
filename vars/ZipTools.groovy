@@ -17,5 +17,5 @@ def bundle(sourceFolder, excludes, bundleName = '') {
 
     sh "cd ${sourceFolder} && tar -zcf ${archhiveFilePath} ${excludeParameters} * "
 
-    return archhiveFilePath
+    return bundleName
 }
