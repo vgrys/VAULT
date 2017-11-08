@@ -17,13 +17,12 @@ def artifactoryATFConfig(env, repository, String archive, String name) {
     ]
     def dirName = branchDirs.get(env.GIT_BRANCH_TYPE, '')
     if (dirName != '') {
-        def artifactoryc = new artifactoryConfig()
-        artifactoryc(env, repository, archive, name, dirName)
+        artifactoryConfig(env, repository, archive, name, dirName)
     }
 }
 
-def static artifactoryProjectConfig(env, repository, String archive) {
-    artifactoryConfig(env, repository, archive, "${env.GIT_REPO}", '')
+def static artifactoryProjectConfig(env, repository, String archive, name) {
+    artifactoryConfig(env, repository, archive, name, '')
 }
 
 def ATFUpload (artifactoryUrl, artifactoryRepo) {
@@ -33,10 +32,10 @@ def ATFUpload (artifactoryUrl, artifactoryRepo) {
     server.upload(uploadSpec)
 }
 
-def projectUpload (artifactoryUrl, artifactoryRepo) {
+def projectUpload (artifactoryUrl, artifactoryRepo, name) {
     GString archive = "${env.WORKSPACE}/*.tgz"
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
-    artifactoryProjectConfig(env, artifactoryRepo, archive)
+    artifactoryProjectConfig(env, artifactoryRepo, archive, name)
     server.upload(uploadSpec)
 }
 
