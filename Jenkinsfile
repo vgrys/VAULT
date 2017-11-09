@@ -17,6 +17,12 @@ node {
 
     echo "DEBUG CODE -----> Running ${env.JOB_NAME} on ${env.JENKINS_URL} for branch ${env.BRANCH_NAME}"
 
+    stage ('test playbook skip') {
+        echo "********** test playbook skip ***********"
+        checkHosts(targetGroup)
+        echo "********** End of test playbook skip ***********"
+    }
+
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
         deleteDir()
