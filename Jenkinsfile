@@ -29,9 +29,12 @@ node {
 //            }
 //        }
         String fileContents = new File("${env.WORKSPACE}/ansible/vars/hosts").getText('UTF-8')
-        for (word in fileContents) {
+        for (GString word in fileContents) {
             if (word != "${targetGroup}") {
                 echo "no targetGroup found ${targetGroup}"
+                exit 1
+            } else {
+                echo "Found it"
             }
         }
 
