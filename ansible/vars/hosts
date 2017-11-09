@@ -1,3 +1,6 @@
 [prod]
-P9CPWPTDMCI01 ansible_host=192.168.56.21 ansible_user=vagrant
+flex1 ansible_host=192.168.56.21 ansible_user=vagrant
+
+[dev]
+flex ansible_host=192.168.56.20 ansible_user=vagrant
 
