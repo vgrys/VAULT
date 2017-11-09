@@ -23,7 +23,7 @@ node {
         checkout scm
         gitInfo()
         echo "********** testing GIT env ***********"
-        env.GIT_PROJECT_KEY
+        echo env.GIT_PROJECT_KEY
         echo GIT_ORIGIN
         echo env.GIT_USER
         echo env.GIT_PROJECT
