@@ -19,15 +19,22 @@ node {
 
     stage ('test playbook skip') {
         echo "********** test playbook skip ***********"
-        def file = new File("${env.WORKSPACE}/ansible/vars/hosts")
-        // for example read line by line
-        def data = file.filterLine { line ->
-            if (line.contains('[prod]')) {
-                echo "we are good to go"
-            } else {
-                echo "no targetGroup '${targetGroup}' found"
+//        def file = new File("${env.WORKSPACE}/ansible/vars/hosts")
+//        // for example read line by line
+//        def data = file.filterLine { line ->
+//            if (line.contains('[prod]')) {
+//                echo "we are good to go"
+//            } else {
+//                echo "no targetGroup '${targetGroup}' found"
+//            }
+//        }
+        String fileContents = new File("${env.WORKSPACE}/ansible/vars/hosts").getText('UTF-8')
+        for (word in fileContents) {
+            if (word != "${targetGroup}") {
+                echo "no targetGroup found ${targetGroup}"
             }
         }
+
         echo "********** End of test playbook skip ***********"
     }
 
