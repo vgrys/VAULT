@@ -19,7 +19,8 @@ node {
 
     stage ('test playbook skip') {
         echo "********** test playbook skip ***********"
-        checkHosts(targetGroup)
+        def result = checkHosts(targetGroup)
+        echo "Result is $result"
         echo "********** End of test playbook skip ***********"
     }
 

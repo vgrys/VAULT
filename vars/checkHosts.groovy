@@ -5,9 +5,9 @@ def call(targetGroup) {
         // for example read line by line
     def data = file.filterLine { line ->
         if (line.contains('[prod]')) {
-            echo "we are good to go"
+            return "we are good to go"
         } else {
-            echo "no targetGroup '${targetGroup}' found"
+            return "no targetGroup '${targetGroup}' found"
         }
     }
 }
