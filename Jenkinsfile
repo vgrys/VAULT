@@ -32,7 +32,7 @@ node {
         for (GString word in fileContents) {
             if (word != "${targetGroup}") {
                 echo "no targetGroup found ${targetGroup}"
-                currentBuild.result = Result.ABORTED
+                currentBuild.result = 'ABORTED'
                 throw new hudson.AbortException('Guess what!')
                 echo 'Further code will not be executed'
             } else {
