@@ -17,6 +17,24 @@ node {
 
     echo "DEBUG CODE -----> Running ${env.JOB_NAME} on ${env.JENKINS_URL} for branch ${env.BRANCH_NAME}"
 
+    stage('Clean Workspace and Check out Source') {
+        echo "********** Clean Jenkins workspace and Check out Source ***********"
+        deleteDir()
+        checkout scm
+        gitInfo()
+        echo "********** testing GIT env ***********"
+        echo GIT_ORIGIN
+        echo env.GIT_USER
+        echo env.GIT_PROJECT
+        echo env.GIT_REPO
+        echo env.GIT_BRANCH
+        echo env.JENKIS_SLVALE1
+        echo env.GIT_FEATURE_NAME
+        echo "********** End of testing GIT env ***********"
+
+        echo "********** End of clean Jenkins workspace and Check out Source ***********"
+    }
+
     stage ('test playbook skip') {
         echo "********** test playbook skip ***********"
 //        def file = new File("${env.WORKSPACE}/ansible/vars/hosts")
@@ -40,24 +58,6 @@ node {
         }
 
         echo "********** End of test playbook skip ***********"
-    }
-
-    stage('Clean Workspace and Check out Source') {
-        echo "********** Clean Jenkins workspace and Check out Source ***********"
-        deleteDir()
-        checkout scm
-        gitInfo()
-        echo "********** testing GIT env ***********"
-        echo GIT_ORIGIN
-        echo env.GIT_USER
-        echo env.GIT_PROJECT
-        echo env.GIT_REPO
-        echo env.GIT_BRANCH
-        echo env.JENKIS_SLVALE1
-        echo env.GIT_FEATURE_NAME
-        echo "********** End of testing GIT env ***********"
-
-        echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
     stage('Create Ansible archive') {
