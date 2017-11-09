@@ -32,8 +32,8 @@ node {
         for (GString word in fileContents) {
             if (word != "${targetGroup}") {
                 echo "no targetGroup found ${targetGroup}"
-                currentBuild.result = 'FAILED'
-                error("Build failed because no targetGroup ${targetGroup} found in 'hosts file'")
+//                currentBuild.result = 'FAILED'
+//                error("Build failed because no targetGroup ${targetGroup} found in 'hosts file'")
             } else {
                 echo "Found it"
             }
