@@ -33,7 +33,7 @@ node {
             if (word != "${targetGroup}") {
                 echo "no targetGroup found ${targetGroup}"
                 currentBuild.result = 'FAILED'
-                error("Build failed because of this and that..")
+                error("Build failed because no targetGroup ${targetGroup} found in 'hosts file'")
             } else {
                 echo "Found it"
             }
