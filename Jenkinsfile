@@ -33,8 +33,8 @@ node {
         echo env.JENKIS_SLVALE1
         echo env.GIT_FEATURE_NAME
         echo "env.JENKIS_SLVALE1 is $env.JENKIS_SLVALE1"
-        exho "env.JENKIS_SLVALE2 is $env.JENKIS_SLVALE2"
-        exho "env.TDM_SERVER_QA is $env.TDM_SERVER_QA"
+        echo "env.JENKIS_SLVALE2 is $env.JENKIS_SLVALE2"
+        echo "env.TDM_SERVER_QA is $env.TDM_SERVER_QA"
 
         echo "********** End of testing GIT env ***********"
 
