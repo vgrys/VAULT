@@ -22,6 +22,7 @@ node {
         deleteDir()
         checkout scm
         gitInfo()
+        projectEnvInfo()
         echo "********** testing GIT env ***********"
         echo env.GIT_PROJECT_KEY
         echo GIT_ORIGIN
@@ -31,6 +32,10 @@ node {
         echo env.GIT_BRANCH
         echo env.JENKIS_SLVALE1
         echo env.GIT_FEATURE_NAME
+        echo "env.JENKIS_SLVALE1 is $env.JENKIS_SLVALE1"
+        exho "env.JENKIS_SLVALE2 is $env.JENKIS_SLVALE2"
+        exho "env.TDM_SERVER_QA is $env.TDM_SERVER_QA"
+
         echo "********** End of testing GIT env ***********"
 
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
