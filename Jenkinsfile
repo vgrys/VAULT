@@ -35,7 +35,6 @@ node {
         echo "env.JENKIS_SLVALE1 is $env.JENKIS_SLVALE1"
         echo "env.JENKIS_SLVALE2 is $env.JENKIS_SLVALE2"
         echo "env.TDM_SERVER_QA is $env.TDM_SERVER_QA"
-        echo "currentBuild is: $currentBuild.result"
 
         echo "********** End of testing GIT env ***********"
 
@@ -44,8 +43,6 @@ node {
 
     stage ('test playbook skip') {
         echo "********** test playbook skip ***********"
-        currentBuild.result = 'SUCCESS'
-        echo "currentBuild is: $currentBuild.result"
 //        def file = new File("${env.WORKSPACE}/ansible/vars/hosts")
 //        // for example read line by line
 //        def data = file.filterLine { line ->
@@ -55,16 +52,16 @@ node {
 //                echo "no targetGroup '${targetGroup}' found"
 //            }
 //        }
-        String fileContents = new File("${env.WORKSPACE}/ansible/vars/hosts").getText('UTF-8')
-        for (GString word in fileContents) {
-            if (word != "${targetGroup}") {
-                echo "no targetGroup found ${targetGroup}"
-//                currentBuild.result = 'FAILED'
-//                error("Build failed because no targetGroup ${targetGroup} found in 'hosts file'")
-            } else {
-                echo "Found it"
-            }
-        }
+//        String fileContents = new File("${env.WORKSPACE}/ansible/vars/hosts").getText('UTF-8')
+//        for (GString word in fileContents) {
+//            if (word != "${targetGroup}") {
+//                echo "no targetGroup found ${targetGroup}"
+////                currentBuild.result = 'FAILED'
+////                error("Build failed because no targetGroup ${targetGroup} found in 'hosts file'")
+//            } else {
+//                echo "Found it"
+//            }
+//        }
 
         echo "********** End of test playbook skip ***********"
     }
