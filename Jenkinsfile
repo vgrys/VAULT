@@ -12,9 +12,6 @@ String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 
-
-
-//('flex1')
 node {
     pipelineConfig.beginning()
 
