@@ -47,6 +47,8 @@ node {
         echo "env.TDM_SERVER_QA is $env.TDM_SERVER_QA"
         echo "SSH_KEY is $env.SSH_KEY"
         echo "SSH_ANSIBLE is $env.SSH_ANSIBLE"
+        echo "VAULT_TOKEN is $env.VAULT_TOKEN"
+
 
 //        def file = new File("${env.WORKSPACE}/ansible/vars/hosts")
 //        // for example read line by line
