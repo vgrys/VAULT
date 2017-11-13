@@ -22,7 +22,7 @@ def call() {
 
     }
 
-    echo pipelineConfig.pad"Environments are set"
+    echo pipelineConfig.pad("Environments are set")
 
 //    String dssNode = 'q9lcwptdmci01.labcorp.ad.ctc'
 //    String sshKeyId = '7e503b79-703a-489b-9a56-b1369b36b417'
