@@ -134,7 +134,7 @@ node {
         echo "********* Start to install AFT project **********"
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
             dir("${WORKSPACE}/ansible") {
-                sh "ansible-playbook --extra-vars 'server=${targetGroup} artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
+                sh "ansible-playbook --list-hosts --limit ${targetGroup} --extra-vars 'server=${targetGroup} artifactoryRepo=${artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
             }
         }
         echo "********* End of install AFT project **********"
