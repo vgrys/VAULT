@@ -12,7 +12,13 @@ String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 
+
 node {
+    ansiColor('xterm') {
+        timestamps {
+            sh 'make check'
+        }
+    }
     pipelineConfig.beginning()
 
     stage('Clean Workspace and Check out Source') {
