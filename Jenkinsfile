@@ -35,6 +35,7 @@ node {
         echo env.GIT_BRANCH
         echo env.JENKIS_SLVALE1
         echo env.GIT_FEATURE_NAME
+        echo currentBuild.result
 
         echo "********** End of testing GIT env ***********"
 
@@ -133,4 +134,5 @@ node {
 //            step([$class: 'WsCleanup'])
         echo "********* Start to clean up WORKSPACE **********"
     }
+    echo "$currentBuild.result"
 }
