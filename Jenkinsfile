@@ -13,7 +13,6 @@ String playbooksVersion = '0.1'
 String bundleName
 
 projectEnvInfo()
-gitInfo()
 
 
 //('flex1')
@@ -24,6 +23,8 @@ node {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
         deleteDir()
         checkout scm
+        gitInfo()
+
 
         echo "********** testing GIT env ***********"
         echo env.GIT_PROJECT_KEY
