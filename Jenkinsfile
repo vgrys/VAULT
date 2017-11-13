@@ -22,7 +22,7 @@ node {
         deleteDir()
         checkout scm
         gitInfo()
-//        projectEnvInfo()
+        projectEnvInfo()
 
 //        echo "********** testing GIT env ***********"
 //        echo env.GIT_PROJECT_KEY
