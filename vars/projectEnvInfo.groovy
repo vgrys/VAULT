@@ -13,7 +13,11 @@ def call() {
 
     withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'env.SAUCE_ACCESS_USR', passwordVariable: 'env.SAUCE_ACCESS_PWD')])
 
-    echo "Environments are set"
+    withCredentials([file(credentialsId: "JEN-KEY-NOPWD", variable: "env.JenKeyNopwd")])
+
+    withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'MY_VAULT_TOKEN')])
+
+    echo pipelineConfig.pad"Environments are set"
 
 //    String dssNode = 'q9lcwptdmci01.labcorp.ad.ctc'
 //    String sshKeyId = '7e503b79-703a-489b-9a56-b1369b36b417'
