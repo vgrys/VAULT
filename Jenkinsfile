@@ -15,10 +15,6 @@ String bundleName
 //('flex1')
 node {
 
-    environment {
-        SAUCE_ACCESS = credentials('ArtsUserPwd')
-    }
-
     echo "DEBUG CODE -----> Running ${env.JOB_NAME} on ${env.JENKINS_URL} for branch ${env.BRANCH_NAME}"
 
     stage('Clean Workspace and Check out Source') {
@@ -45,10 +41,6 @@ node {
 
     stage ('test playbook skip') {
         echo "********** test playbook skip ***********"
-        environment {
-            SAUCE_ACCESS = credentials('ArtsUserPwd')
-        }
-
 
         echo "env.JENKIS_SLVALE1 is $env.JENKIS_SLVALE1"
         echo "env.JENKIS_SLVALE2 is $env.JENKIS_SLVALE2"
@@ -56,9 +48,9 @@ node {
         echo "SSH_KEY is $env.SSH_KEY"
         echo "SSH_ANSIBLE is $env.SSH_ANSIBLE"
         echo "VAULT_TOKEN is $env.VAULT_TOKEN"
-        echo "env.SAUCE_ACCESS is: '${SAUCE_ACCESS}'"
-        echo "env.SAUCE_ACCESS_USR is: '${SAUCE_ACCESS_USR}'"
-        echo "env.SAUCE_ACCESS_PWD is: '${SAUCE_ACCESS_PWD}'"
+        echo "env.SAUCE_ACCESS is: '${env.SAUCE_ACCESS}'"
+        echo "env.SAUCE_ACCESS_USR is: '${env.SAUCE_ACCESS_USR}'"
+        echo "env.SAUCE_ACCESS_PWD is: '${env.SAUCE_ACCESS_PWD}'"
         sh "cat ${env.SSH_KEY}"
         sh "cat ${env.VAULT_TOKEN}"
 

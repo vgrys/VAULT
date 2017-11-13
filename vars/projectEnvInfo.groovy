@@ -10,7 +10,8 @@ def call() {
     env.SSH_KEY = credentials('SSH-KEY')
     env.SSH_ANSIBLE = credentials('SSH-ANSIBLE')
     env.VAULT_TOKEN = credentials('VAULT_TOKEN')
-    env.SAUCE_ACCESS = credentials('ArtsUserPwd')
+
+    withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'env.SAUCE_ACCESS_USR', passwordVariable: 'env.SAUCE_ACCESS_PWD')])
 
     echo "Environments are set"
 
