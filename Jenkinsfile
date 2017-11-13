@@ -39,7 +39,7 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
-    stage ('test playbook skip') {
+    stage ('test variables') {
         echo "********** test playbook skip ***********"
 
         echo "env.JENKIS_SLVALE1 is $env.JENKIS_SLVALE1"
@@ -53,27 +53,7 @@ node {
         echo "env.SAUCE_ACCESS_PWD is: '${env.SAUCE_ACCESS_PWD}'"
 
 
-//        def file = new File("${env.WORKSPACE}/ansible/vars/hosts")
-//        // for example read line by line
-//        def data = file.filterLine { line ->
-//            if (line.contains('[prod]')) {
-//                echo "we are good to go"
-//            } else {
-//                echo "no targetGroup '${targetGroup}' found"
-//            }
-//        }
-//        String fileContents = new File("${env.WORKSPACE}/ansible/vars/hosts").getText('UTF-8')
-//        for (GString word in fileContents) {
-//            if (word != "${targetGroup}") {
-//                echo "no targetGroup found ${targetGroup}"
-////                currentBuild.result = 'FAILED'
-////                error("Build failed because no targetGroup ${targetGroup} found in 'hosts file'")
-//            } else {
-//                echo "Found it"
-//            }
-//        }
-
-        echo "********** End of test playbook skip ***********"
+        echo "********** End of test variables ***********"
     }
 
     stage('Create Ansible archive') {
