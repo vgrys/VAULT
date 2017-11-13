@@ -48,8 +48,8 @@ node {
         echo "SSH_KEY is $env.SSH_KEY"
         echo "SSH_ANSIBLE is $env.SSH_ANSIBLE"
         echo "VAULT_TOKEN is $env.VAULT_TOKEN"
-        sh "cat $env.SSH_KEY"
-        sh "cat $env.VAULT_TOKEN"
+        sh "cat ${env.SSH_KEY}"
+        sh "cat ${env.VAULT_TOKEN}"
 
 
 //        def file = new File("${env.WORKSPACE}/ansible/vars/hosts")
