@@ -2,15 +2,16 @@
 
 def call() {
 
+
     env.JENKIS_SLVALE1 = 'flex1'
     env.JENKIS_SLVALE2 = 'flex0'
     env.TDM_SERVER_QA = "fdg"
 
-    environment {
-        env.SSH_KEY = credentials('SSH-KEY')
-        env.SSH_ANSIBLE = 'SSH-ANSIBLE'
-        env.VAULT_TOKEN = 'VAULT_TOKEN'
-    }
+    env.SSH_KEY = credentials('SSH-KEY')
+    env.SSH_ANSIBLE = 'SSH-ANSIBLE'
+    env.VAULT_TOKEN = 'VAULT_TOKEN'
+
+    echo "Environments are set"
 
 //    String dssNode = 'q9lcwptdmci01.labcorp.ad.ctc'
 //    String sshKeyId = '7e503b79-703a-489b-9a56-b1369b36b417'
