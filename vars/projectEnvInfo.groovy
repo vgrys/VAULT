@@ -8,8 +8,8 @@ def call() {
     env.TDM_SERVER_QA = "fdg"
 
     env.SSH_KEY = credentials('SSH-KEY')
-    env.SSH_ANSIBLE = 'SSH-ANSIBLE'
-    env.VAULT_TOKEN = 'VAULT_TOKEN'
+    env.SSH_ANSIBLE = credentials('SSH-ANSIBLE')
+    env.VAULT_TOKEN = credentials('VAULT_TOKEN')
 
     echo "Environments are set"
 
