@@ -8,8 +8,8 @@ def call() {
 
     environment {
         env.SSH_KEY = credentials('SSH-KEY')
-        env.SSH_ANSIBLE = credentials('SSH-ANSIBLE')
-        env.VAULT_TOKEN = credentials('VAULT_TOKEN')
+        env.SSH_ANSIBLE = 'SSH-ANSIBLE'
+        env.VAULT_TOKEN = 'VAULT_TOKEN'
     }
 
 //    String dssNode = 'q9lcwptdmci01.labcorp.ad.ctc'
