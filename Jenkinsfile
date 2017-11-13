@@ -12,10 +12,8 @@ String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 
-environment {
-    projectEnvInfo()
-    gitInfo()
-}
+projectEnvInfo()
+gitInfo()
 
 
 //('flex1')
