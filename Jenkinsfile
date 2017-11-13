@@ -18,8 +18,7 @@ gitInfo()
 
 //('flex1')
 node {
-
-    echo "DEBUG CODE -----> Running ${env.JOB_NAME} on ${env.JENKINS_URL} for branch ${env.BRANCH_NAME}"
+    pipelineConfig.beginning()
 
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"

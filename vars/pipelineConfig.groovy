@@ -4,6 +4,11 @@ def pad(str) {
     return "********** ${str} ***********"
 }
 
+def beginning() {
+    currentBuild.result = "SUCCESS"
+    echo "DEBUG CODE -----> Running ${env.JOB_NAME} on ${env.JENKINS_URL} for branch ${env.BRANCH_NAME}"
+}
+
 def createProjectBundle(sourceFolder) {
     def zip = new ZipTools()
     def bundlePath = zip.bundle(env, sourceFolder, ['.git', '.gitignore'])
