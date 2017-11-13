@@ -45,8 +45,8 @@ node {
         echo "env.JENKIS_SLVALE1 is $env.JENKIS_SLVALE1"
         echo "env.JENKIS_SLVALE2 is $env.JENKIS_SLVALE2"
         echo "env.TDM_SERVER_QA is $env.TDM_SERVER_QA"
-        echo "SSH_KEY is $SSH_KEY"
-        echo "SSH_ANSIBLE is $SSH_ANSIBLE"
+        echo "SSH_KEY is $env.SSH_KEY"
+        echo "SSH_ANSIBLE is $env.SSH_ANSIBLE"
 
 //        def file = new File("${env.WORKSPACE}/ansible/vars/hosts")
 //        // for example read line by line

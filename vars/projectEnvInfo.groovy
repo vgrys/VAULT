@@ -7,8 +7,8 @@ def call() {
     env.TDM_SERVER_QA = "fdg"
 
     environment {
-        SSH_KEY = credentials('SSH-KEY')
-        SSH_ANSIBLE = credentials('SSH-ANSIBLE')
+        env.SSH_KEY = credentials('SSH-KEY')
+        env.SSH_ANSIBLE = credentials('SSH-ANSIBLE')
     }
 
 //    String dssNode = 'q9lcwptdmci01.labcorp.ad.ctc'
