@@ -48,6 +48,9 @@ node {
         echo "SSH_KEY is $env.SSH_KEY"
         echo "SSH_ANSIBLE is $env.SSH_ANSIBLE"
         echo "VAULT_TOKEN is $env.VAULT_TOKEN"
+        echo "env.SAUCE_ACCESS is: '$env.SAUCE_ACCESS'"
+        echo "env.SAUCE_ACCESS_USR is: '$env.SAUCE_ACCESS_USR'"
+        echo "env.SAUCE_ACCESS_PWD is: '$env.SAUCE_ACCESS_PWD'"
         sh "cat ${env.SSH_KEY}"
         sh "cat ${env.VAULT_TOKEN}"
 

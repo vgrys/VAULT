@@ -10,6 +10,7 @@ def call() {
     env.SSH_KEY = credentials('SSH-KEY')
     env.SSH_ANSIBLE = credentials('SSH-ANSIBLE')
     env.VAULT_TOKEN = credentials('VAULT_TOKEN')
+    env.SAUCE_ACCESS = credentials('ArtsUserPwd')
 
     echo "Environments are set"
 
