@@ -12,7 +12,6 @@ String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 
-projectEnvInfo()
 
 
 //('flex1')
@@ -24,6 +23,7 @@ node {
         deleteDir()
         checkout scm
         gitInfo()
+        projectEnvInfo()
 
 
         echo "********** testing GIT env ***********"
