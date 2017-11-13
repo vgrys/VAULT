@@ -32,7 +32,7 @@ def reportGitParams() {
 }
 
 def static ansible(command, targetGroup) {
-    return "ansible-playbook --extra-vars 'server=${targetGroup} user=artifactory_user password=artifactory_pwd ${command}"
+    return "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} user=artifactory_user password=artifactory_pwd ${command}"
 }
 
 def runDeployATF(String artifactoryUrl, String artifactoryRepo, String atfVersion, String release, String projectName, String targetGroup) {
