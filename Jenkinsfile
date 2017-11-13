@@ -6,7 +6,7 @@ String artifactoryUrl = 'http://192.168.56.105:8081'
 String atfVersion = '0.1.0'
 String atfRelease = 'release'
 
-String targetGroup = "prod123"
+String targetGroup = "dev"
 
 String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
