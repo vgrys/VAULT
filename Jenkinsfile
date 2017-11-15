@@ -12,7 +12,7 @@ String bundleName
 
 
 //def config = SharedConfiguration.get
-println (SharedConfiguration.get("http://consul.test.com"))
+println (SharedConfiguration.get("http://consul.test.com").sdfs)
 
 def cfg = config.conf
 println(cfg.jenkinsSlave1)
