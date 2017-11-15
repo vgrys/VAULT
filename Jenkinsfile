@@ -11,7 +11,8 @@ String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 
-println(config.conf.jenkinsSlave1)
+def cfg = config.conf()
+println(cfg.jenkinsSlave1)
 
 node {
     pipelineConfig.beginning()
