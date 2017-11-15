@@ -11,8 +11,8 @@ String playbooksVersion = '0.1'
 String bundleName
 
 
-//def config = SharedConfiguration.get
-println (SharedConfiguration.getDefault)
+def config = SharedConfiguration.getDefault()
+println (config.getDefault)
 
 def cfg = config.conf
 println(cfg.jenkinsSlave1)
