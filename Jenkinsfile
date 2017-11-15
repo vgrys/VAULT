@@ -10,6 +10,10 @@ String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 
+
+def config = SharedConfiguration.get()
+echo config.jenkinsSlave1
+
 def cfg = config.conf
 println(cfg.jenkinsSlave1)
 
