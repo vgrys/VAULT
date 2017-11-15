@@ -1,3 +1,5 @@
+#!/usr/bin/groovy
+
 // In DSS lib with configs
 def conf = [
         jenkinsSlave1: 'flex1',
