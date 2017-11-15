@@ -13,7 +13,7 @@ String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 
-def configure = new com.epam.config.conf ()
+def configure = new com.epam.config ()
 println(configure.jenkinsSlave1)
 
 //// In Jenkinsfile
