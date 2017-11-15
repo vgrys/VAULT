@@ -15,6 +15,6 @@ class SharedConfiguration implements Serializable {
         if (consulURL) {
             throw NotYetImplemented
         }
-        return getDefault()
+        return getDefault
     }
 }
