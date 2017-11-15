@@ -1,10 +1,8 @@
 #!/usr/bin/groovy
 
-package com.epam
+class config implements Serializable {
 
-LinkedHashMap<String, String> initConfig() {
-
-    return [
+    def conf = [
             jenkinsSlave1: 'flex1',
             jenkinsSlave2: 'flex',
             sshKeyId     : 'SSH-KEY',

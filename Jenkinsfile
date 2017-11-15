@@ -1,6 +1,5 @@
 #!/usr/bin/groovy
 @Library('shared-library@release/version1')
-import com.epam.config
 
 String artifactoryRepo = 'bigdata-dss-automation'
 String artifactoryUrl = 'http://192.168.56.105:8081'
