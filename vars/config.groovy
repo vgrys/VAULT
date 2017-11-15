@@ -6,6 +6,9 @@ class config implements Serializable {
             jenkinsSlave1: 'flex1',
             jenkinsSlave2: 'flex',
             sshKeyId     : 'SSH-KEY',
-            artifactoryId: 'arifactoryID'
+            artifactoryId: 'arifactoryID',
+            artifactoryRepo: 'bigdata-dss-automation',
+            artifactoryUrl: 'http://192.168.56.105:8081'
+
     ]
 }
