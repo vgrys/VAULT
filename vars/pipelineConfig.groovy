@@ -24,8 +24,8 @@ def sshCli(host, commandToRun) {
     return "ssh -o StrictHostKeyChecking=no ${host} /bin/bash -c '\"${commandToRun}\"'"
 }
 
-def executeAnsible(ansibleCommand) {
-    withCredentials([usernamePassword(credentialsId: "${artifactoryID}", usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
+def executeAnsible(ansibleCommand, artifactoryId) {
+    withCredentials([usernamePassword(credentialsId: "${artifactoryId}", usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
         dir("${WORKSPACE}/ansible") {
             sh ansibleCommand
         }
@@ -50,12 +50,12 @@ def runDeployATF(String artifactoryUrl, String artifactoryRepo, String atfVersio
     }
 }
 
-def runDeployProject(artifactoryUrl, artifactoryRepo, projectName, projectArchiveName, targetGroup) {
+def runDeployProject(artifactoryUrl, artifactoryRepo, projectName, projectArchiveName, targetGroup, artifactoryId) {
     def cmd = ansible("artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} projectName=${projectName} projectArchiveName=$projectArchiveName' projectDeployment.yml", targetGroup)
-    executeAnsible(cmd)
+    executeAnsible(cmd, artifactoryId)
 }
 
 def runProjectCleanup(projectName, targetGroup ) {
     cmd = ansible("projectName=${projectName}' projectCleanup.yml", targetGroup)
-    executeAnsible(cmd)
+    executeAnsible(cmd, null)
 }

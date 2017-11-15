@@ -105,7 +105,7 @@ node {
 
     stage('Project deployment') {
         echo pipelineConfig.pad("Start project deployment")
-        pipelineConfig.runDeployProject(cfg.artifactoryUrl, cfg.artifactoryRepo, "test-project", "test-project-20171108105623.tgz"  ,targetGroup)
+        pipelineConfig.runDeployProject(cfg.artifactoryUrl, cfg.artifactoryRepo, "test-project", "test-project-20171108105623.tgz"  ,targetGroup, cfg.artifactoryId)
         echo pipelineConfig.pad("End of project deployment")
     }
 
