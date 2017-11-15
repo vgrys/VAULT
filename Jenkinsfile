@@ -1,5 +1,6 @@
 #!/usr/bin/groovy
 @Library('shared-library@release/version1')
+import com.epam.config
 
 String artifactoryRepo = 'bigdata-dss-automation'
 String artifactoryUrl = 'http://192.168.56.105:8081'
@@ -57,10 +58,10 @@ node (config.conf.jenkinsSlave1) {
     stage ('test variables') {
         echo "********** test playbook skip ***********"
 
-        echo "jenkinsSlave1 is $jenkinsSlave1"
-        echo "jenkinsSlave2 is $jenkinsSlave2"
-        echo "sshKeyId is $sshKeyId"
-        echo "artifactoryId is $artifactoryId"
+//        echo "jenkinsSlave1 is $jenkinsSlave1"
+//        echo "jenkinsSlave2 is $jenkinsSlave2"
+//        echo "sshKeyId is $sshKeyId"
+//        echo "artifactoryId is $artifactoryId"
 
 
         echo "********** End of test variables ***********"
