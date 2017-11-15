@@ -13,7 +13,7 @@ class SharedConfiguration implements Serializable {
         ]
     }
 
-    def static get(consulURL = null) {
+    def static get(consulURL=null) {
         if (consulURL) {
             throw NotYetImplemented
         }
