@@ -81,8 +81,9 @@ node {
     }
 
     stage('Upload Ansible to Artifactory server') {
+        echo "cfg.artifactoryID is: '${cfg.artifactoryID}'"
         echo "********* Start to upload Ansible to Artifactory server **********"
-        artifactoryTools.ansibleUpload(cfg.artifactoryUrl, cfg.artifactoryRepo, playbooksName, cfg.artifactoryID)
+        artifactoryTools.uploadAnsible(cfg.artifactoryUrl, cfg.artifactoryRepo, playbooksName, cfg.artifactoryID)
         echo "********* End of upload Ansible to Artifactory server **********"
     }
 
