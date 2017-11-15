@@ -11,9 +11,9 @@ String playbooksVersion = '0.1'
 String bundleName
 
 
-def config = SharedConfiguration.get()
-println (config.("jenkinsSlave1"))
-println (config.("jenkinsSlave2"))
+def parameter = SharedConfiguration.get()
+println (parameter.("jenkinsSlave1"))
+println (parameter.(jenkinsSlave2))
 
 
 //def cfg = config.conf
@@ -89,9 +89,8 @@ node {
     }
 
     stage('Upload Ansible to Artifactory server') {
-        echo "cfg.artifactoryId is: '${cfg.artifactoryId}'"
         echo "********* Start to upload Ansible to Artifactory server **********"
-        artifactoryTools.uploadAnsible(cfg.artifactoryUrl, cfg.artifactoryRepo, playbooksName, cfg.artifactoryId)
+        artifactoryTools.uploadAnsible(parameter.('artifactoryUrl'), parameter.("artifactoryRepo"), playbooksName, parameter.("artifactoryId"))
         echo "********* End of upload Ansible to Artifactory server **********"
     }
 
