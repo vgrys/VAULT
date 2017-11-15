@@ -12,8 +12,20 @@ String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 
+println(conf.jenkinsSlave1)
 
-node {
+//// In Jenkinsfile
+//node(conf.jenkinsSlave1) {
+//    stage('Check out Source') {
+//        echo pipelineConfig.pad("Checkout SCM and Set BitBucket properties")
+//        checkout scm
+//        bitbucketInfo(conf.param1, conf.param2...)
+//        bitbucketGitInfo(conf.param1, conf.param2...)
+//        ...
+//    }
+//}
+
+node (conf.jenkinsSlave1) {
     pipelineConfig.beginning()
 
     stage('Clean Workspace and Check out Source') {
@@ -22,6 +34,7 @@ node {
         checkout scm
         gitInfo()
         projectEnvInfo()
+        config.conf()
 
 
         echo "********** testing GIT env ***********"
@@ -43,15 +56,10 @@ node {
     stage ('test variables') {
         echo "********** test playbook skip ***********"
 
-        echo "env.JENKIS_SLVALE1 is $env.JENKIS_SLVALE1"
-        echo "env.JENKIS_SLVALE2 is $env.JENKIS_SLVALE2"
-        echo "env.TDM_SERVER_QA is $env.TDM_SERVER_QA"
-        echo "SSH_KEY is $env.SSH_KEY"
-        echo "SSH_ANSIBLE is $env.SSH_ANSIBLE"
-        echo "VAULT_TOKEN is $env.VAULT_TOKEN"
-        echo "env.SAUCE_ACCESS is: '${env.SAUCE_ACCESS}'"
-        echo "env.SAUCE_ACCESS_USR is: '${env.SAUCE_ACCESS_USR}'"
-        echo "env.SAUCE_ACCESS_PWD is: '${env.SAUCE_ACCESS_PWD}'"
+        echo "jenkinsSlave1 is $jenkinsSlave1"
+        echo "jenkinsSlave2 is $jenkinsSlave2"
+        echo "sshKeyId is $sshKeyId"
+        echo "artifactoryId is $artifactoryId"
 
 
         echo "********** End of test variables ***********"
