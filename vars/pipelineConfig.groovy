@@ -25,7 +25,7 @@ def sshCli(host, commandToRun) {
 }
 
 def executeAnsible(ansibleCommand) {
-    withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
+    withCredentials([usernamePassword(credentialsId: "${artifactoryID}", usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
         dir("${WORKSPACE}/ansible") {
             sh ansibleCommand
         }
@@ -41,7 +41,7 @@ def static ansible(command, targetGroup) {
 }
 
 def runDeployATF(String artifactoryUrl, String artifactoryRepo, String atfVersion, String release, String projectName, String targetGroup) {
-    withCredentials([usernamePassword(credentialsId: 'arifactoryID', usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
+    withCredentials([usernamePassword(credentialsId: "${artifactoryID}", usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
             dir("${env.WORKSPACE}/ansible") {
                 sh ansible("artifactoryUrl=${artifactoryUrl} artifactoryRepo=${artifactoryRepo} atfVersion=${atfVersion} atfRelease=${release} projectName=${projectName} zephCred=${zephCred}' ATFDeployment.yml", targetGroup)

@@ -82,13 +82,13 @@ node {
 
     stage('Upload Ansible to Artifactory server') {
         echo "********* Start to upload Ansible to Artifactory server **********"
-        artifactoryTools.ansibleUpload(cfg.artifactoryUrl, cfg.artifactoryRepo, playbooksName)
+        artifactoryTools.ansibleUpload(cfg.artifactoryUrl, cfg.artifactoryRepo, playbooksName, cfg.artifactoryID)
         echo "********* End of upload Ansible to Artifactory server **********"
     }
 
     stage('Upload ATF archive to Artifactory server') {
         echo "********* Start to upload ATF archive to Artifactory server **********"
-        artifactoryTools.ATFUpload(cfg.artifactoryUrl, cfg.artifactoryRepo)
+        artifactoryTools.ATFUpload(cfg.artifactoryUrl, cfg.artifactoryRepo, cfg.artifactoryID)
         echo "********* End of upload ATF archive to Artifactory server **********"
     }
 

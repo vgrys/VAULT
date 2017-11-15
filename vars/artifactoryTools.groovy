@@ -25,23 +25,23 @@ def static artifactoryProjectConfig(env, repository, String archive, name) {
     artifactoryConfig(env, repository, archive, name, '')
 }
 
-def ATFUpload (artifactoryUrl, artifactoryRepo) {
+def ATFUpload (artifactoryUrl, artifactoryRepo, artifactoryID) {
     GString archive = "${env.WORKSPACE}/dist/*.tar.gz"
-    def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
+    def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: "${artifactoryID}"
     artifactoryATFConfig(env, artifactoryRepo, archive, "atf")
     server.upload(uploadSpec)
 }
 
-def projectUpload (artifactoryUrl, artifactoryRepo, name) {
+def projectUpload (artifactoryUrl, artifactoryRepo, name, artifactoryID) {
     GString archive = "${env.WORKSPACE}/*.tgz"
-    def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
+    def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: "${artifactoryID}"
     artifactoryProjectConfig(env, artifactoryRepo, archive, name)
     server.upload(uploadSpec)
 }
 
-def ansibleUpload (artifactoryUrl, artifactoryRepo, name) {
+def ansibleUpload (artifactoryUrl, artifactoryRepo, name, artifactoryID) {
     GString archive = "${env.WORKSPACE}/*.tgz"
-    def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: 'arifactoryID'
+    def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: "${artifactoryID}"
     artifactoryATFConfig(env, artifactoryRepo, archive, name)
     server.upload(uploadSpec)
     return (uploadSpec)
