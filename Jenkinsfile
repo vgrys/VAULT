@@ -12,7 +12,14 @@ String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 
-println(config.conf.jenkinsSlave1)
+def conf = [
+        jenkinsSlave1: 'flex1',
+        jenkinsSlave2: 'flex',
+        sshKeyId     : 'SSH-KEY',
+        artifactoryId: 'arifactoryID'
+]
+
+println(conf.jenkinsSlave1)
 
 //// In Jenkinsfile
 //node(conf.jenkinsSlave1) {
@@ -25,7 +32,7 @@ println(config.conf.jenkinsSlave1)
 //    }
 //}
 
-node (config.conf.jenkinsSlave1) {
+node (conf.jenkinsSlave1) {
     pipelineConfig.beginning()
 
     stage('Clean Workspace and Check out Source') {
