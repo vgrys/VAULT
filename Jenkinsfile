@@ -11,7 +11,7 @@ String playbooksVersion = '0.1'
 String bundleName
 
 
-def config = SharedConfiguration.get()
+def config = SharedConfiguration.get("url")
 println (config.("jenkinsSlave1"))
 println (config.("jenkinsSlave2"))
 
