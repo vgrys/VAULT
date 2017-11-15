@@ -10,6 +10,6 @@ class config implements Serializable {
             artifactoryRepo: 'bigdata-dss-automation',
             artifactoryUrl: 'http://192.168.56.105:8081',
             targetHostUser  : 'user',
-            targetHost      : "${targetHostUser}@host"
+            targetHost      : "$targetHostUser@host"
     ]
 }
