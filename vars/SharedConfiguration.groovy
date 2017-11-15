@@ -1,4 +1,5 @@
 #!/usr/bin/groovy
+import groovy.transform.NotYetImplemented
 
 class SharedConfiguration implements Serializable {
     def get() {
@@ -13,6 +14,13 @@ class SharedConfiguration implements Serializable {
     }
 
     def get(consulURL) {
-        return "not yet implemented"
+        throw NotYetImplemented
+    }
+
+    def getProperty(propertyName, consulUrl=null) {
+        if (consulUrl) {
+            return get(consulUrl).get(property)
+        }
+        return get().get(property)
     }
 }
