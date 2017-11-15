@@ -2,7 +2,7 @@
 import groovy.transform.NotYetImplemented
 
 class SharedConfiguration implements Serializable {
-    def get() {
+    def getDefault() {
         return [
                 jenkinsSlave1  : 'flex1',
                 jenkinsSlave2  : 'flex',
@@ -13,14 +13,10 @@ class SharedConfiguration implements Serializable {
         ]
     }
 
-    def get(consulURL) {
-        throw NotYetImplemented
-    }
-
-    def getProperty(propertyName, consulUrl=null) {
-        if (consulUrl) {
-            return get(consulUrl).get(property)
+    def get(consulURL=null) {
+        if (consulURL) {
+            throw NotYetImplemented
         }
-        return get().get(property)
+        return getDefault()
     }
 }
