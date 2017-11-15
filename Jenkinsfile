@@ -12,7 +12,7 @@ String bundleName
 
 
 def parameter = SharedConfiguration.get()
-println (parameter.("jenkinsSlave1"))
+println (parameter.(jenkinsSlave1))
 println (parameter.(jenkinsSlave2))
 
 
