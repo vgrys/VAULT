@@ -1,7 +1,6 @@
 #!/usr/bin/groovy
 @Library('shared-library@release/version1')
 
-String artifactoryUrl = 'http://192.168.56.105:8081'
 String atfVersion = '0.1.0'
 String atfRelease = 'release'
 
@@ -37,18 +36,6 @@ node {
         echo "********** End of testing GIT env ***********"
 
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
-    }
-
-    stage ('test variables') {
-        echo "********** test playbook skip ***********"
-
-//        echo "jenkinsSlave1 is $jenkinsSlave1"
-//        echo "jenkinsSlave2 is $jenkinsSlave2"
-//        echo "sshKeyId is $sshKeyId"
-//        echo "artifactoryId is $artifactoryId"
-
-
-        echo "********** End of test variables ***********"
     }
 
     stage('Create Ansible archive') {
@@ -95,13 +82,13 @@ node {
 
     stage('Upload Ansible to Artifactory server') {
         echo "********* Start to upload Ansible to Artifactory server **********"
-        artifactoryTools.ansibleUpload(artifactoryUrl, config.conf.artifactoryRepo, playbooksName)
+        artifactoryTools.ansibleUpload(cfg.artifactoryUrl, cfg.artifactoryRepo, playbooksName)
         echo "********* End of upload Ansible to Artifactory server **********"
     }
 
     stage('Upload ATF archive to Artifactory server') {
         echo "********* Start to upload ATF archive to Artifactory server **********"
-        artifactoryTools.ATFUpload(artifactoryUrl, config.conf.artifactoryRepo)
+        artifactoryTools.ATFUpload(cfg.artifactoryUrl, cfg.artifactoryRepo)
         echo "********* End of upload ATF archive to Artifactory server **********"
     }
 
@@ -109,7 +96,7 @@ node {
         echo "********* Start to install AFT project **********"
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
             dir("${WORKSPACE}/ansible") {
-                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} artifactoryRepo=${config.conf.artifactoryRepo} artifactoryUrl=${artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
+                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} artifactoryRepo=${cfg.artifactoryRepo} artifactoryUrl=${cfg.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
             }
         }
         echo "********* End of install AFT project **********"
@@ -117,7 +104,7 @@ node {
 
     stage('Project deployment') {
         echo pipelineConfig.pad("Start project deployment")
-        pipelineConfig.runDeployProject(artifactoryUrl, config.conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz"  ,targetGroup)
+        pipelineConfig.runDeployProject(cfg.artifactoryUrl, cfg.artifactoryRepo, "test-project", "test-project-20171108105623.tgz"  ,targetGroup)
         echo pipelineConfig.pad("End of project deployment")
     }
 
