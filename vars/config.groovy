@@ -11,6 +11,5 @@ class config implements Serializable {
             artifactoryUrl: 'http://192.168.56.105:8081',
             targetHostUser  : 'user',
             targetHost      : "${targetHostUser}@host"
-
     ]
 }
