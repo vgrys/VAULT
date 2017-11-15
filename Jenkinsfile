@@ -12,7 +12,7 @@ String bundleName
 
 
 def parameter = SharedConfiguration.get()
-println (parameter.(jenkinsSlave1))
+println (parameter.jenkinsSlave1)
 println (parameter.(jenkinsSlave2))
 
 
@@ -90,7 +90,7 @@ node {
 
     stage('Upload Ansible to Artifactory server') {
         echo "********* Start to upload Ansible to Artifactory server **********"
-        artifactoryTools.uploadAnsible(parameter.('artifactoryUrl'), parameter.("artifactoryRepo"), playbooksName, parameter.("artifactoryId"))
+        artifactoryTools.uploadAnsible(parameter.(artifactoryUrl), parameter.(artifactoryRepo), playbooksName, parameter.(artifactoryId))
         echo "********* End of upload Ansible to Artifactory server **********"
     }
 
