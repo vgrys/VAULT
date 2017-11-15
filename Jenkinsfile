@@ -16,7 +16,7 @@ String bundleName
 
 def cfg = config.conf
 println(cfg.jenkinsSlave1)
-//println(cfg.targetHostUser)
+println(cfg.targetHostUser)
 println(cfg.targetHost)
 
 node {
