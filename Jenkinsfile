@@ -13,11 +13,13 @@ String bundleName
 
 def config = SharedConfiguration.get()
 println (config.("jenkinsSlave1"))
+println (config.("jenkinsSlave2"))
 
-def cfg = config.conf
-println(cfg.jenkinsSlave1)
-println(cfg.targetHostUser)
-println(cfg.targetHost)
+
+//def cfg = config.conf
+//println(cfg.jenkinsSlave1)
+//println(cfg.targetHostUser)
+//println(cfg.targetHost)
 
 node {
     pipelineConfig.beginning()
