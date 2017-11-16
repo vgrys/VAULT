@@ -5,7 +5,7 @@ def pad(str) {
 }
 
 def beginning() {
-    currentBuild.result = "SUCCESS"
+//    currentBuild.result = "SUCCESS"
     echo "DEBUG CODE -----> Running ${env.JOB_NAME} on ${env.JENKINS_URL} for branch ${env.BRANCH_NAME}"
 }
 
