@@ -11,7 +11,7 @@ String playbooksVersion = '0.1'
 String bundleName
 
 
-def conf = SharedConfiguration.get('http://192.168.56.105:8081')
+def conf = SharedConfiguration.get()
 println (conf.jenkinsSlave1)
 println (conf.(jenkinsSlave2))
 
