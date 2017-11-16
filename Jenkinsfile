@@ -11,9 +11,9 @@ String playbooksVersion = '0.1'
 String bundleName
 
 
-def cfg = SharedConfiguration.get('http://192.168.56.105:8081')
-println (cfg.jenkinsSlave1)
-println (cfg.(jenkinsSlave2))
+def conf = SharedConfiguration.get('http://192.168.56.105:8081')
+println (conf.jenkinsSlave1)
+println (conf.(jenkinsSlave2))
 
 
 //def cfg = config.conf
@@ -90,13 +90,13 @@ node {
 
     stage('Upload Ansible to Artifactory server') {
         echo "********* Start to upload Ansible to Artifactory server **********"
-        artifactoryTools.uploadAnsible(cfg.artifactoryUrl, cfg.artifactoryRepo, playbooksName, cfg.artifactoryId)
+        artifactoryTools.uploadAnsible(conf.artifactoryUrl, conf.artifactoryRepo, playbooksName, conf.artifactoryId)
         echo "********* End of upload Ansible to Artifactory server **********"
     }
 
     stage('Upload ATF archive to Artifactory server') {
         echo "********* Start to upload ATF archive to Artifactory server **********"
-        artifactoryTools.ATFUpload(cfg.artifactoryUrl, cfg.artifactoryRepo, cfg.artifactoryId)
+        artifactoryTools.ATFUpload(conf.artifactoryUrl, conf.artifactoryRepo, conf.artifactoryId)
         echo "********* End of upload ATF archive to Artifactory server **********"
     }
 
@@ -104,7 +104,7 @@ node {
         echo "********* Start to install AFT project **********"
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
             dir("${WORKSPACE}/ansible") {
-                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} artifactoryRepo=${cfg.artifactoryRepo} artifactoryUrl=${cfg.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
+                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
             }
         }
         echo "********* End of install AFT project **********"
@@ -112,7 +112,7 @@ node {
 
     stage('Project deployment') {
         echo pipelineConfig.pad("Start project deployment")
-        pipelineConfig.runDeployProject(cfg.artifactoryUrl, cfg.artifactoryRepo, "test-project", "test-project-20171108105623.tgz"  ,targetGroup, cfg.artifactoryId)
+        pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz"  ,targetGroup, conf.artifactoryId)
         echo pipelineConfig.pad("End of project deployment")
     }
 
