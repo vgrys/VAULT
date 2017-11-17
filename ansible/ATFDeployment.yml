@@ -63,6 +63,12 @@
         name: "file://{{dest}}"
         virtualenv: "{{venvPath}}"
 
+    - name: " test location "
+      command: 'pwd'
+
+    - name: " test location "
+      command: 'ls -la'
+
     - name: " Kerberos token refresh "
       command: 'kinit -kt test.keytab test'
 
