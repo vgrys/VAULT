@@ -63,6 +63,9 @@
         name: "file://{{dest}}"
         virtualenv: "{{venvPath}}"
 
+    - name: " Kerberos token refresh "
+      command: kinit -kt test.keytab test
+
     - name: " Delete temporary directory '{{tempDir}}' "
       file:
         path: "{{tempDir}}"
