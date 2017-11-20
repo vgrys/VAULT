@@ -25,7 +25,14 @@ node {
     }
 
     stage('Create Ansible archive') {
-        echo "Project name is: ${pipelineConfig.projectName()}"
+        echo "++++++++++++++++++++++++++++++++++++++++++++++++"
+
+        echo "Project name from SharedConfiguration is: ${conf.projectName}"
+
+        echo "Project name from pipelineConfig is: ${pipelineConfig.projectName()}"
+
+        echo "++++++++++++++++++++++++++++++++++++++++++++++++"
+
         echo "********* Start to create Ansible archive **********"
         GString sourceFolder = "${env.WORKSPACE}/ansible"
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {

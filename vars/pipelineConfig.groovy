@@ -17,7 +17,7 @@ def createProjectBundle(sourceFolder) {
 
 def projectName () {
     def conf = SharedConfiguration.get()
-    projectName = conf.projectName
+    return projectName = conf.projectName
 }
 
 def runATFCommand(targetHost, user, projectName, command) {
