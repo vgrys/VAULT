@@ -15,6 +15,11 @@ def createProjectBundle(sourceFolder) {
     echo "created an archive $bundlePath"
 }
 
+def projectName () {
+    def conf = SharedConfiguration.get()
+    projectName = conf.projectName
+}
+
 def runATFCommand(targetHost, user, projectName, command) {
     String commandToRun = "cd /home/${user}/${projectName}; source ./ATFVENV/bin/activate; ${command}"
     sh sshCli(targetHost, commandToRun)

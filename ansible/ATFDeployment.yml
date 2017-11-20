@@ -69,7 +69,7 @@
     - name: " test location "
       command: 'ls -la'
 
-    - name: " Kerberos token refresh "
+#    - name: " Kerberos token refresh "
 #      command: 'kinit -kt test.keytab test'
 
     - name: " Delete temporary directory '{{tempDir}}' "

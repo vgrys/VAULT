@@ -9,7 +9,8 @@ class SharedConfiguration implements Serializable {
                 sshKeyId       : 'SSH-KEY',
                 artifactoryId  : 'arifactoryID',
                 artifactoryRepo: 'bigdata-dss-automation',
-                artifactoryUrl : 'http://192.168.56.105:8081'
+                artifactoryUrl : 'http://192.168.56.105:8081',
+                projectName    : 'env.GIT_REPO'
         ]
     }
 
