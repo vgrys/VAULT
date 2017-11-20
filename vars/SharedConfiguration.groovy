@@ -3,7 +3,6 @@ import groovy.transform.NotYetImplemented
 
 class SharedConfiguration implements Serializable {
     def static get() {
-        def name = "${env.GIT_REPO}"
         return [
                 jenkinsSlave1  : 'flex1',
                 jenkinsSlave2  : 'flex',
@@ -11,7 +10,7 @@ class SharedConfiguration implements Serializable {
                 artifactoryId  : 'arifactoryID',
                 artifactoryRepo: 'bigdata-dss-automation',
                 artifactoryUrl : 'http://192.168.56.105:8081',
-                projectName    :  name
+                projectName    :  'env.GIT_REPO'
         ]
     }
 
