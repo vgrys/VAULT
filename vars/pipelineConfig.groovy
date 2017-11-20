@@ -17,7 +17,8 @@ def createProjectBundle(sourceFolder) {
 
 def projectName () {
     def conf = SharedConfiguration.get()
-    def projectName = "${conf.projectName}"
+    def test = echo conf.projectName
+    def projectName = test
     return projectName
 }
 
