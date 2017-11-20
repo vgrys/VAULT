@@ -54,8 +54,6 @@ node {
 //    }
 
     stage('Build ATF project') {
-        echo "${env.PROJECT_ARCHIVE}"
-
         echo "********* Start to build ATF project **********"
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
             echo " Build ATF project because branch is '${env.GIT_BRANCH_TYPE}'"
@@ -82,7 +80,7 @@ node {
         echo "********* Start to install AFT project **********"
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
             dir("${WORKSPACE}/ansible") {
-                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml -vvv"
+                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
             }
         }
         echo "********* End of install AFT project **********"
