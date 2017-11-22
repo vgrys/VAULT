@@ -28,14 +28,18 @@
         mode: 0755
 
     - name: " Download build 'nifi-{{NiFiVersion}}-bin.tar.gz' from 'www.apache.org' server into '{{tempDir}}' directory "
-      uri:
-        validate_certs: no
-        creates: no
-        timeout: 300
-        url: "{{NiFiPath}}"
-        method: GET
-        return_content: yes
-        dest: "{{destNiFi}}"
+      command: "wget {{NiFiPath}}"
+
+
+#    - name: " Download build 'nifi-{{NiFiVersion}}-bin.tar.gz' from 'www.apache.org' server into '{{tempDir}}' directory "
+#      uri:
+#        validate_certs: no
+#        creates: no
+#        timeout: 300
+#        url: "{{NiFiPath}}"
+#        method: GET
+#        return_content: yes
+#        dest: "{{destNiFi}}"
 
     - name: " Extract 'nifi-{{NiFiVersion}}-bin.tar.gz' into '{{tempDir}}' directory "
       unarchive:
