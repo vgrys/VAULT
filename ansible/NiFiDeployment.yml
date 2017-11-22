@@ -33,7 +33,7 @@
         url: "{{NiFiPath}}"
         method: GET
         return_content: yes
-        dest: "{{dest}}"
+        dest: "{{destNiFi}}"
 
     - name: " Extract 'nifi-{{NiFiVersion}}-bin.tar.gz' into '{{tempDir}}' directory "
       unarchive:
