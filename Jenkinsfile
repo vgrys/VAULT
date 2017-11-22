@@ -87,7 +87,7 @@ node {
     stage('NiFi deployment') {
         echo "********* Start to deploy NiFi **********"
         dir("${WORKSPACE}/ansible") {
-            sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} NiFiVersion=${NiFiVersion}' NiFiDeployment.yml"
+            sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} NiFiVersion=${conf.NiFiVersion}' NiFiDeployment.yml"
         }
     }
 
