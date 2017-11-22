@@ -4,7 +4,7 @@
 String atfVersion = '0.1.0'
 String atfRelease = 'release'
 
-String targetGroup = "prod"
+String targetGroup = "master"
 
 String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
