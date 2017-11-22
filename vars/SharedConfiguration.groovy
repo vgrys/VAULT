@@ -10,7 +10,8 @@ class SharedConfiguration implements Serializable {
                 artifactoryId  : 'arifactoryID',
                 artifactoryRepo: 'bigdata-dss-automation',
                 artifactoryUrl : 'http://192.168.56.105:8081',
-                projectName    :  'env.GIT_REPO'
+                projectName    : 'env.GIT_REPO',
+                NiFiVersion    : '1.4.0'
         ]
     }
 

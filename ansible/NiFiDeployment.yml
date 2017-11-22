@@ -1,0 +1,57 @@
+---
+- hosts: "{{server}}"
+  any_errors_fatal: true
+
+  vars_files:
+    - vars/configs.yml
+
+
+  vars:
+    - tempDir: "$HOME/nifi"
+    - destNiFi: "{{tempDir}}/nifi-{{NiFiVersion}}-bin.tar.gz"
+    - venvPath: "/tmp/ATFVENV/"
+    - zephSrc: "{{zephCred}}"
+    - zephDest: "$HOME/zephCred"
+
+  tasks:
+
+#    - name: " Delete temporary directory '{{tempDir}}' if exists "
+#      file:
+#        path: "{{tempDir}}"
+#        state: absent
+
+    - name: " Create temporary directory '{{tempDir}}' "
+      file:
+        path: "{{tempDir}}"
+        state: directory
+        mode: 0755
+
+    - name: " Download build 'nifi-{{NiFiVersion}}-bin.tar.gz' from 'www.apache.org' server into '{{tempDir}} directory "
+      uri:
+        validate_certs: no
+        creates: no
+        url: "{{NiFiPath}}"
+        method: GET
+        return_content: yes
+        dest: "{{dest}}"
+
+    - name: " Extract 'nifi-{{NiFiVersion}}-bin.tar.gz' into '{{tempDir}}' directory "
+      unarchive:
+        src: "{{destNiFi}}"
+        dest: "{{tempDir}}"
+        remote_src: yes
+
+    - name: " Create virtualenv '{{venvPath}}' if doesn't exist "
+      command: "virtualenv {{venvPath}} -p python3.6 creates={{venvPath}}"
+
+#    - name: " Deploy ATF project "
+#      pip:
+#        virtualenv_site_packages: yes
+#        name: "file://{{dest}}"
+#        virtualenv: "{{venvPath}}"
+
+
+#    - name: " Delete temporary directory '{{tempDir}}' "
+#      file:
+#        path: "{{tempDir}}"
+#        state: absent
