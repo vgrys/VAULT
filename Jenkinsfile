@@ -10,7 +10,8 @@ String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
 String nifiURL = 'http://192.168.56.105:8088'
-
+String nifiRootID = 'e3f04b4f-015f-1000-b8f7-a1141fed5991'
+String nifiClientID = 'cfc9c5fd-0159-1000-e150-054ac8339ef8'
 
 def conf = SharedConfiguration.get()
 
@@ -28,6 +29,16 @@ node {
     stage ('NiFi template deployment') {
         echo "********** NiFi template deployment ***********"
         nifi.get(nifiURL, 'process-groups', 'root')
+    }
+
+    stage ('NiFi get info') {
+        echo "********** NiFi NiFi get info ***********"
+        nifi.get(nifiURL, 'process-groups', 'root')
+    }
+
+    stage ('NiFi template deployment') {
+        echo "********** NiFi template deployment ***********"
+        nifi.post(nifiURL, 'process-groups', ${nifiRootID}, ${nifiClientID}, 'group-from-jenkins')
     }
 
 
