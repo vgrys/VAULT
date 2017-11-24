@@ -9,6 +9,7 @@ String targetGroup = "master"
 String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
+String nifiURL = 'http://192.168.56.105:8088'
 
 
 def conf = SharedConfiguration.get()
@@ -24,15 +25,14 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
+    stage ('NiFi template deployment') {
+        echo "********** NiFi template deployment ***********"
+        nifi.get(nifiURL, 'process-groups', 'root')
+    }
+
+
+
     stage('Create Ansible archive') {
-        echo "++++++++++++++++++++++++++++++++++++++++++++++++"
-
-        echo "Project name from SharedConfiguration is: ${conf.projectName}"
-
-        echo "Project name from pipelineConfig is: ${pipelineConfig.projectName()}"
-
-        echo "++++++++++++++++++++++++++++++++++++++++++++++++"
-
         echo "********* Start to create Ansible archive **********"
         GString sourceFolder = "${env.WORKSPACE}/ansible"
         if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
