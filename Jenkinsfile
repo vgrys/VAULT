@@ -26,11 +26,6 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
-    stage ('NiFi template deployment') {
-        echo "********** NiFi template deployment ***********"
-        nifi.get(nifiURL, 'process-groups', 'root')
-    }
-
     stage ('NiFi get info') {
         echo "********** NiFi NiFi get info ***********"
         nifi.get(nifiURL, 'process-groups', 'root')
@@ -38,7 +33,7 @@ node {
 
     stage ('NiFi template deployment') {
         echo "********** NiFi template deployment ***********"
-        nifi.post(nifiURL, 'process-groups', nifiRootID, 'group-from-jenkins')
+        nifi.post(nifiURL, 'process-groups', nifiRootID, nifiClientID, 'group-from-jenkins')
     }
 
 
