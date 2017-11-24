@@ -38,7 +38,7 @@ node {
 
     stage ('NiFi template deployment') {
         echo "********** NiFi template deployment ***********"
-        nifi.post(nifiURL, 'process-groups', nifiRootID, nifiClientID, 'group-from-jenkins')
+        nifi.post(nifiURL, 'process-groups', nifiRootID, 'group-from-jenkins')
     }
 
 
