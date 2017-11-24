@@ -84,13 +84,6 @@ node {
         echo "********* End of upload ATF archive to Artifactory server **********"
     }
 
-    stage('NiFi deployment') {
-        echo "********* Start to deploy NiFi **********"
-        dir("${WORKSPACE}/ansible") {
-            sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} NiFiVersion=${conf.NiFiVersion}' NiFiDeployment.yml -vvv"
-        }
-    }
-
     stage('ATF install') {
         echo "********* Start to install AFT project **********"
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
