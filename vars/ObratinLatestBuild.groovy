@@ -1,9 +1,6 @@
 #!/usr/bin/env groovy
 
 // Artifactory settings
-host="192.168.56.105:8081"
-username="grys"
-password="AKCp5Z2Y3srMsSpGGpfEeGWu7FTQdexXPAfhxF5stW6mYh1TfrkwPmopZ5Yq4MgGH3BfgskkE"
 
 //def runDeployATF(ansibleCommand, artifactoryId) {
 //    withCredentials([usernamePassword(credentialsId: "${artifactoryID}", usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
