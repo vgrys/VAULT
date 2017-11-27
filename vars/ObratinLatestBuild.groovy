@@ -13,8 +13,8 @@ password="AKCp5Z2Y3srMsSpGGpfEeGWu7FTQdexXPAfhxF5stW6mYh1TfrkwPmopZ5Yq4MgGH3Bfgs
 //}
 
 def result () {
-    def curl = "curl -u $username:$password -X POST  http://$host/artifactory/api/search/aql -H"
-    resultAsJson = "$curl \"content-type: text/plain\" -d 'items.find({ \"repo\": {\"$eq\":\"bigdata-dss-automation\"}, \"path\" : \"atf/release\", \"name\": {\"$match\" : \"atf-*\"}})'"
+    GString curl = "curl -u $username:$password -X POST  http://$host/artifactory/api/search/aql -H"
+    resultAsJson = ["$curl \"content-type: text/plain\" -d 'items.find({ \"repo\": {\"$eq\":\"bigdata-dss-automation\"}, \"path\" : \"atf/release\", \"name\": {\"$match\" : \"atf-*\"}})'"].execute().text
 
     echo resultAsJson
 }
