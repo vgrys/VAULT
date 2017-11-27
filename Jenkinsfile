@@ -26,8 +26,13 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
+    stage ('Obtain latest Build') {
+        echo "********** Obtain latest Build ***********"
+        ObratinLatestBuild.result()
+    }
+
     stage ('NiFi get info') {
-        echo "********** NiFi NiFi get info ***********"
+        echo "********** NiFi get info ***********"
         nifi.get(nifiURL, 'process-groups', 'root')
     }
 
