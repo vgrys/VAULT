@@ -17,8 +17,8 @@ def get (URL, process, id) {
     echo "parentGroupId is: '${result.component.parentGroupId}'"
 }
 
-def uploadTemplate (nifiURL, process, nifiRootID, nifiClientID, groupFromJenkins, templatePath) {
-    sh "curl -F template=@${templatePath} -X POST  http://192.168.56.105:8088/nifi-api/process-groups/root/templates/upload > result"
+def uploadTemplate (URL, process, templatePath) {
+    sh "curl -F template=@${templatePath} -X POST  ${URL}/nifi-api/${process}/root/templates/upload > result"
     echo "********** IN DSS ********************"
     def output = readFile('result').trim()
     echo output
