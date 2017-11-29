@@ -18,7 +18,8 @@ def get (URL, process, id) {
 }
 
 def uploadTemplate (nifiURL, process, nifiRootID, nifiClientID, groupFromJenkins, templatePath) {
-    sh "curl -iv -F template=@${templatePath} -X POST  http://192.168.56.105:8088/nifi-api/process-groups/root/templates/upload > result"
+    sh "curl -F template=@${templatePath} -X POST  http://192.168.56.105:8088/nifi-api/process-groups/root/templates/upload > result"
+    echo "********** IN DSS ********************"
     def output = readFile('result').trim()
     def result = new XmlSlurper().parseText("${output}")
     echo "Group ID is: '${result.technology.name.output()}'"
