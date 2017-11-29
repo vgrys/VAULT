@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 import groovy.json.JsonSlurper
-
+import groovy.util.XmlSlurper
 
 
 def get (URL, process, id) {
@@ -18,7 +18,11 @@ def get (URL, process, id) {
 }
 
 def uploadTemplate (nifiURL, process, nifiRootID, nifiClientID, groupFromJenkins, templatePath) {
-    sh "curl -iv -F template=@${templatePath} -X POST  http://192.168.56.105:8088/nifi-api/process-groups/root/templates/upload"
+    sh "curl -iv -F template=@${templatePath} -X POST  http://192.168.56.105:8088/nifi-api/process-groups/root/templates/upload > result"
+    def output = readFile('result').trim()
+    def result = new XmlSlurper().parseText("${output}")
+    echo "Group ID is: '${result.technology.name.output()}'"
+
 }
 
 //curl -X GET 192.168.56.105:8088/nifi-api/flow/process-groups/e96237ab-015f-1000-d7ee-a0ea33f79a1e
