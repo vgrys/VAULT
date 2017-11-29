@@ -22,7 +22,7 @@ def uploadTemplate (nifiURL, process, nifiRootID, nifiClientID, groupFromJenkins
     echo "********** IN DSS ********************"
     def output = readFile('result').trim()
     def result = new XmlSlurper().parseText("${output}")
-    echo "Group ID is: '${result.name()}'"
+    echo "Group ID is: '${result.templateEntity.template.name()}'"
 
 }
 
