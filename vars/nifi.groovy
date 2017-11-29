@@ -10,12 +10,11 @@ def get (URL, process, id) {
     def sluper = new JsonSlurper()
     def result = sluper.parseText("${output}")
 //    assert result.component.id
-    echo result.component.id
-    echo result.component.name
-    echo result.uri
-    echo "revision version is: ${result.revision.version}"
-    println(result.revision.version)
-    echo result.component.parentGroupId
+    echo "Group ID is: '${result.component.id}'"
+    echo " Group name is: '${result.component.name}'"
+    echo "URI is: '${result.uri}'"
+    echo "revision version is: '${result.revision.version}'"
+    echo "parentGroupId is: '${result.component.parentGroupId}'"
 
 
 
