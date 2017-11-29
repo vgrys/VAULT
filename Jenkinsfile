@@ -33,9 +33,8 @@ node {
 
     stage ('NiFi get info') {
         echo "********** NiFi get info ***********"
-        def result = nifi.get(nifiURL, 'process-groups', 'e8e585bd-015f-1000-c903-46aab0cb3971')
+        nifi.get(nifiURL, 'process-groups', 'e8e585bd-015f-1000-c903-46aab0cb3971')
         echo "**********************************************"
-        echo "result is: ${result}"
     }
 
 //    stage ('NiFi template deployment') {
