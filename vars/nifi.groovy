@@ -3,13 +3,12 @@ import groovy.json.JsonSlurper
 import groovy.util.XmlSlurper
 
 
-def get (URL, process, id) {
+def getInfo (URL, process, id) {
     sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"
     def output = readFile('result').trim()
     echo "********** IN DSS ********************"
     def sluper = new JsonSlurper()
     def result = sluper.parseText("${output}")
-//    assert result.component.id
     echo "Group ID is: '${result.component.id}'"
     echo " Group name is: '${result.component.name}'"
     echo "URI is: '${result.uri}'"
@@ -23,10 +22,8 @@ def uploadTemplate (URL, process, templatePath) {
     def output = readFile('result').trim()
     echo output
     def result = new XmlSlurper().parseText("${output}")
-//    assert result instanceof groovy.util.slurpersupport.GPathResult
     echo "Name of the template is: '${result.template.name}'"
     echo "ID of the template is: '${result.template.id}'"
-
 }
 
 //curl -X GET 192.168.56.105:8088/nifi-api/flow/process-groups/e96237ab-015f-1000-d7ee-a0ea33f79a1e

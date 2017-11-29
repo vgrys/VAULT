@@ -33,7 +33,7 @@ node {
 
     stage ('NiFi get info') {
         echo "********** NiFi get info ***********"
-        nifi.get(nifiURL, 'process-groups', 'e8e585bd-015f-1000-c903-46aab0cb3971')
+        nifi.getInfo(nifiURL, 'process-groups', 'e8e585bd-015f-1000-c903-46aab0cb3971')
     }
 
     stage ('NiFi template deployment') {

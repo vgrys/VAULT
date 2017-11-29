@@ -1,77 +1,778 @@
 {
-  "revision": {
-    "clientId": "076cf0c2-0160-1000-3c6b-7957e9203c58",
-    "version": 1
-  },
-  "id": "e8e585bd-015f-1000-c903-46aab0cb3971",
-  "uri": "http://192.168.56.105:8088/nifi-api/process-groups/e8e585bd-015f-1000-c903-46aab0cb3971",
-  "position": {
-    "x": 1636.9335248299612,
-    "y": 226.2077482677031
-  },
-  "permissions": {
-    "canRead": true,
-    "canWrite": true
-  },
-  "bulletins": [],
-  "component": {
-    "id": "e8e585bd-015f-1000-c903-46aab0cb3971",
-    "parentGroupId": "e3f04b4f-015f-1000-b8f7-a1141fed5991",
-    "position": {
-      "x": 1636.9335248299612,
-      "y": 226.2077482677031
-    },
-    "name": "test2",
-    "comments": "",
-    "runningCount": 0,
-    "stoppedCount": 2,
-    "invalidCount": 1,
-    "disabledCount": 0,
-    "activeRemotePortCount": 0,
-    "inactiveRemotePortCount": 0,
-    "inputPortCount": 0,
-    "outputPortCount": 1
-  },
-  "status": {
-    "id": "e8e585bd-015f-1000-c903-46aab0cb3971",
-    "name": "test2",
-    "statsLastRefreshed": "13:00:18 EET",
-    "aggregateSnapshot": {
-      "id": "e8e585bd-015f-1000-c903-46aab0cb3971",
-      "name": "test2",
-      "flowFilesIn": 0,
-      "bytesIn": 0,
-      "input": "0 (0 bytes)",
-      "flowFilesQueued": 0,
-      "bytesQueued": 0,
-      "queued": "0 (0 bytes)",
-      "queuedCount": "0",
-      "queuedSize": "0 bytes",
-      "bytesRead": 0,
-      "read": "0 bytes",
-      "bytesWritten": 0,
-      "written": "0 bytes",
-      "flowFilesOut": 0,
-      "bytesOut": 0,
-      "output": "0 (0 bytes)",
-      "flowFilesTransferred": 0,
-      "bytesTransferred": 0,
-      "transferred": "0 (0 bytes)",
-      "bytesReceived": 0,
-      "flowFilesReceived": 0,
-      "received": "0 (0 bytes)",
-      "bytesSent": 0,
-      "flowFilesSent": 0,
-      "sent": "0 (0 bytes)",
-      "activeThreadCount": 0
-    }
-  },
-  "runningCount": 0,
-  "stoppedCount": 2,
-  "invalidCount": 1,
-  "disabledCount": 0,
-  "activeRemotePortCount": 0,
-  "inactiveRemotePortCount": 0,
-  "inputPortCount": 0,
-  "outputPortCount": 1
+  "flow": {
+    "processGroups": [],
+    "remoteProcessGroups": [],
+    "processors": [
+      {
+        "revision": {
+          "version": 0
+        },
+        "id": "8d1bcb66-9862-36e2-ab12-7fad69766ede",
+        "uri": "http://192.168.56.105:8088/nifi-api/processors/8d1bcb66-9862-36e2-ab12-7fad69766ede",
+        "position": {
+          "x": 0.0,
+          "y": 450.31854627367045
+        },
+        "permissions": {
+          "canRead": true,
+          "canWrite": true
+        },
+        "bulletins": [],
+        "component": {
+          "id": "8d1bcb66-9862-36e2-ab12-7fad69766ede",
+          "parentGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "position": {
+            "x": 0.0,
+            "y": 450.31854627367045
+          },
+          "name": "GenerateFlowFile",
+          "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+          "bundle": {
+            "group": "org.apache.nifi",
+            "artifact": "nifi-standard-nar",
+            "version": "1.4.0"
+          },
+          "state": "STOPPED",
+          "style": {},
+          "relationships": [
+            {
+              "name": "success",
+              "description": "",
+              "autoTerminate": false
+            }
+          ],
+          "supportsParallelProcessing": true,
+          "supportsEventDriven": false,
+          "supportsBatching": true,
+          "persistsState": false,
+          "restricted": false,
+          "deprecated": false,
+          "multipleVersionsAvailable": false,
+          "inputRequirement": "INPUT_FORBIDDEN",
+          "config": {
+            "properties": {
+              "File Size": "10B",
+              "Batch Size": "1",
+              "Data Format": "Text",
+              "Unique FlowFiles": "false",
+              "generate-ff-custom-text": null,
+              "character-set": "UTF-8"
+            },
+            "descriptors": {
+              "File Size": {
+                "name": "File Size",
+                "displayName": "File Size",
+                "description": "The size of the file that will be used",
+                "defaultValue": "0B",
+                "required": true,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              },
+              "Batch Size": {
+                "name": "Batch Size",
+                "displayName": "Batch Size",
+                "description": "The number of FlowFiles to be transferred in each invocation",
+                "defaultValue": "1",
+                "required": true,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              },
+              "Data Format": {
+                "name": "Data Format",
+                "displayName": "Data Format",
+                "description": "Specifies whether the data should be Text or Binary",
+                "defaultValue": "Text",
+                "allowableValues": [
+                  {
+                    "allowableValue": {
+                      "displayName": "Binary",
+                      "value": "Binary"
+                    },
+                    "canRead": true
+                  },
+                  {
+                    "allowableValue": {
+                      "displayName": "Text",
+                      "value": "Text"
+                    },
+                    "canRead": true
+                  }
+                ],
+                "required": true,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              },
+              "Unique FlowFiles": {
+                "name": "Unique FlowFiles",
+                "displayName": "Unique FlowFiles",
+                "description": "If true, each FlowFile that is generated will be unique. If false, a random value will be generated and all FlowFiles will get the same content but this offers much higher throughput",
+                "defaultValue": "false",
+                "allowableValues": [
+                  {
+                    "allowableValue": {
+                      "displayName": "true",
+                      "value": "true"
+                    },
+                    "canRead": true
+                  },
+                  {
+                    "allowableValue": {
+                      "displayName": "false",
+                      "value": "false"
+                    },
+                    "canRead": true
+                  }
+                ],
+                "required": true,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              },
+              "generate-ff-custom-text": {
+                "name": "generate-ff-custom-text",
+                "displayName": "Custom Text",
+                "description": "If Data Format is text and if Unique FlowFiles is false, then this custom text will be used as content of the generated FlowFiles and the File Size will be ignored. Finally, if Expression Language is used, evaluation will be performed only once per batch of generated FlowFiles",
+                "required": false,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": true
+              },
+              "character-set": {
+                "name": "character-set",
+                "displayName": "Character Set",
+                "description": "Specifies the character set to use when writing the bytes of Custom Text to a flow file.",
+                "defaultValue": "UTF-8",
+                "required": true,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              }
+            },
+            "schedulingPeriod": "1 sec",
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "executionNode": "ALL",
+            "penaltyDuration": "30 sec",
+            "yieldDuration": "1 sec",
+            "bulletinLevel": "WARN",
+            "runDurationMillis": 0,
+            "concurrentlySchedulableTaskCount": 1,
+            "comments": "",
+            "lossTolerant": false,
+            "defaultConcurrentTasks": {
+              "TIMER_DRIVEN": "1",
+              "EVENT_DRIVEN": "0",
+              "CRON_DRIVEN": "1"
+            },
+            "defaultSchedulingPeriod": {
+              "TIMER_DRIVEN": "0 sec",
+              "CRON_DRIVEN": "* * * * * ?"
+            }
+          },
+          "extensionMissing": false
+        },
+        "inputRequirement": "INPUT_FORBIDDEN",
+        "status": {
+          "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "id": "8d1bcb66-9862-36e2-ab12-7fad69766ede",
+          "name": "GenerateFlowFile",
+          "statsLastRefreshed": "17:15:27 EET",
+          "aggregateSnapshot": {
+            "id": "8d1bcb66-9862-36e2-ab12-7fad69766ede",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "GenerateFlowFile",
+            "type": "GenerateFlowFile",
+            "runStatus": "Stopped",
+            "bytesRead": 0,
+            "bytesWritten": 0,
+            "read": "0 bytes",
+            "written": "0 bytes",
+            "flowFilesIn": 0,
+            "bytesIn": 0,
+            "input": "0 (0 bytes)",
+            "flowFilesOut": 0,
+            "bytesOut": 0,
+            "output": "0 (0 bytes)",
+            "taskCount": 0,
+            "tasksDurationNanos": 0,
+            "tasks": "0",
+            "tasksDuration": "00:00:00.000",
+            "activeThreadCount": 0
+          }
+        }
+      },
+      {
+        "revision": {
+          "version": 0
+        },
+        "id": "03815733-d30d-3d57-9b37-914ea3c22702",
+        "uri": "http://192.168.56.105:8088/nifi-api/processors/03815733-d30d-3d57-9b37-914ea3c22702",
+        "position": {
+          "x": 483.59872761789387,
+          "y": 98.73410200328786
+        },
+        "permissions": {
+          "canRead": true,
+          "canWrite": true
+        },
+        "bulletins": [],
+        "component": {
+          "id": "03815733-d30d-3d57-9b37-914ea3c22702",
+          "parentGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "position": {
+            "x": 483.59872761789387,
+            "y": 98.73410200328786
+          },
+          "name": "LogAttribute",
+          "type": "org.apache.nifi.processors.standard.LogAttribute",
+          "bundle": {
+            "group": "org.apache.nifi",
+            "artifact": "nifi-standard-nar",
+            "version": "1.4.0"
+          },
+          "state": "STOPPED",
+          "style": {},
+          "relationships": [
+            {
+              "name": "success",
+              "description": "All FlowFiles are routed to this relationship",
+              "autoTerminate": false
+            }
+          ],
+          "supportsParallelProcessing": true,
+          "supportsEventDriven": true,
+          "supportsBatching": true,
+          "persistsState": false,
+          "restricted": false,
+          "deprecated": false,
+          "multipleVersionsAvailable": false,
+          "inputRequirement": "INPUT_REQUIRED",
+          "config": {
+            "properties": {
+              "Log Level": "info",
+              "Log Payload": "false",
+              "Attributes to Log": null,
+              "attributes-to-log-regex": ".*",
+              "Attributes to Ignore": null,
+              "attributes-to-ignore-regex": null,
+              "Log prefix": null,
+              "character-set": "UTF-8"
+            },
+            "descriptors": {
+              "Log Level": {
+                "name": "Log Level",
+                "displayName": "Log Level",
+                "description": "The Log Level to use when logging the Attributes",
+                "defaultValue": "info",
+                "allowableValues": [
+                  {
+                    "allowableValue": {
+                      "displayName": "trace",
+                      "value": "trace"
+                    },
+                    "canRead": true
+                  },
+                  {
+                    "allowableValue": {
+                      "displayName": "debug",
+                      "value": "debug"
+                    },
+                    "canRead": true
+                  },
+                  {
+                    "allowableValue": {
+                      "displayName": "info",
+                      "value": "info"
+                    },
+                    "canRead": true
+                  },
+                  {
+                    "allowableValue": {
+                      "displayName": "warn",
+                      "value": "warn"
+                    },
+                    "canRead": true
+                  },
+                  {
+                    "allowableValue": {
+                      "displayName": "error",
+                      "value": "error"
+                    },
+                    "canRead": true
+                  }
+                ],
+                "required": true,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              },
+              "Log Payload": {
+                "name": "Log Payload",
+                "displayName": "Log Payload",
+                "description": "If true, the FlowFile's payload will be logged, in addition to its attributes; otherwise, just the Attributes will be logged.",
+                "defaultValue": "false",
+                "allowableValues": [
+                  {
+                    "allowableValue": {
+                      "displayName": "true",
+                      "value": "true"
+                    },
+                    "canRead": true
+                  },
+                  {
+                    "allowableValue": {
+                      "displayName": "false",
+                      "value": "false"
+                    },
+                    "canRead": true
+                  }
+                ],
+                "required": true,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              },
+              "Attributes to Log": {
+                "name": "Attributes to Log",
+                "displayName": "Attributes to Log",
+                "description": "A comma-separated list of Attributes to Log. If not specified, all attributes will be logged unless `Attributes to Log by Regular Expression` is modified. There's an AND relationship between the two properties.",
+                "required": false,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              },
+              "attributes-to-log-regex": {
+                "name": "attributes-to-log-regex",
+                "displayName": "Attributes to Log by Regular Expression",
+                "description": "A regular expression indicating the Attributes to Log. If not specified, all attributes will be logged unless `Attributes to Log` is modified. There's an AND relationship between the two properties.",
+                "defaultValue": ".*",
+                "required": false,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              },
+              "Attributes to Ignore": {
+                "name": "Attributes to Ignore",
+                "displayName": "Attributes to Ignore",
+                "description": "A comma-separated list of Attributes to ignore. If not specified, no attributes will be ignored unless `Attributes to Ignore by Regular Expression` is modified. There's an OR relationship between the two properties.",
+                "required": false,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              },
+              "attributes-to-ignore-regex": {
+                "name": "attributes-to-ignore-regex",
+                "displayName": "Attributes to Ignore by Regular Expression",
+                "description": "A regular expression indicating the Attributes to Ignore. If not specified, no attributes will be ignored unless `Attributes to Ignore` is modified. There's an OR relationship between the two properties.",
+                "required": false,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": false
+              },
+              "Log prefix": {
+                "name": "Log prefix",
+                "displayName": "Log prefix",
+                "description": "Log prefix appended to the log lines. It helps to distinguish the output of multiple LogAttribute processors.",
+                "required": false,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": true
+              },
+              "character-set": {
+                "name": "character-set",
+                "displayName": "Character Set",
+                "description": "The name of the CharacterSet to use",
+                "defaultValue": "UTF-8",
+                "required": true,
+                "sensitive": false,
+                "dynamic": false,
+                "supportsEl": true
+              }
+            },
+            "schedulingPeriod": "0 sec",
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "executionNode": "ALL",
+            "penaltyDuration": "30 sec",
+            "yieldDuration": "1 sec",
+            "bulletinLevel": "WARN",
+            "runDurationMillis": 0,
+            "concurrentlySchedulableTaskCount": 1,
+            "comments": "",
+            "lossTolerant": false,
+            "defaultConcurrentTasks": {
+              "TIMER_DRIVEN": "1",
+              "EVENT_DRIVEN": "0",
+              "CRON_DRIVEN": "1"
+            },
+            "defaultSchedulingPeriod": {
+              "TIMER_DRIVEN": "0 sec",
+              "CRON_DRIVEN": "* * * * * ?"
+            }
+          },
+          "extensionMissing": false
+        },
+        "inputRequirement": "INPUT_REQUIRED",
+        "status": {
+          "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "id": "03815733-d30d-3d57-9b37-914ea3c22702",
+          "name": "LogAttribute",
+          "statsLastRefreshed": "17:15:27 EET",
+          "aggregateSnapshot": {
+            "id": "03815733-d30d-3d57-9b37-914ea3c22702",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "LogAttribute",
+            "type": "LogAttribute",
+            "runStatus": "Stopped",
+            "bytesRead": 0,
+            "bytesWritten": 0,
+            "read": "0 bytes",
+            "written": "0 bytes",
+            "flowFilesIn": 0,
+            "bytesIn": 0,
+            "input": "0 (0 bytes)",
+            "flowFilesOut": 0,
+            "bytesOut": 0,
+            "output": "0 (0 bytes)",
+            "taskCount": 0,
+            "tasksDurationNanos": 0,
+            "tasks": "0",
+            "tasksDuration": "00:00:00.000",
+            "activeThreadCount": 0
+          }
+        }
+      }
+    ],
+    "inputPorts": [],
+    "outputPorts": [
+      {
+        "revision": {
+          "version": 0
+        },
+        "id": "bd31e644-ce2f-3eac-be43-f5fc6004ddb8",
+        "uri": "http://192.168.56.105:8088/nifi-api/output-ports/bd31e644-ce2f-3eac-be43-f5fc6004ddb8",
+        "position": {
+          "x": 1090.8200573267704,
+          "y": 0.0
+        },
+        "permissions": {
+          "canRead": true,
+          "canWrite": true
+        },
+        "bulletins": [],
+        "component": {
+          "id": "bd31e644-ce2f-3eac-be43-f5fc6004ddb8",
+          "parentGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "position": {
+            "x": 1090.8200573267704,
+            "y": 0.0
+          },
+          "name": "success",
+          "comments": "",
+          "state": "STOPPED",
+          "type": "OUTPUT_PORT",
+          "concurrentlySchedulableTaskCount": 1,
+          "validationErrors": [
+            "'Port 'success'' is invalid because Output connection for port 'success' is not defined."
+          ]
+        },
+        "status": {
+          "id": "bd31e644-ce2f-3eac-be43-f5fc6004ddb8",
+          "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "name": "success",
+          "runStatus": "Invalid",
+          "statsLastRefreshed": "17:15:27 EET",
+          "aggregateSnapshot": {
+            "id": "bd31e644-ce2f-3eac-be43-f5fc6004ddb8",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "success",
+            "activeThreadCount": 0,
+            "flowFilesIn": 0,
+            "bytesIn": 0,
+            "input": "0 (0 bytes)",
+            "flowFilesOut": 0,
+            "bytesOut": 0,
+            "output": "0 (0 bytes)",
+            "runStatus": "Invalid"
+          }
+        },
+        "portType": "OUTPUT_PORT"
+      }
+    ],
+    "connections": [
+      {
+        "revision": {
+          "version": 0
+        },
+        "id": "88be4720-e9aa-31c8-1f29-ef49058e0e2b",
+        "uri": "http://192.168.56.105:8088/nifi-api/connections/88be4720-e9aa-31c8-1f29-ef49058e0e2b",
+        "permissions": {
+          "canRead": true,
+          "canWrite": true
+        },
+        "component": {
+          "id": "88be4720-e9aa-31c8-1f29-ef49058e0e2b",
+          "parentGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "source": {
+            "id": "8d1bcb66-9862-36e2-ab12-7fad69766ede",
+            "type": "PROCESSOR",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "GenerateFlowFile",
+            "running": false,
+            "comments": ""
+          },
+          "destination": {
+            "id": "03815733-d30d-3d57-9b37-914ea3c22702",
+            "type": "PROCESSOR",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "LogAttribute",
+            "running": false,
+            "comments": ""
+          },
+          "name": "",
+          "labelIndex": 1,
+          "zIndex": 0,
+          "selectedRelationships": [
+            "success"
+          ],
+          "availableRelationships": [
+            "success"
+          ],
+          "backPressureObjectThreshold": 10000,
+          "backPressureDataSizeThreshold": "1 GB",
+          "flowFileExpiration": "0 sec",
+          "prioritizers": [],
+          "bends": []
+        },
+        "status": {
+          "id": "88be4720-e9aa-31c8-1f29-ef49058e0e2b",
+          "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "name": "success",
+          "statsLastRefreshed": "17:15:27 EET",
+          "sourceId": "8d1bcb66-9862-36e2-ab12-7fad69766ede",
+          "sourceName": "GenerateFlowFile",
+          "destinationId": "03815733-d30d-3d57-9b37-914ea3c22702",
+          "destinationName": "LogAttribute",
+          "aggregateSnapshot": {
+            "id": "88be4720-e9aa-31c8-1f29-ef49058e0e2b",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "success",
+            "sourceName": "GenerateFlowFile",
+            "destinationName": "LogAttribute",
+            "flowFilesIn": 0,
+            "bytesIn": 0,
+            "input": "0 (0 bytes)",
+            "flowFilesOut": 0,
+            "bytesOut": 0,
+            "output": "0 (0 bytes)",
+            "flowFilesQueued": 0,
+            "bytesQueued": 0,
+            "queued": "0 (0 bytes)",
+            "queuedSize": "0 bytes",
+            "queuedCount": "0",
+            "percentUseCount": 0,
+            "percentUseBytes": 0
+          }
+        },
+        "bends": [],
+        "labelIndex": 1,
+        "zIndex": 0,
+        "sourceId": "8d1bcb66-9862-36e2-ab12-7fad69766ede",
+        "sourceGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+        "sourceType": "PROCESSOR",
+        "destinationId": "03815733-d30d-3d57-9b37-914ea3c22702",
+        "destinationGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+        "destinationType": "PROCESSOR"
+      },
+      {
+        "revision": {
+          "version": 0
+        },
+        "id": "908d13f7-b649-3e43-aa61-63101bd16173",
+        "uri": "http://192.168.56.105:8088/nifi-api/connections/908d13f7-b649-3e43-aa61-63101bd16173",
+        "permissions": {
+          "canRead": true,
+          "canWrite": true
+        },
+        "component": {
+          "id": "908d13f7-b649-3e43-aa61-63101bd16173",
+          "parentGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "source": {
+            "id": "a349ca8c-bc54-35e3-7293-8c80814bdb58",
+            "type": "FUNNEL",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "Funnel",
+            "running": true,
+            "comments": ""
+          },
+          "destination": {
+            "id": "03815733-d30d-3d57-9b37-914ea3c22702",
+            "type": "PROCESSOR",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "LogAttribute",
+            "running": false,
+            "comments": ""
+          },
+          "name": "",
+          "labelIndex": 1,
+          "zIndex": 0,
+          "backPressureObjectThreshold": 10000,
+          "backPressureDataSizeThreshold": "1 GB",
+          "flowFileExpiration": "0 sec",
+          "prioritizers": [],
+          "bends": []
+        },
+        "status": {
+          "id": "908d13f7-b649-3e43-aa61-63101bd16173",
+          "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "name": "",
+          "statsLastRefreshed": "17:15:27 EET",
+          "sourceId": "a349ca8c-bc54-35e3-7293-8c80814bdb58",
+          "sourceName": "Funnel",
+          "destinationId": "03815733-d30d-3d57-9b37-914ea3c22702",
+          "destinationName": "LogAttribute",
+          "aggregateSnapshot": {
+            "id": "908d13f7-b649-3e43-aa61-63101bd16173",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "",
+            "sourceName": "Funnel",
+            "destinationName": "LogAttribute",
+            "flowFilesIn": 0,
+            "bytesIn": 0,
+            "input": "0 (0 bytes)",
+            "flowFilesOut": 0,
+            "bytesOut": 0,
+            "output": "0 (0 bytes)",
+            "flowFilesQueued": 0,
+            "bytesQueued": 0,
+            "queued": "0 (0 bytes)",
+            "queuedSize": "0 bytes",
+            "queuedCount": "0",
+            "percentUseCount": 0,
+            "percentUseBytes": 0
+          }
+        },
+        "bends": [],
+        "labelIndex": 1,
+        "zIndex": 0,
+        "sourceId": "a349ca8c-bc54-35e3-7293-8c80814bdb58",
+        "sourceGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+        "sourceType": "FUNNEL",
+        "destinationId": "03815733-d30d-3d57-9b37-914ea3c22702",
+        "destinationGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+        "destinationType": "PROCESSOR"
+      },
+      {
+        "revision": {
+          "version": 0
+        },
+        "id": "9e91b008-0f66-3698-c369-b7db4739a112",
+        "uri": "http://192.168.56.105:8088/nifi-api/connections/9e91b008-0f66-3698-c369-b7db4739a112",
+        "permissions": {
+          "canRead": true,
+          "canWrite": true
+        },
+        "component": {
+          "id": "9e91b008-0f66-3698-c369-b7db4739a112",
+          "parentGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "source": {
+            "id": "03815733-d30d-3d57-9b37-914ea3c22702",
+            "type": "PROCESSOR",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "LogAttribute",
+            "running": false,
+            "comments": ""
+          },
+          "destination": {
+            "id": "bd31e644-ce2f-3eac-be43-f5fc6004ddb8",
+            "type": "OUTPUT_PORT",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "success",
+            "running": false,
+            "comments": ""
+          },
+          "name": "",
+          "labelIndex": 1,
+          "zIndex": 0,
+          "selectedRelationships": [
+            "success"
+          ],
+          "availableRelationships": [
+            "success"
+          ],
+          "backPressureObjectThreshold": 10000,
+          "backPressureDataSizeThreshold": "1 GB",
+          "flowFileExpiration": "0 sec",
+          "prioritizers": [],
+          "bends": []
+        },
+        "status": {
+          "id": "9e91b008-0f66-3698-c369-b7db4739a112",
+          "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "name": "success",
+          "statsLastRefreshed": "17:15:27 EET",
+          "sourceId": "03815733-d30d-3d57-9b37-914ea3c22702",
+          "sourceName": "LogAttribute",
+          "destinationId": "bd31e644-ce2f-3eac-be43-f5fc6004ddb8",
+          "destinationName": "success",
+          "aggregateSnapshot": {
+            "id": "9e91b008-0f66-3698-c369-b7db4739a112",
+            "groupId": "0844be16-0160-1000-ec4e-3799518091f0",
+            "name": "success",
+            "sourceName": "LogAttribute",
+            "destinationName": "success",
+            "flowFilesIn": 0,
+            "bytesIn": 0,
+            "input": "0 (0 bytes)",
+            "flowFilesOut": 0,
+            "bytesOut": 0,
+            "output": "0 (0 bytes)",
+            "flowFilesQueued": 0,
+            "bytesQueued": 0,
+            "queued": "0 (0 bytes)",
+            "queuedSize": "0 bytes",
+            "queuedCount": "0",
+            "percentUseCount": 0,
+            "percentUseBytes": 0
+          }
+        },
+        "bends": [],
+        "labelIndex": 1,
+        "zIndex": 0,
+        "sourceId": "03815733-d30d-3d57-9b37-914ea3c22702",
+        "sourceGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+        "sourceType": "PROCESSOR",
+        "destinationId": "bd31e644-ce2f-3eac-be43-f5fc6004ddb8",
+        "destinationGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+        "destinationType": "OUTPUT_PORT"
+      }
+    ],
+    "labels": [],
+    "funnels": [
+      {
+        "revision": {
+          "version": 0
+        },
+        "id": "a349ca8c-bc54-35e3-7293-8c80814bdb58",
+        "uri": "http://192.168.56.105:8088/nifi-api/funnels/a349ca8c-bc54-35e3-7293-8c80814bdb58",
+        "position": {
+          "x": 158.90654564040818,
+          "y": 88.85684311825574
+        },
+        "permissions": {
+          "canRead": true,
+          "canWrite": true
+        },
+        "component": {
+          "id": "a349ca8c-bc54-35e3-7293-8c80814bdb58",
+          "parentGroupId": "0844be16-0160-1000-ec4e-3799518091f0",
+          "position": {
+            "x": 158.90654564040818,
+            "y": 88.85684311825574
+          }
+        }
+      }
+    ]
+  }
 }
