@@ -1,13 +1,13 @@
 #!/usr/bin/groovy
 import groovy.json.JsonSlurper
 
-def jsonSlurper = new JsonSlurper()
 
 
 def get (URL, process, id) {
     sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"
     def output = readFile('result').trim()
     echo "********** IN DSS ********************"
+    def jsonSlurper = new JsonSlurper()
     def object = jsonSlurper.parseText(${output})
     assert object instanceof Map
 
