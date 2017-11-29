@@ -11,6 +11,7 @@ def get (URL, process, id) {
     def result = sluper.parseText("${output}")
 //    assert result.component.id
     echo result.component.id
+    echo result.component.name
 
 
 
