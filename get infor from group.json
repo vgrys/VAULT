@@ -1,0 +1,1529 @@
+{
+  "permissions": {
+    "canRead": true,
+    "canWrite": true
+  },
+  "processGroupFlow": {
+    "id": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+    "uri": "http://192.168.56.105:8088/nifi-api/flow/process-groups/e959b7eb-015f-1000-7573-7a3f9de5ef11",
+    "parentGroupId": "e3f04b4f-015f-1000-b8f7-a1141fed5991",
+    "breadcrumb": {
+      "id": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+      "permissions": {
+        "canRead": true,
+        "canWrite": true
+      },
+      "breadcrumb": {
+        "id": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+        "name": "to be deleted"
+      },
+      "parentBreadcrumb": {
+        "id": "e3f04b4f-015f-1000-b8f7-a1141fed5991",
+        "permissions": {
+          "canRead": true,
+          "canWrite": true
+        },
+        "breadcrumb": {
+          "id": "e3f04b4f-015f-1000-b8f7-a1141fed5991",
+          "name": "NiFi Flow"
+        }
+      }
+    },
+    "flow": {
+      "processGroups": [],
+      "remoteProcessGroups": [],
+      "processors": [
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+          "uri": "http://192.168.56.105:8088/nifi-api/processors/36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+          "position": {
+            "x": 1433.0691211991657,
+            "y": 412.85825065655814
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "position": {
+              "x": 1433.0691211991657,
+              "y": 412.85825065655814
+            },
+            "name": "DebugFlow",
+            "type": "org.apache.nifi.processors.standard.DebugFlow",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.4.0"
+            },
+            "state": "STOPPED",
+            "style": {},
+            "relationships": [
+              {
+                "name": "failure",
+                "description": "FlowFiles that failed to process.",
+                "autoTerminate": false
+              },
+              {
+                "name": "success",
+                "description": "FlowFiles processed successfully.",
+                "autoTerminate": false
+              }
+            ],
+            "supportsParallelProcessing": true,
+            "supportsEventDriven": true,
+            "supportsBatching": false,
+            "persistsState": false,
+            "restricted": false,
+            "deprecated": false,
+            "multipleVersionsAvailable": false,
+            "inputRequirement": "INPUT_ALLOWED",
+            "config": {
+              "properties": {
+                "FlowFile Success Iterations": "1",
+                "FlowFile Failure Iterations": "0",
+                "FlowFile Rollback Iterations": "0",
+                "FlowFile Rollback Yield Iterations": "0",
+                "FlowFile Rollback Penalty Iterations": "0",
+                "FlowFile Exception Iterations": "0",
+                "FlowFile Exception Class": "java.lang.RuntimeException",
+                "No FlowFile Skip Iterations": "1",
+                "No FlowFile Exception Iterations": "0",
+                "No FlowFile Yield Iterations": "0",
+                "No FlowFile Exception Class": "java.lang.RuntimeException",
+                "Write Iterations": "0",
+                "Content Size": "1 KB",
+                "@OnScheduled Pause Time": "0 sec",
+                "Fail When @OnScheduled called": "false",
+                "@OnUnscheduled Pause Time": "0 sec",
+                "Fail When @OnUnscheduled called": "false",
+                "@OnStopped Pause Time": "0 sec",
+                "Fail When @OnStopped called": "false"
+              },
+              "descriptors": {
+                "FlowFile Success Iterations": {
+                  "name": "FlowFile Success Iterations",
+                  "displayName": "FlowFile Success Iterations",
+                  "description": "Number of FlowFiles to forward to success relationship.",
+                  "defaultValue": "1",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "FlowFile Failure Iterations": {
+                  "name": "FlowFile Failure Iterations",
+                  "displayName": "FlowFile Failure Iterations",
+                  "description": "Number of FlowFiles to forward to failure relationship.",
+                  "defaultValue": "0",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "FlowFile Rollback Iterations": {
+                  "name": "FlowFile Rollback Iterations",
+                  "displayName": "FlowFile Rollback Iterations",
+                  "description": "Number of FlowFiles to roll back (without penalty).",
+                  "defaultValue": "0",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "FlowFile Rollback Yield Iterations": {
+                  "name": "FlowFile Rollback Yield Iterations",
+                  "displayName": "FlowFile Rollback Yield Iterations",
+                  "description": "Number of FlowFiles to roll back and yield.",
+                  "defaultValue": "0",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "FlowFile Rollback Penalty Iterations": {
+                  "name": "FlowFile Rollback Penalty Iterations",
+                  "displayName": "FlowFile Rollback Penalty Iterations",
+                  "description": "Number of FlowFiles to roll back with penalty.",
+                  "defaultValue": "0",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "FlowFile Exception Iterations": {
+                  "name": "FlowFile Exception Iterations",
+                  "displayName": "FlowFile Exception Iterations",
+                  "description": "Number of FlowFiles to throw exception.",
+                  "defaultValue": "0",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "FlowFile Exception Class": {
+                  "name": "FlowFile Exception Class",
+                  "displayName": "FlowFile Exception Class",
+                  "description": "Exception class to be thrown (must extend java.lang.RuntimeException).",
+                  "defaultValue": "java.lang.RuntimeException",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "No FlowFile Skip Iterations": {
+                  "name": "No FlowFile Skip Iterations",
+                  "displayName": "No FlowFile Skip Iterations",
+                  "description": "Number of times to skip onTrigger if no FlowFile.",
+                  "defaultValue": "1",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "No FlowFile Exception Iterations": {
+                  "name": "No FlowFile Exception Iterations",
+                  "displayName": "No FlowFile Exception Iterations",
+                  "description": "Number of times to throw NPE exception if no FlowFile.",
+                  "defaultValue": "0",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "No FlowFile Yield Iterations": {
+                  "name": "No FlowFile Yield Iterations",
+                  "displayName": "No FlowFile Yield Iterations",
+                  "description": "Number of times to yield if no FlowFile.",
+                  "defaultValue": "0",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "No FlowFile Exception Class": {
+                  "name": "No FlowFile Exception Class",
+                  "displayName": "No FlowFile Exception Class",
+                  "description": "Exception class to be thrown if no FlowFile (must extend java.lang.RuntimeException).",
+                  "defaultValue": "java.lang.RuntimeException",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Write Iterations": {
+                  "name": "Write Iterations",
+                  "displayName": "Write Iterations",
+                  "description": "Number of times to write to the FlowFile",
+                  "defaultValue": "0",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Content Size": {
+                  "name": "Content Size",
+                  "displayName": "Content Size",
+                  "description": "The number of bytes to write each time that the FlowFile is written to",
+                  "defaultValue": "1 KB",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "@OnScheduled Pause Time": {
+                  "name": "@OnScheduled Pause Time",
+                  "displayName": "@OnScheduled Pause Time",
+                  "description": "Specifies how long the processor should sleep in the @OnScheduled method, so that the processor can be forced to take a long time to start up",
+                  "defaultValue": "0 sec",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Fail When @OnScheduled called": {
+                  "name": "Fail When @OnScheduled called",
+                  "displayName": "Fail When @OnScheduled called",
+                  "description": "Specifies whether or not the Processor should throw an Exception when the methods annotated with @OnScheduled are called",
+                  "defaultValue": "false",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "@OnUnscheduled Pause Time": {
+                  "name": "@OnUnscheduled Pause Time",
+                  "displayName": "@OnUnscheduled Pause Time",
+                  "description": "Specifies how long the processor should sleep in the @OnUnscheduled method, so that the processor can be forced to take a long time to respond when user clicks stop",
+                  "defaultValue": "0 sec",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Fail When @OnUnscheduled called": {
+                  "name": "Fail When @OnUnscheduled called",
+                  "displayName": "Fail When @OnUnscheduled called",
+                  "description": "Specifies whether or not the Processor should throw an Exception when the methods annotated with @OnUnscheduled are called",
+                  "defaultValue": "false",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "@OnStopped Pause Time": {
+                  "name": "@OnStopped Pause Time",
+                  "displayName": "@OnStopped Pause Time",
+                  "description": "Specifies how long the processor should sleep in the @OnStopped method, so that the processor can be forced to take a long time to shutdown",
+                  "defaultValue": "0 sec",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Fail When @OnStopped called": {
+                  "name": "Fail When @OnStopped called",
+                  "displayName": "Fail When @OnStopped called",
+                  "description": "Specifies whether or not the Processor should throw an Exception when the methods annotated with @OnStopped are called",
+                  "defaultValue": "false",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                }
+              },
+              "schedulingPeriod": "0 sec",
+              "schedulingStrategy": "EVENT_DRIVEN",
+              "executionNode": "ALL",
+              "penaltyDuration": "30 sec",
+              "yieldDuration": "1 sec",
+              "bulletinLevel": "WARN",
+              "runDurationMillis": 0,
+              "concurrentlySchedulableTaskCount": 0,
+              "comments": "",
+              "lossTolerant": false,
+              "defaultConcurrentTasks": {
+                "TIMER_DRIVEN": "1",
+                "EVENT_DRIVEN": "0",
+                "CRON_DRIVEN": "1"
+              },
+              "defaultSchedulingPeriod": {
+                "TIMER_DRIVEN": "0 sec",
+                "CRON_DRIVEN": "* * * * * ?"
+              }
+            },
+            "extensionMissing": false
+          },
+          "inputRequirement": "INPUT_ALLOWED",
+          "status": {
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "id": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+            "name": "DebugFlow",
+            "statsLastRefreshed": "15:39:46 EET",
+            "aggregateSnapshot": {
+              "id": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "DebugFlow",
+              "type": "DebugFlow",
+              "runStatus": "Stopped",
+              "bytesRead": 0,
+              "bytesWritten": 0,
+              "read": "0 bytes",
+              "written": "0 bytes",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "taskCount": 0,
+              "tasksDurationNanos": 0,
+              "tasks": "0",
+              "tasksDuration": "00:00:00.000",
+              "activeThreadCount": 0
+            }
+          }
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "74139331-ba2c-3065-97b7-98f85abd5dce",
+          "uri": "http://192.168.56.105:8088/nifi-api/processors/74139331-ba2c-3065-97b7-98f85abd5dce",
+          "position": {
+            "x": 1249.0241114521746,
+            "y": 160.51082308305885
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "74139331-ba2c-3065-97b7-98f85abd5dce",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "position": {
+              "x": 1249.0241114521746,
+              "y": 160.51082308305885
+            },
+            "name": "LogAttribute",
+            "type": "org.apache.nifi.processors.standard.LogAttribute",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.4.0"
+            },
+            "state": "STOPPED",
+            "style": {},
+            "relationships": [
+              {
+                "name": "success",
+                "description": "All FlowFiles are routed to this relationship",
+                "autoTerminate": false
+              }
+            ],
+            "supportsParallelProcessing": true,
+            "supportsEventDriven": true,
+            "supportsBatching": true,
+            "persistsState": false,
+            "restricted": false,
+            "deprecated": false,
+            "multipleVersionsAvailable": false,
+            "inputRequirement": "INPUT_REQUIRED",
+            "config": {
+              "properties": {
+                "Log Level": "info",
+                "Log Payload": "false",
+                "Attributes to Log": null,
+                "attributes-to-log-regex": ".*",
+                "Attributes to Ignore": null,
+                "attributes-to-ignore-regex": null,
+                "Log prefix": null,
+                "character-set": "UTF-8"
+              },
+              "descriptors": {
+                "Log Level": {
+                  "name": "Log Level",
+                  "displayName": "Log Level",
+                  "description": "The Log Level to use when logging the Attributes",
+                  "defaultValue": "info",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "trace",
+                        "value": "trace"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "debug",
+                        "value": "debug"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "info",
+                        "value": "info"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "warn",
+                        "value": "warn"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "error",
+                        "value": "error"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Log Payload": {
+                  "name": "Log Payload",
+                  "displayName": "Log Payload",
+                  "description": "If true, the FlowFile's payload will be logged, in addition to its attributes; otherwise, just the Attributes will be logged.",
+                  "defaultValue": "false",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Attributes to Log": {
+                  "name": "Attributes to Log",
+                  "displayName": "Attributes to Log",
+                  "description": "A comma-separated list of Attributes to Log. If not specified, all attributes will be logged unless `Attributes to Log by Regular Expression` is modified. There's an AND relationship between the two properties.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "attributes-to-log-regex": {
+                  "name": "attributes-to-log-regex",
+                  "displayName": "Attributes to Log by Regular Expression",
+                  "description": "A regular expression indicating the Attributes to Log. If not specified, all attributes will be logged unless `Attributes to Log` is modified. There's an AND relationship between the two properties.",
+                  "defaultValue": ".*",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Attributes to Ignore": {
+                  "name": "Attributes to Ignore",
+                  "displayName": "Attributes to Ignore",
+                  "description": "A comma-separated list of Attributes to ignore. If not specified, no attributes will be ignored unless `Attributes to Ignore by Regular Expression` is modified. There's an OR relationship between the two properties.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "attributes-to-ignore-regex": {
+                  "name": "attributes-to-ignore-regex",
+                  "displayName": "Attributes to Ignore by Regular Expression",
+                  "description": "A regular expression indicating the Attributes to Ignore. If not specified, no attributes will be ignored unless `Attributes to Ignore` is modified. There's an OR relationship between the two properties.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Log prefix": {
+                  "name": "Log prefix",
+                  "displayName": "Log prefix",
+                  "description": "Log prefix appended to the log lines. It helps to distinguish the output of multiple LogAttribute processors.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true
+                },
+                "character-set": {
+                  "name": "character-set",
+                  "displayName": "Character Set",
+                  "description": "The name of the CharacterSet to use",
+                  "defaultValue": "UTF-8",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true
+                }
+              },
+              "schedulingPeriod": "0 sec",
+              "schedulingStrategy": "TIMER_DRIVEN",
+              "executionNode": "ALL",
+              "penaltyDuration": "30 sec",
+              "yieldDuration": "1 sec",
+              "bulletinLevel": "WARN",
+              "runDurationMillis": 0,
+              "concurrentlySchedulableTaskCount": 1,
+              "comments": "",
+              "lossTolerant": false,
+              "defaultConcurrentTasks": {
+                "TIMER_DRIVEN": "1",
+                "EVENT_DRIVEN": "0",
+                "CRON_DRIVEN": "1"
+              },
+              "defaultSchedulingPeriod": {
+                "TIMER_DRIVEN": "0 sec",
+                "CRON_DRIVEN": "* * * * * ?"
+              }
+            },
+            "extensionMissing": false
+          },
+          "inputRequirement": "INPUT_REQUIRED",
+          "status": {
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "id": "74139331-ba2c-3065-97b7-98f85abd5dce",
+            "name": "LogAttribute",
+            "statsLastRefreshed": "15:39:46 EET",
+            "aggregateSnapshot": {
+              "id": "74139331-ba2c-3065-97b7-98f85abd5dce",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "LogAttribute",
+              "type": "LogAttribute",
+              "runStatus": "Stopped",
+              "bytesRead": 0,
+              "bytesWritten": 0,
+              "read": "0 bytes",
+              "written": "0 bytes",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "taskCount": 0,
+              "tasksDurationNanos": 0,
+              "tasks": "0",
+              "tasksDuration": "00:00:00.000",
+              "activeThreadCount": 0
+            }
+          }
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "ac530f70-9a91-325b-39c7-8eb66a62ac76",
+          "uri": "http://192.168.56.105:8088/nifi-api/processors/ac530f70-9a91-325b-39c7-8eb66a62ac76",
+          "position": {
+            "x": 765.4253838342805,
+            "y": 512.0952673534414
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "ac530f70-9a91-325b-39c7-8eb66a62ac76",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "position": {
+              "x": 765.4253838342805,
+              "y": 512.0952673534414
+            },
+            "name": "GenerateFlowFile",
+            "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.4.0"
+            },
+            "state": "STOPPED",
+            "style": {},
+            "relationships": [
+              {
+                "name": "success",
+                "description": "",
+                "autoTerminate": false
+              }
+            ],
+            "supportsParallelProcessing": true,
+            "supportsEventDriven": false,
+            "supportsBatching": true,
+            "persistsState": false,
+            "restricted": false,
+            "deprecated": false,
+            "multipleVersionsAvailable": false,
+            "inputRequirement": "INPUT_FORBIDDEN",
+            "config": {
+              "properties": {
+                "File Size": "10B",
+                "Batch Size": "1",
+                "Data Format": "Text",
+                "Unique FlowFiles": "false",
+                "generate-ff-custom-text": null,
+                "character-set": "UTF-8"
+              },
+              "descriptors": {
+                "File Size": {
+                  "name": "File Size",
+                  "displayName": "File Size",
+                  "description": "The size of the file that will be used",
+                  "defaultValue": "0B",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Batch Size": {
+                  "name": "Batch Size",
+                  "displayName": "Batch Size",
+                  "description": "The number of FlowFiles to be transferred in each invocation",
+                  "defaultValue": "1",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Data Format": {
+                  "name": "Data Format",
+                  "displayName": "Data Format",
+                  "description": "Specifies whether the data should be Text or Binary",
+                  "defaultValue": "Text",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "Binary",
+                        "value": "Binary"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "Text",
+                        "value": "Text"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "Unique FlowFiles": {
+                  "name": "Unique FlowFiles",
+                  "displayName": "Unique FlowFiles",
+                  "description": "If true, each FlowFile that is generated will be unique. If false, a random value will be generated and all FlowFiles will get the same content but this offers much higher throughput",
+                  "defaultValue": "false",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                },
+                "generate-ff-custom-text": {
+                  "name": "generate-ff-custom-text",
+                  "displayName": "Custom Text",
+                  "description": "If Data Format is text and if Unique FlowFiles is false, then this custom text will be used as content of the generated FlowFiles and the File Size will be ignored. Finally, if Expression Language is used, evaluation will be performed only once per batch of generated FlowFiles",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true
+                },
+                "character-set": {
+                  "name": "character-set",
+                  "displayName": "Character Set",
+                  "description": "Specifies the character set to use when writing the bytes of Custom Text to a flow file.",
+                  "defaultValue": "UTF-8",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false
+                }
+              },
+              "schedulingPeriod": "1 sec",
+              "schedulingStrategy": "TIMER_DRIVEN",
+              "executionNode": "ALL",
+              "penaltyDuration": "30 sec",
+              "yieldDuration": "1 sec",
+              "bulletinLevel": "WARN",
+              "runDurationMillis": 0,
+              "concurrentlySchedulableTaskCount": 1,
+              "comments": "",
+              "lossTolerant": false,
+              "defaultConcurrentTasks": {
+                "TIMER_DRIVEN": "1",
+                "EVENT_DRIVEN": "0",
+                "CRON_DRIVEN": "1"
+              },
+              "defaultSchedulingPeriod": {
+                "TIMER_DRIVEN": "0 sec",
+                "CRON_DRIVEN": "* * * * * ?"
+              }
+            },
+            "extensionMissing": false
+          },
+          "inputRequirement": "INPUT_FORBIDDEN",
+          "status": {
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "id": "ac530f70-9a91-325b-39c7-8eb66a62ac76",
+            "name": "GenerateFlowFile",
+            "statsLastRefreshed": "15:39:46 EET",
+            "aggregateSnapshot": {
+              "id": "ac530f70-9a91-325b-39c7-8eb66a62ac76",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "GenerateFlowFile",
+              "type": "GenerateFlowFile",
+              "runStatus": "Stopped",
+              "bytesRead": 0,
+              "bytesWritten": 0,
+              "read": "0 bytes",
+              "written": "0 bytes",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "taskCount": 0,
+              "tasksDurationNanos": 0,
+              "tasks": "0",
+              "tasksDuration": "00:00:00.000",
+              "activeThreadCount": 0
+            }
+          }
+        }
+      ],
+      "inputPorts": [],
+      "outputPorts": [
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "ac62b7c2-0d9f-358f-5f51-91dfbab8d5c9",
+          "uri": "http://192.168.56.105:8088/nifi-api/output-ports/ac62b7c2-0d9f-358f-5f51-91dfbab8d5c9",
+          "position": {
+            "x": 2061.0496633566986,
+            "y": 441.0437981478366
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "ac62b7c2-0d9f-358f-5f51-91dfbab8d5c9",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "position": {
+              "x": 2061.0496633566986,
+              "y": 441.0437981478366
+            },
+            "name": "OK",
+            "state": "STOPPED",
+            "type": "OUTPUT_PORT",
+            "concurrentlySchedulableTaskCount": 1,
+            "validationErrors": [
+              "'Port 'OK'' is invalid because Output connection for port 'OK' is not defined."
+            ]
+          },
+          "status": {
+            "id": "ac62b7c2-0d9f-358f-5f51-91dfbab8d5c9",
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "name": "OK",
+            "runStatus": "Invalid",
+            "statsLastRefreshed": "15:39:46 EET",
+            "aggregateSnapshot": {
+              "id": "ac62b7c2-0d9f-358f-5f51-91dfbab8d5c9",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "OK",
+              "activeThreadCount": 0,
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "runStatus": "Invalid"
+            }
+          },
+          "portType": "OUTPUT_PORT"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "d65235a6-3244-36fa-c9f7-9a77ac7796ad",
+          "uri": "http://192.168.56.105:8088/nifi-api/output-ports/d65235a6-3244-36fa-c9f7-9a77ac7796ad",
+          "position": {
+            "x": 1856.245441161051,
+            "y": 61.776721079770994
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "d65235a6-3244-36fa-c9f7-9a77ac7796ad",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "position": {
+              "x": 1856.245441161051,
+              "y": 61.776721079770994
+            },
+            "name": "success",
+            "state": "STOPPED",
+            "type": "OUTPUT_PORT",
+            "concurrentlySchedulableTaskCount": 1,
+            "validationErrors": [
+              "'Port 'success'' is invalid because Output connection for port 'success' is not defined."
+            ]
+          },
+          "status": {
+            "id": "d65235a6-3244-36fa-c9f7-9a77ac7796ad",
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "name": "success",
+            "runStatus": "Invalid",
+            "statsLastRefreshed": "15:39:46 EET",
+            "aggregateSnapshot": {
+              "id": "d65235a6-3244-36fa-c9f7-9a77ac7796ad",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "success",
+              "activeThreadCount": 0,
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "runStatus": "Invalid"
+            }
+          },
+          "portType": "OUTPUT_PORT"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "e3a66332-cb3d-33ff-db30-9bdcba467c6e",
+          "uri": "http://192.168.56.105:8088/nifi-api/output-ports/e3a66332-cb3d-33ff-db30-9bdcba467c6e",
+          "position": {
+            "x": 2041.5446395371546,
+            "y": 590.5833636072564
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "e3a66332-cb3d-33ff-db30-9bdcba467c6e",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "position": {
+              "x": 2041.5446395371546,
+              "y": 590.5833636072564
+            },
+            "name": "error",
+            "state": "STOPPED",
+            "type": "OUTPUT_PORT",
+            "concurrentlySchedulableTaskCount": 1,
+            "validationErrors": [
+              "'Port 'error'' is invalid because Output connection for port 'error' is not defined."
+            ]
+          },
+          "status": {
+            "id": "e3a66332-cb3d-33ff-db30-9bdcba467c6e",
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "name": "error",
+            "runStatus": "Invalid",
+            "statsLastRefreshed": "15:39:46 EET",
+            "aggregateSnapshot": {
+              "id": "e3a66332-cb3d-33ff-db30-9bdcba467c6e",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "error",
+              "activeThreadCount": 0,
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "runStatus": "Invalid"
+            }
+          },
+          "portType": "OUTPUT_PORT"
+        }
+      ],
+      "connections": [
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "e66b4208-c63c-3f85-0aa4-c806c9393cd7",
+          "uri": "http://192.168.56.105:8088/nifi-api/connections/e66b4208-c63c-3f85-0aa4-c806c9393cd7",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "e66b4208-c63c-3f85-0aa4-c806c9393cd7",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "source": {
+              "id": "ac530f70-9a91-325b-39c7-8eb66a62ac76",
+              "type": "PROCESSOR",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "GenerateFlowFile",
+              "running": false,
+              "comments": ""
+            },
+            "destination": {
+              "id": "74139331-ba2c-3065-97b7-98f85abd5dce",
+              "type": "PROCESSOR",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "LogAttribute",
+              "running": false,
+              "comments": ""
+            },
+            "name": "",
+            "labelIndex": 1,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "success"
+            ],
+            "availableRelationships": [
+              "success"
+            ],
+            "backPressureObjectThreshold": 10000,
+            "backPressureDataSizeThreshold": "1 GB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": []
+          },
+          "status": {
+            "id": "e66b4208-c63c-3f85-0aa4-c806c9393cd7",
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "name": "success",
+            "statsLastRefreshed": "15:39:46 EET",
+            "sourceId": "ac530f70-9a91-325b-39c7-8eb66a62ac76",
+            "sourceName": "GenerateFlowFile",
+            "destinationId": "74139331-ba2c-3065-97b7-98f85abd5dce",
+            "destinationName": "LogAttribute",
+            "aggregateSnapshot": {
+              "id": "e66b4208-c63c-3f85-0aa4-c806c9393cd7",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "success",
+              "sourceName": "GenerateFlowFile",
+              "destinationName": "LogAttribute",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0
+            }
+          },
+          "bends": [],
+          "labelIndex": 1,
+          "zIndex": 0,
+          "sourceId": "ac530f70-9a91-325b-39c7-8eb66a62ac76",
+          "sourceGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "sourceType": "PROCESSOR",
+          "destinationId": "74139331-ba2c-3065-97b7-98f85abd5dce",
+          "destinationGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "destinationType": "PROCESSOR"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "8d8ca488-2e72-32b0-d629-136ed56a0b05",
+          "uri": "http://192.168.56.105:8088/nifi-api/connections/8d8ca488-2e72-32b0-d629-136ed56a0b05",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "8d8ca488-2e72-32b0-d629-136ed56a0b05",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "source": {
+              "id": "3a8cf454-2572-3b6f-e0f1-23299804c005",
+              "type": "FUNNEL",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "Funnel",
+              "running": true,
+              "comments": ""
+            },
+            "destination": {
+              "id": "74139331-ba2c-3065-97b7-98f85abd5dce",
+              "type": "PROCESSOR",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "LogAttribute",
+              "running": false,
+              "comments": ""
+            },
+            "name": "",
+            "labelIndex": 1,
+            "zIndex": 0,
+            "backPressureObjectThreshold": 10000,
+            "backPressureDataSizeThreshold": "1 GB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": []
+          },
+          "status": {
+            "id": "8d8ca488-2e72-32b0-d629-136ed56a0b05",
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "name": "",
+            "statsLastRefreshed": "15:39:46 EET",
+            "sourceId": "3a8cf454-2572-3b6f-e0f1-23299804c005",
+            "sourceName": "Funnel",
+            "destinationId": "74139331-ba2c-3065-97b7-98f85abd5dce",
+            "destinationName": "LogAttribute",
+            "aggregateSnapshot": {
+              "id": "8d8ca488-2e72-32b0-d629-136ed56a0b05",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "",
+              "sourceName": "Funnel",
+              "destinationName": "LogAttribute",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0
+            }
+          },
+          "bends": [],
+          "labelIndex": 1,
+          "zIndex": 0,
+          "sourceId": "3a8cf454-2572-3b6f-e0f1-23299804c005",
+          "sourceGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "sourceType": "FUNNEL",
+          "destinationId": "74139331-ba2c-3065-97b7-98f85abd5dce",
+          "destinationGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "destinationType": "PROCESSOR"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "7046ba41-a679-305b-7bdb-7c0ae5e19549",
+          "uri": "http://192.168.56.105:8088/nifi-api/connections/7046ba41-a679-305b-7bdb-7c0ae5e19549",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "7046ba41-a679-305b-7bdb-7c0ae5e19549",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "source": {
+              "id": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+              "type": "PROCESSOR",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "DebugFlow",
+              "running": false,
+              "comments": ""
+            },
+            "destination": {
+              "id": "ac62b7c2-0d9f-358f-5f51-91dfbab8d5c9",
+              "type": "OUTPUT_PORT",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "OK",
+              "running": false
+            },
+            "name": "",
+            "labelIndex": 1,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "success"
+            ],
+            "availableRelationships": [
+              "failure",
+              "success"
+            ],
+            "backPressureObjectThreshold": 10000,
+            "backPressureDataSizeThreshold": "1 GB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": []
+          },
+          "status": {
+            "id": "7046ba41-a679-305b-7bdb-7c0ae5e19549",
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "name": "success",
+            "statsLastRefreshed": "15:39:46 EET",
+            "sourceId": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+            "sourceName": "DebugFlow",
+            "destinationId": "ac62b7c2-0d9f-358f-5f51-91dfbab8d5c9",
+            "destinationName": "OK",
+            "aggregateSnapshot": {
+              "id": "7046ba41-a679-305b-7bdb-7c0ae5e19549",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "success",
+              "sourceName": "DebugFlow",
+              "destinationName": "OK",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0
+            }
+          },
+          "bends": [],
+          "labelIndex": 1,
+          "zIndex": 0,
+          "sourceId": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+          "sourceGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "sourceType": "PROCESSOR",
+          "destinationId": "ac62b7c2-0d9f-358f-5f51-91dfbab8d5c9",
+          "destinationGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "destinationType": "OUTPUT_PORT"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "ac070457-7fcf-3ed1-2f05-46a535e94f4b",
+          "uri": "http://192.168.56.105:8088/nifi-api/connections/ac070457-7fcf-3ed1-2f05-46a535e94f4b",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "ac070457-7fcf-3ed1-2f05-46a535e94f4b",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "source": {
+              "id": "74139331-ba2c-3065-97b7-98f85abd5dce",
+              "type": "PROCESSOR",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "LogAttribute",
+              "running": false,
+              "comments": ""
+            },
+            "destination": {
+              "id": "d65235a6-3244-36fa-c9f7-9a77ac7796ad",
+              "type": "OUTPUT_PORT",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "success",
+              "running": false
+            },
+            "name": "",
+            "labelIndex": 1,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "success"
+            ],
+            "availableRelationships": [
+              "success"
+            ],
+            "backPressureObjectThreshold": 10000,
+            "backPressureDataSizeThreshold": "1 GB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": []
+          },
+          "status": {
+            "id": "ac070457-7fcf-3ed1-2f05-46a535e94f4b",
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "name": "success",
+            "statsLastRefreshed": "15:39:46 EET",
+            "sourceId": "74139331-ba2c-3065-97b7-98f85abd5dce",
+            "sourceName": "LogAttribute",
+            "destinationId": "d65235a6-3244-36fa-c9f7-9a77ac7796ad",
+            "destinationName": "success",
+            "aggregateSnapshot": {
+              "id": "ac070457-7fcf-3ed1-2f05-46a535e94f4b",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "success",
+              "sourceName": "LogAttribute",
+              "destinationName": "success",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0
+            }
+          },
+          "bends": [],
+          "labelIndex": 1,
+          "zIndex": 0,
+          "sourceId": "74139331-ba2c-3065-97b7-98f85abd5dce",
+          "sourceGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "sourceType": "PROCESSOR",
+          "destinationId": "d65235a6-3244-36fa-c9f7-9a77ac7796ad",
+          "destinationGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "destinationType": "OUTPUT_PORT"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "0c1909dc-0eb9-3bd4-4976-0f5348162415",
+          "uri": "http://192.168.56.105:8088/nifi-api/connections/0c1909dc-0eb9-3bd4-4976-0f5348162415",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "0c1909dc-0eb9-3bd4-4976-0f5348162415",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "source": {
+              "id": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+              "type": "PROCESSOR",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "DebugFlow",
+              "running": false,
+              "comments": ""
+            },
+            "destination": {
+              "id": "e3a66332-cb3d-33ff-db30-9bdcba467c6e",
+              "type": "OUTPUT_PORT",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "error",
+              "running": false
+            },
+            "name": "",
+            "labelIndex": 1,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "failure"
+            ],
+            "availableRelationships": [
+              "failure",
+              "success"
+            ],
+            "backPressureObjectThreshold": 10000,
+            "backPressureDataSizeThreshold": "1 GB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": []
+          },
+          "status": {
+            "id": "0c1909dc-0eb9-3bd4-4976-0f5348162415",
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "name": "failure",
+            "statsLastRefreshed": "15:39:46 EET",
+            "sourceId": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+            "sourceName": "DebugFlow",
+            "destinationId": "e3a66332-cb3d-33ff-db30-9bdcba467c6e",
+            "destinationName": "error",
+            "aggregateSnapshot": {
+              "id": "0c1909dc-0eb9-3bd4-4976-0f5348162415",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "failure",
+              "sourceName": "DebugFlow",
+              "destinationName": "error",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0
+            }
+          },
+          "bends": [],
+          "labelIndex": 1,
+          "zIndex": 0,
+          "sourceId": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+          "sourceGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "sourceType": "PROCESSOR",
+          "destinationId": "e3a66332-cb3d-33ff-db30-9bdcba467c6e",
+          "destinationGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "destinationType": "OUTPUT_PORT"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "02039a69-e996-3851-45d1-5c63f046ef52",
+          "uri": "http://192.168.56.105:8088/nifi-api/connections/02039a69-e996-3851-45d1-5c63f046ef52",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "02039a69-e996-3851-45d1-5c63f046ef52",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "source": {
+              "id": "ac530f70-9a91-325b-39c7-8eb66a62ac76",
+              "type": "PROCESSOR",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "GenerateFlowFile",
+              "running": false,
+              "comments": ""
+            },
+            "destination": {
+              "id": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+              "type": "PROCESSOR",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "DebugFlow",
+              "running": false,
+              "comments": ""
+            },
+            "name": "",
+            "labelIndex": 1,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "success"
+            ],
+            "availableRelationships": [
+              "success"
+            ],
+            "backPressureObjectThreshold": 10000,
+            "backPressureDataSizeThreshold": "1 GB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": []
+          },
+          "status": {
+            "id": "02039a69-e996-3851-45d1-5c63f046ef52",
+            "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "name": "success",
+            "statsLastRefreshed": "15:39:46 EET",
+            "sourceId": "ac530f70-9a91-325b-39c7-8eb66a62ac76",
+            "sourceName": "GenerateFlowFile",
+            "destinationId": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+            "destinationName": "DebugFlow",
+            "aggregateSnapshot": {
+              "id": "02039a69-e996-3851-45d1-5c63f046ef52",
+              "groupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+              "name": "success",
+              "sourceName": "GenerateFlowFile",
+              "destinationName": "DebugFlow",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0
+            }
+          },
+          "bends": [],
+          "labelIndex": 1,
+          "zIndex": 0,
+          "sourceId": "ac530f70-9a91-325b-39c7-8eb66a62ac76",
+          "sourceGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "sourceType": "PROCESSOR",
+          "destinationId": "36d3daf4-daff-3e8a-7423-82ea5f1f6089",
+          "destinationGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+          "destinationType": "PROCESSOR"
+        }
+      ],
+      "labels": [],
+      "funnels": [
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "3a8cf454-2572-3b6f-e0f1-23299804c005",
+          "uri": "http://192.168.56.105:8088/nifi-api/funnels/3a8cf454-2572-3b6f-e0f1-23299804c005",
+          "position": {
+            "x": 924.3319294746888,
+            "y": 150.63356419802673
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "3a8cf454-2572-3b6f-e0f1-23299804c005",
+            "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+            "position": {
+              "x": 924.3319294746888,
+              "y": 150.63356419802673
+            }
+          }
+        }
+      ]
+    },
+    "lastRefreshed": "15:39:46 EET"
+  }
+}
