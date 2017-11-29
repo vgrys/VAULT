@@ -7,10 +7,9 @@ def get (URL, process, id) {
     sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"
     def output = readFile('result').trim()
     echo "********** IN DSS ********************"
-    def jsonSlurper = new JsonSlurper()
-    def object = jsonSlurper.parseText("${output}")
-    assert object instanceof Map
-
+    def sluper = new JsonSlurper()
+    def result = sluper.parseText("${output}")
+    assert result.component.id
 
 
 
