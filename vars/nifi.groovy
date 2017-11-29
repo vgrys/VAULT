@@ -9,7 +9,8 @@ def get (URL, process, id) {
     echo "********** IN DSS ********************"
     def sluper = new JsonSlurper()
     def result = sluper.parseText("${output}")
-    assert result.component.id
+//    assert result.component.id
+    echo result.component.id
 
 
 
