@@ -1,7 +1,9 @@
 #!/usr/bin/groovy
 
 def get (URL, process, id) {
-    def result = sh "curl -X GET ${URL}/nifi-api/${process}/${id}"
+    sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"
+    def output = readFile('result').trim()
+    echo "output=$output"
     echo "********** IN DSS ********************"
     echo "result is: ${result}"
 
