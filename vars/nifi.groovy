@@ -5,7 +5,7 @@ def get (URL, process, id) {
     def output = readFile('result').trim()
     echo "output=$output"
     echo "********** IN DSS ********************"
-    echo "result is: ${result}"
+//    echo "result is: ${result}"
 
     return result
 }
