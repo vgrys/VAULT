@@ -24,8 +24,8 @@ def uploadTemplate (nifiURL, process, nifiRootID, nifiClientID, groupFromJenkins
     echo output
     def result = new XmlSlurper().parseText("${output}")
 //    assert result instanceof groovy.util.slurpersupport.GPathResult
-    echo "Name of the group is: '${result.template.name}'"
-    echo "Name of the group is: '${result.template.id}'"
+    echo "Name of the template is: '${result.template.name}'"
+    echo "ID of the template is: '${result.template.id}'"
 
 }
 
