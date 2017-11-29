@@ -36,10 +36,10 @@ node {
         nifi.get(nifiURL, 'process-groups', 'e8e585bd-015f-1000-c903-46aab0cb3971')
     }
 
-//    stage ('NiFi template deployment') {
-//        echo "********** NiFi template deployment ***********"
-//        nifi.post(nifiURL, 'process-groups', nifiRootID, nifiClientID, 'group-from-jenkins')
-//    }
+    stage ('NiFi template deployment') {
+        echo "********** NiFi template deployment ***********"
+        nifi.uploadTemplate(nifiURL, 'process-groups', nifiRootID, nifiClientID, 'group-from-jenkins')
+    }
 //
 //
 //    stage('Create Ansible archive') {

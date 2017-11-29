@@ -17,6 +17,10 @@ def get (URL, process, id) {
     echo "parentGroupId is: '${result.component.parentGroupId}'"
 }
 
+def uploadTemplate (nifiURL, process, nifiRootID, nifiClientID, groupFromJenkins) {
+    sh "curl -iv -F template=@Test-template.xml -X POST  http://192.168.56.105:8088/nifi-api/process-groups/root/templates/upload"
+}
+
 //curl -X GET 192.168.56.105:8088/nifi-api/flow/process-groups/e96237ab-015f-1000-d7ee-a0ea33f79a1e
 //
 //def post (URL, process, rootID, clientId, name) {
