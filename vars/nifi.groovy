@@ -13,7 +13,7 @@ def get (URL, process, id) {
     echo result.component.id
     echo result.component.name
     echo result.uri
-    echo String(result.revision.version)
+    println(result.revision.version)
     echo result.component.parentGroupId
 
 
