@@ -12,6 +12,9 @@ def get (URL, process, id) {
 //    assert result.component.id
     echo result.component.id
     echo result.component.name
+    echo result.uri
+    echo result.revision.version
+    echo result.component.parentGroupId
 
 
 

@@ -1,12 +1,13 @@
 {
   "revision": {
-    "version": 0
+    "clientId": "076cf0c2-0160-1000-3c6b-7957e9203c58",
+    "version": 1
   },
-  "id": "e3f04b4f-015f-1000-b8f7-a1141fed5991",
-  "uri": "http://192.168.56.105:8088/nifi-api/process-groups/e3f04b4f-015f-1000-b8f7-a1141fed5991",
+  "id": "e8e585bd-015f-1000-c903-46aab0cb3971",
+  "uri": "http://192.168.56.105:8088/nifi-api/process-groups/e8e585bd-015f-1000-c903-46aab0cb3971",
   "position": {
-    "x": 0.0,
-    "y": 0.0
+    "x": 1636.9335248299612,
+    "y": 226.2077482677031
   },
   "permissions": {
     "canRead": true,
@@ -14,37 +15,38 @@
   },
   "bulletins": [],
   "component": {
-    "id": "e3f04b4f-015f-1000-b8f7-a1141fed5991",
+    "id": "e8e585bd-015f-1000-c903-46aab0cb3971",
+    "parentGroupId": "e3f04b4f-015f-1000-b8f7-a1141fed5991",
     "position": {
-      "x": 0.0,
-      "y": 0.0
+      "x": 1636.9335248299612,
+      "y": 226.2077482677031
     },
-    "name": "NiFi Flow",
+    "name": "test2",
     "comments": "",
-    "runningCount": 2,
-    "stoppedCount": 5,
-    "invalidCount": 5,
+    "runningCount": 0,
+    "stoppedCount": 2,
+    "invalidCount": 1,
     "disabledCount": 0,
     "activeRemotePortCount": 0,
     "inactiveRemotePortCount": 0,
     "inputPortCount": 0,
-    "outputPortCount": 0
+    "outputPortCount": 1
   },
   "status": {
-    "id": "e3f04b4f-015f-1000-b8f7-a1141fed5991",
-    "name": "NiFi Flow",
-    "statsLastRefreshed": "12:39:19 EET",
+    "id": "e8e585bd-015f-1000-c903-46aab0cb3971",
+    "name": "test2",
+    "statsLastRefreshed": "13:00:18 EET",
     "aggregateSnapshot": {
-      "id": "e3f04b4f-015f-1000-b8f7-a1141fed5991",
-      "name": "NiFi Flow",
+      "id": "e8e585bd-015f-1000-c903-46aab0cb3971",
+      "name": "test2",
       "flowFilesIn": 0,
       "bytesIn": 0,
       "input": "0 (0 bytes)",
-      "flowFilesQueued": 29494,
-      "bytesQueued": 1414940,
-      "queued": "29,494 (1.35 MB)",
-      "queuedCount": "29,494",
-      "queuedSize": "1.35 MB",
+      "flowFilesQueued": 0,
+      "bytesQueued": 0,
+      "queued": "0 (0 bytes)",
+      "queuedCount": "0",
+      "queuedSize": "0 bytes",
       "bytesRead": 0,
       "read": "0 bytes",
       "bytesWritten": 0,
@@ -64,12 +66,12 @@
       "activeThreadCount": 0
     }
   },
-  "runningCount": 2,
-  "stoppedCount": 5,
-  "invalidCount": 5,
+  "runningCount": 0,
+  "stoppedCount": 2,
+  "invalidCount": 1,
   "disabledCount": 0,
   "activeRemotePortCount": 0,
   "inactiveRemotePortCount": 0,
   "inputPortCount": 0,
-  "outputPortCount": 0
+  "outputPortCount": 1
 }
