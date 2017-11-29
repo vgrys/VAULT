@@ -38,7 +38,7 @@ node {
 
     stage ('NiFi template deployment') {
         echo "********** NiFi template deployment ***********"
-        nifi.uploadTemplate(nifiURL, 'process-groups', nifiRootID, nifiClientID, 'group-from-jenkins')
+        nifi.uploadTemplate(nifiURL, 'process-groups', nifiRootID, nifiClientID, 'group-from-jenkins', "${env.WORKSPACE}/nifi/Test-template.xml")
     }
 //
 //
