@@ -2,6 +2,9 @@
 
 def get (URL, process, id) {
     def result = sh "curl -X GET ${URL}/nifi-api/${process}/${id}"
+    echo "********** IN DSS ********************"
+    echo "result is: ${result}"
+
     return result
 }
 
