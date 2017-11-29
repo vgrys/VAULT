@@ -34,14 +34,14 @@ node {
     stage ('NiFi get info') {
         echo "********** NiFi get info ***********"
         def result = nifi.get(nifiURL, 'process-groups', 'root')
-        echo result
+        echo "**********************************************"
+        echo "result is: ${result}"
     }
 
     stage ('NiFi template deployment') {
         echo "********** NiFi template deployment ***********"
         nifi.post(nifiURL, 'process-groups', nifiRootID, nifiClientID, 'group-from-jenkins')
     }
-
 
 
     stage('Create Ansible archive') {
