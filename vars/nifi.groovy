@@ -8,7 +8,7 @@ def get (URL, process, id) {
     def output = readFile('result').trim()
     echo "********** IN DSS ********************"
     def jsonSlurper = new JsonSlurper()
-    def object = jsonSlurper.parseText(${output})
+    def object = jsonSlurper.parseText("${output}")
     assert object instanceof Map
 
 
