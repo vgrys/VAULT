@@ -21,7 +21,7 @@ def uploadTemplate (nifiURL, process, nifiRootID, nifiClientID, groupFromJenkins
     sh "curl -F template=@${templatePath} -X POST  http://192.168.56.105:8088/nifi-api/process-groups/root/templates/upload > result"
     echo "********** IN DSS ********************"
     def output = readFile('result').trim()
-    assert list instanceof groovy.util.slurpersupport.GPathResult
+    assert result instanceof groovy.util.slurpersupport.GPathResult
     def result = new XmlSlurper().parseText("${output}")
     echo "Name of the group is: '${result.templateEntity.template.name()}'"
 
