@@ -17,6 +17,7 @@ node() {
         echo pipelineConfig.pad("Loading file: 'Jenkinsfile.${JenkinsfileExt}'")
         load("Jenkinsfile.${JenkinsfileExt}")
         configurationLoaded = true
+        deleteDir()
         return true
     }
 
@@ -25,6 +26,7 @@ node() {
         echo pipelineConfig.pad("Loading file: 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'")
         load("Jenkinsfile.${env.GIT_BRANCH_TYPE}")
         configurationLoaded = true
+        deleteDir()
         return true
 
     } else {
