@@ -11,7 +11,7 @@ node() {
     def jenkinsfile
 
     String JenkinsfileExt = 'test'
-    if (env.BRANCH_NAME == 'feature/DAC-686-Implement_multi-definition_pipelines' && "fileExists Jenkinsfile.${JenkinsfileExt}") {
+    if (env.BRANCH_NAME == 'bla-bla/test' && "fileExists Jenkinsfile.${JenkinsfileExt}") {
         jenkinsfile = "Jenkinsfile.${JenkinsfileExt}"
 
     } else if (env.GIT_BRANCH_TYPE in ['master', 'release', 'feature'] && "fileExists Jenkinsfile.${env.GIT_BRANCH_TYPE}") {
