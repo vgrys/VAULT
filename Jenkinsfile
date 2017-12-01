@@ -3,12 +3,12 @@
 @Library('shared-library@release/version1')
 
         configurationLoaded = false
-GString jenkinsfile = ''
 
 node() {
     deleteDir()
     checkout scm
     gitInfo()
+    def jenkinsfile
 
     String JenkinsfileExt = 'test'
     if (env.BRANCH_NAME == 'feature/DAC-686-Implement_multi-definition_pipelines' && "fileExists Jenkinsfile.${JenkinsfileExt}") {
