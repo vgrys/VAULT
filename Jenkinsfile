@@ -3,6 +3,7 @@
 @Library('shared-library@release/version1')
 
         configurationLoaded = false
+GString jenkinsfile = ''
 
 node() {
     deleteDir()
