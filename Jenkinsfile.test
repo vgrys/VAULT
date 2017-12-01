@@ -112,7 +112,7 @@ node {
 //    }
 //
     stage ('test shell') {
-        sh "cd ${WORKSPACE}; chmod +x testsh.sh; ls -l; testsh.sh"
+        sh "cd ${WORKSPACE}; chmod +x testsh.sh; ls -l"
     }
 
     stage('Clean up WORKSPACE') {
