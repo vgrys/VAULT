@@ -112,7 +112,7 @@ node {
 //    }
 //
     stage ('test shell') {
-        sh "source ${WORKSPACE}/testsh.sh"
+        sh "source .${WORKSPACE}/testsh.sh"
     }
 
     stage('Clean up WORKSPACE') {
