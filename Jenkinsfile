@@ -2,7 +2,8 @@
 
 @Library('shared-library@release/version1')
 
-configurationLoaded = false
+//configurationLoaded = false
+def exist = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
 
 node {
     stage('Clean Workspace and Check out Source') {
@@ -12,12 +13,11 @@ node {
         gitInfo()
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
-    exist = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
 
     if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature'] && exist) {
         echo "Loading file: 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'"
         load("Jenkinsfile.${env.GIT_BRANCH_TYPE}")
-        configurationLoaded = true
+//        configurationLoaded = true
     } else {
         error("Configuration file was't loaded.")
     }
