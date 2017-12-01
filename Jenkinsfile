@@ -11,7 +11,7 @@ node() {
     def jenkinsfile
 
     String JenkinsfileExt = 'test'
-    if (env.BRANCH_NAME == 'bla-bla/test' && fileExists("Jenkinsfile.${JenkinsfileExt}")) {
+    if (env.BRANCH_NAME == 'release/version1' && fileExists("Jenkinsfile.${JenkinsfileExt}")) {
         jenkinsfile = "Jenkinsfile.${JenkinsfileExt}"
 
     } else if (env.GIT_BRANCH_TYPE in ['master', 'release', 'feature'] && fileExists("Jenkinsfile.${env.GIT_BRANCH_TYPE}")) {
@@ -39,7 +39,7 @@ node() {
 //        return true
 //    }
 //
-    exist = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
+//    exist = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
 //    if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature'] && exist) {
 //        echo pipelineConfig.pad("Loading file: 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'")
 //        load("Jenkinsfile.${env.GIT_BRANCH_TYPE}")
