@@ -10,12 +10,12 @@ node {
     exist = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
 
     if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature'] && exist) {
+        echo "Loading file: 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'"
         load("Jenkinsfile.${env.GIT_BRANCH_TYPE}")
-        echo "Loaded file: 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'"
-        configurationLoaded = true
+                configurationLoaded = true
     } else {
+        echo "Loading file: 'Jenkinsfile.default'"
         load("Jenkinsfile.default")
-        echo "Loaded file: 'Jenkinsfile.default'"
         configurationLoaded = true
     }
 
