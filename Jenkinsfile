@@ -2,7 +2,7 @@
 
 @Library('shared-library@release/version1')
 
-//configurationLoaded = false
+configurationLoaded = false
 def exist = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
 
 node {
@@ -17,7 +17,7 @@ node {
     if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature'] && exist) {
         echo "Loading file: 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'"
         load("Jenkinsfile.${env.GIT_BRANCH_TYPE}")
-//        configurationLoaded = true
+        configurationLoaded = true
     } else {
         error("Configuration file was't loaded.")
     }
