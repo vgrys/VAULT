@@ -12,6 +12,7 @@ node() {
     def JenkinsfileExt = 'test'
     exist = fileExists "Jenkinsfile.${JenkinsfileExt}"
     if (env.BRANCH_NAME == 'release/version1') {
+        echo "I am here"
         echo pipelineConfig.pad("Loading file: 'Jenkinsfile.${JenkinsfileExt}'")
         load("Jenkinsfile.${JenkinsfileExt}")
         configurationLoaded = true
