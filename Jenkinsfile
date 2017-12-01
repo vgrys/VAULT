@@ -5,7 +5,6 @@
 configurationLoaded = false
 
 node {
-    scmVars = checkout(scm)
     gitInfo()
     exist = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
 
