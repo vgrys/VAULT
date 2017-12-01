@@ -17,12 +17,14 @@ node() {
         echo pipelineConfig.pad("Loading file: 'Jenkinsfile.${JenkinsfileExt}'")
         load("Jenkinsfile.${JenkinsfileExt}")
         configurationLoaded = true
+        return true
     }
 
-    else if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature'] && exist1) {
+    if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature'] && exist1) {
         echo pipelineConfig.pad("Loading file: 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'")
         load("Jenkinsfile.${env.GIT_BRANCH_TYPE}")
         configurationLoaded = true
+        return true
 
     } else {
         deleteDir()
