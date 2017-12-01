@@ -14,7 +14,7 @@ node() {
     if (env.BRANCH_NAME == 'bla-bla/test' && fileExists("Jenkinsfile.${JenkinsfileExt}")) {
         jenkinsfile = "Jenkinsfile.${JenkinsfileExt}"
 
-    } else if (env.GIT_BRANCH_TYPE in ['master', 'release', 'feature'] && "fileExists Jenkinsfile.${env.GIT_BRANCH_TYPE}") {
+    } else if (env.GIT_BRANCH_TYPE in ['master', 'release', 'feature'] && fileExists("Jenkinsfile.${env.GIT_BRANCH_TYPE}")) {
         jenkinsfile = "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
     }
 
