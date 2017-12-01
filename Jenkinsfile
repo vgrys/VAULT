@@ -43,7 +43,7 @@ node {
 def switchPipeline(stageName, branchName) {
     exists = fileExists "Jenkinsfile.${stageName}"
 
-    if (branchName ==~ /^origin\/${stageName}(\/.*)?$/ && exists) {
+    if (branchName == /^origin\/${stageName}(\/.*)?$/ && exists) {
         load("Jenkinsfile.${stageName}")
         configurationLoaded = true
     }
