@@ -17,33 +17,3 @@ node {
         error("Configuration file was't loaded.")
     }
 }
-
-//
-//node {
-//    scmVars = checkout(scm)
-//    gitInfo()
-//
-//    stage("feature") {
-//        switchPipeline("${env.STAGE_NAME}", "${scmVars.GIT_BRANCH}")
-//    }
-//
-//    stage("release") {
-//        switchPipeline("${env.STAGE_NAME}", "${scmVars.GIT_BRANCH}")
-//    }
-//
-//    stage("default") {
-//        if (!configurationLoaded) {
-//            error("Configuration file was't loaded.")
-//        }
-//    }
-//}
-//
-//// It goes into DSS library.
-//def switchPipeline(stageName, branchName) {
-//    exists = fileExists "Jenkinsfile.${stageName}"
-//
-//    if (branchName == /^origin\/${stageName}(\/.*)?$/ && exists) {
-//        load("Jenkinsfile.${stageName}")
-//        configurationLoaded = true
-//    }
-//}
