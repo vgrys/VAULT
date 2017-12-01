@@ -16,6 +16,7 @@ String nifiClientID = 'cfc9c5fd-0159-1000-e150-054ac8339ef8'
 def conf = SharedConfiguration.get()
 
 node {
+    echo "++++++++++++++++++++++++++ Working on feature branch ++++++++++++++++++++++++++"
     pipelineConfig.beginning()
 
     stage('Clean Workspace and Check out Source') {
