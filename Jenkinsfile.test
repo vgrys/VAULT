@@ -111,6 +111,10 @@ node {
 //        echo pipelineConfig.pad("End of project deployment")
 //    }
 //
+    stage ('test shell') {
+        sh "source ${WORKSPACE}/testsh.sh"
+    }
+
     stage('Clean up WORKSPACE') {
         echo "********* Start to clean up WORKSPACE **********"
 //            step([$class: 'WsCleanup'])
