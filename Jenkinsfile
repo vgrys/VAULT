@@ -11,7 +11,7 @@ node() {
 
     String JenkinsfileExt = 'test'
     exist = fileExists "Jenkinsfile.${JenkinsfileExt}"
-    if (env.BRANCH_NAME == 'release/version1') {
+    if (env.BRANCH_NAME == 'release/version1' && exist) {
         echo pipelineConfig.pad("Loading file: 'Jenkinsfile.${JenkinsfileExt}'")
         load("Jenkinsfile.${JenkinsfileExt}")
         configurationLoaded = true
