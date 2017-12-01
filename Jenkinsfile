@@ -20,5 +20,6 @@ node() {
         configurationLoaded = true
     } else {
         error("Configuration file was't loaded.")
+        deleteDir()
     }
 }
