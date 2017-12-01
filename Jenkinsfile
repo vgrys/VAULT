@@ -4,7 +4,7 @@
 
 configurationLoaded = false
 
-node {
+node() {
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
         deleteDir()
