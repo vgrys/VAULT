@@ -8,18 +8,14 @@ node {
     scmVars = checkout(scm)
     gitInfo()
     exist = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
-//    GString switchPipeline = ''
 
     if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature'] && exist) {
-
-//        exists = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
-//        switchPipeline("Jenkinsfile.${env.GIT_BRANCH_TYPE}") //figures out if it's release/feature
-//        switchPipeline(pipelineType)
         load("Jenkinsfile.${env.GIT_BRANCH_TYPE}")
+        echo "Loaded file: 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'"
         configurationLoaded = true
     } else {
-//        switchPipeline("Jenkinsfile.default")
         load("Jenkinsfile.default")
+        echo "Loaded file: 'Jenkinsfile.default'"
         configurationLoaded = true
     }
 
