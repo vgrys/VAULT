@@ -9,7 +9,7 @@ node() {
     checkout scm
     gitInfo()
 
-    exist1 = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
+
 
     String JenkinsfileExt = 'test'
     exist = fileExists "Jenkinsfile.${JenkinsfileExt}"
@@ -20,7 +20,8 @@ node() {
         return true
     }
 
-    if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature'] && exist1) {
+    exist = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
+    if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature'] && exist) {
         echo pipelineConfig.pad("Loading file: 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'")
         load("Jenkinsfile.${env.GIT_BRANCH_TYPE}")
         configurationLoaded = true
