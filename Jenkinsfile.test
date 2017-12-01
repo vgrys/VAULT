@@ -37,10 +37,10 @@ node {
         nifi.getInfo(nifiURL, 'process-groups', 'e8e585bd-015f-1000-c903-46aab0cb3971')
     }
 
-    stage ('NiFi template upload') {
-        echo "********** NiFi template upload ***********"
-        nifi.uploadTemplate(nifiURL, 'process-groups', "${env.WORKSPACE}/nifi/Test-template.xml")
-    }
+//    stage ('NiFi template upload') {
+//        echo "********** NiFi template upload ***********"
+//        nifi.uploadTemplate(nifiURL, 'process-groups', "${env.WORKSPACE}/nifi/Test-template.xml")
+//    }
 //
 //
 //    stage('Create Ansible archive') {
@@ -111,10 +111,10 @@ node {
 //        echo pipelineConfig.pad("End of project deployment")
 //    }
 //
-//    stage('Clean up WORKSPACE') {
-//        echo "********* Start to clean up WORKSPACE **********"
-////            step([$class: 'WsCleanup'])
-//        echo "********* Start to clean up WORKSPACE **********"
-//    }
+    stage('Clean up WORKSPACE') {
+        echo "********* Start to clean up WORKSPACE **********"
+//            step([$class: 'WsCleanup'])
+        echo "********* Start to clean up WORKSPACE **********"
+    }
 //    echo "$currentBuild.result"
 }
