@@ -9,12 +9,12 @@ node {
     gitInfo()
 
     if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
-        pipelineType = inferPipelineType("Jenkinsfile.${env.GIT_BRANCH_TYPE}") //figures out if it's release/feature
+        pipelineType = ("Jenkinsfile.${env.GIT_BRANCH_TYPE}") //figures out if it's release/feature
 //        switchPipeline(pipelineType)
 //        load("Jenkinsfile.${stageName}")
         configurationLoaded = true
     } else {
-        pipelineType = inferPipelineType("Jenkinsfile.default")
+        pipelineType = ("Jenkinsfile.default")
         configurationLoaded = true
     }
 
