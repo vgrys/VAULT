@@ -25,6 +25,6 @@ node() {
 
     } else {
         deleteDir()
-        error("Configuration file was't loaded.")
+        error("Configuration file 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'was't loaded.")
     }
 }
