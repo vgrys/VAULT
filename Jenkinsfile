@@ -19,7 +19,7 @@ node() {
         load("Jenkinsfile.${env.GIT_BRANCH_TYPE}")
         configurationLoaded = true
     } else {
-        error("Configuration file was't loaded.")
         deleteDir()
+        error("Configuration file was't loaded.")
     }
 }
