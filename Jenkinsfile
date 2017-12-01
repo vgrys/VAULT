@@ -1,10 +1,11 @@
 #!/usr/bin/groovy
 
+@Library('shared-library@release/version1')
+
 configurationLoaded = false
 
 node {
     scmVars = checkout(scm)
-    checkout scm
     gitInfo()
 
     if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
