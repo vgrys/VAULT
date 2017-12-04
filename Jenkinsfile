@@ -10,7 +10,7 @@ node() {
     gitInfo()
     def jenkinsfile
 
-    String JenkinsfileExt = '_test'
+    String JenkinsfileExt = 'test'
     if (env.BRANCH_NAME == 'release/version1' && fileExists("Jenkinsfile.${JenkinsfileExt}")) {
         jenkinsfile = "Jenkinsfile.${JenkinsfileExt}"
 
