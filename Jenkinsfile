@@ -13,11 +13,9 @@ node() {
     String JenkinsfileExt = '_test'
     if (env.BRANCH_NAME == 'release/version1' && fileExists("Jenkinsfile.${JenkinsfileExt}")) {
         jenkinsfile = "Jenkinsfile.${JenkinsfileExt}"
-        deleteDir()
 
     } else if (env.GIT_BRANCH_TYPE in ['master', 'release', 'feature'] && fileExists("Jenkinsfile.${env.GIT_BRANCH_TYPE}")) {
         jenkinsfile = "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
-        deleteDir()
     }
 
     if (jenkinsfile) {
