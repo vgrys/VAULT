@@ -23,7 +23,6 @@ node() {
         load("${jenkinsfile}")
         configurationLoaded = true
         deleteDir()
-        return true
 
     } else {
         deleteDir()
