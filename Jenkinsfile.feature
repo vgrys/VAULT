@@ -37,6 +37,11 @@ node {
         nifi.getInfo(nifiURL, 'process-groups', 'e8e585bd-015f-1000-c903-46aab0cb3971')
     }
 
+    stage ('NiFi get info') {
+        echo "********** NiFi get info ***********"
+        nifi.getInfoConnection(nifiURL, 'process-groups', 'e8e585bd-015f-1000-c903-46aab0cb3971')
+    }
+
     stage ('NiFi template upload') {
         echo "********** NiFi template upload ***********"
         nifi.uploadTemplate(nifiURL, 'process-groups', "${env.WORKSPACE}/nifi/Test-template.xml")

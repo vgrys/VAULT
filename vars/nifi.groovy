@@ -16,6 +16,19 @@ def getInfo (URL, process, id) {
     echo "parentGroupId is: '${result.component.parentGroupId}'"
 }
 
+def getInfoConnection (URL, process, id) {
+    sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"
+    def output = readFile('result').trim()
+    echo "********** IN DSS ********************"
+    def sluper = new JsonSlurper()
+    def result = sluper.parseText("${output}")
+    echo "Group ID is: '${result.component.id}'"
+    echo " Group name is: '${result.component.name}'"
+    echo "connections is: '${result.connections}'"
+//    echo "revision version is: '${result.revision.version}'"
+//    echo "parentGroupId is: '${result.component.parentGroupId}'"
+}
+
 def uploadTemplate (URL, process, templatePath) {
     sh "curl -F template=@${templatePath} -X POST  ${URL}/nifi-api/${process}/root/templates/upload > result"
     echo "********** IN DSS ********************"
