@@ -24,7 +24,7 @@ def getInfoConnection (URL, process, id) {
     def result = sluper.parseText("${output}")
     echo "Group ID is: '${result.component.id}'"
     echo " Group name is: '${result.component.name}'"
-    echo "connections is: '${result.connections}'"
+    echo "connections is: '${result.processGroupFlow.connections}'"
 //    echo "revision version is: '${result.revision.version}'"
 //    echo "parentGroupId is: '${result.component.parentGroupId}'"
 }
