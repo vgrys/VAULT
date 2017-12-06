@@ -22,7 +22,7 @@ def getInfoConnection (URL, process, id) {
     echo "********** IN DSS ********************"
     def sluper = new JsonSlurper()
     def result = sluper.parseText("${output}")
-    echo "Group ID is: '${result.component.id}'"
+    echo "Group ID is: '${result.processGroupFlow.id}'"
     echo " Group name is: '${result.processGroupFlow.breadcrumb.breadcrumb.name}'"
     echo "connections is: '${result.component.connections}'"
 //    echo "revision version is: '${result.revision.version}'"
