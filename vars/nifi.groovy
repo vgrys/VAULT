@@ -30,8 +30,9 @@ def uploadTemplate(URL, env) {
             fileResult << ("${it}")
         }
     }
-    newList = fileResult.join(",")
-    println(newList)
+    sh "cat ${fileResult}"
+//    newList = fileResult.join(",")
+//    println(newList)
     echo "End of uploadTemplate"
 }
 
