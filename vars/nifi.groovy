@@ -26,7 +26,7 @@ def uploadTemplate(URL, env) {
 //        env.templateId << "${result.template.id}"
 //        println(env.templateId)
         File fileResult = new File("${result.template.id}")
-        infoList.each {
+        fileResult.each {
             fileResult << ("${it}")
         }
         echo fileResult
