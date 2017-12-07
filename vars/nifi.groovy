@@ -23,8 +23,10 @@ def uploadTemplate(URL) {
     File f = new File("${env.WORKSPACE}/nifi")
     File[] matchingFiles = f.listFiles()
     for (File file:matchingFiles) {
-        println(file)
+        println(file.getName())
     }
+
+
 
 //    println(matchingFiles)
 
