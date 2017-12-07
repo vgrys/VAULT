@@ -20,7 +20,7 @@ def uploadTemplate(URL) {
     File f = new File("${env.WORKSPACE}/nifi")
     File[] matchingFiles = f.listFiles(new FilenameFilter() {
         public boolean accept(File dir, String name) {
-            print name.endsWith(".xml")
+            return name.endsWith(".xml")
         }
     })
 
