@@ -2,14 +2,14 @@
 import groovy.json.JsonSlurper
 
 def call(URL) {
-    try {
+//    try {
         echo "********* Upload templates to the NiFi ************"
         uploadTemplate(URL, env)
-    } catch (err) {
-        currentBuild.result = "FAILURE"
-        echo "********* Errors happened *********"
-        throw err
-    }
+//    } catch (err) {
+//        currentBuild.result = "FAILURE"
+//        echo "********* Errors happened *********"
+//        throw err
+//    }
 }
 
 def uploadTemplate(URL, env) {
