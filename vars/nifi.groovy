@@ -8,8 +8,6 @@ def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
         uploadTemplate(URL, env)
-        echo "********* Run TDM Data Refresh (if manifest file found) **********"
-        runTDMRefresh(tdmInfo)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
