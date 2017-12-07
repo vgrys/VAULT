@@ -2,10 +2,9 @@
 import groovy.json.JsonSlurper
 
 def call(URL) {
-    List templateId = []
 //    try {
         echo "********* Upload templates to the NiFi ************"
-        uploadTemplate(URL, env, templateId)
+        uploadTemplate(URL, env)
 //    } catch (err) {
 //        currentBuild.result = "FAILURE"
 //        echo "********* Errors happened *********"
@@ -13,7 +12,7 @@ def call(URL) {
 //    }
 }
 
-def uploadTemplate(URL, env, templateId) {
+def uploadTemplate(URL, env) {
     File[] files = findTemplates(env)
     for (File file : files) {
         echo "start for loop"
@@ -24,10 +23,10 @@ def uploadTemplate(URL, env, templateId) {
         def result = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${result.template.name}'"
         echo "ID of the template is: '${result.template.id}'"
-        templateId << "${result.template.id}"
-        println(templateId)
+        env.templateId << "${result.template.id}"
+        println(env.templateId)
     }
-    newList = templateId.join(",")
+    newList = env.templateId.join(",")
     println(newList)
     echo "End of uploadTemplate"
 }
