@@ -1,5 +1,4 @@
 #!/usr/bin/groovy
-import groovy.io.FileType
 import groovy.json.JsonSlurper
 
 def call(URL) {
@@ -15,9 +14,9 @@ def call(URL) {
 
 def uploadTemplate(URL, env) {
     List templateId = []
-    File [] files = findTemplates(env)
-    for (File file:files) {
-        sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
+    File[] files = findTemplates(env)
+    for (File file : files) {
+        sh "curl -i -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
         echo "********** IN DSS ********************"
         def output = readFile('result').trim()
         def result = new XmlSlurper().parseText("${output}")
@@ -30,11 +29,10 @@ def uploadTemplate(URL, env) {
 }
 
 def static findTemplates(env) {
-    File f = new File("${env.WORKSPACE}/nifi")
-    File[] matchingFiles = f.listFiles()
+    File files = new File("${env.WORKSPACE}/nifi")
+    File[] matchingFiles = files.listFiles()
     return matchingFiles
 }
-
 
 //        File f = new File("${env.WORKSPACE}/nifi")
 //        File[] matchingFiles = f.listFiles()
