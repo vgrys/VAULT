@@ -2,19 +2,18 @@
 import groovy.io.FileType
 import groovy.json.JsonSlurper
 
-def call(URL) {
-    try {
-        echo "********* Upload templates to the NiFi ************"
-        def test = uploadTemplate(URL, env)
-        return test
-    } catch (err) {
-        currentBuild.result = "FAILURE"
-        echo "********* Errors happened *********"
-        throw err
-    }
-}
-
-static List uploadTemplate(URL, env) {
+//def call(URL) {
+//    try {
+//        echo "********* Upload templates to the NiFi ************"
+//        def test = uploadTemplate(URL, env)
+//        return test
+//    } catch (err) {
+//        currentBuild.result = "FAILURE"
+//        echo "********* Errors happened *********"
+//        throw err
+//    }
+//}
+def uploadTemplate(URL) {
 
     def list = []
 
@@ -26,8 +25,8 @@ static List uploadTemplate(URL, env) {
 
     new File("${env.WORKSPACE}/nifi").eachFile(FileType.FILES, {list << it.name })
 
-
-    return list
+    println(list)
+//    return list
 
 //    new File("${env.WORKSPACE}/nifi").eachFile() { file->
 //        list.add (file.getName())
