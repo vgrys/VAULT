@@ -30,7 +30,7 @@ def uploadTemplate(URL, env) {
             fileResult << ("${it}")
         }
     }
-    newList = env.templateId.join(",")
+    newList = fileResult.join(",")
     println(newList)
     echo "End of uploadTemplate"
 }
