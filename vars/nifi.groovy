@@ -24,7 +24,7 @@ def uploadTemplate(URL) {
 //    list = dir.listFiles()
 
     new File("${env.WORKSPACE}/nifi").eachFile(FileType.FILES, {list << it.name })
-
+    echo "I am here"
     println(list)
 //    return list
 
