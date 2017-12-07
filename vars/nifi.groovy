@@ -24,6 +24,7 @@ def uploadTemplate(URL, env) {
         echo "Name of the template is: '${result.template.name}'"
         echo "ID of the template is: '${result.template.id}'"
         templ = templateId.add(result.template.id)
+        println(templ)
     }
     println(templ)
     echo "End of uploadTemplate"
