@@ -23,6 +23,7 @@ def uploadTemplate(URL) {
             return name.endsWith(".xml")
         }
     })
+    println(matchingFiles)
 
 
 
