@@ -1,8 +1,6 @@
 #!/usr/bin/groovy
-import groovy.json.JsonSlurper
-import groovy.util.XmlSlurper
 import groovy.io.FileType
-
+import groovy.json.JsonSlurper
 
 def call(URL) {
     try {
@@ -16,20 +14,18 @@ def call(URL) {
     }
 }
 
-def static uploadTemplate (URL, env) {
+static List uploadTemplate(URL, env) {
 
-    def list = []
+    List list = []
 
     def dir = new File("${env.WORKSPACE}/nifi/")
-    dir.eachFileRecurse (FileType.FILES) { file ->
+    dir.eachFileRecurse(FileType.FILES) { file ->
         list << file
     }
 
-    println(list)
-
-    list.each {
-        return it.name
-    }
+//    list.each {
+    return list
+//    }
 
 //    sh "curl -F template=@${templatePath} -X POST  ${URL}/nifi-api/${process}/root/templates/upload > result"
 //    echo "********** IN DSS ********************"
@@ -40,7 +36,7 @@ def static uploadTemplate (URL, env) {
 //    echo "ID of the template is: '${result.template.id}'"
 }
 
-def getInfo (URL, process, id) {
+def getInfo(URL, process, id) {
     sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"
     def output = readFile('result').trim()
     echo "********** IN DSS ********************"
@@ -53,7 +49,7 @@ def getInfo (URL, process, id) {
     echo "parentGroupId is: '${result.component.parentGroupId}'"
 }
 
-def getInfoConnection (URL, process, id) {
+def getInfoConnection(URL, process, id) {
     sh "curl -X GET ${URL}/nifi-api/flow/${process}/${id} > result"
     def output = readFile('result').trim()
     echo "********** IN DSS ********************"
@@ -66,6 +62,6 @@ def getInfoConnection (URL, process, id) {
 }
 
 
-def createWorkspace () {
+def createWorkspace() {
 
 }
