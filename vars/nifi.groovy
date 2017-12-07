@@ -23,9 +23,9 @@ def uploadTemplate(URL, env) {
         def result = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${result.template.name}'"
         echo "ID of the template is: '${result.template.id}'"
-        templateId.add(result.template.id)
+        def newList = templateId << "${result.template.id}"
     }
-    println(templateId)
+    println(newList)
     echo "End of uploadTemplate"
 }
 
