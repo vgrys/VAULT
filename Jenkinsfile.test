@@ -31,8 +31,9 @@ node {
     stage ('NiFi deployment') {
         echo "********** NiFi deployment ***********"
 //        nifi.uploadTemplate(nifiURL)
-        new File("${env.WORKSPACE}/nifi").eachFile() { file->
+        new File("${env.WORKSPACE}/nifi").eachFile() { file ->
             println file.getName()
+        }
     }
 //    stage ('NiFi deployment') {
 //        echo "********** NiFi deployment ***********"
