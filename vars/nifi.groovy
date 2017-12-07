@@ -24,6 +24,7 @@ def uploadTemplate(URL, env) {
         echo "Name of the template is: '${result.template.name}'"
         echo "ID of the template is: '${result.template.id}'"
         templateId << "${result.template.id}"
+        println(templateId)
     }
     newList = templateId.join(",")
     println(newList)
