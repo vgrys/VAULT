@@ -21,7 +21,7 @@ def static uploadTemplate (URL) {
 
     def list = []
 
-    def dir = new File("${evn.WORKSPACE}/nifi/")
+    def dir = new File("${env.WORKSPACE}/nifi/")
     dir.eachFileRecurse (FileType.FILES) { file ->
         list << file
     }
