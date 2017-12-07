@@ -19,6 +19,7 @@ def uploadTemplate(URL, env) {
         sh "curl -i -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
         echo "********** IN DSS ********************"
         def output = readFile('result').trim()
+        echo output
         def result = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${result.template.name}'"
         echo "ID of the template is: '${result.template.id}'"
