@@ -22,10 +22,10 @@ node() {
         echo pipelineConfig.pad("Loading file: '${jenkinsfile}'")
         load("${jenkinsfile}")
         configurationLoaded = true
-        deleteDir()
+//        deleteDir()
 
     } else {
-        deleteDir()
+//        deleteDir()
         error("Jenkinsfile for '${env.GIT_BRANCH_TYPE}' banch was't loaded.")
     }
 
