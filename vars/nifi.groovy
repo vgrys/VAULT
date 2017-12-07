@@ -17,15 +17,18 @@ def uploadTemplate(URL) {
 
     def list = []
 
-//    File dir = new File("${env.WORKSPACE}/nifi")
-//    dir.eachFileRecurse(FileType.FILES) { file ->
-//        list << file
-//    }
-//    list = dir.listFiles()
+    File dir = new File("${env.WORKSPACE}/nifi")
+    dir.eachFileRecurse(FileType.FILES) { file ->
+    echo file
+        list << file
+    }
 
-    new File("${env.WORKSPACE}/nifi").eachFile(FileType.FILES, {list << each.it.name })
-    echo "I am here"
-    println(list)
+
+
+//
+//    new File("${env.WORKSPACE}/nifi").eachFile(FileType.FILES, {list << it.name })
+//    echo "I am here"
+//    println(list)
 
 
 
