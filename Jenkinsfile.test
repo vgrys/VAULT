@@ -35,11 +35,9 @@ node {
 
     stage ('NiFi deployment') {
         echo "********** NiFi deployment ***********"
-        def test = nifi(nifiURL)
-        println(test)
+        nifi(nifiURL)
     }
 
-    echo "env.id is: ${env.id}"
 
 
 

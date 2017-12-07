@@ -5,8 +5,7 @@ import groovy.json.JsonSlurper
 def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
-        def id = uploadTemplate(URL, env)
-        return id
+        uploadTemplate(URL, env)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
@@ -24,8 +23,8 @@ def uploadTemplate(URL, env) {
         def result = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${result.template.name}'"
         echo "ID of the template is: '${result.template.id}'"
-//        env.id = id.add(result.template.id)
     }
+    echo "End of uploadTemplate"
 }
 
 def static findTemplates(env) {
