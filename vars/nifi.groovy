@@ -29,7 +29,7 @@ def uploadTemplate(URL, env) {
         infoList.each {
             fileResult << ("${it}")
         }
-        echo infoList
+        echo fileResult
     }
     newList = env.templateId.join(",")
     println(newList)
