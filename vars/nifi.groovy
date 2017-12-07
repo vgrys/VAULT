@@ -24,6 +24,9 @@ def static uploadTemplate (URL, env) {
     dir.eachFileRecurse (FileType.FILES) { file ->
         list << file
     }
+
+    println(list)
+
     list.each {
         return it.name
     }
