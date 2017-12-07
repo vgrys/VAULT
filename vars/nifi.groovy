@@ -18,7 +18,7 @@ static List uploadTemplate(URL, env) {
 
     List list = []
 
-    File dir = new File("${env.WORKSPACE}/nifi/*")
+    File dir = new File("${env.WORKSPACE}/nifi")
     dir.eachFileRecurse(FileType.FILES) { file ->
         list << file
     }
