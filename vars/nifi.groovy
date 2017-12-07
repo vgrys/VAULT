@@ -14,6 +14,7 @@ def call(URL) {
 
 def uploadTemplate(URL, env) {
     File[] files = findTemplates(env)
+    File fileResult = new File("${env.WORKSPACE}/nifi/templateResult")
     for (File file : files) {
         echo "start for loop"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
@@ -25,8 +26,7 @@ def uploadTemplate(URL, env) {
         echo "ID of the template is: '${result.template.id}'"
 //        env.templateId << "${result.template.id}"
 //        println(env.templateId)
-        File fileResult = new File("${env.WORKSPACE}/nifi/templateResult")
-        result.template.id.each {
+        fileResult.template.id.each {
             fileResult << ("${it}")
         }
     }
