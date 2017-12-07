@@ -29,7 +29,6 @@ def uploadTemplate(URL, env) {
         result.template.id.each {
             fileResult << ("${it}")
         }
-        echo fileResult
     }
     newList = env.templateId.join(",")
     println(newList)
