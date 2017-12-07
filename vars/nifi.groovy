@@ -13,8 +13,8 @@ def call(URL) {
 }
 
 def uploadTemplate(URL, env) {
-    List templateId = []
     File[] files = findTemplates(env)
+    List templateId = []
     for (File file : files) {
         echo "start for loop"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
