@@ -17,13 +17,14 @@ def uploadTemplate(URL) {
 
 //    new File("${env.WORKSPACE}/nifi").eachFile() { file->
 //        println file.getName()
-//    }
+//    }l
 
 
     File f = new File("${env.WORKSPACE}/nifi")
     File[] matchingFiles = f.listFiles()
     for (File file:matchingFiles) {
         println(file.getName().replace(".xml", ""))
+        println(file.getName())
     }
 
 
