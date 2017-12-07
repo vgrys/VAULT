@@ -19,7 +19,7 @@ def uploadTemplate(URL) {
 
     File dir = new File("${env.WORKSPACE}/nifi")
     dir.eachFileRecurse(FileType.FILES) { file ->
-    echo file
+    print file
         list << file
     }
 
