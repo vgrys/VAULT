@@ -7,7 +7,7 @@ import groovy.io.FileType
 def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
-        uploadTemplate(URL)
+        uploadTemplate(URL, env)
         echo "********* Run TDM Data Refresh (if manifest file found) **********"
         runTDMRefresh(tdmInfo)
     } catch (err) {
@@ -17,7 +17,7 @@ def call(URL) {
     }
 }
 
-def static uploadTemplate (URL) {
+def static uploadTemplate (URL, env) {
 
     def list = []
 
