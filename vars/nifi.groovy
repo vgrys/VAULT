@@ -13,66 +13,33 @@ def call(URL) {
         throw err
     }
 }
+
 def static uploadTemplate(URL, env) {
-
-//    new File("${env.WORKSPACE}/nifi").eachFile() { file->
-//        println file.getName()
-//    }l
-
-
-    File f = new File("${env.WORKSPACE}/nifi")
-    File[] matchingFiles = f.listFiles()
-    for (File file:matchingFiles) {
-        println(file.getName().replace(".xml", ""))
-        println(file)
+    File [] files = findTemplates(env)
+    for (File file:files) {
+        sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
+        echo "********** IN DSS ********************"
+        def output = readFile('result').trim()
+        echo output
+        def result = new XmlSlurper().parseText("${output}")
+        echo "Name of the template is: '${result.template.name}'"
+        echo "ID of the template is: '${result.template.id}'"
     }
-
-
-
-//    println(matchingFiles)
-
-
-
-//    List list = []
-//    List list1 = []
-//
-//
-//    new File("${env.WORKSPACE}/nifi").eachFile(FileType.FILES) { file ->
-//    println(file)
-//        list << file
-//    }
-//    echo "I am here"
-//    println(list)
-
-
-//
-//    new File("${env.WORKSPACE}/nifi").eachFile(FileType.FILES, {list << it.name })
-//    echo "I am here"
-//    println(list)
-
-
-
-//    return list
-
-//    new File("${env.WORKSPACE}/nifi").eachFile() { file->
-//        list.add (file.getName())
-//    }
-//            eachFileRecurse { list.add(it.name) }
-
-
 }
 
-//    list.each {
-//    }
+def static findTemplates(env) {
+    File f = new File("${env.WORKSPACE}/nifi")
+    File[] matchingFiles = f.listFiles()
+    return matchingFiles
+}
 
-//    sh "curl -F template=@${templatePath} -X POST  ${URL}/nifi-api/${process}/root/templates/upload > result"
-//    echo "********** IN DSS ********************"
-//    def output = readFile('result').trim()
-//    echo output
-//    def result = new XmlSlurper().parseText("${output}")
-//    echo "Name of the template is: '${result.template.name}'"
-//    echo "ID of the template is: '${result.template.id}'"
 
+//        File f = new File("${env.WORKSPACE}/nifi")
+//        File[] matchingFiles = f.listFiles()
+//        for (File file:matchingFiles) {
+//            println(file.getName().replace(".xml", ""))
+//            println(file)
+//        }
 
 def getInfo(URL, process, id) {
     sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"

@@ -28,16 +28,16 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
-    stage ('NiFi deployment') {
-        echo "********** NiFi deployment ***********"
-        nifi.uploadTemplate(nifiURL)
-    }
-
 //    stage ('NiFi deployment') {
 //        echo "********** NiFi deployment ***********"
-//        def test = nifi(nifiURL)
-//        println(test)
+//        nifi.uploadTemplate(nifiURL)
 //    }
+
+    stage ('NiFi deployment') {
+        echo "********** NiFi deployment ***********"
+        def test = nifi(nifiURL)
+        println(test)
+    }
 
 
 
