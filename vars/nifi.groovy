@@ -18,7 +18,7 @@ def uploadTemplate(URL) {
     List list = []
 
     File dir = new File("${env.WORKSPACE}/nifi")
-    dir.eachFileRecurse(FileType.FILES) { file ->
+    dir.eachFileRecurse(FileType.FILES, println(it.name)) { file ->
     println(file)
         list << file
     }
