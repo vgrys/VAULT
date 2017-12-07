@@ -30,21 +30,22 @@ node {
     }
 
 
-    stage ('test file search') {
-        def list = []
-
-        def dir = new File("${env.WORKSPACE}/nifi/")
-        dir.eachFileRecurse (FileType.FILES) { file ->
-            list << file
-        }
-        list.each {
-            println(it.path)
-        }
-    }
+//    stage ('test file search') {
+//        def list = []
+//
+//        def dir = new File("${env.WORKSPACE}/nifi/")
+//        dir.eachFileRecurse (FileType.FILES) { file ->
+//            list << file
+//        }
+//        list.each {
+//            println(it.path)
+//        }
+//    }
 
     stage ('NiFi deployment') {
         echo "********** NiFi deployment ***********"
-        nifi(nifiURL)
+        def test = nifi(nifiURL)
+        echo test
     }
 
 

@@ -7,7 +7,8 @@ import groovy.io.FileType
 def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
-        uploadTemplate(URL, env)
+        def test = uploadTemplate(URL, env)
+        return test
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
