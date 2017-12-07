@@ -1,4 +1,6 @@
 #!/usr/bin/groovy
+import groovy.io.FileType
+
 @Library('shared-library@release/version1')
 
 String atfVersion = '0.1.0'
@@ -27,6 +29,18 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
+
+    stage ('test file search') {
+        def list = []
+
+        def dir = new File("${env.WORKSPACE}/nifi/")
+        dir.eachFileRecurse (FileType.FILES) { file ->
+            list << file
+        }
+        list.each {
+            println(it.path)
+        }
+    }
 
     stage ('NiFi deployment') {
         echo "********** NiFi deployment ***********"
