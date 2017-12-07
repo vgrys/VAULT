@@ -23,10 +23,9 @@ def getInfoConnection (URL, process, id) {
     def sluper = new JsonSlurper()
     def result = sluper.parseText("${output}")
     echo "Group ID is: '${result.processGroupFlow.id}'"
-    echo " Group name is: '${result.processGroupFlow.breadcrumb.breadcrumb.name}'"
-    echo "connections is: '${result.processGroupFlow.flow.connections.id}'"
-//    echo "revision version is: '${result.revision.version}'"
-//    echo "parentGroupId is: '${result.component.parentGroupId}'"
+    echo "Group name is: '${result.processGroupFlow.breadcrumb.breadcrumb.name}'"
+    echo "connections ID is: '${result.processGroupFlow.flow.connections.id}'"
+    echo "URI is: '${result.processGroupFlow.flow.connections.uri}'"
 }
 
 def uploadTemplate (URL, process, templatePath) {
@@ -38,14 +37,3 @@ def uploadTemplate (URL, process, templatePath) {
     echo "Name of the template is: '${result.template.name}'"
     echo "ID of the template is: '${result.template.id}'"
 }
-
-//curl -X GET 192.168.56.105:8088/nifi-api/flow/process-groups/e96237ab-015f-1000-d7ee-a0ea33f79a1e
-//
-//def post (URL, process, rootID, clientId, name) {
-//sh "curl -H \"Content-Type: application/json\" -X POST -d '{\"revision\":{\"clientId\":\"${clientId}\",\"version\":0},\"component\":{\"name\":\"${name}\"}}' ${URL}/nifi-api/${process}/${rootID}/${process}"
-////    sh 'curl -H "Content-Type: application/json" -X POST -d '{"revision"':'{"clientId"':'${clientId}',"version":0},"component":{"name":'${name}'}}' "${URL}"/nifi-api/"${process}"/"${rootID}"/"${process}"'
-//}
-//
-//deg getinfo () {
-//    sh "http://192.168.56.105:8088/nifi-api/process-groups/ee059263-015f-1000-6d52-da1a4daa9bab"
-//}
