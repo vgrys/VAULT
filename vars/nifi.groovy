@@ -25,8 +25,8 @@ def uploadTemplate(URL, env) {
         echo "ID of the template is: '${result.template.id}'"
 //        env.templateId << "${result.template.id}"
 //        println(env.templateId)
-        File fileResult = new File("${result.template.id}")
-        fileResult.each {
+        File fileResult = new File("${env.WORKSPACE}/nifi/templateResult")
+        result.template.id.each {
             fileResult << ("${it}")
         }
         echo fileResult
