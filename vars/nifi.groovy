@@ -28,8 +28,8 @@ def uploadTemplate(URL, env) {
         File fileResult = new File("${result.template.id}")
         infoList.each {
             fileResult << ("${it}")
-            echo fileResult
         }
+        echo infoList
     }
     newList = env.templateId.join(",")
     println(newList)
