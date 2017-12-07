@@ -27,7 +27,7 @@ def uploadTemplate(URL, env) {
 //        env.templateId << "${result.template.id}"
 //        println(env.templateId)
         result.template.id.each {
-            fileResult << ("${it}")
+            fileResult << ("${it}, ")
         }
     }
     sh "cat ${fileResult}"
