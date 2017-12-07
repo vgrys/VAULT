@@ -1,7 +1,42 @@
 #!/usr/bin/groovy
 import groovy.json.JsonSlurper
 import groovy.util.XmlSlurper
+import groovy.io.FileType
 
+
+def call(URL) {
+    try {
+        echo "********* Upload templates to the NiFi ************"
+        uploadTemplate(URL)
+        echo "********* Run TDM Data Refresh (if manifest file found) **********"
+        runTDMRefresh(tdmInfo)
+    } catch (err) {
+        currentBuild.result = "FAILURE"
+        echo "********* Errors happened *********"
+        throw err
+    }
+}
+
+def static uploadTemplate (URL) {
+
+    def list = []
+
+    def dir = new File("${evn.WORKSPACE}/nifi/")
+    dir.eachFileRecurse (FileType.FILES) { file ->
+        list << file
+    }
+    list.each {
+        println it.path
+    }
+
+//    sh "curl -F template=@${templatePath} -X POST  ${URL}/nifi-api/${process}/root/templates/upload > result"
+//    echo "********** IN DSS ********************"
+//    def output = readFile('result').trim()
+//    echo output
+//    def result = new XmlSlurper().parseText("${output}")
+//    echo "Name of the template is: '${result.template.name}'"
+//    echo "ID of the template is: '${result.template.id}'"
+}
 
 def getInfo (URL, process, id) {
     sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"
@@ -28,12 +63,7 @@ def getInfoConnection (URL, process, id) {
     echo "URI is: '${result.processGroupFlow.flow.connections.uri}'"
 }
 
-def uploadTemplate (URL, process, templatePath) {
-    sh "curl -F template=@${templatePath} -X POST  ${URL}/nifi-api/${process}/root/templates/upload > result"
-    echo "********** IN DSS ********************"
-    def output = readFile('result').trim()
-    echo output
-    def result = new XmlSlurper().parseText("${output}")
-    echo "Name of the template is: '${result.template.name}'"
-    echo "ID of the template is: '${result.template.id}'"
+
+def createWorkspace () {
+
 }
