@@ -16,14 +16,15 @@ def call(URL) {
 
 static List uploadTemplate(URL, env) {
 
-//    List list = []
+    def list = []
 
-    File dir = new File("${env.WORKSPACE}/nifi")
+//    File dir = new File("${env.WORKSPACE}/nifi")
 //    dir.eachFileRecurse(FileType.FILES) { file ->
 //        list << file
 //    }
-    list = dir.listFiles()
+//    list = dir.listFiles()
 
+    new File("${env.WORKSPACE}/nifi").eachFileRecurse { list.add (it.name) }
 
 //    list.each {
     return list
