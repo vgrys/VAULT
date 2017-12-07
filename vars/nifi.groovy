@@ -2,18 +2,18 @@
 import groovy.io.FileType
 import groovy.json.JsonSlurper
 
-//def call(URL) {
-//    try {
-//        echo "********* Upload templates to the NiFi ************"
-//        def test = uploadTemplate(URL, env)
-//        return test
-//    } catch (err) {
-//        currentBuild.result = "FAILURE"
-//        echo "********* Errors happened *********"
-//        throw err
-//    }
-//}
-def uploadTemplate(URL) {
+def call(URL) {
+    try {
+        echo "********* Upload templates to the NiFi ************"
+        def test = uploadTemplate(URL, env)
+        return test
+    } catch (err) {
+        currentBuild.result = "FAILURE"
+        echo "********* Errors happened *********"
+        throw err
+    }
+}
+def static uploadTemplate(URL, env) {
 
 //    new File("${env.WORKSPACE}/nifi").eachFile() { file->
 //        println file.getName()
@@ -24,7 +24,7 @@ def uploadTemplate(URL) {
     File[] matchingFiles = f.listFiles()
     for (File file:matchingFiles) {
         println(file.getName().replace(".xml", ""))
-        println(file.getName())
+        println(file)
     }
 
 
