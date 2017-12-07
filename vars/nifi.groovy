@@ -14,7 +14,7 @@ def call(URL) {
     }
 }
 
-def static uploadTemplate(URL, env) {
+def uploadTemplate(URL, env) {
     File [] files = findTemplates(env)
     for (File file:files) {
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
