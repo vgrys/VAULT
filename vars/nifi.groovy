@@ -19,8 +19,7 @@ def uploadTemplate(URL) {
     List list1 = []
 
 
-    File dir = new File("${env.WORKSPACE}/nifi")
-    dir.eachFile(FileType.FILES) { file ->
+    new File("${env.WORKSPACE}/nifi").eachFile(FileType.FILES) { file ->
     println(file)
         list << file
     }
