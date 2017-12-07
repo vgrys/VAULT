@@ -24,7 +24,7 @@ static List uploadTemplate(URL, env) {
 //    }
 //    list = dir.listFiles()
 
-    new File("${env.WORKSPACE}\\nifi").eachFile() { file->
+    new File("${env.WORKSPACE}/nifi").eachFile() { file->
         list.add (file.getName())
     }
     return list
