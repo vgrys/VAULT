@@ -24,9 +24,8 @@ def uploadTemplate(URL, env) {
         def result = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${result.template.name}'"
         echo "ID of the template is: '${result.template.id}'"
-        id.add(result.template.id)
+        env.id = id.add(result.template.id)
     }
-    return id
 }
 
 def static findTemplates(env) {

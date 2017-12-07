@@ -39,6 +39,7 @@ node {
         println(test)
     }
 
+    echo "env.id is: ${env.id}"
 
 
 
