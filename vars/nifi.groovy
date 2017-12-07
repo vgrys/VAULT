@@ -15,14 +15,15 @@ import groovy.json.JsonSlurper
 //}
 def uploadTemplate(URL) {
 
-    def list = []
+    List list = []
 
     File dir = new File("${env.WORKSPACE}/nifi")
     dir.eachFileRecurse(FileType.FILES) { file ->
     println(file)
         list << file
     }
-
+    echo "I am here"
+    println(list)
 
 
 //
