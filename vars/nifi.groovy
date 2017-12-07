@@ -16,6 +16,8 @@ import groovy.json.JsonSlurper
 def uploadTemplate(URL) {
 
     List list = []
+    List list1 = []
+
 
     File dir = new File("${env.WORKSPACE}/nifi")
     dir.eachFileRecurse(FileType.FILES, {list1 << it.name }, println(list1)) { file ->
