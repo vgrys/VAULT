@@ -15,16 +15,27 @@ import groovy.json.JsonSlurper
 //}
 def uploadTemplate(URL) {
 
-    List list = []
-    List list1 = []
 
 
-    new File("${env.WORKSPACE}/nifi").eachFile(FileType.FILES) { file ->
-    println(file)
-        list << file
-    }
-    echo "I am here"
-    println(list)
+    File f = new File("${env.WORKSPACE}/nifi")
+    File[] matchingFiles = f.listFiles(new FilenameFilter() {
+        public boolean accept(File dir, String name) {
+            print name.endsWith(".xml")
+        }
+    })
+
+
+
+//    List list = []
+//    List list1 = []
+//
+//
+//    new File("${env.WORKSPACE}/nifi").eachFile(FileType.FILES) { file ->
+//    println(file)
+//        list << file
+//    }
+//    echo "I am here"
+//    println(list)
 
 
 //
