@@ -27,12 +27,12 @@ def uploadTemplate(URL, env) {
 //        env.templateId << "${result.template.id}"
 //        println(env.templateId)
         result.template.id.each {
-            fileResult << ("${it}, ")
+            fileResult << ("${it} ")
         }
     }
-    sh "cat ${fileResult}"
-//    newList = fileResult.join(",")
-//    println(newList)
+//    sh "cat ${fileResult}"
+    newList = readFile('fileResult')join(",")
+    println(newList)
     echo "End of uploadTemplate"
 }
 
