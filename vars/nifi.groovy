@@ -16,6 +16,7 @@ def uploadTemplate(URL, env) {
     List templateId = []
     File[] files = findTemplates(env)
     for (File file : files) {
+        echo "start for loop"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
         echo "********** IN DSS ********************"
         def output = readFile('result').trim()
