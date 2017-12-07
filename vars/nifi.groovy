@@ -5,7 +5,7 @@ import groovy.json.JsonSlurper
 def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
-        def test = uploadTemplate(URL, env)
+        List test = uploadTemplate(URL, env)
         return test
     } catch (err) {
         currentBuild.result = "FAILURE"
@@ -16,12 +16,14 @@ def call(URL) {
 
 static List uploadTemplate(URL, env) {
 
-    List list = []
+//    List list = []
 
     File dir = new File("${env.WORKSPACE}/nifi")
-    dir.eachFileRecurse(FileType.FILES) { file ->
-        list << file
-    }
+//    dir.eachFileRecurse(FileType.FILES) { file ->
+//        list << file
+//    }
+    list = dir.listFiles()
+
 
 //    list.each {
     return list
