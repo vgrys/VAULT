@@ -23,9 +23,6 @@ static List uploadTemplate(URL, env) {
         list << file
     }
 
-    list.each {
-        print(it.path)
-    }
 //    list.each {
     return list
 //    }

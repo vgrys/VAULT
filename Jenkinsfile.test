@@ -32,7 +32,9 @@ node {
     stage ('NiFi deployment') {
         echo "********** NiFi deployment ***********"
         def test = nifi(nifiURL)
-        println(test)
+        test.each {
+            print(it.path)
+        }
     }
 
 
