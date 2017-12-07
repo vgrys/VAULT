@@ -2,9 +2,10 @@
 import groovy.json.JsonSlurper
 
 def call(URL) {
+    List templateId = []
 //    try {
         echo "********* Upload templates to the NiFi ************"
-        uploadTemplate(URL, env)
+        uploadTemplate(URL, env, templateId)
 //    } catch (err) {
 //        currentBuild.result = "FAILURE"
 //        echo "********* Errors happened *********"
@@ -12,10 +13,9 @@ def call(URL) {
 //    }
 }
 
-def uploadTemplate(URL, env) {
+def uploadTemplate(URL, env, templateId) {
     File[] files = findTemplates(env)
     for (File file : files) {
-        List templateId = []
         echo "start for loop"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
         echo "********** IN DSS ********************"
