@@ -15,13 +15,13 @@ def call(URL) {
 }
 
 def uploadTemplate(URL, env) {
-    List id = []
+//    List id = []
     File [] files = findTemplates(env)
     for (File file:files) {
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
         echo "********** IN DSS ********************"
         def output = readFile('result').trim()
-        result = new XmlSlurper().parseText("${output}")
+        def result = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${result.template.name}'"
         echo "ID of the template is: '${result.template.id}'"
 //        env.id = id.add(result.template.id)
