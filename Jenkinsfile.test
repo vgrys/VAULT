@@ -45,7 +45,7 @@ node {
     stage ('NiFi deployment') {
         echo "********** NiFi deployment ***********"
         def test = nifi(nifiURL)
-        echo test
+        println(test)
     }
 
 
