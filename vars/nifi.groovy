@@ -25,7 +25,7 @@ def static uploadTemplate (URL, env) {
         list << file
     }
     list.each {
-        return it.path
+        return it.name
     }
 
 //    sh "curl -F template=@${templatePath} -X POST  ${URL}/nifi-api/${process}/root/templates/upload > result"
