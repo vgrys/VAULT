@@ -24,10 +24,18 @@ static List uploadTemplate(URL, env) {
 //    }
 //    list = dir.listFiles()
 
-    new File("${env.WORKSPACE}/nifi").eachFileRecurse { list.add (it.name) }
+    new File("${env.WORKSPACE}\\nifi").eachFile() { file->
+        list.add (file.getName())
+    }
+    return list
+
+
+//            eachFileRecurse { list.add(it.name) }
+
+
+}
 
 //    list.each {
-    return list
 //    }
 
 //    sh "curl -F template=@${templatePath} -X POST  ${URL}/nifi-api/${process}/root/templates/upload > result"
@@ -37,7 +45,7 @@ static List uploadTemplate(URL, env) {
 //    def result = new XmlSlurper().parseText("${output}")
 //    echo "Name of the template is: '${result.template.name}'"
 //    echo "ID of the template is: '${result.template.id}'"
-}
+
 
 def getInfo(URL, process, id) {
     sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"
