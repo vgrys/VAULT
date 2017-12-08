@@ -31,7 +31,7 @@ def uploadTemplate(URL, env) {
     sh "cat ${fileResult}"
     def templateList = []
 //    def newList = readFile("${fileResult}").trim() { line ->
-    new File("${fileResult}").eachLine { line ->
+    new File("${fileResult}").eachLine.join(',') { line ->
         templateList << line
     }
     print(templateList)
