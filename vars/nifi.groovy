@@ -5,7 +5,7 @@ def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
         def array = "ls -f ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
-        echo array
+        print(array)
 //        uploadTemplate(URL)
 //        createWorkspace(URL)
 //        createProcesGroups(URL)
