@@ -14,9 +14,9 @@ def call(URL) {
 
 def uploadTemplate(URL, env) {
     File[] files = findTemplates(env)
-    def listTemplate = []
-    print(listTemplate)
-//    File fileResult = new File("${env.WORKSPACE}/nifi/templateResult")
+//    def listTemplate = []
+//    print(listTemplate)
+    File fileResult = new File("${env.WORKSPACE}/nifi/templateResult")
     for (File file : files) {
         echo "start for loop"
         print(listTemplate)
@@ -27,17 +27,16 @@ def uploadTemplate(URL, env) {
         def result = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${result.template.name}'"
         echo "ID of the template is: '${result.template.id}'"
-        listTemplate << result.template.id
-        result = null
+//        listTemplate << result.template.id
 //        env.templateId << "${result.template.id}"
 //        println(env.templateId)
-//        result.template.id.each {
-//            fileResult << ("${it} ")
-//        }
+        result.template.id.each {
+            fileResult << ("${it} ")
+        }
     }
-//    sh "cat ${fileResult}"
-//    newList = readFile("${fileResult}").join(",")
-//    println(newList)
+    sh "cat ${fileResult}"
+    newList = readFile("${fileResult}").join(",")
+    println(newList)
     echo "End of uploadTemplate"
 }
 
