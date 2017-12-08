@@ -9,7 +9,7 @@ def call(URL) {
         List list = Arrays.asList(array)
         print(list.class)
         print(list)
-        list.removeAll(['.', '..'] as Object[])
+        list.removeAll(['.', '..'])
 //        array.remove(3)
 //        array.remove("..")
         for (String item : array) {
