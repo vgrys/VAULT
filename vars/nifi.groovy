@@ -30,7 +30,6 @@ def uploadTemplate(URL, env) {
     }
     sh "cat ${fileResult}"
     def newList = readFile("${fileResult}").trim()
-    print(templateList)
     newList = newList.join(",")
     println(newList)
     echo "End of uploadTemplate"
