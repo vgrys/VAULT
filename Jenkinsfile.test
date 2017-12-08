@@ -38,9 +38,9 @@ node {
         nifi(nifiURL)
     }
 
-    echo "env.TEMPLATE_ID is ${env.TEMPLATE_ID}"
-    echo "env.WORKSPACE_PROCESS_GROUP is: ${env.WORKSPACE_PROCESS_GROUP}"
-    echo "env.PROCESS_GROUP_ID: ${env.PROCESS_GROUP_ID}"
+    echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
+    echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
+    echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUP_ID}"
 
 
 
