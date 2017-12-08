@@ -26,7 +26,8 @@ def uploadTemplate(URL, env) {
             fileResult << ("${it} ")
         }
     }
-    env.TEMPLATE_ID = readFile("${fileResult}").trim().replace(" ", ",")
+    env.TEMPLATE_ID = readFile("${fileResult}").trim()
+//            .replace(" ", ",")
 }
 
 def static findTemplates(env) {
@@ -43,10 +44,21 @@ def static findTemplates(env) {
 //        }
 
 def createWorkspace(URL) {
-    sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${env.BRANCH_NAME}\"}}' ${URL}/nifi-api/process-groups/root/process-groups > JSON"
+    sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${env.GIT_REPO}\"}}' ${URL}/nifi-api/process-groups/root/process-groups > JSON"
     def output = readFile('JSON').trim()
     def result = new JsonSlurper().parseText("${output}")
     echo "Group ID is: '${result.id}'"
+    env.WORKSPACE_PROCESS_GROUP = result.id
+}
+
+def createProcesGroups() {
+
+    def listId = env.TEMPLATE_ID.toString().split()
+    sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${env.GIT_REPO}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
+    def output = readFile('JSON').trim()
+    def result = new JsonSlurper().parseText("${output}")
+    echo "Group ID is: '${result.id}'"
+
 }
 
 def getInfo(URL, process, id) {

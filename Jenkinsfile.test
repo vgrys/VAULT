@@ -39,6 +39,7 @@ node {
     }
 
     print(env.TEMPLATE_ID)
+    print(env.WORKSPACE_PROCESS_GROUP)
 
 
 
