@@ -34,7 +34,7 @@ def createWorkspace(URL) {
     sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${env.GIT_REPO}\"}}' ${URL}/nifi-api/process-groups/root/process-groups > JSON"
     def output = readFile('JSON').trim()
     def result = new JsonSlurper().parseText("${output}")
-    echo "Group ID is: '${result.id}'"
+    echo "Group group is created with ID is: '${result.id}' and name: '${result.component.name}'"
     env.WORKSPACE_PROCESS_GROUP = result.id
 }
 
@@ -49,7 +49,7 @@ def createProcesGroups(URL) {
             sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${processGroup}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
             def output = readFile('JSON').trim()
             def result = new JsonSlurper().parseText("${output}")
-            echo "Group ID is: '${result.id}'"
+            echo "Group group is created with ID is: '${result.id}' and name: '${result.component.name}'"
         }
     }
 }
