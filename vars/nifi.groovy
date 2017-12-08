@@ -50,7 +50,7 @@ def createWorkspace(URL) {
 }
 
 def createProcesGroups(URL) {
-    File[] files = findTemplates(env)
+    files = findTemplates(env)
     File fileResult = new File("${env.WORKSPACE}/groupsResult")
     for (File file : files) {
         println(file.getName().replace(".xml", ""))
