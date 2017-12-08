@@ -43,7 +43,7 @@ def static findTemplates(env) {
 //        }
 
 def createWorkspace(URL) {
-    sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"test-to-delete-from-linux\"}}' ${URL}/nifi-api/process-groups/root/process-groups > JSON"
+    sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${env.BRANCH_NAME}\"}}' ${URL}/nifi-api/process-groups/root/process-groups > JSON"
     def output = readFile('JSON').trim()
     def result = new JsonSlurper().parseText("${output}")
     echo "Group ID is: '${result.id}'"
