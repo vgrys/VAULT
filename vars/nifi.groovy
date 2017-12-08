@@ -6,11 +6,15 @@ def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
         def array = "ls -f ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
-        array.remove(".")
-        array.remove("..")
-        for (String item : array) {
-            print(item)
-        }
+        List list = Arrays.asList(array)
+        print(list.class)
+
+
+//        array.remove(".")
+//        array.remove("..")
+//        for (String item : array) {
+//            print(item)
+//        }
 //        uploadTemplate(URL)
 //        createWorkspace(URL)
 //        createProcesGroups(URL)
