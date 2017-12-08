@@ -30,7 +30,7 @@ def uploadTemplate(URL) {
     File[] files = findTemplates(env)
     File fileResult = new File("${env.WORKSPACE}/templatesResult")
     for (File file : files) {
-        sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
+        sh "curl -F template=@"${env.WORKSPACE}/nifi/${file}" -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
         def output = readFile('XML').trim()
         echo output
         def result = new XmlSlurper().parseText("${output}")
