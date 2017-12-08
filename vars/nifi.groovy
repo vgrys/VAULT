@@ -23,9 +23,7 @@ def uploadTemplate(URL) {
         echo output
         def result = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${result.template.name}'"
-        result.template.id.each {
-            fileResult << ("${it} " )
-        }
+        fileResult << ("${result.template.id} ")
     }
     env.TEMPLATE_ID = readFile("${fileResult}").trim()
 }
