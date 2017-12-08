@@ -1,19 +1,17 @@
 #!/usr/bin/groovy
 import groovy.json.JsonSlurper
-import java.util.List
 
 def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
+
         def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
         List list = Arrays.asList(array)
-        print(list.class)
         print(list)
-//        array.remove(3)
-//        array.remove("..")
         for (String item : array) {
             print(item)
         }
+
 //        uploadTemplate(URL)
 //        createWorkspace(URL)
 //        createProcesGroups(URL)
@@ -23,11 +21,16 @@ def call(URL) {
         throw err
     }
 }
-
+//
 //def static findTemplates(env) {
 ////    File files = new File("${env.WORKSPACE}/nifi")
-////    array = $(ls -f  env.{WORKSPACE}/nifi/)
-//    File[] matchingFiles = files.listFiles()
+////    File[] matchingFiles = files.listFiles()
+//    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
+//    List list = Arrays.asList(array)
+//    print(list)
+//    for (String item : array) {
+//        print(item)
+//    }
 //    return matchingFiles
 //}
 //
@@ -99,6 +102,6 @@ def call(URL) {
 //    echo "connections ID is: '${result.processGroupFlow.flow.connections.id}'"
 //    echo "URI is: '${result.processGroupFlow.flow.connections.uri}'"
 //}
-
-
-
+//
+//
+//
