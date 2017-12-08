@@ -24,7 +24,7 @@ def uploadTemplate(URL) {
         def result = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${result.template.name}'"
         result.template.id.each {
-            fileResult << ("${it}" )
+            fileResult << ("${it} " )
         }
     }
     env.TEMPLATE_ID = readFile("${fileResult}").trim()
@@ -48,9 +48,8 @@ def createProcesGroups(URL) {
         def output = readFile('JSON').trim()
         def result = new JsonSlurper().parseText("${output}")
         echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
-        result.id.each {
-            fileResult << ("${it}''")
-        }
+        fileResult << ("${result.id} ")
+
     }
     echo "I am here"
     sh "cat ${fileResult}"
