@@ -49,6 +49,10 @@ def createWorkspace(URL) {
     def result = new JsonSlurper().parseText("${output}")
     echo "Group ID is: '${result.id}'"
     env.WORKSPACE_PROCESS_GROUP = result.id
+
+    def listId = env.TEMPLATE_ID.toString().split()
+    print(listId)
+
 }
 
 def createProcesGroups() {
