@@ -49,7 +49,7 @@ def createProcesGroups(URL) {
         def result = new JsonSlurper().parseText("${output}")
         echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
         result.id.each {
-            fileResult << ("${it}" )
+            fileResult << ("${it}''")
         }
     }
     echo "I am here"
