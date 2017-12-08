@@ -5,11 +5,10 @@ import java.util.List
 def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
-        def array = "ls -f ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
+        def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
         List list = Arrays.asList(array)
         print(list.class)
         print(list)
-        list.removeAll{ it == '.'}
 //        array.remove(3)
 //        array.remove("..")
         for (String item : array) {
