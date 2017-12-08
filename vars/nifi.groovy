@@ -4,14 +4,22 @@ import groovy.json.JsonSlurper
 def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
-        uploadTemplate(URL)
-        createWorkspace(URL)
-        createProcesGroups(URL)
+        "ls -l ${env.WORKSPACE}/nifi".execute().text
+//        uploadTemplate(URL)
+//        createWorkspace(URL)
+//        createProcesGroups(URL)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
         throw err
     }
+}
+
+def static findTemplates(env) {
+//    File files = new File("${env.WORKSPACE}/nifi")
+//    array = $(ls -f  env.{WORKSPACE}/nifi/)
+    File[] matchingFiles = files.listFiles()
+    return matchingFiles
 }
 
 def uploadTemplate(URL) {
@@ -49,8 +57,6 @@ def createProcesGroups(URL) {
         fileResult << ("${result.id} ")
 
     }
-    echo "I am here"
-    sh "cat ${fileResult}"
     env.PROCESS_GROUP_ID = readFile("${fileResult}").trim()
 }
 
@@ -85,15 +91,5 @@ def getInfoConnection(URL, process, id) {
     echo "URI is: '${result.processGroupFlow.flow.connections.uri}'"
 }
 
-def static findTemplates(env) {
-    File files = new File("${env.WORKSPACE}/nifi")
-    File[] matchingFiles = files.listFiles()
-    return matchingFiles
-}
 
-//        File f = new File("${env.WORKSPACE}/nifi")
-//        File[] matchingFiles = f.listFiles()
-//        for (File file:matchingFiles) {
-//            println(file.getName().replace(".xml", ""))
-//            println(file)
-//        }
+
