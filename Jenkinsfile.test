@@ -23,7 +23,7 @@ node {
     stage('Clean Workspace and Check out Source') {
         echo "********** Clean Jenkins workspace and Check out Source ***********"
         deleteDir()
-//        checkout scm
+        checkout scm
         gitInfo()
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
