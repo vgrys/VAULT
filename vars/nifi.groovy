@@ -53,6 +53,10 @@ def createWorkspace(URL) {
     def listId = env.TEMPLATE_ID.toString().split()
     print(listId[0])
 
+    for (String item : listId) {
+        print(item)
+    }
+
 
 }
 
