@@ -31,7 +31,7 @@ def uploadTemplate(URL) {
 }
 
 def createWorkspace(URL) {
-    sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${env.GIT_REPO}-WORKSPAVE\"}}' ${URL}/nifi-api/process-groups/root/process-groups > JSON"
+    sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${env.GIT_REPO}-WORKSPACE\"}}' ${URL}/nifi-api/process-groups/root/process-groups > JSON"
     def output = readFile('JSON').trim()
     def result = new JsonSlurper().parseText("${output}")
     echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
