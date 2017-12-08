@@ -4,7 +4,8 @@ import groovy.json.JsonSlurper
 def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
-        "ls -l ${env.WORKSPACE}/nifi".execute().text
+        def array = "ls -l ${env.WORKSPACE}/nifi".execute().text
+        echo array
 //        uploadTemplate(URL)
 //        createWorkspace(URL)
 //        createProcesGroups(URL)
