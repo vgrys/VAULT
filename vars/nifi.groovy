@@ -43,14 +43,14 @@ def createProcesGroups(URL) {
     File[] files = findTemplates(env)
     for (File file : files) {
         println(file.getName().replace(".xml", ""))
+        def processGroup = file.getName().replace(".xml", "")
 
-//        for (String item : listId) {
-//
-//            sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${env.GIT_REPO}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
-//            def output = readFile('JSON').trim()
-//            def result = new JsonSlurper().parseText("${output}")
-//            echo "Group ID is: '${result.id}'"
-//        }
+        for (String item : listId) {
+            sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${processGroup}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
+            def output = readFile('JSON').trim()
+            def result = new JsonSlurper().parseText("${output}")
+            echo "Group ID is: '${result.id}'"
+        }
     }
 }
 
