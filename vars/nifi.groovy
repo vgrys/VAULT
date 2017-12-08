@@ -52,6 +52,7 @@ def createProcesGroups(URL) {
             fileResult << ("${it} ")
         }
     }
+    sh "cat ${fileResult}"
     env.PROCESS_GROUP_ID = readFile("${fileResult}").trim()
 }
 
