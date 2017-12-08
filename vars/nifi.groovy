@@ -2,35 +2,31 @@
 import groovy.json.JsonSlurper
 
 def call(URL) {
-//    try {
+    try {
         echo "********* Upload templates to the NiFi ************"
         uploadTemplate(URL, env)
-//    } catch (err) {
-//        currentBuild.result = "FAILURE"
-//        echo "********* Errors happened *********"
-//        throw err
-//    }
+        createWorkspace(URL)
+    } catch (err) {
+        currentBuild.result = "FAILURE"
+        echo "********* Errors happened *********"
+        throw err
+    }
 }
 
 def uploadTemplate(URL, env) {
     File[] files = findTemplates(env)
     File fileResult = new File("${env.WORKSPACE}/nifi/templateResult")
     for (File file : files) {
-        echo "start for loop"
-        sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > result"
-        echo "********** IN DSS ********************"
-        def output = readFile('result').trim()
+        sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
+        def output = readFile('XML').trim()
         echo output
         def result = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${result.template.name}'"
-        echo "ID of the template is: '${result.template.id}'"
         result.template.id.each {
             fileResult << ("${it} ")
         }
     }
     env.TEMPLATE_ID = readFile("${fileResult}").trim().replace(" ", ",")
-    print(env.TEMPLATE_ID)
-    echo "End of uploadTemplate"
 }
 
 def static findTemplates(env) {
@@ -45,6 +41,13 @@ def static findTemplates(env) {
 //            println(file.getName().replace(".xml", ""))
 //            println(file)
 //        }
+
+def createWorkspace(URL) {
+    sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"test-to-delete-from-linux\"}}' ${URL}/nifi-api/process-groups/root/process-groups > JSON"
+    def output = readFile('XML').trim()
+    def result = new JsonSlurper().parseText("${output}")
+    echo "Group ID is: '${result.id}'"
+}
 
 def getInfo(URL, process, id) {
     sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"
@@ -71,7 +74,3 @@ def getInfoConnection(URL, process, id) {
     echo "URI is: '${result.processGroupFlow.flow.connections.uri}'"
 }
 
-
-def createWorkspace() {
-
-}
