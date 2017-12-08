@@ -5,11 +5,11 @@ import groovyjarjarantlr.collections.List
 def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
-        def array = "ls -f ${env.WORKSPACE}/nifi".execute().text.trim().toList()
-//        List list = Arrays.asList(array)
-        print(array)
-//        list.remove('.')
-//        echo list
+        def array = "ls -f ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
+        List list = Arrays.asList(array).toList
+        print(list)
+        list.remove('.')
+        Print(list)
 
 //        for (String item : array) {
 //            print(item)
