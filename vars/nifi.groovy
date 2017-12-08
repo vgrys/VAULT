@@ -51,7 +51,8 @@ def createWorkspace(URL) {
     env.WORKSPACE_PROCESS_GROUP = result.id
 
     def listId = env.TEMPLATE_ID.toString().split()
-    print(listId)
+    print(listId[0])
+
 
 }
 
