@@ -29,14 +29,10 @@ def uploadTemplate(URL, env) {
         }
     }
     sh "cat ${fileResult}"
-    def templateList = []
-//    def newList = readFile("${fileResult}").trim() { line ->
-    new File("${fileResult}").eachLine.join(',') { line ->
-        templateList << line
-    }
+    def newList = readFile("${fileResult}").trim()
     print(templateList)
-//    newList.join(",")
-//    println(newList)
+    newList = newList.join(",")
+    println(newList)
     echo "End of uploadTemplate"
 }
 
