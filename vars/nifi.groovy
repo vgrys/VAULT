@@ -7,9 +7,9 @@ def call(URL) {
         echo "********* Upload templates to the NiFi ************"
         def array = "ls -f ${env.WORKSPACE}/nifi".execute().text.trim().toList()
 //        List list = Arrays.asList(array)
-        echo array
-        list.remove('.')
-        echo list
+        print(array)
+//        list.remove('.')
+//        echo list
 
 //        for (String item : array) {
 //            print(item)
