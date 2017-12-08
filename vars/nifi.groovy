@@ -8,13 +8,11 @@ def call(URL) {
         def array = "ls -f ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
         List list = Arrays.asList(array)
         print(list.class)
-
-
-//        array.remove(".")
-//        array.remove("..")
-//        for (String item : array) {
-//            print(item)
-//        }
+        array.remove(".")
+        array.remove("..")
+        for (String item : array) {
+            print(item)
+        }
 //        uploadTemplate(URL)
 //        createWorkspace(URL)
 //        createProcesGroups(URL)
