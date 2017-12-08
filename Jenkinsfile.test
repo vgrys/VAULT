@@ -38,6 +38,7 @@ node {
         nifi(nifiURL)
     }
 
+    print(env.TEMPLATE_ID)
 
 
 

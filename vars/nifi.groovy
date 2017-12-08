@@ -28,9 +28,8 @@ def uploadTemplate(URL, env) {
             fileResult << ("${it} ")
         }
     }
-    sh "cat ${fileResult}"
-    def newList = readFile("${fileResult}").trim().replace(" ", ",")
-    print(newList)
+    env.TEMPLATE_ID = readFile("${fileResult}").trim().replace(" ", ",")
+    print(env.TEMPLATE_ID)
     echo "End of uploadTemplate"
 }
 
