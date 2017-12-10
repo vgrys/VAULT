@@ -1,5 +1,6 @@
 #!/usr/bin/groovy
 import groovy.json.JsonSlurper
+import groovyjarjarantlr.collections.List
 
 def call(URL) {
     try {
@@ -31,7 +32,7 @@ def uploadTemplate(URL) {
 //    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
     sh "ls -A ${env.WORKSPACE}/nifi > shellOutput"
     def outputShell=readFile('shellOutput').trim().toString().split()
-    String result = []
+    List result = []
 //    File fileResult = new File("${env.WORKSPACE}/templatesResult")
     for (File name : outputShell) {
         GString file = "${env.WORKSPACE}/nifi/${name}"
