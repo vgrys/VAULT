@@ -40,7 +40,9 @@ def uploadTemplate(URL) {
         echo output
         def xmlResult = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${xmlResult.template.name}' and id is: '${xmlResult.template.id}'"
-        result << ("${xmlResult.template.id} ")
+//        result << ("${xmlResult.template.id} ")
+        result.add("${xmlResult.template.id} ")
+
     }
     echo("I am here")
     print(result)
@@ -56,9 +58,11 @@ def createWorkspace(URL) {
 }
 
 def createProcesGroups(URL) {
-    files = findTemplates(env)
-    File fileResult = new File("${env.WORKSPACE}/groupsResult")
-    for (File file : files) {
+//    files = findTemplates(env)
+//    File fileResult = new File("${env.WORKSPACE}/groupsResult")
+    sh "ls -A ${env.WORKSPACE}/nifi > shellOutput"
+    def outputShell=readFile('shellOutput').trim().toString().split()
+    for (File file : outputShell) {
         println(file.getName().replace(".xml", ""))
         def processGroup = file.getName().replace(".xml", "")
         sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${processGroup}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
