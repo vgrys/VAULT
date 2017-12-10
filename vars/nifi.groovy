@@ -42,7 +42,7 @@ def uploadTemplate(URL) {
         echo "Name of the template is: '${xmlResult.template.name}' and id is: '${xmlResult.template.id}'"
 //        result << ("${xmlResult.template.id} ")
         def newResult = result << "${xmlResult.template.id} "
-
+        print(newResult)
     }
     echo("I am here")
     print(newResult)
