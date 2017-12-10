@@ -39,7 +39,7 @@ def uploadTemplate(URL) {
     print(newOutput)
     String result = ''
 //    File fileResult = new File("${env.WORKSPACE}/templatesResult")
-    for (File name : outputShell) {
+    for (String name : newOutput) {
         GString file = "${env.WORKSPACE}/nifi/${name}"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
         def output = readFile('XML').trim()
