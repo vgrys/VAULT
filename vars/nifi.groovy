@@ -30,7 +30,8 @@ def uploadTemplate(URL) {
 //    files = findTemplates(env)
 //    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
     sh "ls -A ${env.WORKSPACE}/nifi > shellOutput"
-    def outputShell=readFile('shellOutput').trim().toString().split()
+    def outputShell = readFile()
+    outputShell('shellOutput').trim().toString().split()
     String result = ''
 //    File fileResult = new File("${env.WORKSPACE}/templatesResult")
     for (File name : outputShell) {
@@ -45,7 +46,7 @@ def uploadTemplate(URL) {
         print(result)
     }
     echo("I am here")
-    print(newResult)
+    print(result)
 //    env.TEMPLATE_ID = readFile("${fileResult}").trim()
 }
 
