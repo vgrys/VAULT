@@ -35,7 +35,8 @@ def uploadTemplate(URL) {
     sh 'ls -l'
     def outputShell = readFile("shellOutput")
     echo outputShell
-//            .trim().toString().split()
+    def newOutput = outputShell.trim().toString().split()
+    print(newOutput)
     String result = ''
 //    File fileResult = new File("${env.WORKSPACE}/templatesResult")
     for (File name : outputShell) {
