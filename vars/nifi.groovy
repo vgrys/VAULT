@@ -33,11 +33,12 @@ def uploadTemplate(URL) {
     sh 'cat shellOutput'
     sh 'pwd'
     sh 'ls -l'
-    def outputShell = readFile("shellOutput")
+    def r = new readFile()
+    r("shellOutput").trim().toString().split()
     echo outputShell
     print(outputShell.class)
-    def newOutput = outputShell.trim().toString().split()
-    print(newOutput)
+//    def newOutput = outputShell.trim().toString().split()
+//    print(newOutput)
     String result = ''
 //    File fileResult = new File("${env.WORKSPACE}/templatesResult")
     for (String name : newOutput) {
