@@ -30,11 +30,11 @@ def uploadTemplate(URL) {
 //    files = findTemplates(env)
 //    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
     sh "ls -A ${env.WORKSPACE}/nifi > shellOutput"
-    def outputShell = readFile()
-    outputShell('shellOutput').trim().toString().split()
+    def outputShell = readFile "${shellOutput}"
+    def newOutputShell = outputShell().trim().toString().split()
     String result = ''
 //    File fileResult = new File("${env.WORKSPACE}/templatesResult")
-    for (File name : outputShell) {
+    for (File name : newOutputShell) {
         GString file = "${env.WORKSPACE}/nifi/${name}"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
         def output = readFile('XML').trim()
