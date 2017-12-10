@@ -31,18 +31,19 @@ def uploadTemplate(URL) {
 //    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
     sh "ls -A ${env.WORKSPACE}/nifi > shellOutput"
     def outputShell=readFile('shellOutput').trim().toString().split()
-    print(outputShell.class)
+    String result = []
 //    File fileResult = new File("${env.WORKSPACE}/templatesResult")
     for (File name : outputShell) {
         GString file = "${env.WORKSPACE}/nifi/${name}"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
         def output = readFile('XML').trim()
         echo output
-        def result = new XmlSlurper().parseText("${output}")
-        echo "Name of the template is: '${result.template.name}'"
-        fileResult << ("${result.template.id} ")
+        def xmlResult = new XmlSlurper().parseText("${output}")
+        echo "Name of the template is: '${xmlResult.template.name}'"
+        result << ("${xmlResult.template.id} ")
     }
-    env.TEMPLATE_ID = readFile("${fileResult}").trim()
+    print(result)
+//    env.TEMPLATE_ID = readFile("${fileResult}").trim()
 }
 
 def createWorkspace(URL) {
