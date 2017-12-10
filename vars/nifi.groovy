@@ -42,11 +42,11 @@ def uploadTemplate(URL) {
         def xmlResult = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${xmlResult.template.name}' and id is: '${xmlResult.template.id}'"
 //        result << ("${xmlResult.template.id} ")
-        result.add("${xmlResult.template.id} ")
+        def newResult = result << "${xmlResult.template.id} "
 
     }
     echo("I am here")
-    print(result)
+    print(newResult)
 //    env.TEMPLATE_ID = readFile("${fileResult}").trim()
 }
 
