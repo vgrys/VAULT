@@ -14,22 +14,26 @@ def call(URL) {
     }
 }
 
-def static findTemplates(env) {
-//    File files = new File("${env.WORKSPACE}/nifi")
-//    File[] matchingFiles = files.listFiles()
-    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
-//    List list = Arrays.asList(array)
-//    print(list)
-//    for (String item : array) {
-//        print(item)
-//    }
-    return array
-}
+//def static findTemplates(env) {
+////    File files = new File("${env.WORKSPACE}/nifi")
+////    File[] matchingFiles = files.listFiles()
+//    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
+////    List list = Arrays.asList(array)
+////    print(list)
+////    for (String item : array) {
+////        print(item)
+////    }
+//    return array
+//}
 
 def uploadTemplate(URL) {
-    files = findTemplates(env)
-    File fileResult = new File("${env.WORKSPACE}/templatesResult")
-    for (File name : files) {
+//    files = findTemplates(env)
+//    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
+    sh "ls -A ${env.WORKSPACE}/nifi > shellOutput"
+    def outputShell=readFile('shellOutput').trim()
+    print(outputShell)
+//    File fileResult = new File("${env.WORKSPACE}/templatesResult")
+    for (File name : outputShell) {
         GString file = "${env.WORKSPACE}/nifi/${name}"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
         def output = readFile('XML').trim()
