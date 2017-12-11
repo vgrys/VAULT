@@ -1,5 +1,6 @@
 #!/usr/bin/groovy
 import groovy.json.JsonSlurper
+import groovyjarjarantlr.collections.List
 
 def call(URL) {
     try {
@@ -29,13 +30,25 @@ def call(URL) {
 def uploadTemplate(URL) {
 //    files = findTemplates(env)
 //    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
+    List list = []
     sh "ls -A -m ${env.WORKSPACE}/nifi > shellOutput"
     sh 'cat shellOutput'
     def outputShell = readFile('shellOutput').trim().toString()
     print(outputShell)
-    List<String> list = Arrays.asList(outputShell)
-    print(list.class)
-    print(list)
+    elem = ''
+    for (def character : outputShell) {
+        if (character == ',') {
+            list.append(elem.trim())
+            elem = ''
+        } else {
+            elem += character
+        }
+        list.append(elem.trim())
+    }
+
+//    List<String> list = Arrays.asList(outputShell)
+//    print(list.class)
+//    print(list)
 //    def list = outputShell.readLines()
 //    print(list.class)
 //    print(list)
@@ -43,6 +56,8 @@ def uploadTemplate(URL) {
 //    print(newOutput)
 //    String result = ''
 //    File fileResult = new File("${env.WORKSPACE}/templatesResult")
+
+
     for (def name : list) {
         print(name)
         GString file = "${env.WORKSPACE}/nifi/${name}"
@@ -72,7 +87,7 @@ def createProcesGroups(URL) {
 //    files = findTemplates(env)
 //    File fileResult = new File("${env.WORKSPACE}/groupsResult")
     sh "ls -A ${env.WORKSPACE}/nifi > shellOutput"
-    def outputShell=readFile('shellOutput').trim().toString().split()
+    def outputShell = readFile('shellOutput').trim().toString().split()
     for (File file : outputShell) {
         println(file.getName().replace(".xml", ""))
         def processGroup = file.getName().replace(".xml", "")
