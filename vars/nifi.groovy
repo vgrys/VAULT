@@ -35,7 +35,7 @@ def uploadTemplate(URL) {
     sh 'cat shellOutput'
     def outputShell = readFile('shellOutput').trim().toString()
     print(outputShell)
-    elem = ''
+    def elem = ''
     for (def character : outputShell) {
         if (character == ',') {
             list.append(elem.trim())
