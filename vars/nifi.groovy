@@ -35,7 +35,7 @@ def uploadTemplate(URL) {
     sh 'cat shellOutput'
     def outputShell = readFile('shellOutput').trim().toString().split(", ")
     List list = outputShell
-    print(list[1])
+//    print(list[1])
 
     for (List name : list) {
         print(name)
