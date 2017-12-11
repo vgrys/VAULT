@@ -33,8 +33,11 @@ def uploadTemplate(URL) {
     sh 'cat shellOutput'
     sh 'pwd'
     sh 'ls -l'
-    def outputShell = readFile('shellOutput').trim().toString().split()
+    def outputShell = readFile('shellOutput').trim().toString()
     print(outputShell.class)
+    def list = outputShell.readLines()
+    print(list.class)
+    print(list)
 //    def newOutput = outputShell.trim().toString().split()
 //    print(newOutput)
     String result = ''
