@@ -30,7 +30,7 @@ def uploadTemplate(URL) {
 //    files = findTemplates(env)
 //    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
     def script = "ls -A ${env.WORKSPACE}/nifi > shellOutput"
-    sh(returnStdout: true, script: script).trim()
+    sh(returnStdout: true, result: 'command' ,script: script).trim()
 
     sh 'cat shellOutput'
 //    String script = 'git log --name-status --oneline -1 | grep -i "^[AM]" | grep -i "data_manifest" || true'
