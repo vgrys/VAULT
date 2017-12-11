@@ -35,6 +35,7 @@ def uploadTemplate(URL) {
     sh 'ls -l'
     def outputShell = readFile('shellOutput').trim().toString()
     print(outputShell.class)
+    print(outputShell)
 //    def list = outputShell.readLines()
 //    print(list.class)
 //    print(list)
