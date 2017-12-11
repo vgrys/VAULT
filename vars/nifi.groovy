@@ -35,10 +35,10 @@ def uploadTemplate(URL) {
     sh 'cat shellOutput'
     def outputShell = readFile('shellOutput').trim().toString().split(", ")
     print(outputShell[0])
-    List list = outputShell
+//    List list = outputShell
 //    print(list[1])
 
-    for (List name : list) {
+    for (def name : outputShell) {
         print(name)
         GString file = "${env.WORKSPACE}/nifi/${name}"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
