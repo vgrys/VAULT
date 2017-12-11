@@ -34,7 +34,7 @@ def uploadTemplate(URL) {
     sh "ls -A -m ${env.WORKSPACE}/nifi > shellOutput"
     sh 'cat shellOutput'
     def outputShell = readFile('shellOutput').trim().toString().split(", ")
-    print(outputShell)
+    print(outputShell[0])
     List list = outputShell
 //    print(list[1])
 
