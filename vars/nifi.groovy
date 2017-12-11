@@ -35,14 +35,14 @@ def uploadTemplate(URL) {
     sh 'ls -l'
     def outputShell = readFile('shellOutput').trim().toString()
     print(outputShell.class)
-    def list = outputShell.readLines()
-    print(list.class)
-    print(list)
+//    def list = outputShell.readLines()
+//    print(list.class)
+//    print(list)
 //    def newOutput = outputShell.trim().toString().split()
 //    print(newOutput)
     String result = ''
 //    File fileResult = new File("${env.WORKSPACE}/templatesResult")
-    for (def name : list) {
+    for (def name : outputShell) {
         GString file = "${env.WORKSPACE}/nifi/${name}"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
         def output = readFile('XML').trim()
@@ -50,11 +50,11 @@ def uploadTemplate(URL) {
         def xmlResult = new XmlSlurper().parseText("${output}")
         echo "Name of the template is: '${xmlResult.template.name}' and id is: '${xmlResult.template.id}'"
 //        result << ("${xmlResult.template.id} ")
-        result.append("${xmlResult.template.id} ")
-        print(result)
+//        result.append("${xmlResult.template.id} ")
+//        print(result)
     }
-    echo("I am here")
-    print(result)
+    echo("finished")
+//    print(result)
 //    env.TEMPLATE_ID = readFile("${fileResult}").trim()
 }
 
