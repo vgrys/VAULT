@@ -29,12 +29,8 @@ def call(URL) {
 def uploadTemplate(URL) {
 //    files = findTemplates(env)
 //    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
-    def script = "ls -A ${env.WORKSPACE}/nifi > shellOutput"
-    sh(returnStdout: true, result: 'command' ,script: script).trim()
-
+    sh "ls -A -m ${env.WORKSPACE}/nifi > shellOutput"
     sh 'cat shellOutput'
-//    String script = 'git log --name-status --oneline -1 | grep -i "^[AM]" | grep -i "data_manifest" || true'
-    sh "cat shellOutput"
     def outputShell = readFile('shellOutput').trim().toString()
     print(outputShell.class)
     print(outputShell)
@@ -45,7 +41,7 @@ def uploadTemplate(URL) {
 //    print(newOutput)
 //    String result = ''
 //    File fileResult = new File("${env.WORKSPACE}/templatesResult")
-    for (def name : outputShell.read().lines()) {
+    for (def name : outputShell) {
         print(name)
         GString file = "${env.WORKSPACE}/nifi/${name}"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
