@@ -29,10 +29,12 @@ def call(URL) {
 def uploadTemplate(URL) {
 //    files = findTemplates(env)
 //    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
-    sh "ls -A ${env.WORKSPACE}/nifi > shellOutput"
+    def script = "ls -A ${env.WORKSPACE}/nifi > shellOutput"
+    sh(returnStdout: true, script: script).trim()
+
     sh 'cat shellOutput'
-    sh 'pwd'
-    sh 'ls -l'
+//    String script = 'git log --name-status --oneline -1 | grep -i "^[AM]" | grep -i "data_manifest" || true'
+    sh "cat shellOutput"
     def outputShell = readFile('shellOutput').trim().toString()
     print(outputShell.class)
     print(outputShell)
