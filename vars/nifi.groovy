@@ -31,9 +31,9 @@ def uploadTemplate(URL) {
 //    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
     sh "ls -A -m ${env.WORKSPACE}/nifi > shellOutput"
     sh 'cat shellOutput'
-    String outputShell = readFile('shellOutput').trim().toString()
+    def outputShell = readFile('shellOutput').trim().toString()
     print(outputShell)
-    def list = new JsonSlurper().parseText("${outputShell}")
+    List<String> list = outputShell.asList(str.split("\\s*,\\s*"))
     print(list.class)
     print(list)
 //    def list = outputShell.readLines()
