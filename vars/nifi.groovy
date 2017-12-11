@@ -44,7 +44,8 @@ def uploadTemplate(URL) {
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
         def output = readFile('XML').trim()
         echo output
-        def xmlResult = new XmlSlurper().parseText("${output}")
+//        def xmlResult = new XmlSlurper().parseText("${output}")
+        def xmlResult = new XmlParser().parseText("${output}")
         echo "Name of the template is: '${xmlResult.template.name}' and id is: '${xmlResult.template.id}'"
 //        result << ("${xmlResult.template.id} ")
 //        result.append("${xmlResult.template.id} ")
