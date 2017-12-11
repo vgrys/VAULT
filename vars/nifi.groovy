@@ -32,8 +32,9 @@ def uploadTemplate(URL) {
     sh "ls -A -m ${env.WORKSPACE}/nifi > shellOutput"
     sh 'cat shellOutput'
     List outputShell = readFile('shellOutput').trim().toString()
-    print(outputShell.class)
-    print(outputShell)
+    def list = Eval.me(outputShell)
+    print(list.class)
+    print(list)
 //    def list = outputShell.readLines()
 //    print(list.class)
 //    print(list)
