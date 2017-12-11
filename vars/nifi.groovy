@@ -30,21 +30,22 @@ def call(URL) {
 def uploadTemplate(URL) {
 //    files = findTemplates(env)
 //    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
-    List list = []
+//    List list = []
     sh "ls -A -m ${env.WORKSPACE}/nifi > shellOutput"
     sh 'cat shellOutput'
-    def outputShell = readFile('shellOutput').trim().toString()
-    print(outputShell)
-    def elem = ''
-    for (def character : outputShell) {
-        if (character == ',') {
-            list.append(elem.trim())
-            elem = ''
-        } else {
-            elem += character
-        }
-        list.append(elem.trim())
-    }
+    def outputShell = readFile('shellOutput').trim().toString().split(", ")
+    List list = outputShell
+    print(outputShell[1])
+//    def elem = ''
+//    for (def character : outputShell) {
+//        if (character == ',') {
+//            list.append(elem.trim())
+//            elem = ''
+//        } else {
+//            elem += character
+//        }
+//        list.append(elem.trim())
+//    }
 
 //    List<String> list = Arrays.asList(outputShell)
 //    print(list.class)
