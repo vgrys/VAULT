@@ -33,7 +33,7 @@ def uploadTemplate(URL) {
     sh 'cat shellOutput'
     def outputShell = readFile('shellOutput').trim().toString()
     print(outputShell)
-    List<String> list = Arrays.asList(outputShell.split("\\s*,\\s*"))
+    List<String> list = Arrays.asList(outputShell)
     print(list.class)
     print(list)
 //    def list = outputShell.readLines()
