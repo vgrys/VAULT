@@ -35,31 +35,9 @@ def uploadTemplate(URL) {
     sh 'cat shellOutput'
     def outputShell = readFile('shellOutput').trim().toString().split(", ")
     List list = outputShell
-    print(outputShell[1])
-//    def elem = ''
-//    for (def character : outputShell) {
-//        if (character == ',') {
-//            list.append(elem.trim())
-//            elem = ''
-//        } else {
-//            elem += character
-//        }
-//        list.append(elem.trim())
-//    }
+    print(list[1])
 
-//    List<String> list = Arrays.asList(outputShell)
-//    print(list.class)
-//    print(list)
-//    def list = outputShell.readLines()
-//    print(list.class)
-//    print(list)
-//    def newOutput = outputShell.trim().toString().split()
-//    print(newOutput)
-//    String result = ''
-//    File fileResult = new File("${env.WORKSPACE}/templatesResult")
-
-
-    for (def name : list) {
+    for (List name : list) {
         print(name)
         GString file = "${env.WORKSPACE}/nifi/${name}"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
