@@ -41,8 +41,12 @@ def getTemplatesId(URL) {
     sh "curl -X GET ${URL}/nifi-api/flow/templates > output"
     def output = readFile('output').trim()
     def result = new JsonSlurper().parseText("${output}")
+    print(result.templates.template.name)
+    print(result.templates.template.id)
     for (List templateName : list) {
+        echo "Iam in for loop"
         if (result.templates.template.name == templateName) {
+            echo "I am in if loop"
             echo "templateName is: ${templateName}"
             echo "result.templates.template.name is: ${result.templates.template.name}"
             templatesId < result.templates.template.id
