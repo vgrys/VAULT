@@ -93,7 +93,7 @@ def getInfoConnection(URL, process, id) {
 }
 
 def findTemplates(env) {
-    sh "ls -A -C ${env.WORKSPACE}/nifi > output"
+    sh "ls -A -m -w 0 ${env.WORKSPACE}/nifi > output"
     sh "cat output"
     def output = readFile('output').trim().toString().split(" ")
     echo output
