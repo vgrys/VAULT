@@ -44,7 +44,7 @@ def getTemplatesId(URL) {
     print(result.templates.template.name)
     print(result.templates.template.id)
     for (List templateName : list) {
-        echo "Iam in for loop"
+        echo "I am in for loop"
         if (result.templates.template.name == templateName) {
             echo "I am in if loop"
             echo "templateName is: ${templateName}"
@@ -53,6 +53,8 @@ def getTemplatesId(URL) {
             templatesName < result.templates.template.name
             echo result.templates.template.id
             echo result.templates.template.name
+        } else {
+            echo "I am in else loop"
         }
         env.TEMPLATE_ID = templatesId
     }
