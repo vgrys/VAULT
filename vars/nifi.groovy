@@ -7,7 +7,7 @@ def call(URL) {
         uploadTemplate(URL)
         createWorkspace(URL)
         getTemplatesId(URL)
-        createProcesGroups(URL)
+//        createProcesGroups(URL)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
