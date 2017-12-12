@@ -15,45 +15,15 @@ def call(URL) {
     }
 }
 
-//def static findTemplates(env) {
-////    File files = new File("${env.WORKSPACE}/nifi")
-////    File[] matchingFiles = files.listFiles()
-//    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
-////    List list = Arrays.asList(array)
-////    print(list)
-////    for (String item : array) {
-////        print(item)
-////    }
-//    return array
-//}
-
 def uploadTemplate(URL) {
-//    files = findTemplates(env)
-//    def array = "ls -A ${env.WORKSPACE}/nifi".execute().text.trim().toString().split()
-//    List list = []
-    sh "ls -A -m ${env.WORKSPACE}/nifi > shellOutput"
-    sh 'cat shellOutput'
-    def outputShell = readFile('shellOutput').trim().toString().split(", ")
-    print(outputShell[0])
-//    List list = outputShell
-//    print(list[1])
-
-    for (def name : outputShell) {
-        print(name)
+    List list = findTemplates(env)
+    for (List name : list) {
         GString file = "${env.WORKSPACE}/nifi/${name}"
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
         def output = readFile('XML').trim()
         echo output
-//        def xmlResult = new XmlSlurper().parseText("${output}")
-        def xmlResult = new XmlParser().parseText("${output}")
-        echo "Name of the template is: '${xmlResult.template.name}' and id is: '${xmlResult.template.id}'"
-//        result << ("${xmlResult.template.id} ")
-//        result.append("${xmlResult.template.id} ")
-//        print(result)
     }
     echo("finished")
-//    print(result)
-//    env.TEMPLATE_ID = readFile("${fileResult}").trim()
 }
 
 def createWorkspace(URL) {
@@ -113,5 +83,9 @@ def getInfoConnection(URL, process, id) {
     echo "URI is: '${result.processGroupFlow.flow.connections.uri}'"
 }
 
-
-
+def findTemplates(env) {
+    sh "ls -A -m ${env.WORKSPACE}/nifi > output"
+    def output = readFile('output').trim().toString().split(", ")
+    List list = output
+    return list
+}
