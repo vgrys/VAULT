@@ -36,6 +36,7 @@ def createWorkspace(URL) {
 
 def getTemplatesId(URL) {
     List list = findTemplates(env)
+    def templates = list.getName().replace(".xml", "")
     List templatesId = []
     List templatesName = []
     sh "curl -X GET ${URL}/nifi-api/flow/templates > output"
@@ -43,7 +44,7 @@ def getTemplatesId(URL) {
     def result = new JsonSlurper().parseText("${output}")
     print(result.templates.template.name)
     print(result.templates.template.id)
-    for (List templateName : list) {
+    for (List templateName : templates) {
         echo "I am in for loop"
         if (result.templates.template.name == templateName) {
             echo "I am in if loop"
