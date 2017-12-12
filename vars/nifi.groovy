@@ -111,7 +111,8 @@ def getInfoConnection(URL, process, id) {
 
 def findTemplates(env) {
     sh "ls -A -m -w 0 ${env.WORKSPACE}/nifi > output"
-    def output = readFile('output').trim().toString().split(" ")
+    def output = readFile('output').trim().toString().split(", ").replace(".xml", "")
+    print(output)
     List list = output
     return list
 }
