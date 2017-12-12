@@ -44,8 +44,9 @@ def getTemplatesId(URL) {
     print(result.templates.template.name)
     print(result.templates.template.id)
     for (List templateName : list) {
-        def templates = templateName.getName().replace(".xml", "")
-        echo "templates is: ${templates}"
+        echo templateName
+        def templates = templateName.replace(".xml", "")
+        print("templates is: ${templates}")
         echo "I am in for loop"
         if (result.templates.template.name == templates) {
             echo "I am in if loop"
