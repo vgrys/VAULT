@@ -19,6 +19,8 @@ def uploadTemplate(URL) {
     List list = findTemplates(env)
     for (List name : list) {
         GString file = "${env.WORKSPACE}/nifi/${name}"
+        echo file
+        print(URL)
         sh "curl -F template=@${file} -X POST ${URL}/nifi-api/process-groups/root/templates/upload > output"
         def output = readFile('output').trim()
         echo output
