@@ -1,88 +1,53 @@
-{"revision": {
-    "clientId": "cfc9c5fd-0159-1000-e150-054ac8339ef8",
-    "version": 1,
-    "lastModifier": "anonymous"
+{templates=[
+  {
+    id=74835298-7a61-3bc3-bda6-231dd584c5b2
+    permissions=
+  {
+    canRead=true,
+    canWrite=true
   },
-  "id": "034864b6-0160-1000-21bc-cfc224eb64ad",
-  "uri": "http://192.168.56.105:8088/nifi-api/process-groups/034864b6-0160-1000-21bc-cfc224eb64ad",
-  "position": {
-    "x": 0.0,
-    "y": 0.0
-  },
-  "permissions": {
-    "canRead": true,
-    "canWrite": true
-  },
-  "bulletins": [],
-  "component": {
-    "id": "034864b6-0160-1000-21bc-cfc224eb64ad",
-    "parentGroupId": "e3f04b4f-015f-1000-b8f7-a1141fed5991",
-    "position": {
-      "x": 0.0,
-      "y": 0.0
-    },
-    "name": "test-to-delete-from-linux",
-    "comments": "",
-    "runningCount": 0,
-    "stoppedCount": 0,
-    "invalidCount": 0,
-    "disabledCount": 0,
-    "activeRemotePortCount": 0,
-    "inactiveRemotePortCount": 0,
-    "inputPortCount": 0,
-    "outputPortCount": 0,
-    "contents": {
-      "processGroups": [],
-      "remoteProcessGroups": [],
-      "processors": [],
-      "inputPorts": [],
-      "outputPorts": [],
-      "connections": [],
-      "labels": [],
-      "funnels": [],
-      "controllerServices": []
-    }
-  },
-  "status": {
-    "id": "034864b6-0160-1000-21bc-cfc224eb64ad",
-    "name": "test-to-delete-from-linux",
-    "statsLastRefreshed": "17:39:24 EET",
-    "aggregateSnapshot": {
-      "id": "034864b6-0160-1000-21bc-cfc224eb64ad",
-      "name": "test-to-delete-from-linux",
-      "flowFilesIn": 0,
-      "bytesIn": 0,
-      "input": "0 (0 bytes)",
-      "flowFilesQueued": 0,
-      "bytesQueued": 0,
-      "queued": "0 (0 bytes)",
-      "queuedCount": "0",
-      "queuedSize": "0 bytes",
-      "bytesRead": 0,
-      "read": "0 bytes",
-      "bytesWritten": 0,
-      "written": "0 bytes",
-      "flowFilesOut": 0,
-      "bytesOut": 0,
-      "output": "0 (0 bytes)",
-      "flowFilesTransferred": 0,
-      "bytesTransferred": 0,
-      "transferred": "0 (0 bytes)",
-      "bytesReceived": 0,
-      "flowFilesReceived": 0,
-      "received": "0 (0 bytes)",
-      "bytesSent": 0,
-      "flowFilesSent": 0,
-      "sent": "0 (0 bytes)",
-      "activeThreadCount": 0
-    }
-  },
-  "runningCount": 0,
-  "stoppedCount": 0,
-  "invalidCount": 0,
-  "disabledCount": 0,
-  "activeRemotePortCount": 0,
-  "inactiveRemotePortCount": 0,
-  "inputPortCount": 0,
-  "outputPortCount": 0
-}
+  template=
+  {
+    description=marks
+    pmm
+    product
+    ref
+    tables,
+    encoding-version=1.1,
+    groupId=b83a10d3-1080-115d-42dd-48d8d60e73c5,
+    id=74835298-7a61-3bc3-bda6-231dd584c5b2,
+    name=marks-product-ref,
+    timestamp=12/01/2017
+    13: 42
+    :
+    21
+    UTC,
+    uri=http: //d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/74835298-7a61-3bc3-bda6-231dd584c5b2}}, {id=51f8ae59-8ae3-3cd8-aa62-be91620cc2ed, permissions={canRead=true, canWrite=true}, template={description=SSDX_OUT_ODS_MHS
+    SSDX_OUT_ODS_MSE,
+    encoding-version=1.1,
+    groupId=037940bc-34cd-1f49-ddda-8b7dba5978d8,
+    id=51f8ae59-8ae3-3cd8-aa62-be91620cc2ed,
+    name=IBS_DL_Ingestion_DevOps_Release1,
+    timestamp=11/09/2017
+    19: 27
+    :
+    45
+    UTC,
+    uri=http: //d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/51f8ae59-8ae3-3cd8-aa62-be91620cc2ed}}, {id=e76300c6-8742-3bad-8782-17b094a14044, permissions={canRead=true, canWrite=true}, template={description=BASADREE
+    BASCOOEE
+    PRDCTLEE
+    PRDSTSEE
+    TXSAPPCD
+    TXSAUTEE
+    TXSCALCD
+    TXSRATEE,
+    encoding-version=1.1,
+    groupId=b83a10d3-1080-115d-42dd-48d8d60e73c5,
+    id=e76300c6-8742-3bad-8782-17b094a14044,
+    name=fgl-product-ref,
+    timestamp=11/24/2017
+    14: 37
+    :
+    26
+    UTC
+    uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/e76300c6-8742-3bad-8782-17b094a14044}}, {id=d1a4acc3-ea72-366b-9b39-5f8f79c511fe, permissions={canRead=true, canWrite=true}, template={description=, encoding-version=1.1, groupId=30a39300-e5b5-34ee-2b9c-753d49340949, id=d1a4acc3-ea72-366b-9b39-5f8f79c511fe, name=Facebook_API, timestamp=11/30/2017 16:08:34 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/d1a4acc3-ea72-366b-9b39-5f8f79c511fe}}, {id=0717e4fc-a31e-3a2f-8362-b74224dedbd0, permissions={canRead=true, canWrite=true}, template={description=Data ingestion from FGL replica for product master data, encoding-version=1.1, groupId=9337aa23-12ce-3b69-4994-ce90541626a0, id=0717e4fc-a31e-3a2f-8362-b74224dedbd0, name=fgl_pmm_product_raw, timestamp=11/22/2017 19:49:28 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/0717e4fc-a31e-3a2f-8362-b74224dedbd0}}, {id=10e0d34e-cbd1-3e1b-baf5-19a18741a0c6, permissions={canRead=true, canWrite=true}, template={description=Example NiFi data flow for SecureData processing, encoding-version=1.0, groupId=831bb498-015f-1000-0000-0000369b9fb5, id=10e0d34e-cbd1-3e1b-baf5-19a18741a0c6, name=SecureDataExample, timestamp=11/03/2017 18:29:07 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/10e0d34e-cbd1-3e1b-baf5-19a18741a0c6}}, {id=23594dd7-0a18-3e82-a8d7-58d26407afd3, permissions={canRead=true, canWrite=true}, template={description=, encoding-version=1.1, groupId=9337aa23-12ce-3b69-4994-ce90541626a0, id=23594dd7-0a18-3e82-a8d7-58d26407afd3, name=weather_xml_20171106, timestamp=11/09/2017 16:27:15 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/23594dd7-0a18-3e82-a8d7-58d26407afd3}}, {id=e9c43a88-86ea-30d3-8ff3-89f4c040af88, permissions={canRead=true, canWrite=true}, template={description=weather_nifi_20171112.xml, encoding-version=1.1, groupId=9337aa23-12ce-3b69-4994-ce90541626a0, id=e9c43a88-86ea-30d3-8ff3-89f4c040af88, name=weather_nifi_20171112.xml, timestamp=11/12/2017 08:07:18 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/e9c43a88-86ea-30d3-8ff3-89f4c040af88}}, {id=c91deea6-b6a4-3eab-9521-008e8b3e807f, permissions={canRead=true, canWrite=true}, template={description=marks pmm product data extraction from int_pmm_rpl schema, encoding-version=1.1, groupId=9337aa23-12ce-3b69-4994-ce90541626a0, id=c91deea6-b6a4-3eab-9521-008e8b3e807f, name=marks_pmm_product_raw, timestamp=12/04/2017 21:35:05 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/c91deea6-b6a4-3eab-9521-008e8b3e807f}}, {id=f900ad7b-ddfc-3854-b71f-96ce9b5b6500, permissions={canRead=true, canWrite=true}, template={description=, encoding-version=1.1, groupId=d17122f2-015c-1000-05e4-c3fc92bb7073, id=f900ad7b-ddfc-3854-b71f-96ce9b5b6500, name=nifi_qa_template.xml, timestamp=11/17/2017 18:44:30 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/f900ad7b-ddfc-3854-b71f-96ce9b5b6500}}, {id=1d348a59-7440-3251-a0de-0d9f98c1d576, permissions={canRead=true, canWrite=true}, template={description=, encoding-version=1.1, groupId=d17122f2-015c-1000-05e4-c3fc92bb7073, id=1d348a59-7440-3251-a0de-0d9f98c1d576, name=Prod Image FB Extract, timestamp=12/08/2017 16:15:55 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/1d348a59-7440-3251-a0de-0d9f98c1d576}}, {id=a3ea2f9d-1831-3df1-ad39-201ce0e52e3f, permissions={canRead=true, canWrite=true}, template={description=, encoding-version=1.1, groupId=037940bc-34cd-1f49-ddda-8b7dba5978d8, id=a3ea2f9d-1831-3df1-ad39-201ce0e52e3f, name=IBS-SSDX_OUT_REF_ITEM, timestamp=11/06/2017 20:02:55 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/a3ea2f9d-1831-3df1-ad39-201ce0e52e3f}}, {id=643b2edc-5c35-3738-b557-92046412167b, permissions={canRead=true, canWrite=true}, template={description=, encoding-version=1.1, groupId=d17122f2-015c-1000-05e4-c3fc92bb7073, id=643b2edc-5c35-3738-b557-92046412167b, name=Sample, timestamp=11/24/2017 19:55:40 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/643b2edc-5c35-3738-b557-92046412167b}}, {id=1ededf9c-f5f5-3751-a925-0e8ac204dee9, permissions={canRead=true, canWrite=true}, template={description=Final, encoding-version=1.1, groupId=9337aa23-12ce-3b69-4994-ce90541626a0, id=1ededf9c-f5f5-3751-a925-0e8ac204dee9, name=FGL Non-Audited Auditworks, timestamp=11/07/2017 14:44:18 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/1ededf9c-f5f5-3751-a925-0e8ac204dee9}}, {id=cec953c9-b8ef-31de-aff8-ccc3c39727ea, permissions={canRead=true, canWrite=true}, template={description=, encoding-version=1.1, groupId=d17122f2-015c-1000-05e4-c3fc92bb7073, id=cec953c9-b8ef-31de-aff8-ccc3c39727ea, name=ci_cd_sample-new, timestamp=12/12/2017 15:47:23 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/cec953c9-b8ef-31de-aff8-ccc3c39727ea}}, {id=0c9a817c-4dae-3c6c-a93c-e92d13fac2e0, permissions={canRead=true, canWrite=true}, template={description=, encoding-version=1.1, groupId=d17122f2-015c-1000-05e4-c3fc92bb7073, id=0c9a817c-4dae-3c6c-a93c-e92d13fac2e0, name=ci_cd_sample, timestamp=12/12/2017 15:47:24 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/0c9a817c-4dae-3c6c-a93c-e92d13fac2e0}}, {id=d5fb9bec-30d0-310c-867e-ec4183c1c900, permissions={canRead=true, canWrite=true}, template={description=, encoding-version=1.1, groupId=037940bc-34cd-1f49-ddda-8b7dba5978d8, id=d5fb9bec-30d0-310c-867e-ec4183c1c900, name=ssdx_out_ods_mhs, timestamp=11/07/2017 20:21:14 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/d5fb9bec-30d0-310c-867e-ec4183c1c900}}, {id=c7bc4014-e2ef-391a-addd-bc6d153536c8, permissions={canRead=true, canWrite=true}, template={description=Ingest from Kafka, encoding-version=1.1, groupId=30a39300-e5b5-34ee-2b9c-753d49340949, id=c7bc4014-e2ef-391a-addd-bc6d153536c8, name=Event Ingestion, timestamp=11/07/2017 18:59:44 UTC, uri=http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/c7bc4014-e2ef-391a-addd-bc6d153536c8}}]}

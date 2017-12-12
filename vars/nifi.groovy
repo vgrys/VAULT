@@ -41,6 +41,7 @@ def getTemplatesId(URL) {
     sh "curl -X GET ${URL}/nifi-api/flow/templates > output"
     def output = readFile('output').trim()
     def result = new JsonSlurper().parseText("${output}")
+    print(result)
     print(result.templates.template.name)
     print(result.templates.template.id)
     for (List templateName : list) {

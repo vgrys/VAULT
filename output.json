@@ -80,22 +80,6 @@
       }
     },
     {
-      "id": "6a1fee0e-27e1-383c-bf5d-8605d2c484e5",
-      "permissions": {
-        "canRead": true,
-        "canWrite": true
-      },
-      "template": {
-        "uri": "http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/6a1fee0e-27e1-383c-bf5d-8605d2c484e5",
-        "id": "6a1fee0e-27e1-383c-bf5d-8605d2c484e5",
-        "groupId": "d17122f2-015c-1000-05e4-c3fc92bb7073",
-        "name": "ci_cd_sample-new",
-        "description": "",
-        "timestamp": "12/11/2017 16:09:48 UTC",
-        "encoding-version": "1.1"
-      }
-    },
-    {
       "id": "10e0d34e-cbd1-3e1b-baf5-19a18741a0c6",
       "permissions": {
         "canRead": true,
@@ -109,6 +93,22 @@
         "description": "Example NiFi data flow for SecureData processing",
         "timestamp": "11/03/2017 18:29:07 UTC",
         "encoding-version": "1.0"
+      }
+    },
+    {
+      "id": "7adf72fe-6ef7-324d-82f1-ab5955c241b5",
+      "permissions": {
+        "canRead": true,
+        "canWrite": true
+      },
+      "template": {
+        "uri": "http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/7adf72fe-6ef7-324d-82f1-ab5955c241b5",
+        "id": "7adf72fe-6ef7-324d-82f1-ab5955c241b5",
+        "groupId": "d17122f2-015c-1000-05e4-c3fc92bb7073",
+        "name": "ci_cd_sample",
+        "description": "",
+        "timestamp": "12/12/2017 15:16:22 UTC",
+        "encoding-version": "1.1"
       }
     },
     {
@@ -144,18 +144,18 @@
       }
     },
     {
-      "id": "2b3113ba-dcf2-3df0-80e2-caea97095ba8",
+      "id": "22f76f9b-c8b2-3693-aa8f-e2312b45c2b7",
       "permissions": {
         "canRead": true,
         "canWrite": true
       },
       "template": {
-        "uri": "http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/2b3113ba-dcf2-3df0-80e2-caea97095ba8",
-        "id": "2b3113ba-dcf2-3df0-80e2-caea97095ba8",
+        "uri": "http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/22f76f9b-c8b2-3693-aa8f-e2312b45c2b7",
+        "id": "22f76f9b-c8b2-3693-aa8f-e2312b45c2b7",
         "groupId": "d17122f2-015c-1000-05e4-c3fc92bb7073",
-        "name": "ci_cd_sample",
+        "name": "ci_cd_sample-new",
         "description": "",
-        "timestamp": "11/29/2017 14:54:37 UTC",
+        "timestamp": "12/12/2017 15:16:21 UTC",
         "encoding-version": "1.1"
       }
     },
@@ -288,5 +288,5 @@
       }
     }
   ],
-  "generated": "16:12:46 UTC"
+  "generated": "15:20:42 UTC"
 }
