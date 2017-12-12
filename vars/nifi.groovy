@@ -19,8 +19,6 @@ def uploadTemplate(URL) {
     List list = findTemplates(env)
     for (List name : list) {
         GString file = "${env.WORKSPACE}/nifi/${name}"
-        echo file
-        print(URL)
         sh "curl -F template=@${file} -X POST ${URL}/nifi-api/process-groups/root/templates/upload > output"
         def output = readFile('output').trim()
         echo output
@@ -45,6 +43,8 @@ def getTemplatesId(URL) {
     def result = new JsonSlurper().parseText("${output}")
     for (List templateName : list) {
         if (result.templates.template.name == templateName) {
+            echo "templateName is: ${templateName}"
+            echo "result.templates.template.name is: ${result.templates.template.name}"
             templatesId < result.templates.template.id
             templatesName < result.templates.template.name
             echo result.templates.template.id
