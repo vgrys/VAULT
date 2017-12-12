@@ -6,6 +6,7 @@ def call(URL) {
         echo "********* Upload templates to the NiFi ************"
         uploadTemplate(URL)
         createWorkspace(URL)
+        getTemplatesId(URL)
         createProcesGroups(URL)
     } catch (err) {
         currentBuild.result = "FAILURE"
@@ -18,8 +19,8 @@ def uploadTemplate(URL) {
     List list = findTemplates(env)
     for (List name : list) {
         GString file = "${env.WORKSPACE}/nifi/${name}"
-        sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
-        def output = readFile('XML').trim()
+        sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > output"
+        def output = readFile('output').trim()
         echo output
     }
     echo("finished")
@@ -31,6 +32,13 @@ def createWorkspace(URL) {
     def result = new JsonSlurper().parseText("${output}")
     echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
     env.WORKSPACE_PROCESS_GROUP = result.id
+}
+
+def getTemplatesId(URL) {
+    sh "curl -X GET ${URL}/nifi-api/flow/templates > output"
+    def output = readFile('output').trim()
+    def result = new JsonSlurper().parseText("${output}")
+    echo "Process group is created with ID: '${result.templates.template}'"
 }
 
 def createProcesGroups(URL) {
