@@ -37,18 +37,28 @@ def createWorkspace(URL) {
 }
 
 def getTemplatesId(URL) {
+    List list = findTemplates(env)
+    List templatesId = []
+    List templatesName = []
     sh "curl -X GET ${URL}/nifi-api/flow/templates > output"
     def output = readFile('output').trim()
     def result = new JsonSlurper().parseText("${output}")
+    for (List templateName : list) {
+        if (result.templates.template.name == templateName) {
+            templatesId < result.templates.template.id
+            templatesName < result.templates.template.name
+            echo result.templates.template.id
+            echo result.templates.template.name
+        }
+        env.TEMPLATE_ID = templatesId
+    }
     echo "Process group is created with ID: '${result.templates.template}'"
 }
 
 def createProcesGroups(URL) {
-//    files = findTemplates(env)
+    List list = findTemplates(env)
 //    File fileResult = new File("${env.WORKSPACE}/groupsResult")
-    sh "ls -A ${env.WORKSPACE}/nifi > shellOutput"
-    def outputShell = readFile('shellOutput').trim().toString().split()
-    for (File file : outputShell) {
+    for (List file : list) {
         println(file.getName().replace(".xml", ""))
         def processGroup = file.getName().replace(".xml", "")
         sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${processGroup}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
