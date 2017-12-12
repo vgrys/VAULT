@@ -36,7 +36,6 @@ def createWorkspace(URL) {
 
 def getTemplatesId(URL) {
     List list = findTemplates(env)
-    def templates = list.getName().replace(".xml", "")
     List templatesId = []
     List templatesName = []
     sh "curl -X GET ${URL}/nifi-api/flow/templates > output"
@@ -44,9 +43,11 @@ def getTemplatesId(URL) {
     def result = new JsonSlurper().parseText("${output}")
     print(result.templates.template.name)
     print(result.templates.template.id)
-    for (List templateName : templates) {
+    for (List templateName : list) {
+        def templates = templateName.getName().replace(".xml", "")
+        echo "templates is: ${templates}"
         echo "I am in for loop"
-        if (result.templates.template.name == templateName) {
+        if (result.templates.template.name == templates) {
             echo "I am in if loop"
             echo "templateName is: ${templateName}"
             echo "result.templates.template.name is: ${result.templates.template.name}"
@@ -111,7 +112,7 @@ def getInfoConnection(URL, process, id) {
 
 def findTemplates(env) {
     sh "ls -A -m -w 0 ${env.WORKSPACE}/nifi > output"
-    def output = readFile('output').trim().toString().split(", ").replace(".xml", "")
+    def output = readFile('output').trim().toString().split(", ")
     print(output)
     List list = output
     return list
