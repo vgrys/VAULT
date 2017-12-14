@@ -4,14 +4,16 @@ import groovy.json.JsonSlurper
 
 def call(artifactoryId, URL) {
     withCredentials([usernamePassword(credentialsId: "${artifactoryId}", usernameVariable: 'artifactory_user', passwordVariable: 'artifactory_pwd')]) {
-        sh "curl -u ${artifactory_user}:${artifactory_pwd} -X POST  ${URL}/artifactory/api/search/aql -H \"content-type: text/plain\" -d 'items.find({ \"repo\": {\"\$eq\":\"bigdata-dss-automation\"}, \"path\" : \"atf/release\", \"name\": {\"\$match\" : \"atf-*.tar.gz\"}})' > output"
-        sh "cat output"
-        def output = readFile('output').trim()
-        def result = new JsonSlurper().parseText(output)
-        def sortedJSON = result.sort { a,b -> b.updated <=> a.updated}
+        sh "curl -u ${artifactory_user}:${artifactory_pwd} -X POST  ${URL}/artifactory/api/search/aql -H \"content-type: text/plain\" -d 'items.find({ \"repo\": {\"\$eq\":\"bigdata-dss-automation\"}, \"path\" : \"atf/release\", \"name\": {\"\$match\" : \"atf-*.tar.gz\"}})' > JSON"
+        sh "cat JSON"
+        def JSON = readFile('JSON').trim()
+        def output = new JsonSlurper().parseText(JSON)
+        for (def result in output.results) {
+            echo result.updated
+//        def sortedJSON = result.sort { a,b -> b.updated <=> a.updated}
 
-        def id = sortedJSON[0].id
-        echo id
+//                    def id = sortedJSON[0].id
+        }
 
         def fileToDownload = "${URL}/artifactory/bigdata-dss-automation/${latestFile}"
     }
