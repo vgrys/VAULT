@@ -10,14 +10,9 @@ def call(artifactoryId, URL, release) {
         def output = new JsonSlurper().parseText(JSON)
         for (def result in output.results) {
             echo "${result.updated} and name: ${result.name}"
-//        def sortedJSON = result.sort { a,b -> b.updated <=> a.updated}
 
-//                    def id = sortedJSON[0].id
         }
 
 //        def fileToDownload = "${URL}/artifactory/bigdata-dss-automation/${latestFile}"
     }
-//        Use ./jq to pars JSON
-//latestFile=$(echo ${resultAsJson} |  jq -r '.results | sort_by("updated") [-1].name')
-
 }
