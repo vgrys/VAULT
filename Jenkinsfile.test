@@ -28,7 +28,7 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
     stage ("Download latest build") {
-        downloadLatestBuild(conf.artifactoryId, conf.artifactoryUrl, "feature")
+        downloadLatestBuild(conf.artifactoryId, conf.artifactoryUrl, "release")
     }
 
 //    stage ('NiFi deployment') {
