@@ -8,7 +8,7 @@ def call(artifactoryId, URL) {
         sh "cat output"
         def output = readFile('output').trim()
         def result = new JsonSlurper().parseText(output)
-        def sortedJSON = result.sort { a,b -> b.results.updated <=> a.results.updated}
+        def sortedJSON = result.sort { a,b -> b.updated <=> a.updated}
 
         def id = sortedJSON[0].id
         echo id
