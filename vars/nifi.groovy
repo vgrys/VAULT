@@ -16,15 +16,20 @@ def call(URL) {
 }
 
 def uploadTemplate(URL) {
-    List list = findTemplates(env)
-    for (List name : list) {
-        GString file = "${env.WORKSPACE}/nifi/${name}"
-        sh "curl -F template=@${file} -X POST ${URL}/nifi-api/process-groups/root/templates/upload > output"
-        def output = readFile('output').trim()
+    File[] files = findTemplates(env)
+    File fileResult = new File("${env.WORKSPACE}/templatesResult")
+    for (File file : files) {
+        sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
+        def output = readFile('XML').trim()
         echo output
+        def result = new XmlSlurper().parseText("${output}")
+        echo result
+        echo "Name of the template is: '${result.template.name}'"
+        fileResult << ("${result.template.id} ")
     }
-    echo("finished")
+    env.TEMPLATE_ID = readFile("${fileResult}").trim()
 }
+
 
 def createWorkspace(URL) {
     sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${env.GIT_REPO}-WORKSPACE\"}}' ${URL}/nifi-api/process-groups/root/process-groups > JSON"

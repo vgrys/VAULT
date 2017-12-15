@@ -2,22 +2,10 @@
 <templateEntity>
     <template encoding-version="1.1">
         <description></description>
-        <groupId>e3f04b4f-015f-1000-b8f7-a1141fed5991</groupId>
-        <id>8af53d64-7e8e-40ad-8854-b72b57fa0db4</id>
-        <name>Test-template</name>
-        <timestamp>11/29/2017 14:48:58 EET</timestamp>
-        <uri>http://192.168.56.105:8088/nifi-api/templates/8af53d64-7e8e-40ad-8854-b72b57fa0db4</uri>
+        <groupId>d17122f2-015c-1000-05e4-c3fc92bb7073</groupId>
+        <id>40d7a118-52f2-321e-97a4-a3d4d8ac808e</id>
+        <name>ci_cd_sample</name>
+        <timestamp>12/15/2017 11:32:53 UTC</timestamp>
+        <uri>http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/40d7a118-52f2-321e-97a4-a3d4d8ac808e</uri>
     </template>
-</templateEntity>
-
-        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<templateEntity>
-<template encoding-version="1.1">
-    <description></description>
-    <groupId>d17122f2-015c-1000-05e4-c3fc92bb7073</groupId>
-    <id>756e91cd-d64a-381b-bd21-a60d506aa13e</id>
-    <name>ci_cd_sample-new</name>
-    <timestamp>12/14/2017 16:55:23 UTC</timestamp>
-    <uri>http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/756e91cd-d64a-381b-bd21-a60d506aa13e</uri>
-</template>
 </templateEntity>
