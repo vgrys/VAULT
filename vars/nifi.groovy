@@ -17,6 +17,7 @@ def call(URL) {
 
 def uploadTemplates(URL) {
     List templatesId = []
+    LinkedHashMap sampleMap = [:]
     List template = findTemplates(env)
     for (List name : template) {
         GString filePath = "${env.WORKSPACE}/nifi/${name}"
@@ -28,6 +29,15 @@ def uploadTemplates(URL) {
         echo "Template is uploaded with id: '${result.template.id}' and name: '${result.template.name}'"
         String id = result.template.id
         templatesId.add(id)
+        sampleMap << ["${result.template.name}":"${result.template.id}"]
+        print(sampleMap)
+
+//        sampleMap.put('thickness', 10)
+//        sampleMap['color'] = 'Blue'
+//        sampleMap.weight = 500
+//        sampleMap.'shape' = 'Circle'
+//        sampleMap << [price:150]
+
     }
     env.TEMPLATE_ID = templatesId
     return [{}]
