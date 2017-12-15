@@ -45,6 +45,7 @@ def createWorkspace(URL) {
     env.WORKSPACE_PROCESS_GROUP = result.id
 }
 
+@NonCPS
 def createProcesGroupsAndDeployTemplate(URL, templateMap) {
     List processGroups = []
     for (def key : templateMap.keySet()) {
