@@ -9,15 +9,18 @@ def call(artifactoryId, URL, repository, release) {
         sh "cat JSON"
         def JSON = readFile('JSON').trim()
         def output = new JsonSlurper().parseText(JSON)
-        for (def result in output.results) {
-            echo "${result.updated} and name: ${result.name}"
-//            if (result.updated(result.updated))echo "${result.updated} and name: ${result.name}"
-//                return "date1 is after date2";
-            if (result.updated > maximumNumberOfParameters) {
-                echo "${result.updated} and name: ${result.name}"
-            }
+        def sortedJSON = output.sort { a,b -> b.updated <=> a.updated}
+        print(sortedJSON)
 
-        }
+//        for (def result in output.results) {
+//            echo "${result.updated} and name: ${result.name}"
+////            if (result.updated(result.updated))echo "${result.updated} and name: ${result.name}"
+////                return "date1 is after date2";
+//            if (result.updated > ) {
+//                echo "${result.updated} and name: ${result.name}"
+//            }
+//
+//        }
 
 //        def fileToDownload = "${URL}/artifactory/bigdata-dss-automation/${latestFile}"
     }
