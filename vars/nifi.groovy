@@ -59,7 +59,7 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
         String processGroupId = result.id
         processGroups.add(processGroupId)
         echo "I am here"
-        sh "curl -H \"Content-Type: application/json\" -X POST -d \'{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}\' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance > output"
+        sh "curl -H \"Content-Type: application/json\" -X POST -d '{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance"
 //        output = readFile('output').trim()
 //        print(output)
         echo "Finished"
