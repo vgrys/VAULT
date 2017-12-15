@@ -16,9 +16,9 @@ def call(URL) {
 }
 
 def uploadTemplate(URL) {
-//    File[] files = findTemplates(env)
+    List list = findTemplates(env)
     File fileResult = new File("${env.WORKSPACE}/templatesResult")
-    for (File file : files) {
+    for (List file : list) {
         sh "curl -F template=@${file} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
         def output = readFile('XML').trim()
         echo output
