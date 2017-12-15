@@ -48,7 +48,6 @@ def createWorkspace(URL) {
 def createProcesGroups(URL, templateMap) {
     List processGroups = []
     for (def key : templateMap.keySet()) {
-        echo "template is ${template}"
         echo key
         def value = templateMap.getAt(key)
         echo value
