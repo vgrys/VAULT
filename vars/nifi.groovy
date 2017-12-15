@@ -22,7 +22,7 @@ def uploadTemplate(URL) {
         GString filePath = "${env.WORKSPACE}/nifi/${file}"
         sh "curl -F template=@${filePath} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > XML"
         def output = readFile('XML').trim()
-        echo output
+        print(output)
         def result = new XmlSlurper().parseText("${output}")
         echo result
         echo "Name of the template is: '${result.template.name}'"
