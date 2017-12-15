@@ -58,8 +58,8 @@ def createProcesGroups(URL, templateMap) {
         echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
         String id = result.id
         processGroups.add(id)
-        template["process_group_id"] = id
-        echo template
+//        template["process_group_id"] = id
+//        echo template
     }
     env.PROCESS_GROUP_ID = processGroups
 }
