@@ -27,8 +27,8 @@ def uploadTemplates(URL) {
         print(output)
         def result = new XmlSlurper().parseText("${output}")
         echo "Template is uploaded with id: '${result.template.id}' and name: '${result.template.name}'"
-        GString templateId = result.template.id
-        GString templateName = result.template.name
+        String templateId = result.template.id
+        String templateName = result.template.name
         templatesId.add(templateId)
         sampleMap << ["${templateName}":"${templateId}"]
         print(sampleMap)
