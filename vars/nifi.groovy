@@ -25,7 +25,7 @@ def uploadTemplate(URL) {
         print(output)
         def result = new XmlSlurper().parseText("${output}")
         echo "Template is uploaded with id: '${result.template.id}' and name: '${result.template.name}'"
-        templates << result.template.id
+        templates.add(result.template.id)
         print(templates)
     }
     env.TEMPLATE_ID = templates
