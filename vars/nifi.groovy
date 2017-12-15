@@ -43,19 +43,21 @@ def createWorkspace(URL) {
 }
 
 def createProcesGroups(URL) {
+    List processGroups = []
     List list = findTemplates(env)
-//    File fileResult = new File("${env.WORKSPACE}/groupsResult")
-    for (List file : list) {
-        println(file.getName().replace(".xml", ""))
-        def processGroup = file.getName().replace(".xml", "")
+    for (List name : list) {
+        def processGroup = name.replace(".xml", "")
+        echo "processGroup is: ${processGroup}"
         sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${processGroup}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
         def output = readFile('JSON').trim()
         def result = new JsonSlurper().parseText("${output}")
         echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
-        fileResult << ("${result.id} ")
-
+        String id = result.id
+        processGroups.add(id)
+        print(processGroups)
     }
-    env.PROCESS_GROUP_ID = readFile("${fileResult}").trim()
+    env.PROCESS_GROUP_ID = processGroups
+    print(env.PROCESS_GROUP_ID)
 }
 
 def deployTemplates() {
