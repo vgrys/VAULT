@@ -58,9 +58,11 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
         echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
         String processGroupId = result.id
         processGroups.add(processGroupId)
+        echo "I am here"
         sh "curl -H \"Content-Type: application/json\" -X POST -d '{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance > output"
-        output = readFile('output').trim()
-        print(output)
+//        output = readFile('output').trim()
+//        print(output)
+        echo "Finished"
 //        template["process_group_id"] = id
 //        echo template
     }
