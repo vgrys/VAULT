@@ -48,17 +48,17 @@ def createWorkspace(URL) {
 def createProcesGroupsAndDeployTemplate(URL, templateMap) {
     List processGroups = []
     for (def key : templateMap.keySet()) {
-        echo key
-        def value = templateMap.getAt(key)
-        echo value
-        GString CreateProcessGroup = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${key}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
+        String templateName = key
+        String templateId = templateMap.getAt(key)
+        echo "templateId is: ${templateId} and name is: ${templateName}"
+        GString CreateProcessGroup = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${templateName}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
         sh "curl -H \"Content-Type: application/json\" -X POST -d ${CreateProcessGroup} > output"
         def output = readFile('output').trim()
         def result = new JsonSlurper().parseText("${output}")
         echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
-        String id = result.id
-        processGroups.add(id)
-        sh "curl -H \"Content-Type: application/json\" -X POST -d '{\"templateId\":\"${templateMap.getAt(key)}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${key}/template-instance > output"
+        String processGroupId = result.id
+        processGroups.add(processGroupId)
+        sh "curl -H \"Content-Type: application/json\" -X POST -d '{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance > output"
         output = readFile('output').trim()
         print(output)
 //        template["process_group_id"] = id
