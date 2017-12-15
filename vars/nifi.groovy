@@ -26,11 +26,9 @@ def uploadTemplate(URL) {
         echo "Template is uploaded with id: '${result.template.id}' and name: '${result.template.name}'"
         String id = result.template.id
         templates.add(id)
-        print(templates)
         print(templates.class)
     }
     env.TEMPLATE_ID = templates
-    print(env.TEMPLATE_ID)
 }
 
 
@@ -47,17 +45,14 @@ def createProcesGroups(URL) {
     List list = findTemplates(env)
     for (List name : list) {
         def processGroup = name.replace(".xml", "")
-        echo "processGroup is: ${processGroup}"
         sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${processGroup}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
         def output = readFile('JSON').trim()
         def result = new JsonSlurper().parseText("${output}")
         echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
         String id = result.id
         processGroups.add(id)
-        print(processGroups)
     }
     env.PROCESS_GROUP_ID = processGroups
-    print(env.PROCESS_GROUP_ID)
 }
 
 def deployTemplates() {
