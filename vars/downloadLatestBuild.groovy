@@ -9,7 +9,7 @@ def call(artifactoryId, URL, repository, release) {
         sh "cat JSON"
         def JSON = readFile('JSON').trim()
         def output = new JsonSlurper().parseText(JSON)
-        def sortedJSON = output.sort { a,b -> b.updated <=> a.updated}
+        def sortedJSON = output.results.sort { a,b -> b.updated <=> a.updated}
         print(sortedJSON)
 
 //        for (def result in output.results) {
