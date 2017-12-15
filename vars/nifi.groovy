@@ -29,7 +29,7 @@ def uploadTemplate(URL) {
         templates.add(id)
         print(templates)
     }
-    env.TEMPLATE_ID = templates
+    env.TEMPLATE_ID = toString(templates)
 }
 
 
