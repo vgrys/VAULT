@@ -47,10 +47,11 @@ def createWorkspace(URL) {
 
 def createProcesGroups(URL, templateMap) {
     List processGroups = []
-    for (List template : templateMap) {
+    for (def key : templateMap.keySet()) {
         echo "template is ${template}"
-        echo template.getKey()
-        echo template.getValue()
+        echo key
+        def value = templateMap.getAt(key)
+        echo value
         GString command = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${template}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
         sh "curl -H \"Content-Type: application/json\" -X POST -d ${command} > output"
         def output = readFile('output').trim()
