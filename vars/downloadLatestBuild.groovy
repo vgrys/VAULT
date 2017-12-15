@@ -13,7 +13,7 @@ def call(artifactoryId, URL, repository, release) {
             echo "${result.updated} and name: ${result.name}"
 //            if (result.updated(result.updated))echo "${result.updated} and name: ${result.name}"
 //                return "date1 is after date2";
-            if (result.updated >) {
+            if (result.updated > maximumNumberOfParameters) {
                 echo "${result.updated} and name: ${result.name}"
             }
 
