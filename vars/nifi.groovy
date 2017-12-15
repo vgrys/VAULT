@@ -59,9 +59,9 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
         String processGroupId = result.id
         processGroups.add(processGroupId)
         echo "I am here"
-        GString deployTemplate = "'{\"templateId\":\"d29050f0-5627-42f8-b299-e5d8f6a692e7\",\"originX\":-0.0,\"originY\":-0.0}' http://192.168.56.105:8088/nifi-api/process-groups/5ad947e5-0160-1000-e84b-f857cbdd8eef/template-instance"
-        echo deployTemplate
-        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate}"
+//        GString deployTemplate = "'{\"templateId\":\"d29050f0-5627-42f8-b299-e5d8f6a692e7\",\"originX\":-0.0,\"originY\":-0.0}' http://192.168.56.105:8088/nifi-api/process-groups/5ad947e5-0160-1000-e84b-f857cbdd8eef/template-instance"
+//        echo deployTemplate
+        sh "curl -H \"Content-Type: application/json\" -X POST -d '{\"templateId\":\"d29050f0-5627-42f8-b299-e5d8f6a692e7\",\"originX\":-0.0,\"originY\":-0.0}' http://192.168.56.105:8088/nifi-api/process-groups/5ad947e5-0160-1000-e84b-f857cbdd8eef/template-instance"
 //        output = readFile('output').trim()
 //        print(output)
         echo "Finished"
