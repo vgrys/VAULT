@@ -28,8 +28,10 @@ def uploadTemplate(URL) {
         String id = result.template.id
         templates.add(id)
         print(templates)
+        print(templates.class)
     }
-    env.TEMPLATE_ID = toString(templates)
+    env.TEMPLATE_ID = templates
+    print(env.TEMPLATE_ID)
 }
 
 
