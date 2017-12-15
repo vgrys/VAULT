@@ -5,9 +5,9 @@ def call(URL) {
     def templates
     try {
         echo "********* Upload templates to the NiFi ************"
-        templates = uploadTemplates(URL)
+        templateMap = uploadTemplates(URL)
         createWorkspace(URL)
-        createProcesGroups(URL, templates)
+        createProcesGroups(URL, templateMap)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
@@ -17,7 +17,7 @@ def call(URL) {
 
 def uploadTemplates(URL) {
     List templatesId = []
-    LinkedHashMap sampleMap = [:]
+    LinkedHashMap templateMap = [:]
     List template = findTemplates(env)
     for (List name : template) {
         GString filePath = "${env.WORKSPACE}/nifi/${name}"
@@ -30,18 +30,10 @@ def uploadTemplates(URL) {
         String templateId = result.template.id
         String templateName = result.template.name
         templatesId.add(templateId)
-        sampleMap << ["${templateName}":"${templateId}"]
-        print(sampleMap)
-
-//        sampleMap.put('thickness', 10)
-//        sampleMap['color'] = 'Blue'
-//        sampleMap.weight = 500
-//        sampleMap.'shape' = 'Circle'
-//        sampleMap << [price:150]
-
+        templateMap << ["${templateName}":"${templateId}"]
     }
     env.TEMPLATE_ID = templatesId
-    return [{}]
+    return templateMap
 }
 
 def createWorkspace(URL) {
@@ -52,12 +44,10 @@ def createWorkspace(URL) {
     env.WORKSPACE_PROCESS_GROUP = result.id
 }
 
-def createProcesGroups(URL, temapltes) {
+def createProcesGroups(URL, templateMap) {
     List processGroups = []
-//    List list = findTemplates(env)
-    for (List template : temapltes) {
+    for (List template : templateMap) {
         echo "template is ${template}"
-//        def processGroup = name.replace(".xml", "")
         sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${template}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
         def output = readFile('JSON').trim()
         def result = new JsonSlurper().parseText("${output}")
