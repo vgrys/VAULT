@@ -47,7 +47,7 @@ def createProcesGroups(URL, temapltes) {
     for (List template : temapltes) {
         echo "template is ${template}"
 //        def processGroup = name.replace(".xml", "")
-        sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${processGroup}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
+        sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${template}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
         def output = readFile('JSON').trim()
         def result = new JsonSlurper().parseText("${output}")
         echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
