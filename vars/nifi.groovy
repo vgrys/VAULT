@@ -30,7 +30,7 @@ def uploadTemplates(URL) {
         String templateId = result.template.id
         String templateName = result.template.name
         templatesId.add(templateId)
-        templateMap << ["${templateName}":"${templateId}"]
+        templateMap."${templateName}" = "${templateId}"
     }
     env.TEMPLATE_ID = templatesId
     return templateMap
@@ -48,8 +48,10 @@ def createProcesGroups(URL, templateMap) {
     List processGroups = []
     for (List template : templateMap) {
         echo "template is ${template}"
-        sh "curl -H \"Content-Type: application/json\" -X POST -d ' {\"revision\":{\"version\":0},\"component\":{\"name\":\"${template}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups > JSON"
-        def output = readFile('JSON').trim()
+
+        GString command = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${template}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
+        sh "curl -H \"Content-Type: application/json\" -X POST -d ${command} > output"
+        def output = readFile('output').trim()
         def result = new JsonSlurper().parseText("${output}")
         echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
         String id = result.id
