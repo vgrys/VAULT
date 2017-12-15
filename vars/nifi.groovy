@@ -6,7 +6,6 @@ def call(URL) {
         echo "********* Upload templates to the NiFi ************"
         uploadTemplate(URL)
         createWorkspace(URL)
-        getTemplatesId(URL)
 //        createProcesGroups(URL)
     } catch (err) {
         currentBuild.result = "FAILURE"
@@ -41,37 +40,6 @@ def createWorkspace(URL) {
     def result = new JsonSlurper().parseText("${output}")
     echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
     env.WORKSPACE_PROCESS_GROUP = result.id
-}
-
-def getTemplatesId(URL) {
-    List list = findTemplates(env)
-    List templatesId = []
-    List templatesName = []
-    sh "curl -X GET ${URL}/nifi-api/flow/templates > output"
-    def output = readFile('output').trim()
-    def result = new JsonSlurper().parseText("${output}")
-    print(result)
-    print(result.templates.template.name)
-    print(result.templates.template.id)
-    for (List templateName : list) {
-        echo templateName
-        def templates = templateName.replace(".xml", "")
-        print("templates is: ${templates}")
-        echo "I am in for loop"
-        if (result.templates.template.name == templates) {
-            echo "I am in if loop"
-            echo "templateName is: ${templateName}"
-            echo "result.templates.template.name is: ${result.templates.template.name}"
-            templatesId < result.templates.template.id
-            templatesName < result.templates.template.name
-            echo result.templates.template.id
-            echo result.templates.template.name
-        } else {
-            echo "I am in else loop"
-        }
-        env.TEMPLATE_ID = templatesId
-    }
-    echo "Process group is created with ID: '${result.templates.template}'"
 }
 
 def createProcesGroups(URL) {
