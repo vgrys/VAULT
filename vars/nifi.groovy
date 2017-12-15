@@ -6,7 +6,7 @@ def call(URL) {
         echo "********* Upload templates to the NiFi ************"
         uploadTemplate(URL)
         createWorkspace(URL)
-//        createProcesGroups(URL)
+        createProcesGroups(URL)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
