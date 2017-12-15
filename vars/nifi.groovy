@@ -52,7 +52,7 @@ def createProcesGroups(URL, templateMap) {
         echo key
         def value = templateMap.getAt(key)
         echo value
-        GString command = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${template}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
+        GString command = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${key}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
         sh "curl -H \"Content-Type: application/json\" -X POST -d ${command} > output"
         def output = readFile('output').trim()
         def result = new JsonSlurper().parseText("${output}")
