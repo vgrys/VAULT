@@ -9,10 +9,9 @@ def call(artifactoryId, URL, repository, release) {
         sh "cat JSON"
         def JSON = readFile('JSON').trim()
         def output = new JsonSlurper().parseText(JSON)
+        print(output.results.name)
         def sortedJSON = output.results.sort { a,b -> b.updated <=> a.updated}
         print(sortedJSON)
-        print(sortedJSON.class)
-        print(sortedJSON[0])
 
 //        for (def result in output.results) {
 //            echo "${result.updated} and name: ${result.name}"
