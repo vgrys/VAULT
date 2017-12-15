@@ -11,11 +11,11 @@ def call(artifactoryId, URL, repository, release) {
         def output = new JsonSlurper().parseText(JSON)
         for (def result in output.results) {
             echo "${result.updated} and name: ${result.name}"
-            if (result.updated(result.updated))echo "${result.updated} and name: ${result.name}"
+//            if (result.updated(result.updated))echo "${result.updated} and name: ${result.name}"
 //                return "date1 is after date2";
-//            if (result.updated >= result.updated) {
-//                echo "${result.updated} and name: ${result.name}"
-//            }
+            if (result.updated >) {
+                echo "${result.updated} and name: ${result.name}"
+            }
 
         }
 
