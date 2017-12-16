@@ -5,7 +5,7 @@ import groovyjarjarantlr.collections.List
 
 def call(URL) {
     try {
-        echo "********* Upload templates to the NiFi ************"
+        echo "********* Delete templates from NiFi ************"
         deleteTemplates(URL)
         stopProcessGroup(URL)
         cleanUpQueue(URL)
