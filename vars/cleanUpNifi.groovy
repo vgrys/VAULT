@@ -8,6 +8,7 @@ def call(URL) {
         echo "********* Upload templates to the NiFi ************"
         deleteTemplates(URL)
         stopProcessGroup(URL)
+        cleanUpQueue(URL)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
