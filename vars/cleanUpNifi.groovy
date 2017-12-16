@@ -14,7 +14,7 @@ def call(URL) {
 }
 
 def deleteTemplates(URL) {
-    List templates = env.TEMPLATE_ID.replace("[", "").replace("]", "").split(',').trim()
+    List templates = env.TEMPLATE_ID.replace("[", "").replace("]", "").split(',')
     for (List template : templates) {
         print("template is: ${template}")
         sh "curl -X DELETE ${URL}/nifi-api/templates/${template}"
