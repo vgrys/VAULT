@@ -36,6 +36,7 @@ def cleanUpQueue(URL) {
         def result = new JsonSlurper().parseText("${output}")
         echo "connections ID is: '${result.processGroupFlow.flow.connections.id}'"
         List connectionsIds = result.processGroupFlow.flow.connections.id
+        result = null
         for (List connectionsId : connectionsIds){
             sh "curl –X POST ${URL}/nifi-api/flowfile-queues/${connectionsId}"
         }
