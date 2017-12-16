@@ -45,8 +45,9 @@ def createWorkspace(URL) {
     env.WORKSPACE_PROCESS_GROUP = result.id
 }
 
-@NonCPS
+//@NonCPS
 def createProcesGroupsAndDeployTemplate(URL, templateMap) {
+
     List processGroups = []
     for (def key : templateMap.keySet()) {
         String templateName = key
@@ -62,8 +63,9 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
         echo "I am here"
         GString deployTemplate = "'{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance"
 //        echo deployTemplate
-        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > output"
-//       sh 'curl -H "Content-Type: application/json" -X POST -d \'{"templateId":"d29050f0-5627-42f8-b299-e5d8f6a692e7","originX":-0.0,"originY":-0.0}\' http://192.168.56.105:8088/nifi-api/process-groups/5ad947e5-0160-1000-e84b-f857cbdd8eef/template-instance > /dev/null 2>&1'
+        GString commandToRun = "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > output"
+       sh "ssh -o StrictHostKeyChecking=no vgrys@192.168.56.105 /bin/bash -c '\"${commandToRun}\"'"
+//      sh 'curl -H "Content-Type: application/json" -X POST -d \'{"templateId":"d29050f0-5627-42f8-b299-e5d8f6a692e7","originX":-0.0,"originY":-0.0}\' http://192.168.56.105:8088/nifi-api/process-groups/5ad947e5-0160-1000-e84b-f857cbdd8eef/template-instance > /dev/null 2>&1'
 //        sh command
 //        output = readFile('output').trim()
 //        print(output)
