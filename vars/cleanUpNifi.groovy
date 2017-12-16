@@ -1,7 +1,6 @@
 #!/usr/bin/groovy
 
 import groovy.json.JsonSlurper
-import groovyjarjarantlr.collections.List
 
 def call(URL) {
     try {
