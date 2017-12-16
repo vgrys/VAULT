@@ -38,7 +38,7 @@ def cleanUpQueue(URL) {
         List connectionsIds = result.processGroupFlow.flow.connections.id
         result = null
         for (List connectionsId : connectionsIds){
-            sh "curl –X POST ${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests"
+            sh "curl -X POST ${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests"
         }
     }
 //    curl –X POST http://192.168.56.105:8088/nifi-api/flowfile-queues/9e91b008-0f66-3698-8c01-2464d67a19ae/drop-requests
