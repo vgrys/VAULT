@@ -47,6 +47,7 @@ node {
     echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUP_ID}"
 
     stage ('NiFi cleanUp') {
+        sleep(30)
         echo "********** NiFi cleanUp ***********"
         cleanUpNifi(nifiURL)
     }
