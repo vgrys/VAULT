@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-import com.thoughtworks.xstream.converters.basic.StringBufferConverter
+
 import groovy.json.JsonSlurper
 
 def call(URL) {

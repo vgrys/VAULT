@@ -39,13 +39,17 @@ node {
 
     stage ('NiFi deployment') {
         echo "********** NiFi deployment ***********"
-        nifi(nifiURL)
+        deployNifi(nifiURL)
     }
 
     echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
     echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
     echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUP_ID}"
 
+    stage ('NiFi cleanUp') {
+        echo "********** NiFi cleanUp ***********"
+        cleanUpNifi(nifiURL)
+    }
 
 
 //    stage ('NiFi getInfoConnection') {
