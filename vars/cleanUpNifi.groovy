@@ -1,6 +1,7 @@
 #!/usr/bin/groovy
 
 import groovy.json.JsonSlurper
+import groovyjarjarantlr.collections.List
 
 def call(URL) {
     try {
@@ -24,6 +25,19 @@ def deleteTemplates(URL) {
 
 def stopProcessGroup(URL) {
     sh "curl -H \"Content-Type: application/json\" -X PUT -d '{\"id\":\"${env.WORKSPACE_PROCESS_GROUP}\",\"state\":\"STOPPED\"}' ${URL}/nifi-api/flow/process-groups/${env.WORKSPACE_PROCESS_GROUP}"
+}
+
+def cleanUpQueue(URL) {
+    List processGroups = env.PROCESS_GROUP_ID.replace("[", "").replace("]", "").split(', ')
+    print(processGroups)
+    for (List processGroup in processGroups) {
+        sh "curl -X GET ${URL}/nifi-api/flow/process-groups/${processGroup} > output"
+        def output = readFile('output').trim()
+        def result = new JsonSlurper().parseText("${output}")
+        echo "connections ID is: '${result.processGroupFlow.flow.connections.id}'"
+    }
+//    curl –X POST http://192.168.56.105:8088/nifi-api/flowfile-queues/9e91b008-0f66-3698-8c01-2464d67a19ae/drop-requests
+
 }
 
 def getInfo(URL, process, id) {
