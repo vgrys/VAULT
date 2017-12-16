@@ -6,6 +6,7 @@ def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
         deleteTemplates(URL)
+        stopProcessGroup(URL)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
@@ -15,11 +16,14 @@ def call(URL) {
 
 def deleteTemplates(URL) {
     List templates = env.TEMPLATE_ID.replace("[", "").replace("]", "").split(', ')
-    print(templates)
     for (List template : templates) {
-        print("template is: ${template}")
         sh "curl -X DELETE ${URL}/nifi-api/templates/${template}"
     }
+    echo "Templates are removed"
+}
+
+def stopProcessGroup(URL) {
+    sh "curl -H \"Content-Type: application/json\" -X PUT -d '{\"id\":\"${env.WORKSPACE_PROCESS_GROUP}\",\"state\":\"STOPPED\"}' ${URL}/nifi-api/flow/process-groups/${env.WORKSPACE_PROCESS_GROUP}"
 }
 
 def getInfo(URL, process, id) {
