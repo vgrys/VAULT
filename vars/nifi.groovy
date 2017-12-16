@@ -1,4 +1,5 @@
 #!/usr/bin/groovy
+import com.thoughtworks.xstream.converters.basic.StringBufferConverter
 import groovy.json.JsonSlurper
 
 def call(URL) {
@@ -74,8 +75,8 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
 }
 
 def deleteTemplates(URL) {
-    for (List template in env.TEMPLATE_ID) {
-        print("template is: ${template}")
+    for (String template : env.TEMPLATE_ID) {
+//        print("template is: ${template}")
         sh "curl - i - X DELETE ${URL}/nifi-api/templates/${template}"
     }
 }
