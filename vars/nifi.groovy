@@ -74,8 +74,8 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
 }
 
 def deleteTemplates(URL) {
-    for (String template in env.TEMPLATE_ID) {
-        echo "template is: ${template}"
+    for (List template in env.TEMPLATE_ID) {
+        pring("template is: ${template}")
         sh "curl - i - X DELETE ${URL}/nifi-api/templates/${template}"
     }
 }
