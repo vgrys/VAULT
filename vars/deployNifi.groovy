@@ -64,7 +64,8 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
         processGroups.add(processGroupId)
         result = ''
         GString deployTemplate = "'{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance"
-        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > output"
+        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > /dev/null 2>&1"
+        sh "curl -H \"Content-Type: application/json\" -X PUT -d '{\"id\":\"${processGroupId}\",\"state\":\"STARTED\"}' ${URL}/nifi-api/flow/process-groups/${processGroupId}"
 //        output = readFile('output').trim()
 //        print(output)
 //        template["process_group_id"] = id
