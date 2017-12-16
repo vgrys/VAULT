@@ -64,14 +64,11 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
         processGroups.add(processGroupId)
         result = ''
         echo "I am here"
-        echo result
-        sh 'curl -H "Content-Type: application/json" -X POST -d \'{"templateId":"d29050f0-5627-42f8-b299-e5d8f6a692e7","originX":-0.0,"originY":-0.0}\' http://192.168.56.105:8088/nifi-api/process-groups/6124cda9-0160-1000-0de7-30aa81f515d8/template-instance'
+//        sh 'curl -H "Content-Type: application/json" -X POST -d \'{"templateId":"d29050f0-5627-42f8-b299-e5d8f6a692e7","originX":-0.0,"originY":-0.0}\' http://192.168.56.105:8088/nifi-api/process-groups/6124cda9-0160-1000-0de7-30aa81f515d8/template-instance'
 
         GString deployTemplate = "'{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance"
-//        echo deployTemplate
-        GString commandToRun = "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > output"
-        echo commandToRun
-       sh "ssh -o StrictHostKeyChecking=no vgrys@192.168.56.105 /bin/bash -c '\"${commandToRun}\"'"
+        echo deployTemplate
+        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > output"
 //      sh 'curl -H "Content-Type: application/json" -X POST -d \'{"templateId":"d29050f0-5627-42f8-b299-e5d8f6a692e7","originX":-0.0,"originY":-0.0}\' http://192.168.56.105:8088/nifi-api/process-groups/5ad947e5-0160-1000-e84b-f857cbdd8eef/template-instance > /dev/null 2>&1'
 //        sh command
 //        output = readFile('output').trim()
