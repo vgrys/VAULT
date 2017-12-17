@@ -48,7 +48,7 @@ def createWorkspace(URL) {
 
 def createProcesGroupsAndDeployTemplate(URL, templateMap) {
     List processGroups = []
-    for (def key : templateMap.keySet()) {
+    for (def key : templateMap.keySet().iterator()) {
         String templateName = key
         String templateId = templateMap.getAt(key)
         echo "TemplateId is: ${templateId} and name is: ${templateName}"
