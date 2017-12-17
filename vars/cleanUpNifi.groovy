@@ -8,8 +8,8 @@ def call(URL) {
         deleteTemplates(URL)
         stopProcessGroup(URL)
         cleanUpQueue(URL)
-        getInfo(URL)
         deleteProcessGroups(URL)
+        deleteWorkspaceProcessGroup(URL)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
@@ -56,19 +56,16 @@ def deleteProcessGroups(URL) {
         def result = new JsonSlurper().parseText("${output}")
         String revisionNumber = result.revision.version
         result = null
-        sh "curl -X DELETE ${URL}/nifi-api/process-groups/${processGroup}?version=${revisionNumber}"
+        sh "curl -X DELETE ${URL}/nifi-api/process-groups/${processGroup}?version=${revisionNumber} > /dev/null 2>&1"
     }
     echo "Finished"
 }
 
-
-def getInfo(URL) {
+def deleteWorkspaceProcessGroup(URL) {
     sh "curl -X GET ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP} > output"
     def output = readFile('output').trim()
     def result = new JsonSlurper().parseText("${output}")
-    echo "Group ID is: '${result.component.id}'"
-    echo " Group name is: '${result.component.name}'"
-    echo "URI is: '${result.uri}'"
-    echo "revision version is: '${result.revision.version}'"
-    echo "parentGroupId is: '${result.component.parentGroupId}'"
+    String revisionNumber = result.revision.version
+    result = null
+    sh "curl -X DELETE ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}?version=${revisionNumber} > /dev/null 2>&1"
 }
