@@ -19,7 +19,7 @@ def call(URL) {
 
 def uploadTemplates(URL) {
     List templatesId = []
-    LinkedHashMap templateMap = [:]
+    LinkedHashMap<String, String> templateMap = [:]
     List template = findTemplates(env)
     for (List name : template) {
         GString filePath = "${env.WORKSPACE}/nifi/${name}"
