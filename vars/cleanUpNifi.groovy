@@ -8,6 +8,7 @@ def call(URL) {
         deleteTemplates(URL)
         stopProcessGroup(URL)
         cleanUpQueue(URL)
+        getInfo(URL)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
@@ -46,27 +47,13 @@ def cleanUpQueue(URL) {
     }
 }
 
-def getInfo(URL, process, id) {
-    sh "curl -X GET ${URL}/nifi-api/${process}/${id} > result"
-    def output = readFile('result').trim()
-    echo "********** IN DSS ********************"
-    def sluper = new JsonSlurper()
-    def result = sluper.parseText("${output}")
+def getInfo(URL) {
+    sh "curl -X GET ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP} > output"
+    def output = readFile('output').trim()
+    def result = new JsonSlurper().parseText("${output}")
     echo "Group ID is: '${result.component.id}'"
     echo " Group name is: '${result.component.name}'"
     echo "URI is: '${result.uri}'"
     echo "revision version is: '${result.revision.version}'"
     echo "parentGroupId is: '${result.component.parentGroupId}'"
-}
-
-def getInfoConnection(URL, process, id) {
-    sh "curl -X GET ${URL}/nifi-api/flow/${process}/${id} > result"
-    def output = readFile('result').trim()
-    echo "********** IN DSS ********************"
-    def sluper = new JsonSlurper()
-    def result = sluper.parseText("${output}")
-    echo "Group ID is: '${result.processGroupFlow.id}'"
-    echo "Group name is: '${result.processGroupFlow.breadcrumb.breadcrumb.name}'"
-    echo "connections ID is: '${result.processGroupFlow.flow.connections.id}'"
-    echo "URI is: '${result.processGroupFlow.flow.connections.uri}'"
 }
