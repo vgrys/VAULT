@@ -70,7 +70,7 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
 def findTemplates(env) {
     sh "ls -A -m -w 0 ${env.WORKSPACE}/nifi > output"
     def output = readFile('output').trim().toString().split(", ")
-    print(output)
+//    print(output)
     List list = output
     return list
 }
