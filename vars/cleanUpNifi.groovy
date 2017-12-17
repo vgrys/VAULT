@@ -58,7 +58,6 @@ def deleteProcessGroups(URL) {
         result = null
         sh "curl -X DELETE ${URL}/nifi-api/process-groups/${processGroup}?version=${revisionNumber} > /dev/null 2>&1"
     }
-    echo "Finished"
 }
 
 def deleteWorkspaceProcessGroup(URL) {
