@@ -55,6 +55,7 @@ def deleteProcessGroups(URL) {
         def output = readFile('output').trim()
         def result = new JsonSlurper().parseText("${output}")
         String revisionNumber = result.revision.version
+        result = null
         sh "curl -X DELETE ${URL}/nifi-api/process-groups/${processGroup}?version=${revisionNumber}"
     }
     echo "Finished"
