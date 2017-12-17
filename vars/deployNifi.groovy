@@ -71,6 +71,5 @@ def findTemplates(env) {
     sh "ls -A -m -w 5000 ${env.WORKSPACE}/nifi > output"
     def output = readFile('output').trim().toString().split(", ")
     List list = output
-    print(list)
     return list
 }
