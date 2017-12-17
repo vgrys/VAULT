@@ -44,7 +44,7 @@ node {
 
     echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
     echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
-    echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUP_ID}"
+    echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
 
     stage ('NiFi cleanUp') {
         sleep(15)

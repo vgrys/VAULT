@@ -9,6 +9,7 @@ def call(URL) {
         stopProcessGroup(URL)
         cleanUpQueue(URL)
         getInfo(URL)
+        deleteProcessGroups(URL)
     } catch (err) {
         currentBuild.result = "FAILURE"
         echo "********* Errors happened *********"
@@ -29,7 +30,7 @@ def stopProcessGroup(URL) {
 }
 
 def cleanUpQueue(URL) {
-    List processGroups = env.PROCESS_GROUP_ID.replace("[", "").replace("]", "").split(', ')
+    List processGroups = env.PROCESS_GROUPS_ID.replace("[", "").replace("]", "").split(', ')
     print(processGroups)
     for (List processGroup in processGroups) {
         sh "curl -X GET ${URL}/nifi-api/flow/process-groups/${processGroup} > output"
@@ -46,6 +47,19 @@ def cleanUpQueue(URL) {
         }
     }
 }
+
+def deleteProcessGroups(URL) {
+    List processGroups = env.PROCESS_GROUPS_ID.replace("[", "").replace("]", "").split(', ')
+    for (List processGroup in processGroups) {
+        sh "curl -X GET ${URL}/nifi-api/process-groups/${processGroup} > output"
+        def output = readFile('output').trim()
+        def result = new JsonSlurper().parseText("${output}")
+        String revisionNumber = result.revision.version
+        sh "curl -X DELETE ${URL}/nifi-api/process-groups/${processGroup}?version=${revisionNumber}"
+    }
+    echo "Finished"
+}
+
 
 def getInfo(URL) {
     sh "curl -X GET ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP} > output"
