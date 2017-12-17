@@ -5,8 +5,9 @@ import groovy.json.JsonSlurper
 def call(URL) {
     try {
         echo "********* Upload templates to the NiFi ************"
+        LinkedHashMap<String, String> templateMap = uploadTemplates(URL)
 
-        templateMap = uploadTemplates(URL)
+//        templateMap = uploadTemplates(URL)
         createWorkspace(URL)
         createProcesGroupsAndDeployTemplate(URL, templateMap)
     } catch (err) {
