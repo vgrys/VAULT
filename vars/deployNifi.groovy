@@ -72,5 +72,6 @@ def findTemplates(env) {
     def output = readFile('output').trim().toString().split(", ")
 //    print(output)
     List list = output
+    echo list
     return list
 }
