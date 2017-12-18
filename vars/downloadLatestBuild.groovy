@@ -14,10 +14,11 @@ def call(artifactoryId, URL, repository, release) {
         print(max)
         for (name in output.results) {
             if (max == output.results.updated) {
-                name = output.results.name
+                nameneeded = output.results.name
             }
-            print name
+            name = nameneeded
         }
+        print(name)
 //        def result = output.results.updated.groupBy {it}.get(max)
 //        print(result)
 //        if (max) {
