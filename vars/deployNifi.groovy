@@ -62,10 +62,12 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
 //        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > /dev/null 2>&1"
 //    }
 ////    for (def key : templateMap.keySet().iterator()) {
+
     for (def template : templateMap) {
         String templateName = template.key
         String templateId = template.value
-        echo "TemplateId is: ${templateId} and name is: ${templateName}"
+        template = null
+        echo "Template id is: ${templateId} and name is: ${templateName}"
         GString CreateProcessGroup = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${templateName}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
         sh "curl -H \"Content-Type: application/json\" -X POST -d ${CreateProcessGroup} > output"
         def output = readFile('output').trim()
