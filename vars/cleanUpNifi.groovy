@@ -18,7 +18,7 @@ def call(URL) {
 }
 
 def deleteTemplates(URL) {
-    List templates = env.TEMPLATE_ID.replace("[", "").replace("]", "").split(', ')
+    List templates = env.TEMPLATE_ID.split(',')
     for (List template : templates) {
         sh "curl -X DELETE ${URL}/nifi-api/templates/${template}"
     }
@@ -30,41 +30,57 @@ def stopProcessGroup(URL) {
 }
 
 def cleanUpQueue(URL) {
-    List processGroups = env.PROCESS_GROUPS_ID.replace("[", "").replace("]", "").split(', ')
+    List processGroups = env.PROCESS_GROUPS_ID.split(',')
     print(processGroups)
     for (List processGroup in processGroups) {
-        sh "curl -X GET ${URL}/nifi-api/flow/process-groups/${processGroup} > output"
-        def output = readFile('output').trim()
-        def result = new JsonSlurper().parseText("${output}")
+//        sh "curl -X GET ${URL}/nifi-api/flow/process-groups/${processGroup} > output"
+//        def output = readFile('output').trim()
+//        def result = new JsonSlurper().parseText("${output}")
+        def result = get("${URL}/nifi-api/flow/process-groups/${processGroup}")
         echo "connections ID is: '${result.processGroupFlow.flow.connections.id}'"
         List connectionsIds = result.processGroupFlow.flow.connections.id
         result = null
         for (List connectionsId : connectionsIds){
-            sh "curl -X POST ${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests > output"
-            def jsonStatus = readFile('output').trim()
-            def status = new JsonSlurper().parseText("${jsonStatus}")
+//            sh "curl -X POST ${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests > output"
+//            def jsonStatus = readFile('output').trim()
+//            def status = new JsonSlurper().parseText("${jsonStatus}")
+            def status = get("${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests")
             echo "State of clean up queue: '${status.dropRequest.state}'"
         }
     }
 }
 
 def deleteProcessGroups(URL) {
-    List processGroups = env.PROCESS_GROUPS_ID.replace("[", "").replace("]", "").split(', ')
-    for (List processGroup in processGroups) {
-        sh "curl -X GET ${URL}/nifi-api/process-groups/${processGroup} > output"
-        def output = readFile('output').trim()
-        def result = new JsonSlurper().parseText("${output}")
-        String revisionNumber = result.revision.version
-        result = null
-        sh "curl -X DELETE ${URL}/nifi-api/process-groups/${processGroup}?version=${revisionNumber} > /dev/null 2>&1"
-    }
+    List processGroups = env.PROCESS_GROUPS_ID.split(',')
+    processGroups.each{ deleteProcessGroup(URL, it) }
+//    for (List processGroup in processGroups) {
+//        deleteProcessGroup(URL, processGroup)
+//    }
 }
 
 def deleteWorkspaceProcessGroup(URL) {
-    sh "curl -X GET ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP} > output"
-    def output = readFile('output').trim()
-    def result = new JsonSlurper().parseText("${output}")
+    deleteProcessGroup(URL, env.WORKSPACE_PROCESS_GROUP)
+}
+
+def deleteProcessGroup(URL, processGroup) {
+//    sh "curl -X GET ${URL}/nifi-api/process-groups/${processGroup} > output"
+//    def output = readFile('output').trim()
+//    def result = new JsonSlurper().parseText("${output}")
+    def result = get("${URL}/nifi-api/process-groups/${processGroup}")
     String revisionNumber = result.revision.version
     result = null
-    sh "curl -X DELETE ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}?version=${revisionNumber} > /dev/null 2>&1"
+    sh "curl -X DELETE ${URL}/nifi-api/process-groups/${processGroup}?version=${revisionNumber} > /dev/null 2>&1"
 }
+
+def get(url) {
+    sh "curl -X GET ${url} > output"
+    def output = readFile('output').trim()
+    return new JsonSlurper().parseText("${output}")
+}
+//def deserializeList(strList) {
+//    strList.split(',')
+//}
+//
+//def searializeList(list) {
+//    list.join(',')
+//}

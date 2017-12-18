@@ -34,7 +34,7 @@ def uploadTemplates(URL) {
         templatesId.add(templateId)
         templateMap."${templateName}" = "${templateId}"
     }
-    env.TEMPLATE_ID = templatesId
+    env.TEMPLATE_ID = templatesId.join(',')
     return templateMap
 }
 
@@ -79,7 +79,7 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
 //        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > /dev/null 2>&1"
 //        sh "curl -H \"Content-Type: application/json\" -X PUT -d '{\"id\":\"${processGroupId}\",\"state\":\"RUNNING\"}' ${URL}/nifi-api/flow/process-groups/${processGroupId}"
 //    }
-    env.PROCESS_GROUPS_ID = processGroups
+    env.PROCESS_GROUPS_ID = processGroups.join(',')
 }
 
 def findTemplates(env) {
