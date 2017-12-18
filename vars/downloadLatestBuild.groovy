@@ -12,6 +12,7 @@ def call(artifactoryId, URL, repository, release) {
         print(output.results.name)
         def max = output.results.updated.max()
         def results = output.results.updated.groupBy {it}.get(max)
+        print(results.{it}.get(name))
         print(results)
 //        def latestBuild = output.results.name
 //        for (def result in output.results) {
