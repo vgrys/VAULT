@@ -11,6 +11,7 @@ def call(artifactoryId, URL, repository, release) {
         def output = new JsonSlurper().parseText(outputJson)
         print(output.results.name)
         def max = output.results.updated.max()
+        print(max)
         def result = output.results.updated.groupBy {it}.get(max)
         print(result)
         if (max) {
