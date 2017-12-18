@@ -14,6 +14,7 @@ def result () {
     resultAsJson = ["$curl \"content-type: text/plain\" -d 'items.find({ \"repo\": {\"$eq\":\"bigdata-dss-automation\"}, \"path\" : \"atf/release\", \"name\": {\"$match\" : \"atf-*\"}})'"].execute().text
 
     echo resultAsJson
+//    def latest = resultAsJson
 }
 
 //def repoUrl= "https://gitblit.myhost.com/git/" + repository + ".git"

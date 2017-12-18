@@ -29,7 +29,7 @@ node {
     }
 
     stage ("Download latest build") {
-//        downloadLatestBuild(conf.artifactoryId, conf.artifactoryUrl, conf.artifactoryRepo, "release")
+        downloadLatestBuild(conf.artifactoryId, conf.artifactoryUrl, conf.artifactoryRepo, "release")
     }
 
 //    stage ('NiFi deployment') {
@@ -37,20 +37,20 @@ node {
 //        nifi.uploadTemplate(nifiURL)
 //    }
 
-    stage ('NiFi deployment') {
-        echo "********** NiFi deployment ***********"
-        deployNifi(nifiURL)
-    }
-
-    echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
-    echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
-    echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
-
-    stage ('NiFi cleanUp') {
-        sleep(30)
-        echo "********** NiFi cleanUp ***********"
-        cleanUpNifi(nifiURL)
-    }
+//    stage ('NiFi deployment') {
+//        echo "********** NiFi deployment ***********"
+//        deployNifi(nifiURL)
+//    }
+//
+//    echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
+//    echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
+//    echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
+//
+//    stage ('NiFi cleanUp') {
+//        sleep(30)
+//        echo "********** NiFi cleanUp ***********"
+//        cleanUpNifi(nifiURL)
+//    }
 
 
 //    stage ('NiFi getInfoConnection') {
