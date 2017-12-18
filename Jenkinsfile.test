@@ -35,7 +35,7 @@ node {
 
 //    stage ('NiFi deployment') {
 //        echo "********** NiFi deployment ***********"
-//        nifi.uploadTemplate(nifiURL)
+//        nifi.uploadTemplate(nifiURL, env.GIT_REPO)
 //    }
 
 //    stage ('NiFi deployment') {

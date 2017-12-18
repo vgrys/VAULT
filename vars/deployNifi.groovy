@@ -2,13 +2,13 @@
 
 import groovy.json.JsonSlurper
 
-def call(URL) {
+def call(URL, projectName) {
     try {
         echo "********* Upload templates to the NiFi ************"
         LinkedHashMap<String, String> templateMap = uploadTemplates(URL)
 
 //        templateMap = uploadTemplates(URL)
-        createWorkspace(URL)
+        createWorkspace(URL, projectName)
         createProcesGroupsAndDeployTemplate(URL, templateMap)
     } catch (err) {
         currentBuild.result = "FAILURE"
@@ -38,8 +38,8 @@ def uploadTemplates(URL) {
     return templateMap
 }
 
-def createWorkspace(URL) {
-    sh "curl -H \"Content-Type: application/json\" -X POST -d '{\"revision\":{\"version\":0},\"component\":{\"name\":\"${env.GIT_REPO}-WORKSPACE\"}}' ${URL}/nifi-api/process-groups/root/process-groups > output"
+def createWorkspace(URL, projectName) {
+    sh "curl -H \"Content-Type: application/json\" -X POST -d '{\"revision\":{\"version\":0},\"component\":{\"name\":\"${projectName}-WORKSPACE\"}}' ${URL}/nifi-api/process-groups/root/process-groups > output"
     def output = readFile('output').trim()
     def result = new JsonSlurper().parseText("${output}")
     echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
@@ -48,25 +48,8 @@ def createWorkspace(URL) {
 
 def createProcesGroupsAndDeployTemplate(URL, templateMap) {
     List processGroups = []
-    templateMap.each{ templateName, templateId ->
-        echo "Template id is: ${templateId} and name is: ${templateName}"
-        GString CreateProcessGroup = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${templateName}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
-        sh "curl -H \"Content-Type: application/json\" -X POST -d ${CreateProcessGroup} > output"
-        def output = readFile('output').trim()
-        def result = new JsonSlurper().parseText("${output}")
-        echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
-        String processGroupId = result.id
-        processGroups.add(processGroupId)
-        result = null
-        GString deployTemplate = "'{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance"
-        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > /dev/null 2>&1"
-    }
-    sh "curl -H \"Content-Type: application/json\" -X PUT -d '{\"id\":\"${env.WORKSPACE_PROCESS_GROUP}\",\"state\":\"RUNNING\"}' ${URL}/nifi-api/flow/process-groups/${env.WORKSPACE_PROCESS_GROUP}"
-//    for (def key : templateMap.keySet().iterator()) {
-//    for (def template : templateMap) {
-//        String templateName = template.key
-//        String templateId = template.value
-//        echo "TemplateId is: ${templateId} and name is: ${templateName}"
+//    templateMap.each{ templateName, templateId ->
+//        echo "Template id is: ${templateId} and name is: ${templateName}"
 //        GString CreateProcessGroup = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${templateName}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
 //        sh "curl -H \"Content-Type: application/json\" -X POST -d ${CreateProcessGroup} > output"
 //        def output = readFile('output').trim()
@@ -77,8 +60,25 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
 //        result = null
 //        GString deployTemplate = "'{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance"
 //        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > /dev/null 2>&1"
-//        sh "curl -H \"Content-Type: application/json\" -X PUT -d '{\"id\":\"${processGroupId}\",\"state\":\"RUNNING\"}' ${URL}/nifi-api/flow/process-groups/${processGroupId}"
 //    }
+////    for (def key : templateMap.keySet().iterator()) {
+    for (def template : templateMap) {
+        String templateName = template.key
+        String templateId = template.value
+        echo "TemplateId is: ${templateId} and name is: ${templateName}"
+        GString CreateProcessGroup = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${templateName}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
+        sh "curl -H \"Content-Type: application/json\" -X POST -d ${CreateProcessGroup} > output"
+        def output = readFile('output').trim()
+        def result = new JsonSlurper().parseText("${output}")
+        echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
+        String processGroupId = result.id
+        processGroups.add(processGroupId)
+        result = null
+        GString deployTemplate = "'{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance"
+        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > /dev/null 2>&1"
+        sh "curl -H \"Content-Type: application/json\" -X PUT -d '{\"id\":\"${processGroupId}\",\"state\":\"RUNNING\"}' ${URL}/nifi-api/flow/process-groups/${processGroupId}"
+    }
+    sh "curl -H \"Content-Type: application/json\" -X PUT -d '{\"id\":\"${env.WORKSPACE_PROCESS_GROUP}\",\"state\":\"RUNNING\"}' ${URL}/nifi-api/flow/process-groups/${env.WORKSPACE_PROCESS_GROUP}"
     env.PROCESS_GROUPS_ID = processGroups.join(',')
 }
 
