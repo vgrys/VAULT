@@ -12,6 +12,6 @@ def call(artifactoryId, URL, repository, release) {
         def max = output.results.updated.max()
         latestBuild = output.results.find{ it.updated == max}
         print(latestBuild.name)
-        max = null
+        outputJson = null
     }
 }
