@@ -10,8 +10,16 @@ def call(artifactoryId, URL, repository, release) {
         def JSON = readFile('JSON').trim()
         def output = new JsonSlurper().parseText(JSON)
         print(output.results.name)
-        def sortedJSON = output.results.sort { a,b -> b.updated <=> a.updated}
-        print(sortedJSON)
+        def max = output.results.updated.max()
+        def results = output.results.updated.groupBy {it}.get(max)
+        echo results
+//        def latestBuild = output.results.name
+//        for (def result in output.results) {
+//            if
+//        }
+
+//        def sortedJSON = output.results.sort { a,b -> b.updated <=> a.updated}
+//        print(sortedJSON)
 
 //        for (def result in output.results) {
 //            echo "${result.updated} and name: ${result.name}"
