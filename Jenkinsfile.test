@@ -29,7 +29,8 @@ node {
     }
 
     stage ("Download latest build") {
-        downloadLatestBuild(conf.artifactoryId, conf.artifactoryUrl, conf.artifactoryRepo, "release")
+        def latestBuild = downloadLatestBuild(conf.artifactoryId, conf.artifactoryUrl, conf.artifactoryRepo, "release")
+        echo latestBuild
     }
 
 //    stage ('NiFi deployment') {
