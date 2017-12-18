@@ -33,17 +33,10 @@ def cleanUpQueue(URL) {
     List processGroups = env.PROCESS_GROUPS_ID.split(',')
     print(processGroups)
     for (List processGroup in processGroups) {
-//        sh "curl -X GET ${URL}/nifi-api/flow/process-groups/${processGroup} > output"
-//        def output = readFile('output').trim()
-//        def result = new JsonSlurper().parseText("${output}")
         def result = get("-X GET ${URL}/nifi-api/flow/process-groups/${processGroup}")
-        echo "connections ID is: '${result.processGroupFlow.flow.connections.id}'"
         List connectionsIds = result.processGroupFlow.flow.connections.id
         result = null
         for (List connectionsId : connectionsIds){
-//            sh "curl -X POST ${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests > output"
-//            def jsonStatus = readFile('output').trim()
-//            def status = new JsonSlurper().parseText("${jsonStatus}")
             def status = get("-X POST ${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests")
             echo "State of clean up queue: '${status.dropRequest.state}'"
         }
@@ -53,9 +46,6 @@ def cleanUpQueue(URL) {
 def deleteProcessGroups(URL) {
     List processGroups = env.PROCESS_GROUPS_ID.split(',')
     processGroups.each{ deleteProcessGroup(URL, it) }
-//    for (List processGroup in processGroups) {
-//        deleteProcessGroup(URL, processGroup)
-//    }
 }
 
 def deleteWorkspaceProcessGroup(URL) {
@@ -63,9 +53,6 @@ def deleteWorkspaceProcessGroup(URL) {
 }
 
 def deleteProcessGroup(URL, processGroup) {
-//    sh "curl -X GET ${URL}/nifi-api/process-groups/${processGroup} > output"
-//    def output = readFile('output').trim()
-//    def result = new JsonSlurper().parseText("${output}")
     def result = get("-X GET ${URL}/nifi-api/process-groups/${processGroup}")
     String revisionNumber = result.revision.version
     result = null
@@ -77,10 +64,3 @@ def get(url) {
     def output = readFile('output').trim()
     return new JsonSlurper().parseText("${output}")
 }
-//def deserializeList(strList) {
-//    strList.split(',')
-//}
-//
-//def searializeList(list) {
-//    list.join(',')
-//}
