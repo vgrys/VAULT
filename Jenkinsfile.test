@@ -35,7 +35,7 @@ node {
 
     stage ('NiFi deployment') {
         echo "********** NiFi deployment ***********"
-        deployNifi(nifiURL)
+        deployNifi(nifiURL, env.GIT_REPO)
     }
 
     echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
