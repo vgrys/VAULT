@@ -4,10 +4,11 @@ import groovy.json.JsonSlurper
 
 
 def call(artifactoryId, URL, repository, release) {
-        def result = getResult(artifactoryId, URL, repository, release)
-        def max = result.results.updated.max()
-        latestBuild = result.results.find{ it.updated == max}
-        return latestBuild.name
+    def result = getResult(artifactoryId, URL, repository, release)
+    def max = result.results.updated.max()
+    latestBuild = result.results.find { it.updated == max }
+    result = null
+    return latestBuild.name
 }
 
 def getResult(artifactoryId, URL, repository, release) {
