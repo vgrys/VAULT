@@ -33,31 +33,20 @@ node {
         echo latestBuild
     }
 
-//    stage ('NiFi deployment') {
-//        echo "********** NiFi deployment ***********"
-//        nifi.uploadTemplate(nifiURL, env.GIT_REPO)
-//    }
+    stage ('NiFi deployment') {
+        echo "********** NiFi deployment ***********"
+        deployNifi(nifiURL)
+    }
 
-//    stage ('NiFi deployment') {
-//        echo "********** NiFi deployment ***********"
-//        deployNifi(nifiURL)
-//    }
-//
-//    echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
-//    echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
-//    echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
-//
-//    stage ('NiFi cleanUp') {
-//        sleep(30)
-//        echo "********** NiFi cleanUp ***********"
-//        cleanUpNifi(nifiURL)
-//    }
+    echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
+    echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
+    echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
 
-
-//    stage ('NiFi getInfoConnection') {
-//        echo "********** NiFi getInfoConnection ***********"
-//        nifi.getInfoConnection(nifiURL, 'process-groups', 'e8e585bd-015f-1000-c903-46aab0cb3971')
-//    }
+    stage ('NiFi cleanUp') {
+        sleep(30)
+        echo "********** NiFi cleanUp ***********"
+        cleanUpNifi(nifiURL)
+    }
 
 
 
