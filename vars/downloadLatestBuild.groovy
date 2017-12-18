@@ -7,8 +7,9 @@ def call(artifactoryId, URL, repository, release) {
     def result = getResult(artifactoryId, URL, repository, release)
     def max = result.results.updated.max()
     latestBuild = result.results.find { it.updated == max }
+    latestBuildName = latestBuild.name
     result = null
-    return latestBuild.name
+    return latestBuildName
 }
 
 def getResult(artifactoryId, URL, repository, release) {
