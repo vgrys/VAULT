@@ -9,11 +9,9 @@ def call(artifactoryId, URL, repository, release) {
         sh "cat output"
         def outputJson = readFile('output').trim()
         def output = new JsonSlurper().parseText(outputJson)
-        print(output.results.name)
         def max = output.results.updated.max()
-        print(max)
         latestBuild = output.results.find{ it.updated == max}
         print(latestBuild.name)
-        output = null
+        max = null
     }
 }
