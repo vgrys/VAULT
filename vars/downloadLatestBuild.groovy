@@ -2,7 +2,7 @@
 
 import groovy.json.JsonSlurper
 
-class downloadLatestBuild implements Serializable {
+//class downloadLatestBuild implements Serializable {
 
     def call(artifactoryId, URL, repository, release) {
         def result = getResult(artifactoryId, URL, repository, release)
@@ -20,4 +20,4 @@ class downloadLatestBuild implements Serializable {
             return new JsonSlurper().parseText(output)
         }
     }
-}
+//}
