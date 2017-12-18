@@ -36,7 +36,7 @@ def cleanUpQueue(URL) {
 //        sh "curl -X GET ${URL}/nifi-api/flow/process-groups/${processGroup} > output"
 //        def output = readFile('output').trim()
 //        def result = new JsonSlurper().parseText("${output}")
-        def result = get("${URL}/nifi-api/flow/process-groups/${processGroup}")
+        def result = get("GET ${URL}/nifi-api/flow/process-groups/${processGroup}")
         echo "connections ID is: '${result.processGroupFlow.flow.connections.id}'"
         List connectionsIds = result.processGroupFlow.flow.connections.id
         result = null
@@ -44,7 +44,7 @@ def cleanUpQueue(URL) {
 //            sh "curl -X POST ${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests > output"
 //            def jsonStatus = readFile('output').trim()
 //            def status = new JsonSlurper().parseText("${jsonStatus}")
-            def status = get("${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests")
+            def status = get("POST ${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests")
             echo "State of clean up queue: '${status.dropRequest.state}'"
         }
     }
@@ -66,14 +66,14 @@ def deleteProcessGroup(URL, processGroup) {
 //    sh "curl -X GET ${URL}/nifi-api/process-groups/${processGroup} > output"
 //    def output = readFile('output').trim()
 //    def result = new JsonSlurper().parseText("${output}")
-    def result = get("${URL}/nifi-api/process-groups/${processGroup}")
+    def result = get("GET ${URL}/nifi-api/process-groups/${processGroup}")
     String revisionNumber = result.revision.version
     result = null
     sh "curl -X DELETE ${URL}/nifi-api/process-groups/${processGroup}?version=${revisionNumber} > /dev/null 2>&1"
 }
 
 def get(url) {
-    sh "curl -X GET ${url} > output"
+    sh "curl -X ${url} > output"
     def output = readFile('output').trim()
     return new JsonSlurper().parseText("${output}")
 }
