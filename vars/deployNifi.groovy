@@ -1,11 +1,12 @@
 #!/usr/bin/groovy
 
 import groovy.json.JsonSlurper
+import java.util.Map
 
 def call(URL, projectName) {
     try {
         echo "********* Upload templates to the NiFi ************"
-        LinkedHashMap<String, String> templateMap = uploadTemplates(URL)
+        Map<String, String> templateMap = uploadTemplates(URL)
 
 //        templateMap = uploadTemplates(URL)
         createWorkspace(URL, projectName)
@@ -19,7 +20,8 @@ def call(URL, projectName) {
 
 def uploadTemplates(URL) {
     List templatesId = []
-    LinkedHashMap<String, String> templateMap = [:]
+//    Map<String, String> templateMap = [:]
+    Map<String, String> templateMap = new HashMap<Sting, String>()
     List template = findTemplates(env)
     for (List name : template) {
         GString filePath = "${env.WORKSPACE}/nifi/${name}"
@@ -48,24 +50,9 @@ def createWorkspace(URL, projectName) {
 
 def createProcesGroupsAndDeployTemplate(URL, templateMap) {
     List processGroups = []
-//    templateMap.each{ templateName, templateId ->
-//        echo "Template id is: ${templateId} and name is: ${templateName}"
-//        GString CreateProcessGroup = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${templateName}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
-//        sh "curl -H \"Content-Type: application/json\" -X POST -d ${CreateProcessGroup} > output"
-//        def output = readFile('output').trim()
-//        def result = new JsonSlurper().parseText("${output}")
-//        echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
-//        String processGroupId = result.id
-//        processGroups.add(processGroupId)
-//        result = null
-//        GString deployTemplate = "'{\"templateId\":\"${templateId}\",\"originX\":-0.0,\"originY\":-0.0}' ${URL}/nifi-api/process-groups/${processGroupId}/template-instance"
-//        sh "curl -H \"Content-Type: application/json\" -X POST -d ${deployTemplate} > /dev/null 2>&1"
-//    }
-////    for (def key : templateMap.keySet().iterator()) {
-
-    for (def template : templateMap) {
-        String templateName = template.key
-        String templateId = template.value
+    for (def key : templateMap.keySet()) {
+        String templateName = key
+        String templateId = templateMap.get(key)
         echo "Template id is: ${templateId} and name is: ${templateName}"
         GString CreateProcessGroup = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${templateName}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
         sh "curl -H \"Content-Type: application/json\" -X POST -d ${CreateProcessGroup} > output"
