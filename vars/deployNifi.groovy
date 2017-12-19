@@ -21,7 +21,7 @@ def call(URL, projectName) {
 def uploadTemplates(URL) {
     List templatesId = []
 //    Map<String, String> templateMap = [:]
-    Map<String, String> templateMap = new HashMap<Sting, String>()
+    Map<String, String> templateMap = new HashMap()
     List template = findTemplates(env)
     for (List name : template) {
         GString filePath = "${env.WORKSPACE}/nifi/${name}"
