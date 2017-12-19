@@ -26,8 +26,8 @@ def uploadTemplates(URL) {
     for (List name : template) {
         GString filePath = "${env.WORKSPACE}/nifi/${name}"
         GString run = "curl -F template=@${filePath} -X POST  ${URL}/nifi-api/process-groups/root/templates/upload > output"
-        echo "echo ${run} > run.sh"
-        sh "source ./run.sh"
+        sh "echo ${run} > run.sh & chmod +x run.sh"
+        sh "shell run.sh"
         echo "Template '${name}' is uploaded to NiFi server '${URL}'"
         def output = readFile('output').trim()
         print(output)
