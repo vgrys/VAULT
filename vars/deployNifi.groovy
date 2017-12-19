@@ -44,7 +44,7 @@ def createWorkspace(URL, projectName) {
     sh "curl -H \"Content-Type: application/json\" -X POST -d '{\"revision\":{\"version\":0},\"component\":{\"name\":\"${projectName}-WORKSPACE\"}}' ${URL}/nifi-api/process-groups/root/process-groups > output"
     def output = readFile('output').trim()
     def result = new JsonSlurper().parseText("${output}")
-    echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
+    echo "Workspace process group is created with ID: '${result.id}' and name: '${result.component.name}'"
     env.WORKSPACE_PROCESS_GROUP = result.id
 }
 
