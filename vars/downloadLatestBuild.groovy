@@ -4,7 +4,7 @@ import groovy.json.JsonSlurper
 
 def call(artifactoryId, URL, repository, release) {
     def result = getResult(artifactoryId, URL, repository, release)
-    String latestBuild = ''
+    def latestBuild = null
     String lastestUpdate = ''
     for (def build : result.results) {
         if (build.updated > lastestUpdate) {
