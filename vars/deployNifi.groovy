@@ -66,7 +66,6 @@ def createProcesGroupsAndDeployTemplate(URL, templateMap) {
     for (def template : templateMap) {
         String templateName = template.key
         String templateId = template.value
-        template = null
         echo "Template id is: ${templateId} and name is: ${templateName}"
         GString CreateProcessGroup = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${templateName}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
         sh "curl -H \"Content-Type: application/json\" -X POST -d ${CreateProcessGroup} > output"
