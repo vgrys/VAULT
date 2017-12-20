@@ -25,7 +25,7 @@ def uploadTemplates(URL) {
         echo "Template '${name}' is uploaded to NiFi server '${URL}'"
         def output = readFile('output').trim()
         print(output)
-        def result = new XmlSlurper().parseText("${output}")
+        def result = new XmlSlurper().parseText(output)
         echo "Template is uploaded with id: '${result.template.id}' and name: '${result.template.name}'"
         String templateId = result.template.id
         templates.add([templateId, name])
@@ -39,7 +39,7 @@ def uploadTemplates(URL) {
 def createWorkspace(URL, projectName) {
     sh "curl -H \"Content-Type: application/json\" -X POST -d '{\"revision\":{\"version\":0},\"component\":{\"name\":\"${projectName}-WORKSPACE\"}}' ${URL}/nifi-api/process-groups/root/process-groups > output"
     def output = readFile('output').trim()
-    def result = new JsonSlurper().parseText("${output}")
+    def result = new JsonSlurper().parseText(output)
     echo "Workspace process group is created with ID: '${result.id}' and name: '${result.component.name}'"
     env.WORKSPACE_PROCESS_GROUP = result.id
 }
@@ -66,7 +66,7 @@ def createProcessGroups(URL, templateName){
     GString CreateProcessGroup = "'{\"revision\":{\"version\":0},\"component\":{\"name\":\"${templateName}\"}}' ${URL}/nifi-api/process-groups/${env.WORKSPACE_PROCESS_GROUP}/process-groups"
     sh "curl -H \"Content-Type: application/json\" -X POST -d ${CreateProcessGroup} > output"
     def output = readFile('output').trim()
-    def result = new JsonSlurper().parseText("${output}")
+    def result = new JsonSlurper().parseText(output)
     echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
     String processGroupId = result.id
     return processGroupId
