@@ -35,9 +35,9 @@ def cleanUpQueue(URL) {
     for (List processGroup in processGroups) {
         def result = get("-X GET ${URL}/nifi-api/flow/process-groups/${processGroup}")
 //        List connectionsIds = result.processGroupFlow.flow.connections.id
-        result = null
-        for (List connectionsId : result.processGroupFlow.flow.connections){
-            def status = get("-X POST ${URL}/nifi-api/flowfile-queues/${connectionsId}/drop-requests")
+//        result = null
+        for (List id : result.processGroupFlow.flow.connections){
+            def status = get("-X POST ${URL}/nifi-api/flowfile-queues/${id}/drop-requests")
             echo "State of clean up queue: '${status.dropRequest.state}'"
         }
     }
