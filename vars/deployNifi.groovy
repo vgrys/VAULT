@@ -85,8 +85,7 @@ def createProcessGroups(URL, templateName){
     def result = new JsonSlurper().parseText("${output}")
     echo "Process group is created with ID: '${result.id}' and name: '${result.component.name}'"
     String processGroupId = result.id
-//    processGroups.add(processGroupId)
-    result = null
+//    result = null
     return processGroupId
 }
 
