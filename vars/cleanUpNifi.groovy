@@ -38,10 +38,12 @@ def getConnctionsId(URL) {
         result = null
         for (connection in connections) {
             echo "I am in second for loop"
-            connectionsId.add(connection.id)
-            print("connectionsId in loop ${connectionsId}")
+            def status = get("-X POST ${URL}/nifi-api/flowfile-queues/${connection.id}/drop-requests")
+//            echo "State of clean up queue: '${status.dropRequest.state}'"
+//            connectionsId.add(connection.id)
+//            print("connectionsId in loop ${connectionsId}")
         }
-        print("connectionsId after loop ${connectionsId}")
+//        print("connectionsId after loop ${connectionsId}")
 //        List connectionsIds = result.processGroupFlow.flow.connections.id
 //        result = null
 //        return result.processGroupFlow.flow.connections
