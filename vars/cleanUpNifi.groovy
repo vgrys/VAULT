@@ -54,7 +54,10 @@ def cleanUpQueue(URL) {
 def deleteProcessGroups(URL) {
     def processGroups = env.PROCESS_GROUPS_ID.split(',')
     for (processGroup in processGroups) {
-        deleteProcessGroup(URL, processGroup)
+        def result = get("-X GET ${URL}/nifi-api/process-groups/${processGroup}")
+        String revisionNumber = result.revision.version
+        result = null
+        sh "curl -X DELETE ${URL}/nifi-api/process-groups/${processGroup}?version=${revisionNumber} > /dev/null 2>&1"
     }
 }
 

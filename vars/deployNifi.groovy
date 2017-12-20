@@ -31,7 +31,6 @@ def uploadTemplates(URL) {
         String templateName = result.template.name
         templates.add([templateId, templateName])
         templatesId.add(templateId)
-        print(templates)
     }
     env.TEMPLATE_ID = templatesId.join(',')
     return templates
@@ -60,7 +59,7 @@ def createProcesGroupsAndDeployTemplate(URL, templates) {
 
     }
     env.PROCESS_GROUPS_ID = processGroups.join(',')
-//    startProcessGroups(URL)
+    startProcessGroups(URL)
 }
 
 def createProcessGroups(URL, templateName){
