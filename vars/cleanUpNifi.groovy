@@ -31,13 +31,17 @@ def stopProcessGroup(URL) {
 
 def getConnctionsId(URL) {
     List processGroups = env.PROCESS_GROUPS_ID.split(',')
+    List connectionsId = []
     for (List processGroup in processGroups) {
         def result = get("-X GET ${URL}/nifi-api/flow/process-groups/${processGroup}")
+        for (id in result.processGroupFlow.flow.connections) {
+            connectionsId.add(id)
+        }
+        print(connectionsId)
 //        List connectionsIds = result.processGroupFlow.flow.connections.id
 //        result = null
 //        return result.processGroupFlow.flow.connections
-        def status = cleanUpQueue(URL, result.processGroupFlow.flow.connections)
-        echo "State of clean up queue: '${status}'"
+//        def status = cleanUpQueue(URL, result.processGroupFlow.flow.connections)
     }
 }
 
@@ -47,7 +51,6 @@ def cleanUpQueue(URL, result) {
 //        echo "State of clean up queue: '${status.dropRequest.state}'"
         return status.dropRequest.state
     }
-
 }
 
 def deleteProcessGroups(URL) {
