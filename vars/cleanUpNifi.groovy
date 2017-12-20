@@ -34,10 +34,12 @@ def getConnctionsId(URL) {
     List connectionsId = []
     for (List processGroup in processGroups) {
         def result = get("-X GET ${URL}/nifi-api/flow/process-groups/${processGroup}")
-        print(result.processGroupFlow.flow.connections)
-        for (id in result.processGroupFlow.flow.connections) {
+        def connections = result.processGroupFlow.flow.connections
+        result = null
+        print(connections)
+        for (id in connections) {
             echo "I am in second for loop"
-            connectionsId.add(id)
+            connectionsId.add(id.id)
             print(connectionsId)
         }
         print(connectionsId)
