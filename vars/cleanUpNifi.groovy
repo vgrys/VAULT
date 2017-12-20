@@ -36,6 +36,7 @@ def getConnctionsId(URL) {
         def result = get("-X GET ${URL}/nifi-api/flow/process-groups/${processGroup}")
         print(result.processGroupFlow.flow.connections)
         for (id in result.processGroupFlow.flow.connections) {
+            echo "I am in second for loop"
             connectionsId.add(id)
         }
         print(connectionsId)
