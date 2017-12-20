@@ -39,7 +39,7 @@ def getConnctionsId(URL) {
         for (connection in connections) {
             echo "I am in second for loop"
             def status = get("-X POST ${URL}/nifi-api/flowfile-queues/${connection.id}/drop-requests")
-//            echo "State of clean up queue: '${status.dropRequest.state}'"
+            echo "State of clean up queue: '${status.dropRequest.state}'"
 //            connectionsId.add(connection.id)
 //            print("connectionsId in loop ${connectionsId}")
         }
