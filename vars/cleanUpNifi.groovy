@@ -7,7 +7,7 @@ def call(URL) {
         echo "********* Delete templates from NiFi ************"
         deleteTemplates(URL)
         stopProcessGroup(URL)
-        getConnctionsId(URL)
+        cleanUpQueue(URL)
         deleteProcessGroups(URL)
         deleteWorkspaceProcessGroup(URL)
     } catch (err) {
@@ -38,25 +38,18 @@ def getConnctionsId(URL) {
         result = null
         for (connection in connections) {
             echo "I am in second for loop"
-            def status = get("-X POST ${URL}/nifi-api/flowfile-queues/${connection.id}/drop-requests")
-            echo "State of clean up queue: '${status.dropRequest.state}'"
-            status = null
-//            connectionsId.add(connection.id)
-//            print("connectionsId in loop ${connectionsId}")
+            connectionsId.add(connection.id)
+            print("connectionsId in loop ${connectionsId}")
         }
-//        print("connectionsId after loop ${connectionsId}")
-//        List connectionsIds = result.processGroupFlow.flow.connections.id
-//        result = null
-//        return result.processGroupFlow.flow.connections
-//        def status = cleanUpQueue(URL, result.processGroupFlow.flow.connections)
     }
+    return connectionsId
 }
 
-def cleanUpQueue(URL, result) {
+def cleanUpQueue(URL) {
+    def result = getConnctionsId(URL)
     for (List id : result){
         def status = get("-X POST ${URL}/nifi-api/flowfile-queues/${id}/drop-requests")
-//        echo "State of clean up queue: '${status.dropRequest.state}'"
-        return status.dropRequest.state
+        echo "State of clean up queue: '${status.dropRequest.state}'"
     }
 }
 
