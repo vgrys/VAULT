@@ -28,7 +28,8 @@ def uploadTemplates(URL) {
         def result = new XmlSlurper().parseText(output)
         echo "Template is uploaded with id: '${result.template.id}' and name: '${result.template.name}'"
         String templateId = result.template.id
-        templates.add([templateId, name])
+        String templateName = result.template.name
+        templates.add([templateId, templateName])
         templatesId.add(templateId)
         print(templates)
     }
