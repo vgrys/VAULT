@@ -54,8 +54,10 @@ def cleanUpQueue(URL) {
 }
 
 def deleteProcessGroups(URL) {
-    List processGroups = env.PROCESS_GROUPS_ID.split(',')
-    processGroups.each{ deleteProcessGroup(URL, it) }
+    def processGroups = env.PROCESS_GROUPS_ID.split(',')
+    for (processGroup in processGroups) {
+        deleteProcessGroup(URL, processGroup)
+    }
 }
 
 def deleteWorkspaceProcessGroup(URL) {
