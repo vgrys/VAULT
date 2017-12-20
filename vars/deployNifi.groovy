@@ -5,9 +5,7 @@ import groovy.json.JsonSlurper
 def call(URL, projectName) {
     try {
         echo "********* Upload templates to the NiFi ************"
-        def templates = uploadTemplates(URL)
-
-//        templateMap = uploadTemplates(URL)
+        List templates = uploadTemplates(URL)
         createWorkspace(URL, projectName)
         createProcesGroupsAndDeployTemplate(URL, templates)
     } catch (err) {
@@ -18,10 +16,8 @@ def call(URL, projectName) {
 }
 
 def uploadTemplates(URL) {
-    def templates = []
+    List templates = []
     List templatesId = []
-    List templatesName = []
-//    def tupleTemplates = new Tuple(templatesId, templatesName)
     List template = findTemplates(env)
     for (List name : template) {
         GString filePath = "${env.WORKSPACE}/nifi/${name}"
@@ -32,11 +28,9 @@ def uploadTemplates(URL) {
         def result = new XmlSlurper().parseText("${output}")
         echo "Template is uploaded with id: '${result.template.id}' and name: '${result.template.name}'"
         String templateId = result.template.id
-//        String templateName = result.template.name
         templates.add([templateId, name])
         templatesId.add(templateId)
         print(templates)
-//        templateMap."${templateName}" = "${templateId}"
     }
     env.TEMPLATE_ID = templatesId.join(',')
     return templates
@@ -53,8 +47,8 @@ def createWorkspace(URL, projectName) {
 def createProcesGroupsAndDeployTemplate(URL, templates) {
     List processGroups = []
     for (def template : templates) {
-        String templateName = template[1]
-        String templateId = template[0]
+        def templateName = template[1]
+        def templateId = template[0]
         echo "Template id is: ${templateId} and name is: ${templateName}"
 
         def processGroupId = createProcessGroups(URL, templateName)
