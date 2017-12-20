@@ -38,6 +38,7 @@ def getConnctionsId(URL) {
         for (id in result.processGroupFlow.flow.connections) {
             echo "I am in second for loop"
             connectionsId.add(id)
+            print(connectionsId)
         }
         print(connectionsId)
 //        List connectionsIds = result.processGroupFlow.flow.connections.id
