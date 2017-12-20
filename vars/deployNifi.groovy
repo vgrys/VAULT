@@ -59,7 +59,7 @@ def createProcesGroupsAndDeployTemplate(URL, templates) {
 
     }
     env.PROCESS_GROUPS_ID = processGroups.join(',')
-    startProcessGroups(URL)
+//    startProcessGroups(URL)
 }
 
 def createProcessGroups(URL, templateName){
