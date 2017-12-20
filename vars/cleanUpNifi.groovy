@@ -37,9 +37,7 @@ def getConnctionsId(URL) {
         def connections = result.processGroupFlow.flow.connections
         result = null
         for (connection in connections) {
-            echo "I am in second for loop"
             connectionsId.add(connection.id)
-            print("connectionsId in loop ${connectionsId}")
         }
     }
     return connectionsId
