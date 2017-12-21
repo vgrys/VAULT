@@ -39,7 +39,7 @@ node {
     }
 
     stage ('test variable') {
-        sh "echo \$env.WORKSPACE_PROCESS_GROUP"
+//        sh "echo \$env.WORKSPACE_PROCESS_GROUP"
         sh "echo \$WORKSPACE_PROCESS_GROUP"
     }
 
