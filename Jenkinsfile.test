@@ -38,6 +38,11 @@ node {
         deployNifi(nifiURL, env.GIT_REPO)
     }
 
+    stage ('test variable') {
+        sh "echo \$env.WORKSPACE_PROCESS_GROUP"
+        sh "echo \$WORKSPACE_PROCESS_GROUP"
+    }
+
     echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
     echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
     echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
@@ -48,10 +53,6 @@ node {
         cleanUpNifi(nifiURL)
     }
 
-    stage ('test variable') {
-        sh "echo \$env.WORKSPACE_PROCESS_GROUP"
-        sh "echo \$WORKSPACE_PROCESS_GROUP"
-    }
 
 
 //    stage ('Obtain latest Build') {
