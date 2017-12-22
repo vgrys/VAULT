@@ -29,9 +29,7 @@ node {
     }
 
     stage ('test shell arguments') {
-//            sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
-
-        sh "chmod +x ${WORKSPACE}/argument.sh && ${WORKSPACE}/argument.sh process_group_id='4444444444444444444'"
+        sh "chmod +x ${WORKSPACE}/argument.sh && ${WORKSPACE}/argument.sh -process_group_id='4444444444444444444'"
     }
 
     stage ("Download latest build") {
