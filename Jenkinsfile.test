@@ -28,6 +28,12 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
+    stage ('test shell arguments') {
+        //        sh "virtualenv --python=/usr/bin/python3.6 --no-site-packages . && . ./bin/activate && ./bin/pip3.6 install -r ${WORKSPACE}/requirements.txt"
+
+        sh "source ./argument.sh process_group_id='4444444444444444444'"
+    }
+
     stage ("Download latest build") {
         def latestBuild = downloadLatestBuild(conf.artifactoryId, conf.artifactoryUrl, conf.artifactoryRepo, "release")
         echo latestBuild
