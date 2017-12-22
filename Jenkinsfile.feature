@@ -4,7 +4,7 @@
 String atfVersion = '0.0.1'
 String atfRelease = 'release'
 
-String targetGroup = "master"
+String targetGroup = "prod"
 
 String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
@@ -83,7 +83,7 @@ node {
         echo "********* Start to install AFT project **********"
         withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
             dir("${WORKSPACE}/ansible") {
-                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
+                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} hostUser='vagrant' artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
             }
         }
         echo "********* End of install AFT project **********"
