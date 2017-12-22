@@ -14,7 +14,7 @@ node() {
     // If you need to load Jenkinsfile by branch, use pipelineConfig.discoverJenkinsfile()
     // If you need to load specific Jenkinsfile, use pipelineConfig.discoverJenkinsfile('<extension>)'.
     // Add extension of Jenkinsfile. If you have Jenkinsfile.test add 'pipelineConfig.discoverJenkinsfile('test')'
-    def effectiveJenkinsFile = pipelineConfig.discoverJenkinsfile()
+    def effectiveJenkinsFile = pipelineConfig.discoverJenkinsfile('feature')
     load(effectiveJenkinsFile)
     configurationLoaded = true
 }
