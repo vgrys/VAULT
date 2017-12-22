@@ -1,7 +1,6 @@
 ---
 - hosts: "{{server}}"
   any_errors_fatal: true
-  ansible_user: vgrys
 
   vars_files:
     - vars/configs.yml
