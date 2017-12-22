@@ -9,4 +9,4 @@ flex ansible_host=192.168.56.20
 
 [all:vars]
 ansible_connection=ssh
-ansible_ssh_user="{{hostUser}}"
+ansible_user="{{hostUser}}"
