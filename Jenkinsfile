@@ -2,53 +2,19 @@
 
 @Library('shared-library@release/version1')
 
-        configurationLoaded = false
+
+configurationLoaded = false
 
 node() {
+
     deleteDir()
     checkout scm
-    gitInfo()
-    def jenkinsfile
+    bitbucketGitInfo()
 
-    String JenkinsfileExt = 'test'
-    if (env.BRANCH_NAME == 'release/version1' && fileExists("Jenkinsfile.${JenkinsfileExt}")) {
-        jenkinsfile = "Jenkinsfile.${JenkinsfileExt}"
-
-    } else if (env.GIT_BRANCH_TYPE in ['master', 'release', 'feature'] && fileExists("Jenkinsfile.${env.GIT_BRANCH_TYPE}")) {
-        jenkinsfile = "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
-    }
-
-    if (jenkinsfile) {
-        echo pipelineConfig.pad("Loading file: '${jenkinsfile}'")
-        load("${jenkinsfile}")
-        configurationLoaded = true
-//        deleteDir()
-
-    } else {
-//        deleteDir()
-        error("Jenkinsfile for '${env.GIT_BRANCH_TYPE}' banch was't loaded.")
-    }
-
-//    exist = fileExists "Jenkinsfile.${JenkinsfileExt}"
-//    if (env.BRANCH_NAME == 'bla-bla/test' && exist) {
-//        echo pipelineConfig.pad("Loading file: 'Jenkinsfile.${JenkinsfileExt}'")
-//        load("Jenkinsfile.${JenkinsfileExt}")
-//        configurationLoaded = true
-//        deleteDir()
-//        return true
-//    }
-//
-//    exist = fileExists "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
-//    if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature'] && exist) {
-//        echo pipelineConfig.pad("Loading file: 'Jenkinsfile.${env.GIT_BRANCH_TYPE}'")
-//        load("Jenkinsfile.${env.GIT_BRANCH_TYPE}")
-//        configurationLoaded = true
-//        deleteDir()
-//        return true
-//
-//    } else {
-//        deleteDir()
-//        error("Jenkinsfile for '${env.GIT_BRANCH_TYPE}' banch was't loaded.")
-//    }
+    // If you need to load Jenkinsfile by branch, use pipelineConfig.discoverJenkinsfile()
+    // If you need to load specific Jenkinsfile, use pipelineConfig.discoverJenkinsfile('<extension>)'.
+    // Add extension of Jenkinsfile. If you have Jenkinsfile.test add 'pipelineConfig.discoverJenkinsfile('test')'
+    def effectiveJenkinsFile = pipelineConfig.discoverJenkinsfile()
+    load(effectiveJenkinsFile)
+    configurationLoaded = true
 }
-

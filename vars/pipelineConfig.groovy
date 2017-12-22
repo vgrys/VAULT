@@ -66,3 +66,25 @@ def runProjectCleanup(projectName, targetGroup ) {
     cmd = ansible("projectName=${projectName}' projectCleanup.yml", targetGroup)
     executeAnsible(cmd, null)
 }
+
+def discoverJenkinsfile() {
+    GString jenkinsFileCandidate = "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
+    if (fileExists("${jenkinsFileCandidate}")) {
+        echo pad("Loading file: '${jenkinsFileCandidate}'")
+        return "${jenkinsFileCandidate}"
+
+    } else {
+        error("Jenkinsfile '${jenkinsFileCandidate}' not found")
+    }
+}
+
+def discoverJenkinsfile(jenkinsFileExtension) {
+    GString jenkinsFileCandidate = "Jenkinsfile.${jenkinsFileExtension}"
+    if (fileExists(jenkinsFileCandidate)) {
+        echo pad("Loading file: '${jenkinsFileCandidate}'")
+        return jenkinsFileCandidate
+
+    } else {
+        error("Jenkinsfile '${jenkinsFileCandidate}' not found")
+    }
+}
