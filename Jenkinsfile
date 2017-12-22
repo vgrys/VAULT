@@ -9,7 +9,7 @@ node() {
 
     deleteDir()
     checkout scm
-    bitbucketGitInfo()
+    gitInfo()
 
     // If you need to load Jenkinsfile by branch, use pipelineConfig.discoverJenkinsfile()
     // If you need to load specific Jenkinsfile, use pipelineConfig.discoverJenkinsfile('<extension>)'.
