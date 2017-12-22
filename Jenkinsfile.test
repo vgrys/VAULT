@@ -35,7 +35,7 @@ node {
 
     stage ('NiFi deployment') {
         echo "********** NiFi deployment ***********"
-        deployNifi(nifiURL, env.GIT_REPO)
+        nifi.deploy(nifiURL, env.GIT_REPO)
     }
 
     stage ('test variable') {
@@ -50,7 +50,7 @@ node {
     stage ('NiFi cleanUp') {
         sleep(5)
         echo "********** NiFi cleanUp ***********"
-        cleanUpNifi(nifiURL)
+        nifi.cleanup(nifiURL)
     }
 
 
