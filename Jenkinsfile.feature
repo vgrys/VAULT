@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 @Library('shared-library@release/version1')
 
-String atfVersion = '0.1.0'
+String atfVersion = '0.0.1'
 String atfRelease = 'release'
 
 String targetGroup = "master"
