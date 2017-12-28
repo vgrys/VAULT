@@ -28,6 +28,21 @@ node {
     }
 
     stage('SonarQube analysis') {
+        def scannerHome = tool name: 'SonarQube2.8'
+        withSonarQubeEnv('SonarServer') {
+            sh "${scannerHome}/bin/sonar-scanner" +
+                    '-Dsonar.projectKey=com.huettermann:all:master ' +
+//                    '-Dsonar.login=$SONAR_UN ' +
+//                    '-Dsonar.password=$SONAR_PW ' +
+                    '-Dsonar.language=python ' +
+                    '-Dsonar.sources=. ' +
+                    '-Dsonar.tests=. ' +
+//                    '-Dsonar.test.inclusions=**/*Test*/** ' +
+//                    '-Dsonar.exclusions=**/*Test*/**'
+        }
+    }
+
+    stage('SonarQube analysis') {
         // requires SonarQube Scanner 2.8+ def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         def scannerHome = tool name: 'SonarQube2.8'
         withSonarQubeEnv('SonarServer') {
