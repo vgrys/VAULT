@@ -38,7 +38,7 @@ node {
                     '-D sonar.projectVersion=1.0 ' +
 //                    '-Dsonar.login=$SONAR_UN ' +
 //                    '-Dsonar.password=$SONAR_PW ' +
-                    '-D sonar.language=python ' +
+                    '-D sonar.language=py ' +
                     '-D sonar.sources=. '
 //                    '-Dsonar.tests=. '
 //                    '-Dsonar.test.inclusions=**/*Test*/** ' +
