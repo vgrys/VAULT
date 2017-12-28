@@ -30,7 +30,7 @@ node {
     stage('SonarQube analysis') {
         // requires SonarQube Scanner 2.8+ def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         def scannerHome = tool name: 'SonarQube2.8'
-        withSonarQubeEnv('192.168.56.105:9000') {
+        withSonarQubeEnv('SonarServer') {
             sh "${scannerHome}/bin/sonar-scanner"
         }
     }
