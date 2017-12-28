@@ -31,7 +31,7 @@ node {
         def scannerHome = tool name: 'SonarQube2.8'
         withSonarQubeEnv('SonarServer') {
             sh "${scannerHome}/bin/sonar-scanner" +
-                    '-Dsonar.projectKey=com.huettermann:all:master ' +
+                    '-Dsonar.projectKey=TEST ' +
 //                    '-Dsonar.login=$SONAR_UN ' +
 //                    '-Dsonar.password=$SONAR_PW ' +
                     '-Dsonar.language=python ' +
