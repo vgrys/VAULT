@@ -46,13 +46,13 @@ node {
         }
     }
 
-    stage('SonarQube analysis') {
-        // requires SonarQube Scanner 2.8+ def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-        def scannerHome = tool name: 'SonarQube2.8'
-        withSonarQubeEnv('SonarServer') {
-            sh "${scannerHome}/bin/sonar-scanner"
-        }
-    }
+//    stage('SonarQube analysis') {
+//        // requires SonarQube Scanner 2.8+ def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+//        def scannerHome = tool name: 'SonarQube2.8'
+//        withSonarQubeEnv('SonarServer') {
+//            sh "${scannerHome}/bin/sonar-scanner"
+//        }
+//    }
 
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
