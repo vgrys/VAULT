@@ -35,7 +35,7 @@ node {
                     '-D sonar.projectKey=my:VAULT ' +
 //                  this is the name and version displayed in the SonarQube UI. Was mandatory prior to SonarQube 6.1.
                     '-D sonar.projectName=My_project ' +
-                    '-D sonar.projectVersion=1.0 ' +
+                    "-D sonar.projectVersion=${BUILD} " +
 //                    '-Dsonar.login=$SONAR_UN ' +
 //                    '-Dsonar.password=$SONAR_PW ' +
                     '-D sonar.language=py ' +
