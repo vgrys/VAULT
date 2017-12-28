@@ -27,6 +27,14 @@ node {
         echo "********** End of clean Jenkins workspace and Check out Source ***********"
     }
 
+    stage('SonarQube analysis') {
+        // requires SonarQube Scanner 2.8+ def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        def scannerHome = tool name: 'SonarQube2.8'
+        withSonarQubeEnv('loalhost:9000') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+    }
+
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
         GString sourceFolder = "${env.WORKSPACE}/ansible"
