@@ -31,6 +31,11 @@ node {
         // requires SonarQube Scanner 2.8+ def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         def scannerHome = tool name: 'SonarQube2.8'
         withSonarQubeEnv('SonarServer') {
+            sonar.projectKey=TEST-VAULT
+            sonar.projectName=VAULT
+            sonar.projectVersion=${BUILD_ID}
+            sonar.projectBaseDir=${WORKSPACE}
+            sonar.sources=${WORKSPACE}
             sh "${scannerHome}/bin/sonar-scanner"
         }
     }
