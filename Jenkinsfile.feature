@@ -106,21 +106,21 @@ node {
         echo "********* End of upload ATF archive to Artifactory server **********"
     }
 
-    stage('ATF install') {
-        echo "********* Start to install AFT project **********"
-        withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
-            dir("${WORKSPACE}/ansible") {
-                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} hostUser='vagrant' artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
-            }
-        }
-        echo "********* End of install AFT project **********"
-    }
-
-    stage('Project deployment') {
-        echo pipelineConfig.pad("Start project deployment")
-        pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz", targetGroup, conf.artifactoryId)
-        echo pipelineConfig.pad("End of project deployment")
-    }
+//    stage('ATF install') {
+//        echo "********* Start to install AFT project **********"
+//        withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
+//            dir("${WORKSPACE}/ansible") {
+//                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} hostUser='vagrant' artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
+//            }
+//        }
+//        echo "********* End of install AFT project **********"
+//    }
+//
+//    stage('Project deployment') {
+//        echo pipelineConfig.pad("Start project deployment")
+//        pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz", targetGroup, conf.artifactoryId)
+//        echo pipelineConfig.pad("End of project deployment")
+//    }
 
     stage('Clean up WORKSPACE') {
         echo "********* Start to clean up WORKSPACE **********"
