@@ -36,7 +36,7 @@ node {
 //                    '-Dsonar.password=$SONAR_PW ' +
                     '-Dsonar.language=python ' +
                     '-Dsonar.sources=. ' +
-                    '-Dsonar.tests=. ' +
+                    '-Dsonar.tests=. '
 //                    '-Dsonar.test.inclusions=**/*Test*/** ' +
 //                    '-Dsonar.exclusions=**/*Test*/**'
         }
