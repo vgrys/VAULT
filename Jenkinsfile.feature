@@ -32,14 +32,14 @@ node {
         withSonarQubeEnv('SonarServer') {
             sh "${scannerHome}/bin/sonar-scanner -X " +
 //                  must be unique in a given SonarQube instance
-                    'sonar.projectKey=my:project ' +
+                    '-D sonar.projectKey=my:project ' +
 //                  this is the name and version displayed in the SonarQube UI. Was mandatory prior to SonarQube 6.1.
-                    'sonar.projectName=My project ' +
-                    'sonar.projectVersion=1.0 ' +
+                    '-D sonar.projectName=My project ' +
+                    '-D sonar.projectVersion=1.0 ' +
 //                    '-Dsonar.login=$SONAR_UN ' +
 //                    '-Dsonar.password=$SONAR_PW ' +
-                    'sonar.language=python ' +
-                    'sonar.sources=. '
+                    '-D sonar.language=python ' +
+                    '-D sonar.sources=. '
 //                    '-Dsonar.tests=. '
 //                    '-Dsonar.test.inclusions=**/*Test*/** ' +
 //                    '-Dsonar.exclusions=**/*Test*/**'
