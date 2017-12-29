@@ -34,20 +34,6 @@ node {
         sonar.scanner(sonarUrl, sonarToken, sonarQubeScanner, GIT_REPO, BUILD_ID)
     }
 
-//    "-Dsonar.projectKey=${GIT_REPO} " +
-//            "-Dsonar.sources=. " +
-//            "-Dsonar.host.url=${sonarUrl}/sonar " +
-//            "-Dsonar.login=${sonarToken} " +
-//            "-Dsonar.projectName=${GIT_REPO} " +
-//            "-Dsonar.projectVersion=${BUILD_ID} "
-
-//    stage('SonarQube analysis') {
-//        // requires SonarQube Scanner 2.8+ def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-//        def scannerHome = tool name: 'SonarQube2.8'
-//        withSonarQubeEnv('SonarServer') {
-//            sh "${scannerHome}/bin/sonar-scanner"
-//        }
-//    }
 
     stage('Create Ansible archive') {
         echo "********* Start to create Ansible archive **********"
