@@ -28,7 +28,7 @@ node {
     }
 
     stage('SonarQube analysis') {
-        def scannerHome = tool name: 'SonarQube2.8'
+        def scannerHome = tool name: 'SonarQube3.0.3'
         withSonarQubeEnv('SonarServer') {
             sh "${scannerHome}/bin/sonar-scanner -X " +
 //                  must be unique in a given SonarQube instance
