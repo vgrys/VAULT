@@ -30,17 +30,15 @@ node {
     }
 
     stage('SonarQube analysis') {
-        def scannerHome = tool name: 'SonarQube3.0.3'
-        dir("${WORKSPACE}") {
-            sh "${scannerHome}/bin/sonar-scanner -X " +
-                "-Dsonar.projectKey=${GIT_REPO} " +
-                "-Dsonar.sources=. " +
-                "-Dsonar.host.url=${sonarUrl}/sonar " +
-                "-Dsonar.login=${sonarToken} " +
-                "-Dsonar.projectName=${GIT_REPO} " +
-                "-Dsonar.projectVersion=${BUILD_ID} "
-        }
+        sonar(GIT_REPO, sonarUrl, sonarToken, BUILD_ID)
     }
+
+//    "-Dsonar.projectKey=${GIT_REPO} " +
+//            "-Dsonar.sources=. " +
+//            "-Dsonar.host.url=${sonarUrl}/sonar " +
+//            "-Dsonar.login=${sonarToken} " +
+//            "-Dsonar.projectName=${GIT_REPO} " +
+//            "-Dsonar.projectVersion=${BUILD_ID} "
 
 //    stage('SonarQube analysis') {
 //        // requires SonarQube Scanner 2.8+ def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
