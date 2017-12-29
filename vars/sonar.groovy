@@ -5,7 +5,7 @@ def scanner(sonarUrl, sonarTokenId, sonarQubeScanner, projectName, buildId) {
     withCredentials([string(credentialsId: "${sonarTokenId}", variable: 'sonarToken')]) {
         dir("${env.WORKSPACE}") {
             sh "${scannerHome}/bin/sonar-scanner " +
-                    "-Dsonar.projectKey=${projectName} " +
+//                    "-Dsonar.projectKey=${projectName} " +
                     "-Dsonar.sources=. " +
                     "-Dsonar.host.url=${sonarUrl}/sonar " +
                     "-Dsonar.login=${sonarToken} " +
