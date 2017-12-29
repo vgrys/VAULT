@@ -35,12 +35,8 @@ node {
                 "-Dsonar.sources=. " +
                 "-Dsonar.host.url=http://192.168.56.30:9000/sonar " +
                 "-Dsonar.login=4ba546f718ff7ecf7b8b779711c631342120151f " +
-//              must be unique in a given SonarQube instance
-                "-Dsonar.projectKey=my:VAULT " +
-//              this is the name and version displayed in the SonarQube UI. Was mandatory prior to SonarQube 6.1.
                 "-Dsonar.projectName=${GIT_REPO} " +
                 "-Dsonar.projectVersion=${BUILD_ID} "
-//              '-Dsonar.language=py ' +
         }
     }
 
