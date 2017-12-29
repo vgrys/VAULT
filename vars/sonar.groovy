@@ -1,8 +1,8 @@
 #!/usr/bin/groovy
 
-def scanner(projectName, sonarUrl, buildId) {
+def scanner(projectName, sonarUrl, sonarTokenId, buildId) {
     def scannerHome = tool name: 'SonarQube3.0.3'
-    withCredentials([string(credentialsId: 'sonarTokenId', variable: 'sonarToken')]) {
+    withCredentials([string(credentialsId: "${sonarTokenId}", variable: 'sonarToken')]) {
         dir("${env.WORKSPACE}") {
             sh "${scannerHome}/bin/sonar-scanner " +
                     "-Dsonar.projectKey=${projectName} " +
