@@ -28,10 +28,11 @@ node {
     }
 
     stage('SonarQube analysis') {
-        def scannerHome = tool name: 'SonarQube3.0.3'
+//        def scannerHome = tool name: 'SonarQube3.0.3'
         dir("${WORKSPACE}") {
-            sh "${scannerHome}/bin/sonar-scanner -X " +
-                "-Dsonar.projectKey=${GIT_REPO} " +
+//            sh "${scannerHome}/bin/sonar-scanner -X " +
+            sh "sonar-scanner " +
+            "-Dsonar.projectKey=${GIT_REPO} " +
                 "-Dsonar.sources=. " +
                 "-Dsonar.host.url=http://192.168.56.30:9000/sonar " +
                 "-Dsonar.login=4ba546f718ff7ecf7b8b779711c631342120151f " +
