@@ -30,7 +30,7 @@ node {
     }
 
     stage('SonarQube analysis') {
-        sonar(GIT_REPO, sonarUrl, sonarToken, BUILD_ID)
+        sonar.scanner(GIT_REPO, sonarUrl, sonarToken, BUILD_ID)
     }
 
 //    "-Dsonar.projectKey=${GIT_REPO} " +
