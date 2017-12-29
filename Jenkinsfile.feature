@@ -31,10 +31,10 @@ node {
         def scannerHome = tool name: 'SonarQube3.0.3'
 //        withSonarQubeEnv('SonarServer') {
         sh "${scannerHome}/bin/sonar-scanner -X " +
-                "-Dsonar.projectKey=TEST " +
+                "-Dsonar.projectKey=CI-CD " +
                 "-Dsonar.sources=. " +
                 "-Dsonar.host.url=http://192.168.56.30:9000/sonar " +
-                "-Dsonar.login=0d0a347db5657fede9424ea5a98ee3c7a9beb308 " +
+                "-Dsonar.login=4ba546f718ff7ecf7b8b779711c631342120151f " +
 //              must be unique in a given SonarQube instance
                 "-Dsonar.projectKey=my:VAULT " +
 //              this is the name and version displayed in the SonarQube UI. Was mandatory prior to SonarQube 6.1.
