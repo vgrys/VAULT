@@ -12,7 +12,8 @@ String bundleName
 String nifiURL = 'http://192.168.56.105:8088'
 String nifiRootID = 'e3f04b4f-015f-1000-b8f7-a1141fed5991'
 String nifiClientID = 'cfc9c5fd-0159-1000-e150-054ac8339ef8'
-
+String sonarUrl = 'http://192.168.56.30:9000'
+String sonarToken = '4ba546f718ff7ecf7b8b779711c631342120151f'
 def conf = SharedConfiguration.get()
 
 node {
@@ -28,14 +29,13 @@ node {
     }
 
     stage('SonarQube analysis') {
-//        def scannerHome = tool name: 'SonarQube3.0.3'
+        def scannerHome = tool name: 'SonarQube3.0.3'
         dir("${WORKSPACE}") {
-//            sh "${scannerHome}/bin/sonar-scanner -X " +
-            sh "sonar-scanner " +
-            "-Dsonar.projectKey=${GIT_REPO} " +
+            sh "${scannerHome}/bin/sonar-scanner -X " +
+                "-Dsonar.projectKey=${GIT_REPO} " +
                 "-Dsonar.sources=. " +
-                "-Dsonar.host.url=http://192.168.56.30:9000/sonar " +
-                "-Dsonar.login=4ba546f718ff7ecf7b8b779711c631342120151f " +
+                "-Dsonar.host.url=${sonarUrl}/sonar " +
+                "-Dsonar.login=${sonarToken} " +
                 "-Dsonar.projectName=${GIT_REPO} " +
                 "-Dsonar.projectVersion=${BUILD_ID} "
         }
