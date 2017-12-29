@@ -41,7 +41,6 @@ node {
                 "-Dsonar.projectName=${GIT_REPO} " +
                 "-Dsonar.projectVersion=${BUILD_ID} "
 //              '-Dsonar.language=py ' +
-    }
 }
 
 //    stage('SonarQube analysis') {
