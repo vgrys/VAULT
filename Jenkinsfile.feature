@@ -29,8 +29,8 @@ node {
 
     stage('SonarQube analysis') {
         def scannerHome = tool name: 'SonarQube3.0.3'
-//        withSonarQubeEnv('SonarServer') {
-        sh "${scannerHome}/bin/sonar-scanner -X " +
+        dir("${WORKSPACE}") {
+            sh "${scannerHome}/bin/sonar-scanner -X " +
                 "-Dsonar.projectKey=CI-CD " +
                 "-Dsonar.sources=. " +
                 "-Dsonar.host.url=http://192.168.56.30:9000/sonar " +
@@ -41,7 +41,8 @@ node {
                 "-Dsonar.projectName=${GIT_REPO} " +
                 "-Dsonar.projectVersion=${BUILD_ID} "
 //              '-Dsonar.language=py ' +
-}
+        }
+    }
 
 //    stage('SonarQube analysis') {
 //        // requires SonarQube Scanner 2.8+ def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
@@ -51,20 +52,20 @@ node {
 //        }
 //    }
 
-stage('Create Ansible archive') {
-    echo "********* Start to create Ansible archive **********"
-    GString sourceFolder = "${env.WORKSPACE}/ansible"
-    if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
-        echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
-        def zip = new ZipTools()
-        bundleName = zip.bundle("${sourceFolder}", [".git"], "${playbooksName}-${playbooksVersion}.tgz")
-        echo "created an archive '$bundleName'"
-        echo "${env.PROJECT_ARCHIVE}"
-    } else {
-        echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
+    stage('Create Ansible archive') {
+        echo "********* Start to create Ansible archive **********"
+        GString sourceFolder = "${env.WORKSPACE}/ansible"
+        if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
+            echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
+            def zip = new ZipTools()
+            bundleName = zip.bundle("${sourceFolder}", [".git"], "${playbooksName}-${playbooksVersion}.tgz")
+            echo "created an archive '$bundleName'"
+            echo "${env.PROJECT_ARCHIVE}"
+        } else {
+            echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
+        }
+        echo "********* End of stage 'Create Ansible archive' **********"
     }
-    echo "********* End of stage 'Create Ansible archive' **********"
-}
 
 //    stage("Install requirements") {
 //        echo "********* Start to install requirements **********"
@@ -80,16 +81,16 @@ stage('Create Ansible archive') {
 //        echo "********* End of unittest2 **********"
 //    }
 
-stage('Build ATF project') {
-    echo "********* Start to build ATF project **********"
-    if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
-        echo " Build ATF project because branch is '${env.GIT_BRANCH_TYPE}'"
-        sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
-    } else {
-        echo "Branch name is ${env.BRANCH_NAME}, skip build ATF project "
-        echo "********* End of build ATF project **********"
+    stage('Build ATF project') {
+        echo "********* Start to build ATF project **********"
+        if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
+            echo " Build ATF project because branch is '${env.GIT_BRANCH_TYPE}'"
+            sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
+        } else {
+            echo "Branch name is ${env.BRANCH_NAME}, skip build ATF project "
+            echo "********* End of build ATF project **********"
+        }
     }
-}
 
 //stage('Upload Ansible to Artifactory server') {
 //    echo "********* Start to upload Ansible to Artifactory server **********"
@@ -119,10 +120,10 @@ stage('Build ATF project') {
 //        echo pipelineConfig.pad("End of project deployment")
 //    }
 
-stage('Clean up WORKSPACE') {
-    echo "********* Start to clean up WORKSPACE **********"
+    stage('Clean up WORKSPACE') {
+        echo "********* Start to clean up WORKSPACE **********"
 //            step([$class: 'WsCleanup'])
-    echo "********* Start to clean up WORKSPACE **********"
-}
-echo "$currentBuild.result"
+        echo "********* Start to clean up WORKSPACE **********"
+    }
+    echo "$currentBuild.result"
 }
