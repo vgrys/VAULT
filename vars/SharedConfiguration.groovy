@@ -10,6 +10,8 @@ class SharedConfiguration implements Serializable {
                 artifactoryId  : 'artifactoryId',
                 artifactoryRepo: 'bigdata-dss-automation',
                 artifactoryUrl : 'http://192.168.56.30:8081',
+                targetHostUser : 'vagrant',
+                targetGroup    : 'jenkins',
                 projectName    : 'env.GIT_REPO',
                 NiFiVersion    : '1.4.0'
         ]

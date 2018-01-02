@@ -4,8 +4,6 @@
 String atfVersion = '0.0.1'
 String atfRelease = 'release'
 
-String targetGroup = "jenkins"
-
 String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
 String bundleName
@@ -90,14 +88,14 @@ node {
     stage('ATF install') {
         echo "********* Start to install AFT project **********"
         dir("${WORKSPACE}/ansible") {
-            sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} hostUser="{conf.targetHostUser }" artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml"
+            sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser="{conf.targetHostUser}" artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml"
         }
         echo "********* End of install AFT project **********"
     }
 
     stage('Project deployment') {
         echo pipelineConfig.pad("Start project deployment")
-        pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz", targetGroup, conf.artifactoryId)
+        pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz", conf.targetGroup, conf.artifactoryId)
         echo pipelineConfig.pad("End of project deployment")
     }
 
