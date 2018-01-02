@@ -117,7 +117,8 @@ node {
         }
     }
     catch (err) {
-        err
+        error err.getMessage()
+
     }
     finally {
 
