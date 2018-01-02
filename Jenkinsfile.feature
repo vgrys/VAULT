@@ -4,7 +4,7 @@
 String atfVersion = '0.0.1'
 String atfRelease = 'release'
 
-String targetGroup = "prod"
+String targetGroup = "jenkins"
 
 String playbooksName = 'ci-cd-playbooks'
 String playbooksVersion = '0.1'
@@ -87,26 +87,25 @@ stage('Upload ATF archive to Artifactory server') {
     echo "********* End of upload ATF archive to Artifactory server **********"
 }
 
-//    stage('ATF install') {
-//        echo "********* Start to install AFT project **********"
-//        withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
-//            dir("${WORKSPACE}/ansible") {
-//                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} hostUser='vagrant' artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} zephCred=${zephCred}' ATFDeployment.yml"
-//            }
-//        }
-//        echo "********* End of install AFT project **********"
-//    }
-//
-//    stage('Project deployment') {
-//        echo pipelineConfig.pad("Start project deployment")
-//        pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz", targetGroup, conf.artifactoryId)
-//        echo pipelineConfig.pad("End of project deployment")
-//    }
+    stage('ATF install') {
+        echo "********* Start to install AFT project **********"
+        withCredentials([file(credentialsId: 'zeph', variable: 'zephCred')]) {
+            dir("${WORKSPACE}/ansible") {
+                sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} hostUser="{conf.targetHostUser}" artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml"
+            }
+        }
+        echo "********* End of install AFT project **********"
+    }
+
+    stage('Project deployment') {
+        echo pipelineConfig.pad("Start project deployment")
+        pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz", targetGroup, conf.artifactoryId)
+        echo pipelineConfig.pad("End of project deployment")
+    }
 
     stage('Clean up WORKSPACE') {
         echo "********* Start to clean up WORKSPACE **********"
 //            step([$class: 'WsCleanup'])
         echo "********* Start to clean up WORKSPACE **********"
     }
-    echo "$currentBuild.result"
 }
