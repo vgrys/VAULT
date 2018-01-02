@@ -75,17 +75,17 @@ node {
         }
     }
 
-//stage('Upload Ansible to Artifactory server') {
-//    echo "********* Start to upload Ansible to Artifactory server **********"
-//    artifactoryTools.uploadAnsible(conf.artifactoryUrl, conf.artifactoryRepo, playbooksName, conf.artifactoryId)
-//    echo "********* End of upload Ansible to Artifactory server **********"
-//}
-//
-//stage('Upload ATF archive to Artifactory server') {
-//    echo "********* Start to upload ATF archive to Artifactory server **********"
-//    artifactoryTools.ATFUpload(conf.artifactoryUrl, conf.artifactoryRepo, conf.artifactoryId)
-//    echo "********* End of upload ATF archive to Artifactory server **********"
-//}
+stage('Upload Ansible to Artifactory server') {
+    echo "********* Start to upload Ansible to Artifactory server **********"
+    artifactoryTools.uploadAnsible(conf.artifactoryUrl, conf.artifactoryRepo, playbooksName, conf.artifactoryId)
+    echo "********* End of upload Ansible to Artifactory server **********"
+}
+
+stage('Upload ATF archive to Artifactory server') {
+    echo "********* Start to upload ATF archive to Artifactory server **********"
+    artifactoryTools.ATFUpload(conf.artifactoryUrl, conf.artifactoryRepo, conf.artifactoryId)
+    echo "********* End of upload ATF archive to Artifactory server **********"
+}
 
 //    stage('ATF install') {
 //        echo "********* Start to install AFT project **********"
