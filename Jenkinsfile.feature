@@ -100,7 +100,7 @@ node {
             echo "********* Start to install AFT project **********"
             sshagent([conf.sshKeyId]) {
                 dir("${WORKSPACE}/ansible") {
-                    sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser=${conf.targetHostUser} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} projectName=${GIT_REPO}' ATFDeployment.yml -vvv"
+                    sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser=${conf.targetHostUser} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} projectName=${GIT_REPO}' ATFDeployment.yml"
                 }
             }
             echo "********* End of install AFT project **********"
