@@ -6,7 +6,7 @@ class SharedConfiguration implements Serializable {
         return [
                 jenkinsSlave1  : 'flex1',
                 jenkinsSlave2  : 'flex',
-                sshKeyId       : 'SSH-KEY',
+                sshKeyId       : 'jenkins-private-key',
                 artifactoryId  : 'artifactoryId',
                 artifactoryRepo: 'bigdata-dss-automation',
                 artifactoryUrl : 'http://192.168.56.30:8081',

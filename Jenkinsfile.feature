@@ -98,8 +98,10 @@ node {
 
         stage('ATF install') {
             echo "********* Start to install AFT project **********"
-            dir("${WORKSPACE}/ansible") {
-                sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser=${conf.targetHostUser} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml -vvv"
+            sshagent([conf.sshKeyId]) {
+                dir("${WORKSPACE}/ansible") {
+                    sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser=${conf.targetHostUser} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml -vvv"
+                }
             }
             echo "********* End of install AFT project **********"
         }
@@ -115,12 +117,11 @@ node {
 //            step([$class: 'WsCleanup'])
             echo "********* Start to clean up WORKSPACE **********"
         }
-    }
-    catch (err) {
+
+    } catch (err) {
         error err.getMessage()
 
-    }
-    finally {
+    } finally {
 
 //        stage('NiFi cleanUp') {
 //            sleep(5)
