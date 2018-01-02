@@ -7,12 +7,10 @@
 
 
   vars:
-    - tempDir: "$HOME/atfdir-tmp"
+    - tempDir: "{{tempProjectDirectory}}/atfdir-tmp"
     - dest: "{{tempDir}}/atf-{{atfVersion}}.tar.gz"
     - requirementsDest: "{{tempDir}}/atf-{{atfVersion}}/requirements.txt"
-    - venvPath: "/tmp/ATFVENV/"
-    - zephSrc: "{{zephCred}}"
-    - zephDest: "$HOME/zephCred"
+    - venvPath: "{{tempProjectDirectory}}/ATFVENV/"
 
   tasks:
 
