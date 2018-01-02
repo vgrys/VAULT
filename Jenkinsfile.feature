@@ -79,9 +79,9 @@ node {
 ////            nifi.deploy(nifiURL, env.GIT_REPO)
 //        }
 
-        echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
-        echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
-        echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
+//        echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
+//        echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
+//        echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
 
 
         stage('Upload Ansible to Artifactory server') {
@@ -100,17 +100,17 @@ node {
             echo "********* Start to install AFT project **********"
             sshagent([conf.sshKeyId]) {
                 dir("${WORKSPACE}/ansible") {
-                    sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser=${conf.targetHostUser} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml"
+                    sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser=${conf.targetHostUser} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease} projectName=${GIT_REPO}' ATFDeployment.yml"
                 }
             }
             echo "********* End of install AFT project **********"
         }
 
-        stage('Project deployment') {
-            echo pipelineConfig.pad("Start project deployment")
-            pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz", conf.targetGroup, conf.artifactoryId)
-            echo pipelineConfig.pad("End of project deployment")
-        }
+//        stage('Project deployment') {
+//            echo pipelineConfig.pad("Start project deployment")
+//            pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "${GIT_REPO}", "test-project-20171108105623.tgz", conf.targetGroup, conf.artifactoryId)
+//            echo pipelineConfig.pad("End of project deployment")
+//        }
 
         stage('Clean up WORKSPACE') {
             echo "********* Start to clean up WORKSPACE **********"
