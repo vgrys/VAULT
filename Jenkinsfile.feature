@@ -74,10 +74,10 @@ node {
             }
         }
 
-        stage('NiFi deployment') {
-            echo "********** NiFi deployment ***********"
-            nifi.deploy(nifiURL, env.GIT_REPO)
-        }
+//        stage('NiFi deployment') {
+//            echo "********** NiFi deployment ***********"
+////            nifi.deploy(nifiURL, env.GIT_REPO)
+//        }
 
         echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
         echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
@@ -121,10 +121,10 @@ node {
     }
     finally {
 
-        stage('NiFi cleanUp') {
-            sleep(5)
-            echo "********** NiFi cleanUp ***********"
-            nifi.cleanup(nifiURL)
-        }
+//        stage('NiFi cleanUp') {
+//            sleep(5)
+//            echo "********** NiFi cleanUp ***********"
+////            nifi.cleanup(nifiURL)
+//        }
     }
 }
