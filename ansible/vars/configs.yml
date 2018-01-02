@@ -4,4 +4,4 @@ artifactory_pwd: AKCp5Z2Y3srMsSpGGpfEeGWu7FTQdexXPAfhxF5stW6mYh1TfrkwPmopZ5Yq4Mg
 artifactoryAtfPath: "{{artifactoryUrl}}/artifactory/{{artifactoryRepo}}/atf/{{atfRelease}}/atf-{{atfVersion}}.tar.gz"
 artifactoryProjectPath: "{{artifactoryUrl}}/artifactory/{{artifactoryRepo}}/{{projectName}}/{{projectArchiveName}}"
 NiFiPath: "http://apache.cp.if.ua/nifi/{{NiFiVersion}}/nifi-{{NiFiVersion}}-bin.tar.gz"
-tempProjectDirectory: "$HOME/{{projectName}}"
+tempProjectDirectory: "/home/{{hostUser}}/{{projectName}}"
