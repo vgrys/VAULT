@@ -73,6 +73,21 @@ node {
         }
     }
 
+    stage ('NiFi deployment') {
+        echo "********** NiFi deployment ***********"
+        nifi.deploy(nifiURL, env.GIT_REPO)
+    }
+
+    echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
+    echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
+    echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
+
+    stage ('NiFi cleanUp') {
+        sleep(5)
+        echo "********** NiFi cleanUp ***********"
+        nifi.cleanup(nifiURL)
+    }
+
     stage('Upload Ansible to Artifactory server') {
         echo "********* Start to upload Ansible to Artifactory server **********"
         artifactoryTools.uploadAnsible(conf.artifactoryUrl, conf.artifactoryRepo, playbooksName, conf.artifactoryId)
@@ -88,7 +103,7 @@ node {
     stage('ATF install') {
         echo "********* Start to install AFT project **********"
         dir("${WORKSPACE}/ansible") {
-            sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser="{conf.targetHostUser}" artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml"
+            sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser=${conf.targetHostUser} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml"
         }
         echo "********* End of install AFT project **********"
     }
