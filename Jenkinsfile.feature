@@ -17,36 +17,37 @@ String sonarQubeScanner = 'SonarQube3.0.3'
 def conf = SharedConfiguration.get()
 
 node {
-    echo "++++++++++++++++++++++++++ Working on feature branch ++++++++++++++++++++++++++"
-    pipelineConfig.beginning()
+    try {
+        echo "++++++++++++++++++++++++++ Working on feature branch ++++++++++++++++++++++++++"
+        pipelineConfig.beginning()
 
-    stage('Clean Workspace and Check out Source') {
-        echo "********** Clean Jenkins workspace and Check out Source ***********"
-        deleteDir()
-        checkout scm
-        gitInfo()
-        echo "********** End of clean Jenkins workspace and Check out Source ***********"
-    }
-
-    stage('SonarQube analysis') {
-        sonar.scanner(sonarUrl, sonarToken, sonarQubeScanner, GIT_REPO, BUILD_ID)
-    }
-
-
-    stage('Create Ansible archive') {
-        echo "********* Start to create Ansible archive **********"
-        GString sourceFolder = "${env.WORKSPACE}/ansible"
-        if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
-            echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
-            def zip = new ZipTools()
-            bundleName = zip.bundle("${sourceFolder}", [".git"], "${playbooksName}-${playbooksVersion}.tgz")
-            echo "created an archive '$bundleName'"
-            echo "${env.PROJECT_ARCHIVE}"
-        } else {
-            echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
+        stage('Clean Workspace and Check out Source') {
+            echo "********** Clean Jenkins workspace and Check out Source ***********"
+            deleteDir()
+            checkout scm
+            gitInfo()
+            echo "********** End of clean Jenkins workspace and Check out Source ***********"
         }
-        echo "********* End of stage 'Create Ansible archive' **********"
-    }
+
+        stage('SonarQube analysis') {
+            sonar.scanner(sonarUrl, sonarToken, sonarQubeScanner, GIT_REPO, BUILD_ID)
+        }
+
+
+        stage('Create Ansible archive') {
+            echo "********* Start to create Ansible archive **********"
+            GString sourceFolder = "${env.WORKSPACE}/ansible"
+            if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
+                echo " Create Ansible archive, branch is '${env.GIT_BRANCH_TYPE}'"
+                def zip = new ZipTools()
+                bundleName = zip.bundle("${sourceFolder}", [".git"], "${playbooksName}-${playbooksVersion}.tgz")
+                echo "created an archive '$bundleName'"
+                echo "${env.PROJECT_ARCHIVE}"
+            } else {
+                echo "Branch name is '${env.GIT_BRANCH_TYPE}', skip to create Ansible archive "
+            }
+            echo "********* End of stage 'Create Ansible archive' **********"
+        }
 
 //    stage("Install requirements") {
 //        echo "********* Start to install requirements **********"
@@ -62,61 +63,68 @@ node {
 //        echo "********* End of unittest2 **********"
 //    }
 
-    stage('Build ATF project') {
-        echo "********* Start to build ATF project **********"
-        if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
-            echo " Build ATF project because branch is '${env.GIT_BRANCH_TYPE}'"
-            sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
-        } else {
-            echo "Branch name is ${env.BRANCH_NAME}, skip build ATF project "
-            echo "********* End of build ATF project **********"
+        stage('Build ATF project') {
+            echo "********* Start to build ATF project **********"
+            if (env.GIT_BRANCH_TYPE in ['develop', 'master', 'release', 'feature']) {
+                echo " Build ATF project because branch is '${env.GIT_BRANCH_TYPE}'"
+                sh "chmod +x ${WORKSPACE}/build-atf.sh && ${WORKSPACE}/build-atf.sh"
+            } else {
+                echo "Branch name is ${env.BRANCH_NAME}, skip build ATF project "
+                echo "********* End of build ATF project **********"
+            }
         }
-    }
 
-    stage ('NiFi deployment') {
-        echo "********** NiFi deployment ***********"
-        nifi.deploy(nifiURL, env.GIT_REPO)
-    }
-
-    echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
-    echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
-    echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
-
-    stage ('NiFi cleanUp') {
-        sleep(5)
-        echo "********** NiFi cleanUp ***********"
-        nifi.cleanup(nifiURL)
-    }
-
-    stage('Upload Ansible to Artifactory server') {
-        echo "********* Start to upload Ansible to Artifactory server **********"
-        artifactoryTools.uploadAnsible(conf.artifactoryUrl, conf.artifactoryRepo, playbooksName, conf.artifactoryId)
-        echo "********* End of upload Ansible to Artifactory server **********"
-    }
-
-    stage('Upload ATF archive to Artifactory server') {
-        echo "********* Start to upload ATF archive to Artifactory server **********"
-        artifactoryTools.ATFUpload(conf.artifactoryUrl, conf.artifactoryRepo, conf.artifactoryId)
-        echo "********* End of upload ATF archive to Artifactory server **********"
-    }
-
-    stage('ATF install') {
-        echo "********* Start to install AFT project **********"
-        dir("${WORKSPACE}/ansible") {
-            sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser=${conf.targetHostUser} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml"
+        stage('NiFi deployment') {
+            echo "********** NiFi deployment ***********"
+            nifi.deploy(nifiURL, env.GIT_REPO)
         }
-        echo "********* End of install AFT project **********"
-    }
 
-    stage('Project deployment') {
-        echo pipelineConfig.pad("Start project deployment")
-        pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz", conf.targetGroup, conf.artifactoryId)
-        echo pipelineConfig.pad("End of project deployment")
-    }
+        echo "TEMPLATE_ID: ${env.TEMPLATE_ID}"
+        echo "WORKSPACE_PROCESS_GROUP: ${env.WORKSPACE_PROCESS_GROUP}"
+        echo "PROCESS_GROUP_ID: ${env.PROCESS_GROUPS_ID}"
 
-    stage('Clean up WORKSPACE') {
-        echo "********* Start to clean up WORKSPACE **********"
+
+        stage('Upload Ansible to Artifactory server') {
+            echo "********* Start to upload Ansible to Artifactory server **********"
+            artifactoryTools.uploadAnsible(conf.artifactoryUrl, conf.artifactoryRepo, playbooksName, conf.artifactoryId)
+            echo "********* End of upload Ansible to Artifactory server **********"
+        }
+
+        stage('Upload ATF archive to Artifactory server') {
+            echo "********* Start to upload ATF archive to Artifactory server **********"
+            artifactoryTools.ATFUpload(conf.artifactoryUrl, conf.artifactoryRepo, conf.artifactoryId)
+            echo "********* End of upload ATF archive to Artifactory server **********"
+        }
+
+        stage('ATF install') {
+            echo "********* Start to install AFT project **********"
+            dir("${WORKSPACE}/ansible") {
+                sh "ansible-playbook --limit ${conf.targetGroup} --extra-vars 'server=${conf.targetGroup} hostUser=${conf.targetHostUser} artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml"
+            }
+            echo "********* End of install AFT project **********"
+        }
+
+        stage('Project deployment') {
+            echo pipelineConfig.pad("Start project deployment")
+            pipelineConfig.runDeployProject(conf.artifactoryUrl, conf.artifactoryRepo, "test-project", "test-project-20171108105623.tgz", conf.targetGroup, conf.artifactoryId)
+            echo pipelineConfig.pad("End of project deployment")
+        }
+
+        stage('Clean up WORKSPACE') {
+            echo "********* Start to clean up WORKSPACE **********"
 //            step([$class: 'WsCleanup'])
-        echo "********* Start to clean up WORKSPACE **********"
+            echo "********* Start to clean up WORKSPACE **********"
+        }
+    }
+    catch (err) {
+        err
+    }
+    finally {
+
+        stage('NiFi cleanUp') {
+            sleep(5)
+            echo "********** NiFi cleanUp ***********"
+            nifi.cleanup(nifiURL)
+        }
     }
 }
