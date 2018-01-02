@@ -90,8 +90,7 @@ node {
     stage('ATF install') {
         echo "********* Start to install AFT project **********"
         dir("${WORKSPACE}/ansible") {
-            sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} hostUser=" { conf.targetHostUser }
-            " artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml"
+            sh "ansible-playbook --limit ${targetGroup} --extra-vars 'server=${targetGroup} hostUser="{conf.targetHostUser }" artifactoryRepo=${conf.artifactoryRepo} artifactoryUrl=${conf.artifactoryUrl} atfVersion=${atfVersion} atfRelease=${atfRelease}' ATFDeployment.yml"
         }
         echo "********* End of install AFT project **********"
     }
