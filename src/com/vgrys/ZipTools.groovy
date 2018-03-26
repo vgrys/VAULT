@@ -1,5 +1,5 @@
 //package ctc.ad.corp.cicd
-package com.epam
+package com.vgrys
 
 static def bundle(env, sourceFolder, excludes, sh) {
 //    def filesToInclude = [incl]

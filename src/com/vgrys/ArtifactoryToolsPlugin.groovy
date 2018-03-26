@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-package com.epam.ArtifactoryToolsPlugin
+package com.vgrys.ArtifactoryToolsPlugin
 
 def static artifactoryConfig(env, repository, String archive, name, version) {
 

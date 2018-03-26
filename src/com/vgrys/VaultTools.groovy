@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 //package ctc.ad.corp.cicd
 
-package com.epam
+package com.vgrys
 
 @Grapes([
         @Grab('com.bettercloud:vault-java-driver:3.0.0'),

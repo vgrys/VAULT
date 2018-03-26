@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-package com.epam
+package com.vgrys
 
 import org.jfrog.artifactory.client.Artifactory
 import org.jfrog.artifactory.client.ArtifactoryClientBuilder
