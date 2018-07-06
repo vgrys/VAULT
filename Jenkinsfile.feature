@@ -92,8 +92,29 @@ node {
 
         stage('Upload ATF archive to Artifactory server') {
             echo "********* Start to upload ATF archive to Artifactory server **********"
+            def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: "${artifactoryId}"
+
+
             artifactoryTools.ATFUpload(conf.artifactoryUrl, conf.artifactoryRepo, conf.artifactoryId)
             echo "********* End of upload ATF archive to Artifactory server **********"
+        }
+
+        stage('Upload Artifact') {
+            steps {
+                script {
+                    echo "********** Start SonarQube analysis ***********"
+                    withCredentials([string(credentialsId: 'mytoken', variable: 'TOKEN')]) {
+                        echo "TOKEN" ${TOKEN}
+                    }
+                    def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: "${artifactoryId}"
+                    def uploadSpec = """{
+                              "files": [{
+                                  "pattern": "bazinga/*froggy*.zip",
+                                  "target": "bazinga-repo/froggy-files/"
+                                }]}"""
+                    server.upload(uploadSpec)
+                }
+            }
         }
 
         stage('ATF install') {

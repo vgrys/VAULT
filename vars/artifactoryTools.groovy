@@ -25,6 +25,7 @@ def static artifactoryProjectConfig(env, repository, String archive, name) {
     artifactoryConfig(env, repository, archive, name, '')
 }
 
+
 def ATFUpload (artifactoryUrl, artifactoryRepo, artifactoryId) {
     GString archive = "${env.WORKSPACE}/dist/*.tar.gz"
     def server = Artifactory.newServer url: "${artifactoryUrl}", credentialsId: "${artifactoryId}"
