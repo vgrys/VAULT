@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<templateEntity>
+    <template encoding-version="1.1">
+        <description></description>
+        <groupId>d17122f2-015c-1000-05e4-c3fc92bb7073</groupId>
+        <id>40d7a118-52f2-321e-97a4-a3d4d8ac808e</id>
+        <name>ci_cd_sample</name>
+        <timestamp>12/15/2017 11:32:53 UTC</timestamp>
+        <uri>http://d9lcwphd0e2.labcorp.ad.ctc:9090/nifi-api/templates/40d7a118-52f2-321e-97a4-a3d4d8ac808e</uri>
+    </template>
+</templateEntity>

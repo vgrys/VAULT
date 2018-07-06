@@ -1,0 +1,69 @@
+{
+  "snippet": {
+    "parentGroupId": "e959b7eb-015f-1000-7573-7a3f9de5ef11",
+    "processors": {
+      "ac530f70-9a91-325b-39c7-8eb66a62ac76": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      },
+      "36d3daf4-daff-3e8a-7423-82ea5f1f6089": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      },
+      "74139331-ba2c-3065-97b7-98f85abd5dce": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      }
+    },
+    "funnels": {
+      "3a8cf454-2572-3b6f-e0f1-23299804c005": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      }
+    },
+    "inputPorts": {},
+    "outputPorts": {
+      "ac62b7c2-0d9f-358f-5f51-91dfbab8d5c9": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      },
+      "d65235a6-3244-36fa-c9f7-9a77ac7796ad": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      },
+      "e3a66332-cb3d-33ff-db30-9bdcba467c6e": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      }
+    },
+    "remoteProcessGroups": {},
+    "processGroups": {},
+    "connections": {
+      "8d8ca488-2e72-32b0-d629-136ed56a0b05": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      },
+      "ac070457-7fcf-3ed1-2f05-46a535e94f4b": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      },
+      "e66b4208-c63c-3f85-0aa4-c806c9393cd7": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      },
+      "02039a69-e996-3851-45d1-5c63f046ef52": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      },
+      "0c1909dc-0eb9-3bd4-4976-0f5348162415": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      },
+      "7046ba41-a679-305b-7bdb-7c0ae5e19549": {
+        "clientId": "02493716-0160-1000-5b64-24259fc770b8",
+        "version": 0
+      }
+    },
+    "labels": {}
+  }
+}

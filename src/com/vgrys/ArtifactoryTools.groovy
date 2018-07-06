@@ -14,7 +14,6 @@ def loadGrapes(){
             [group='org.jfrog.artifactory.client', module='artifactory-java-client-api', version='2.5.2']
     ]
     Grape.grab(classLoader: classLoader, grapez)
-    println "Class: " + classLoader.loadClass('org.ccil.cowan.tagsoup.jaxp.SAXParserImpl')
 }
 
 

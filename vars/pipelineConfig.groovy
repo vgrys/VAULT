@@ -15,6 +15,13 @@ def createProjectBundle(sourceFolder) {
     echo "created an archive $bundlePath"
 }
 
+def projectName () {
+    def conf = SharedConfiguration.get()
+    def test = echo conf.projectName
+    def projectName = test
+    return projectName
+}
+
 def runATFCommand(targetHost, user, projectName, command) {
     String commandToRun = "cd /home/${user}/${projectName}; source ./ATFVENV/bin/activate; ${command}"
     sh sshCli(targetHost, commandToRun)
@@ -58,4 +65,26 @@ def runDeployProject(artifactoryUrl, artifactoryRepo, projectName, projectArchiv
 def runProjectCleanup(projectName, targetGroup ) {
     cmd = ansible("projectName=${projectName}' projectCleanup.yml", targetGroup)
     executeAnsible(cmd, null)
+}
+
+def discoverJenkinsfile() {
+    GString jenkinsFileCandidate = "Jenkinsfile.${env.GIT_BRANCH_TYPE}"
+    if (fileExists("${jenkinsFileCandidate}")) {
+        echo pad("Loading file: '${jenkinsFileCandidate}'")
+        return "${jenkinsFileCandidate}"
+
+    } else {
+        error("Jenkinsfile '${jenkinsFileCandidate}' not found")
+    }
+}
+
+def discoverJenkinsfile(jenkinsFileExtension) {
+    GString jenkinsFileCandidate = "Jenkinsfile.${jenkinsFileExtension}"
+    if (fileExists(jenkinsFileCandidate)) {
+        echo pad("Loading file: '${jenkinsFileCandidate}'")
+        return jenkinsFileCandidate
+
+    } else {
+        error("Jenkinsfile '${jenkinsFileCandidate}' not found")
+    }
 }

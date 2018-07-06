@@ -7,12 +7,10 @@
 
 
   vars:
-    - tempDir: "$HOME/atfdir-tmp"
+    - tempDir: "{{tempProjectDirectory}}/atfdir-tmp"
     - dest: "{{tempDir}}/atf-{{atfVersion}}.tar.gz"
     - requirementsDest: "{{tempDir}}/atf-{{atfVersion}}/requirements.txt"
-    - venvPath: "/tmp/ATFVENV/"
-    - zephSrc: "{{zephCred}}"
-    - zephDest: "$HOME/zephCred"
+    - venvPath: "{{tempProjectDirectory}}/ATFVENV/"
 
   tasks:
 
@@ -42,12 +40,6 @@
         dest: "{{tempDir}}"
         remote_src: yes
 
-    - name: " copy zeph credential file to the server "
-      copy:
-        src: "{{zephSrc}}"
-        dest: "{{zephDest}}"
-        mode: 0400
-
     - name: " Create virtualenv '{{venvPath}}' if doesn't exist "
       command: "virtualenv {{venvPath}} -p python3.6 creates={{venvPath}}"
 
@@ -68,9 +60,6 @@
 
     - name: " test location "
       command: 'ls -la'
-
-    - name: " Kerberos token refresh "
-#      command: 'kinit -kt test.keytab test'
 
     - name: " Delete temporary directory '{{tempDir}}' "
       file:

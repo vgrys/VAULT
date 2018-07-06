@@ -9,7 +9,7 @@ class config implements Serializable {
             artifactoryId: 'arifactoryID',
             artifactoryRepo: 'bigdata-dss-automation',
             artifactoryUrl: 'http://192.168.56.105:8081',
-            targetHostUser  : 'user',
+            targetHostUser  : 'vagrant',
             targetHost      : "targetHostUser@host"
     ]
 }
